@@ -14,6 +14,7 @@ dependencies:
   flutter_bloc: ^8.1.1
   flutter_localizations:
     sdk: flutter
+  flutter_svg: ^1.1.6
   intl: ^0.17.0
 
 dev_dependencies:
@@ -26,6 +27,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/sources/
+    - assets/sources/surahs/
+    - assets/icons/
   fonts:
     - family: Poppins
       fonts:
@@ -33,3 +38,6 @@ flutter:
         - asset: assets/fonts/Poppins-Light.ttf
         - asset: assets/fonts/Poppins-Bold.ttf
           weight: 700
+    - family: IsepMisbah
+      fonts:
+        - asset: assets/fonts/isepMisbah.ttf

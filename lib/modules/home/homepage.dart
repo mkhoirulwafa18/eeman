@@ -1,5 +1,14 @@
+// ignore_for_file: avoid_dynamic_calls
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:quran_app/modules/home/widgets/glassmorphism.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:quran_app/l10n/l10n.dart';
+import 'package:quran_app/modules/home/widgets/box_header.dart';
+
+import 'package:quran_app/modules/home/widgets/quran_appbar.dart';
+import 'package:quran_app/modules/home/widgets/rub_el_hizb.dart';
+import 'package:quran_app/modules/surah/surah_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,39 +17,41 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with AutomaticKeepAliveClientMixin<HomePage> {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<HomePage> {
   @override
   bool get wantKeepAlive => true;
+  List<dynamic> _surahs = [];
+  List<dynamic> _juz = [];
+
+  Future<void> readJson() async {
+    final surahsResponse = await rootBundle.loadString('assets/sources/surah.json');
+    final juzResponse = await rootBundle.loadString('assets/sources/juz.json');
+    final surahList = json.decode(surahsResponse);
+    final juzList = json.decode(juzResponse);
+    setState(() {
+      _surahs = surahList as List;
+      _juz = juzList as List;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    readJson();
+  }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final l10n = context.l10n;
+
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          title: const Text(
-            'Quran App',
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
-            ),
-          ),
-          backgroundColor: const Color(0xff011240),
-          leading: const Icon(
-            Icons.sort,
-          ),
-          actions: const [
-            Padding(
-              padding: EdgeInsets.all(16),
-              child: Icon(
-                Icons.search,
-              ),
-            ),
-          ],
+        appBar: QuranAppBar(
+          appBar: AppBar(),
+          title: l10n.homePageAppBarTitle,
+          showBack: false,
         ),
         backgroundColor: const Color(0xff011240),
         body: Padding(
@@ -48,232 +59,175 @@ class _HomePageState extends State<HomePage>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Assalamualaikum',
-                style: TextStyle(
-                  color: Color(0xffA4A7D3),
-                  fontSize: 16,
-                  fontFamily: 'Poppins',
-                ),
-                textAlign: TextAlign.start,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              const Text(
-                'Khoirul Wafa',
-                style: TextStyle(
-                  color: Color(0xffFAFBFB),
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Stack(
-                children: [
-                  DecoratedBox(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: <Color>[
-                          Color(0xffe3c3f8),
-                          Color(0xffcdabe7),
-                          Color(0xffb693d6),
-                          Color(0xffa07cc5),
-                          Color(0xff8966b5),
-                          Color(0xff7251a5),
-                          Color(0xff5a3c95),
-                          Color(0xff412886),
-                        ],
-                        tileMode: TileMode.mirror,
-                      ),
-                    ),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.width / 2.5,
-                    ),
-                  ),
-                  Glassmorphism(
-                    blur: 8,
-                    opacity: 0.1,
-                    radius: 20,
-                    child: Container(
-                      height: MediaQuery.of(context).size.width / 2.5,
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(20),
-                      child: Column(
-                        children: [
-                          const Text(
-                            'Explore and Learn Flutter',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            'Learn the best design here',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(0.8),
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
+              const BoxHeader(),
               const SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                height: 50,
-                child: AppBar(
-                  backgroundColor: const Color(0xff011240),
-                  elevation: 0,
-                  flexibleSpace: const TabBar(
-                    indicatorColor: Color(0xffE3C3F8),
-                    indicatorWeight: 3,
-                    tabs: [
-                      Tab(
-                        child: Text(
-                          'Surah',
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w600,
+              _buildTabs(l10n),
+              const SizedBox(
+                height: 16,
+              ),
+              if (_surahs.isNotEmpty && _juz.isNotEmpty)
+                Expanded(
+                  child: TabBarView(
+                    children: [
+                      ColoredBox(
+                        color: const Color(0xff011240),
+                        child: ListView.separated(
+                          itemCount: _surahs.length,
+                          separatorBuilder: (BuildContext context, int index) => const Divider(
+                            color: Color(0xffA4A7D3),
                           ),
+                          itemBuilder: (BuildContext context, int index) {
+                            return ListTile(
+                              leading: RubElHizb(
+                                title: (index + 1).toString(),
+                              ),
+                              title: Text(
+                                _surahs[index]['name'] as String,
+                                style: const TextStyle(
+                                  color: Color(0xffFAFBFB),
+                                  fontFamily: 'Poppins',
+                                  fontSize: 16,
+                                ),
+                              ),
+                              subtitle: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _surahs[index]['name_translations']['id'] as String,
+                                    style: const TextStyle(
+                                      color: Color(0xffA4A7D3),
+                                      fontFamily: 'Poppins',
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  if (_surahs[index]['place'] == 'Mecca')
+                                    SvgPicture.asset(
+                                      'assets/icons/mecca.svg',
+                                      width: 16,
+                                      color: const Color(0xfffafbfb),
+                                    )
+                                  else
+                                    SvgPicture.asset(
+                                      'assets/icons/medina.svg',
+                                      width: 16,
+                                      color: const Color(0xfffafbfb),
+                                    ),
+                                ],
+                              ),
+                              dense: true,
+                              trailing: Text(
+                                _surahs[index]['name_translations']['ar'] as String,
+                                style: const TextStyle(
+                                  color: Color(0xFFB9A0FF),
+                                  fontFamily: 'IsepMisbah',
+                                  fontSize: 16,
+                                ),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SurahPage(
+                                      noAyat: (index + 1).toString(),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
                         ),
                       ),
-                      Tab(
-                        child: Text(
-                          'Ayat',
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w600,
+                      ColoredBox(
+                        color: const Color(0xff011240),
+                        child: ListView.separated(
+                          itemCount: _juz.length,
+                          separatorBuilder: (BuildContext context, int index) => const Divider(
+                            color: Color(0xffA4A7D3),
                           ),
-                        ),
-                      ),
-                      Tab(
-                        child: Text(
-                          'Halaman',
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w600,
-                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            return ListTile(
+                              trailing: RubElHizb(
+                                title: (index + 1).toString(),
+                              ),
+                              title: Text(
+                                '${l10n.tabBarJuzLabel} ${_juz[index]['index'] as String}',
+                                style: const TextStyle(color: Color(0xffFAFBFB), fontSize: 16),
+                              ),
+                              subtitle: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${_juz[index]['start']['name'] as String} (${(_juz[index]['start']['verse'] as String).split('_')[1]}) - ',
+                                    style: const TextStyle(
+                                      color: Color(0xffA4A7D3),
+                                      fontFamily: 'Poppins',
+                                    ),
+                                  ),
+                                  Text(
+                                    '${_juz[index]['end']['name'] as String} (${(_juz[index]['end']['verse'] as String).split('_')[1]})',
+                                    style: const TextStyle(
+                                      color: Color(0xffA4A7D3),
+                                      fontFamily: 'Poppins',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              dense: true,
+                            );
+                          },
                         ),
                       ),
                     ],
                   ),
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    // first tab bar view widget
-                    ColoredBox(
-                      color: const Color(0xff011240),
-                      child: ListView.separated(
-                        itemCount: 25,
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const Divider(
-                          color: Color(0xffA4A7D3),
-                        ),
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            leading: Text(
-                              '${index + 1}',
-                              style: const TextStyle(
-                                color: Color(0xffFAFBFB),
-                                fontFamily: 'Poppins',
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            title: Text(
-                              'Surah ${index + 1}',
-                              style: const TextStyle(
-                                color: Color(0xffFAFBFB),
-                                fontFamily: 'Poppins',
-                                fontSize: 16,
-                              ),
-                            ),
-                            subtitle: Text(
-                              'Surah ${index + 1}',
-                              style: const TextStyle(
-                                color: Color(0xffFAFBFB),
-                                fontFamily: 'Poppins',
-                              ),
-                            ),
-                            dense: true,
-                            trailing: Text(
-                              'Surah ${index + 1}',
-                              style: const TextStyle(
-                                color: Color(0xff7352CB),
-                                fontFamily: 'Poppins',
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                )
+              else
+                const Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: Color(0xffE3C3F8),
                     ),
-
-                    ColoredBox(
-                      color: const Color(0xff011240),
-                      child: ListView.separated(
-                        itemCount: 25,
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const Divider(
-                          color: Color(0xffA4A7D3),
-                        ),
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            title: Text(
-                              'Ayat $index',
-                              style: const TextStyle(
-                                color: Color(0xffFAFBFB),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    ColoredBox(
-                      color: const Color(0xff011240),
-                      child: ListView.separated(
-                        itemCount: 25,
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const Divider(
-                          color: Color(0xffA4A7D3),
-                        ),
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            title: Text(
-                              'Halaman $index',
-                              style: const TextStyle(
-                                color: Color(0xffFAFBFB),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              )
+                  ),
+                )
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  SizedBox _buildTabs(AppLocalizations l10n) {
+    return SizedBox(
+      height: 50,
+      child: AppBar(
+        backgroundColor: const Color(0xff011240),
+        elevation: 0,
+        flexibleSpace: TabBar(
+          indicatorColor: const Color(0xffE3C3F8),
+          indicatorWeight: 3,
+          tabs: [
+            Tab(
+              child: Text(
+                l10n.tabBarSurahLabel,
+                style: const TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Tab(
+              child: Text(
+                l10n.tabBarJuzLabel,
+                style: const TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

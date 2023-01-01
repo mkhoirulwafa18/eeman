@@ -3,5 +3,8 @@
     "counterAppBarTitle": "Counter",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
-    }
+    },
+    "tabBarSurahLabel": "Surah",
+    "tabBarJuzLabel": "Juz",
+    "homePageAppBarTitle": "Quran App"
 }

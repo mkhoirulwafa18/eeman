@@ -1,0 +1,95 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quran_app/modules/home/models/quran.dart';
+import 'package:quran_app/modules/home/widgets/rub_el_hizb.dart';
+import 'package:quran_app/modules/surah/surah_page.dart';
+
+class SurahList extends StatelessWidget {
+  const SurahList({
+    super.key,
+    required List<Quran> quran,
+  }) : _quran = quran;
+
+  final List<Quran> _quran;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ColoredBox(
+        color: const Color(0xff011240),
+        child: ListView.separated(
+          itemCount: _quran.length,
+          separatorBuilder: (_, i) => const Divider(
+            color: Color(0xffA4A7D3),
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            return _buildItem(index, context);
+          },
+        ),
+      ),
+    );
+  }
+
+  ListTile _buildItem(int index, BuildContext context) {
+    return ListTile(
+      leading: RubElHizb(
+        title: (index + 1).toString(),
+      ),
+      title: Text(
+        _quran[index].name ?? '',
+        style: const TextStyle(
+          color: Color(0xffFAFBFB),
+          fontFamily: 'Poppins',
+          fontSize: 16,
+        ),
+      ),
+      subtitle: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            _quran[index].nameTranslations!.id ?? '',
+            style: const TextStyle(
+              color: Color(0xffA4A7D3),
+              fontFamily: 'Poppins',
+            ),
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          if (_quran[index].place == Place.mecca)
+            SvgPicture.asset(
+              'assets/icons/mecca.svg',
+              width: 16,
+              color: const Color(0xfffafbfb),
+            )
+          else
+            SvgPicture.asset(
+              'assets/icons/medina.svg',
+              width: 16,
+              color: const Color(0xfffafbfb),
+            ),
+        ],
+      ),
+      dense: true,
+      trailing: Text(
+        _quran[index].nameTranslations!.ar ?? '',
+        style: const TextStyle(
+          color: Color(0xFFB9A0FF),
+          fontFamily: 'IsepMisbah',
+          fontSize: 16,
+        ),
+      ),
+      onTap: () {
+        Navigator.push<MaterialPageRoute<dynamic>>(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SurahPage(
+              noAyat: index,
+              dataQuran: _quran,
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

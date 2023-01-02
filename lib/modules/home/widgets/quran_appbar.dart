@@ -22,6 +22,7 @@ class QuranAppBar extends StatelessWidget implements PreferredSizeWidget {
         statusBarBrightness: Brightness.dark, // For iOS (dark icons)
       ),
       elevation: 0,
+      centerTitle: true,
       title: Text(
         title,
         style: const TextStyle(
@@ -33,18 +34,18 @@ class QuranAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: const Color(0xff011240),
       leading: showBack
           ? GestureDetector(
-              onTap: () => Navigator.pop(context),
+              onTap: () => Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false),
               child: const Icon(Icons.arrow_back),
             )
           : null,
-      actions: const [
-        Padding(
-          padding: EdgeInsets.all(16),
-          child: Icon(
-            Icons.search,
-          ),
-        ),
-      ],
+      // actions: const [
+      //   Padding(
+      //     padding: EdgeInsets.all(16),
+      //     child: Icon(
+      //       Icons.search,
+      //     ),
+      //   ),
+      // ],
     );
   }
 }

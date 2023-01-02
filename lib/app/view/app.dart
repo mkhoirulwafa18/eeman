@@ -22,7 +22,8 @@ class App extends StatelessWidget {
       routes: {
         '/': (context) => const HomePage(),
         '/surah': (context) => const SurahPage(
-              noAyat: '0',
+              noAyat: 0,
+              dataQuran: [],
             ),
       },
     );

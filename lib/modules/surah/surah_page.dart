@@ -1,50 +1,88 @@
 // ignore_for_file: avoid_dynamic_calls
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:quran_app/modules/home/widgets/glassmorphism.dart';
-// import 'package:quran_app/l10n/l10n.dart';
+import 'package:quran_app/modules/home/models/quran.dart';
 import 'package:quran_app/modules/home/widgets/quran_appbar.dart';
 import 'package:quran_app/modules/home/widgets/rub_el_hizb.dart';
+import 'package:quran_app/modules/surah/services/shared_prefs.dart';
+import 'package:quran_app/modules/surah/widgets/surah_info.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class SurahPage extends StatefulWidget {
-  const SurahPage({super.key, required this.noAyat});
-  final String noAyat;
-
+  const SurahPage({
+    super.key,
+    required this.noAyat,
+    required this.dataQuran,
+    this.startAyat = 0,
+  });
+  final int noAyat;
+  final List<Quran> dataQuran;
+  final int? startAyat;
   @override
   State<SurahPage> createState() => _SurahPageState();
 }
 
 class _SurahPageState extends State<SurahPage> {
-  List<dynamic> _ayatSurah = [];
+  List<Verse> _ayatSurah = [];
+  int _indexSurah = 0;
   String title = '';
   int numberSurah = 0;
   String translation = '';
-  String revelation = '';
+  Type revelation = Type.MAKKIYAH;
   int totalAyat = 0;
+  int lastReadAyat = 0;
 
-  Future<void> readJson() async {
-    final surahResponse = await rootBundle.loadString('assets/sources/surahs/${widget.noAyat}.json');
-    final surah = json.decode(surahResponse);
+  Future<void> getLastReadHere() async {
+    final lastAyat = await SurahStorage.getInt('last_read_ayat');
     setState(() {
-      _ayatSurah = surah['verses'] as List;
-      title = surah['name']['transliteration']['id'] as String;
-      numberSurah = surah['number'] as int;
-      translation = surah['name']['translation']['id'] as String;
-      revelation = surah['revelation']['id'] as String;
-      totalAyat = surah['numberOfVerses'] as int;
+      lastReadAyat = lastAyat;
     });
   }
 
+  Future<void> readJson() async {
+    final data = widget.dataQuran;
+    setState(() {
+      _indexSurah = widget.noAyat;
+      _ayatSurah = data[_indexSurah].verses ?? [];
+      title = data[_indexSurah].name ?? '';
+      numberSurah = data[_indexSurah].numberOfSurah ?? 0;
+      translation = data[_indexSurah].nameTranslations!.id ?? '';
+      revelation = data[_indexSurah].type ?? Type.MAKKIYAH;
+      totalAyat = data[_indexSurah].numberOfAyah ?? 0;
+    });
+  }
+
+  final controller = ItemScrollController();
   @override
   void initState() {
     super.initState();
+    getLastReadHere();
     readJson();
+    if (widget.startAyat != 0) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        scrollToIndex(widget.startAyat ?? 0);
+      });
+    }
+  }
+
+  Future<void> scrollToIndex(int index) {
+    return controller.scrollTo(
+      index: index,
+      duration: const Duration(milliseconds: 1000),
+    );
+  }
+
+  Future<void> _setLastRead(int index, int noSurah) async {
+    final currentLastReadAyat = await SurahStorage.getInt('last_read_ayat');
+    final currentLastReadSurah = await SurahStorage.getInt('last_read_surah');
+    if (currentLastReadAyat != (index + 1) || currentLastReadSurah != (noSurah - 1)) {
+      await SurahStorage.setInt('last_read_ayat', index + 1);
+      await SurahStorage.setInt('last_read_surah', noSurah - 1);
+    }
+    return;
   }
 
   @override
   Widget build(BuildContext context) {
-    // final l10n = context.l10n;
     return Scaffold(
       appBar: QuranAppBar(
         appBar: AppBar(),
@@ -54,100 +92,96 @@ class _SurahPageState extends State<SurahPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
         child: _ayatSurah.isNotEmpty
-            ? ListView.builder(
-                itemCount: _ayatSurah.length + 1,
+            ? ScrollablePositionedList.builder(
+                itemScrollController: controller,
+                itemPositionsListener: ItemPositionsListener.create(),
+                itemCount: _ayatSurah.length + 2,
                 itemBuilder: (context, index) {
                   if (index == 0) {
-                    // return the header
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                      child: Glassmorphism(
-                        blur: 1.2,
-                        opacity: 0.2,
-                        radius: 20,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            children: [
-                              RubElHizb(title: numberSurah.toString()),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                title,
-                                style: const TextStyle(
-                                  color: Color(0xfffafbfb),
-                                  fontFamily: 'Poppins',
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Text(
-                                translation,
-                                style: const TextStyle(
-                                  color: Color(0xffA4A7D3),
-                                  fontFamily: 'Poppins',
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Text(
-                                '$revelation - $totalAyat ayat',
-                                style: const TextStyle(
-                                  color: Color(0xffA4A7D3),
-                                  fontFamily: 'Poppins',
-                                  fontSize: 10,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                    return SurahInfo(
+                      numberSurah: numberSurah,
+                      title: title,
+                      translation: translation,
+                      revelation: revelation.name,
+                      totalAyat: totalAyat,
                     );
                   }
                   index -= 1;
-                  return ListTile(
-                    dense: true,
-                    contentPadding: const EdgeInsets.all(16),
-                    tileColor: index.isOdd ? const Color.fromARGB(255, 8, 33, 102) : const Color(0xff011240),
-                    trailing: RubElHizb(
-                      title: (index + 1).toString(),
-                    ),
-                    title: Text(
-                      _ayatSurah[index]['text']['arab'] as String,
-                      style: const TextStyle(
-                        fontFamily: 'IsepMisbah',
-                        fontSize: 20,
-                        color: Color(0xffFAFBFB),
-                      ),
-                      textAlign: TextAlign.right,
-                    ),
-                    isThreeLine: true,
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          _ayatSurah[index]['text']['transliteration']['en'] as String,
-                          style: const TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Color(0xffFAFBFB),
+                  return _ayatSurah.length != index
+                      ? GestureDetector(
+                          onTap: () async {
+                            await _setLastRead(index, numberSurah);
+                          },
+                          child: ListTile(
+                            dense: true,
+                            contentPadding: const EdgeInsets.all(16),
+                            tileColor: index.isOdd ? const Color.fromARGB(255, 8, 33, 102) : const Color(0xff011240),
+                            trailing: RubElHizb(
+                              title: (index + 1).toString(),
+                            ),
+                            title: Text(
+                              (index == 0 && numberSurah != 1
+                                      ? _ayatSurah[index].text!.substring(39)
+                                      : _ayatSurah[index].text) ??
+                                  '',
+                              style: const TextStyle(
+                                fontFamily: 'IsepMisbah',
+                                fontSize: 20,
+                                color: Color(0xffFAFBFB),
+                                height: 2,
+                              ),
+                              textAlign: TextAlign.justify,
+                              textDirection: TextDirection.rtl,
+                            ),
+                            isThreeLine: true,
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Text(
+                                  _ayatSurah[index].translationId ?? '',
+                                  style: const TextStyle(
+                                    fontFamily: 'Poppins',
+                                    color: Color(0xffA4A7D3),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Text(
-                          _ayatSurah[index]['translation']['id'] as String,
-                          style: const TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Color(0xffA4A7D3),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              Navigator.pushReplacement<MaterialPageRoute<dynamic>, MaterialPageRoute<dynamic>>(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SurahPage(
+                                    noAyat: _indexSurah + 1,
+                                    dataQuran: widget.dataQuran,
+                                  ),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.arrow_forward),
+                            label: const Text(
+                              'Lanjut',
+                              style: TextStyle(fontFamily: 'Poppins'),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xffb9a0ff),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
+                        );
                 },
               )
             : const Expanded(
                 child: Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: Color(0xffE3C3F8),
+                  ),
                 ),
               ),
       ),

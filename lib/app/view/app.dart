@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/homepage.dart';
+import 'package:quran_app/modules/surah/surah_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -17,7 +18,14 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/surah': (context) => const SurahPage(
+              noAyat: 0,
+              dataQuran: [],
+            ),
+      },
     );
   }
 }

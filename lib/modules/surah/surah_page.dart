@@ -115,23 +115,31 @@ class _SurahPageState extends State<SurahPage> {
                           child: ListTile(
                             dense: true,
                             contentPadding: const EdgeInsets.all(16),
-                            tileColor: index.isOdd ? const Color.fromARGB(255, 8, 33, 102) : const Color(0xff011240),
-                            trailing: RubElHizb(
-                              title: (index + 1).toString(),
-                            ),
-                            title: Text(
-                              (index == 0 && numberSurah != 1
-                                      ? _ayatSurah[index].text!.substring(39)
-                                      : _ayatSurah[index].text) ??
-                                  '',
-                              style: const TextStyle(
-                                fontFamily: 'IsepMisbah',
-                                fontSize: 20,
-                                color: Color(0xffFAFBFB),
-                                height: 2,
-                              ),
+                            tileColor: index.isOdd ? Color.fromARGB(255, 4, 23, 77) : const Color(0xff011240),
+                            title: RichText(
                               textAlign: TextAlign.justify,
                               textDirection: TextDirection.rtl,
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: (index == 0 && numberSurah != 1
+                                            ? _ayatSurah[index].text!.substring(39)
+                                            : _ayatSurah[index].text) ??
+                                        '',
+                                    style: const TextStyle(
+                                      fontFamily: 'IsepMisbah',
+                                      fontSize: 22,
+                                      color: Color(0xffFAFBFB),
+                                      height: 2,
+                                    ),
+                                  ),
+                                  WidgetSpan(
+                                    child: RubElHizb(
+                                      title: (index + 1).toString(),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                             isThreeLine: true,
                             subtitle: Column(

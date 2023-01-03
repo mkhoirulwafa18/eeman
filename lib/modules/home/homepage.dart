@@ -101,15 +101,23 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   void hitApi() {
-    // Your API call code here
     Storage.setAyatOfTheDay(_quran);
     ayatOfTheDayFunc();
     Storage.setString('last_hit', DateTime.now().toIso8601String());
   }
 
+  void _onSearch(String key) {
+    final temp = <Quran>[];
+    temp.addAll(_quran.where((element) => element.name!.contains(key)));
+    setState(() {
+      _quran = temp;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final TextEditingController controller = TextEditingController();
 
     return Scaffold(
       appBar: QuranAppBar(
@@ -124,7 +132,31 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BoxHeader(data: _quran, aotd: ayatOfTheDay),
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
+            DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: const Color(0xffE3C3F8),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: TextFormField(
+                  cursorColor: const Color(0xffE3C3F8),
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(
+                      color: Color(0xffE3C3F8),
+                    ),
+                    focusColor: Color(0xff011240),
+                    border: InputBorder.none,
+                    labelText: 'Cari Surah',
+                  ),
+                  onChanged: _onSearch,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
             if (_quran.isNotEmpty)
               SurahList(quran: _quran)
             else
@@ -140,7 +172,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xffb9a0ff),
-        // backgroundColor: const Color(0xffE3C3F8),
         onPressed: () async {
           _goToLastRead();
         },

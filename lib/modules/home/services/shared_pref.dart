@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:quran_app/modules/home/models/quran.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,11 +28,13 @@ class Storage {
   }
 
   static Future<dynamic> setAyatOfTheDay(List<Quran> data) async {
+    debugPrint('SET AYAT OF THE DAY IN SHARED PREF');
     final surahNo = Random().nextInt(145);
     final maxAyat = data.isNotEmpty ? data[surahNo].numberOfAyah : 0;
     final ayatNo = Random().nextInt(maxAyat! + 1);
     await setInt(randomSurah, surahNo);
     await setInt(randomAyat, ayatNo);
+    debugPrint('SELESAI SET AYAT OF THE DAY IN SHARED PREF');
   }
 
   static Future<List<int>> getAyatOfTheDay() async {

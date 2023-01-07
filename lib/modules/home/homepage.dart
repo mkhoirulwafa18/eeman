@@ -35,89 +35,78 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     });
   }
 
-  Future<void> ayatOfTheDayFunc() async {
-    final aotd = await _getAyatOfTheDay();
-    final lastHit = await Storage.getString('last_hit');
-    setState(() {
-      ayatOfTheDay = aotd;
-      _lastHit = lastHit;
-    });
-  }
-
-  Future<void> getLastRead() async {
-    final surah = await SurahStorage.getInt('last_read_surah');
-    final ayat = await SurahStorage.getInt('last_read_ayat');
-    setState(() {
-      lastReadSurah = surah;
-      lastReadAyat = ayat;
-    });
-  }
-
-  Future<List<int>> _getAyatOfTheDay() async {
-    final data = await Storage.getAyatOfTheDay();
-    return data;
-  }
-
-  void _goToLastRead() {
-    getLastRead();
-    Navigator.push<MaterialPageRoute<dynamic>>(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SurahPage(
-          noAyat: lastReadSurah,
-          dataQuran: _quran,
-          startAyat: lastReadAyat,
-        ),
-      ),
-    );
-  }
+  // void _goToLastRead() {
+  //   Navigator.push<MaterialPageRoute<dynamic>>(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => SurahPage(
+  //         noAyat: lastReadSurah,
+  //         dataQuran: _quran,
+  //         startAyat: lastReadAyat,
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   void initState() {
     super.initState();
     readJson();
-    ayatOfTheDayFunc();
-    WidgetsBinding.instance.addObserver(this);
-    getLastRead();
+    // WidgetsBinding.instance.addObserver(this);
   }
 
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   WidgetsBinding.instance.removeObserver(this);
+  //   super.dispose();
+  // }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      // Check if the day has changed
-      final now = DateTime.now();
-      final lastHit = DateTime.parse(_lastHit);
-      final formatter = DateFormat.yMd();
-      if (formatter.format(now) != formatter.format(lastHit)) {
-        hitApi();
-      }
-    }
-  }
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   if (state == AppLifecycleState.resumed) {
+  //     // ayatOfTheDayFunc();
+  //     // Check if the day has changed
+  //     if (_lastHit.isNotEmpty) {
+  //       final now = DateTime.now();
+  //       final lastHit = DateTime.parse(_lastHit);
+  //       final formatter = DateFormat.yMd();
+  //       if (formatter.format(now) != formatter.format(lastHit)) {
+  //         setLastHit();
+  //       }
+  //     } else {
+  //       setLastHit();
+  //     }
+  //     debugPrint('===================');
+  //     debugPrint(DateFormat.yMd().format(DateTime.now()));
+  //     debugPrint(DateFormat.yMd().format(DateTime.parse(_lastHit)));
+  //     debugPrint('===================');
+  //   }
+  // }
 
-  void hitApi() {
-    Storage.setAyatOfTheDay(_quran);
-    ayatOfTheDayFunc();
-    Storage.setString('last_hit', DateTime.now().toIso8601String());
-  }
+  // void setLastHit() {
+  //   Storage.setAyatOfTheDay(_quran);
+  //   ayatOfTheDayFunc();
+  //   Storage.setString('last_hit_aotd', DateTime.now().toIso8601String());
+  // }
 
   void _onSearch(String key) {
-    final temp = <Quran>[];
-    temp.addAll(_quran.where((element) => element.name!.contains(key)));
-    setState(() {
-      _quran = temp;
-    });
+    if (key == '') {
+      setState(() {
+        _quran = _quran;
+      });
+    } else {
+      setState(() {
+        _quran = _quran.where((element) => element.name!.contains(key)).toList();
+      });
+    }
+
+    debugPrint(_quran.toString());
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final TextEditingController controller = TextEditingController();
+    // final TextEditingController controller = TextEditingController();
 
     return Scaffold(
       appBar: QuranAppBar(
@@ -131,7 +120,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BoxHeader(data: _quran, aotd: ayatOfTheDay),
+            // BoxHeader(data: _quran, aotd: ayatOfTheDay),
             const SizedBox(height: 16),
             DecoratedBox(
               decoration: BoxDecoration(
@@ -152,6 +141,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                     border: InputBorder.none,
                     labelText: 'Cari Surah',
                   ),
+                  style: const TextStyle(color: Colors.white),
                   onChanged: _onSearch,
                 ),
               ),
@@ -170,16 +160,16 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xffb9a0ff),
-        onPressed: () async {
-          _goToLastRead();
-        },
-        child: SvgPicture.asset(
-          'assets/icons/last_read.svg',
-          width: 30,
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: const Color(0xffb9a0ff),
+      //   onPressed: () async {
+      //     // _goToLastRead();
+      //   },
+      //   child: SvgPicture.asset(
+      //     'assets/icons/last_read.svg',
+      //     width: 30,
+      //   ),
+      // ),
     );
   }
 }

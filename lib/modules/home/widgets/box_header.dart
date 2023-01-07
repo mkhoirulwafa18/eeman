@@ -26,48 +26,52 @@ class BoxHeader extends StatelessWidget {
                 context: context,
                 backgroundColor: const Color(0xff011240),
                 builder: (BuildContext context) {
-                  return Glassmorphism(
-                    blur: 8,
-                    opacity: 0.1,
-                    radius: 20,
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(20),
-                      child: Column(
-                        children: [
-                          Text(
-                            data[surahNo].verses?[ayatNo].text ?? '',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'IsepMisbah',
-                              color: Colors.white.withOpacity(0.8),
-                              fontSize: 20,
-                            ),
+                  return Wrap(
+                    children: [
+                      Glassmorphism(
+                        blur: 8,
+                        opacity: 0.1,
+                        radius: 20,
+                        child: Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            children: [
+                              Text(
+                                data[surahNo].verses?[ayatNo].text ?? '',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: 'IsepMisbah',
+                                  color: Colors.white.withOpacity(0.8),
+                                  fontSize: 20,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Text(
+                                '"${data[surahNo].verses?[ayatNo].translationId}"',
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white.withOpacity(0.8),
+                                  // fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                '"${data[surahNo].name} - $ayatNo"',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white.withOpacity(0.8),
+                                  // fontSize: 16,
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          Text(
-                            '"${data[surahNo].verses?[ayatNo].translationId}"',
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              color: Colors.white.withOpacity(0.8),
-                              // fontSize: 16,
-                            ),
-                          ),
-                          Text(
-                            '"${data[surahNo].name} - $ayatNo"',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              color: Colors.white.withOpacity(0.8),
-                              // fontSize: 16,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   );
                 },
               );

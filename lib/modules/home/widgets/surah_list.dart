@@ -33,7 +33,7 @@ class SurahList extends StatelessWidget {
   ListTile _buildItem(int index, BuildContext context) {
     return ListTile(
       leading: RubElHizb(
-        title: (index + 1).toString(),
+        title: _quran[index].numberOfSurah.toString(),
       ),
       title: Text(
         _quran[index].name ?? '',

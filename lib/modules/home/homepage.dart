@@ -1,17 +1,17 @@
-// ignore_for_file: avoid_dynamic_calls
+// TODO(mkhoirulwafa18): remove unused code
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:intl/intl.dart';
+// import 'package:flutter_svg/svg.dart';
+// import 'package:intl/intl.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/models/quran.dart';
-import 'package:quran_app/modules/home/services/shared_pref.dart';
-import 'package:quran_app/modules/home/widgets/box_header.dart';
+// import 'package:quran_app/modules/home/services/shared_pref.dart';
+// import 'package:quran_app/modules/home/widgets/box_header.dart';
 
 import 'package:quran_app/modules/home/widgets/quran_appbar.dart';
 import 'package:quran_app/modules/home/widgets/surah_list.dart';
-import 'package:quran_app/modules/surah/services/shared_prefs.dart';
-import 'package:quran_app/modules/surah/surah_page.dart';
+// import 'package:quran_app/modules/surah/services/shared_prefs.dart';
+// import 'package:quran_app/modules/surah/surah_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,9 +21,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+  List<Quran> _dataQuran = [];
   List<Quran> _quran = [];
   List<int> ayatOfTheDay = [];
-  String _lastHit = '';
+  // String _lastHit = '';
   int lastReadSurah = 0;
   int lastReadAyat = 0;
 
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     final quranResponse = await rootBundle.loadString('assets/sources/quran.json');
     final quranData = quranFromJson(quranResponse);
     setState(() {
+      _dataQuran = quranData;
       _quran = quranData;
     });
   }
@@ -90,17 +92,30 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   // }
 
   void _onSearch(String key) {
+    debugPrint(key);
     if (key == '') {
       setState(() {
-        _quran = _quran;
+        _quran = _dataQuran;
       });
     } else {
       setState(() {
-        _quran = _quran.where((element) => element.name!.contains(key)).toList();
+        _quran = _dataQuran
+            .where(
+              (element) => element.name!
+                  .toLowerCase()
+                  .replaceAll(
+                    RegExp("[^0-9a-zA-Z']"),
+                    '',
+                  )
+                  .contains(
+                    key.toLowerCase().replaceAll(RegExp("[^0-9a-zA-Z']"), ''),
+                  ),
+            )
+            .toList();
       });
     }
 
-    debugPrint(_quran.toString());
+    // debugPrint(_quran.toString());
   }
 
   @override
@@ -147,7 +162,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               ),
             ),
             const SizedBox(height: 16),
-            if (_quran.isNotEmpty)
+            if (_dataQuran.isNotEmpty)
               SurahList(quran: _quran)
             else
               const Expanded(

@@ -96,29 +96,6 @@ class SurahList extends StatelessWidget {
               ),
             ),
           ),
-          // Text(
-          //   _quran[index].nameTranslations!.id ?? '',
-          //   style: const TextStyle(
-          //     color: Color(0xffA4A7D3),
-          //     fontFamily: 'Poppins',
-          //   ),
-          //   maxLines: 2,
-          // ),
-          // const SizedBox(
-          //   width: 8,
-          // ),
-          // if (_quran[index].place == Place.mecca)
-          //   SvgPicture.asset(
-          //     'assets/icons/mecca.svg',
-          //     width: 16,
-          //     color: const Color(0xfffafbfb),
-          //   )
-          // else
-          //   SvgPicture.asset(
-          //     'assets/icons/medina.svg',
-          //     width: 16,
-          //     color: const Color(0xfffafbfb),
-          //   ),
         ],
       ),
       dense: true,
@@ -127,7 +104,7 @@ class SurahList extends StatelessWidget {
         style: const TextStyle(
           color: Color(0xFFB9A0FF),
           fontFamily: 'IsepMisbah',
-          fontSize: 16,
+          fontSize: 20,
         ),
       ),
       onTap: () {

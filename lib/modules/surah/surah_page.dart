@@ -1,9 +1,9 @@
-// ignore_for_file: avoid_dynamic_calls
 import 'package:flutter/material.dart';
+import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/modules/home/models/quran.dart';
 import 'package:quran_app/modules/home/widgets/quran_appbar.dart';
 import 'package:quran_app/modules/home/widgets/rub_el_hizb.dart';
-import 'package:quran_app/modules/surah/services/shared_prefs.dart';
+import 'package:quran_app/modules/surah/widgets/action_button.dart';
 import 'package:quran_app/modules/surah/widgets/surah_info.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -31,13 +31,6 @@ class _SurahPageState extends State<SurahPage> {
   int totalAyat = 0;
   int lastReadAyat = 0;
 
-  Future<void> getLastReadHere() async {
-    final lastAyat = await SurahStorage.getInt('last_read_ayat');
-    setState(() {
-      lastReadAyat = lastAyat;
-    });
-  }
-
   Future<void> readJson() async {
     final data = widget.dataQuran;
     setState(() {
@@ -55,30 +48,7 @@ class _SurahPageState extends State<SurahPage> {
   @override
   void initState() {
     super.initState();
-    getLastReadHere();
     readJson();
-    if (widget.startAyat != 0) {
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        scrollToIndex(widget.startAyat ?? 0);
-      });
-    }
-  }
-
-  Future<void> scrollToIndex(int index) {
-    return controller.scrollTo(
-      index: index,
-      duration: const Duration(milliseconds: 1000),
-    );
-  }
-
-  Future<void> _setLastRead(int index, int noSurah) async {
-    final currentLastReadAyat = await SurahStorage.getInt('last_read_ayat');
-    final currentLastReadSurah = await SurahStorage.getInt('last_read_surah');
-    if (currentLastReadAyat != (index + 1) || currentLastReadSurah != (noSurah - 1)) {
-      await SurahStorage.setInt('last_read_ayat', index + 1);
-      await SurahStorage.setInt('last_read_surah', noSurah - 1);
-    }
-    return;
   }
 
   @override
@@ -107,91 +77,87 @@ class _SurahPageState extends State<SurahPage> {
                     );
                   }
                   index -= 1;
-                  return _ayatSurah.length != index
-                      ? GestureDetector(
-                          onTap: () async {
-                            await _setLastRead(index, numberSurah);
-                          },
-                          child: ListTile(
-                            dense: true,
-                            contentPadding: const EdgeInsets.all(16),
-                            tileColor: index.isOdd ? Color.fromARGB(255, 4, 23, 77) : const Color(0xff011240),
-                            title: RichText(
-                              textAlign: TextAlign.justify,
-                              textDirection: TextDirection.rtl,
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: (index == 0 && numberSurah != 1
-                                            ? _ayatSurah[index].text!.substring(39)
-                                            : _ayatSurah[index].text) ??
-                                        '',
-                                    style: const TextStyle(
-                                      fontFamily: 'IsepMisbah',
-                                      fontSize: 22,
-                                      color: Color(0xffFAFBFB),
-                                      height: 2,
-                                    ),
-                                  ),
-                                  WidgetSpan(
-                                    child: RubElHizb(
-                                      title: (index + 1).toString(),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            isThreeLine: true,
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                Text(
-                                  _ayatSurah[index].translationId ?? '',
-                                  style: const TextStyle(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xffA4A7D3),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      : Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: ElevatedButton.icon(
-                            onPressed: () {
-                              Navigator.pushReplacement<MaterialPageRoute<dynamic>, MaterialPageRoute<dynamic>>(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SurahPage(
-                                    noAyat: _indexSurah + 1,
-                                    dataQuran: widget.dataQuran,
-                                  ),
-                                ),
-                              );
-                            },
-                            icon: const Icon(Icons.arrow_forward),
-                            label: const Text(
-                              'Lanjut',
-                              style: TextStyle(fontFamily: 'Poppins'),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xffb9a0ff),
-                            ),
-                          ),
-                        );
+                  return _ayatSurah.length != index ? _buildItem(index) : _buildFooter();
                 },
               )
-            : const Expanded(
-                child: Center(
-                  child: CircularProgressIndicator(
-                    color: Color(0xffE3C3F8),
-                  ),
+            : const AppLoading(),
+      ),
+    );
+  }
+
+  Padding _buildFooter() {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          if (numberSurah != 1)
+            ActionButton(
+              type: ButtonActionType.back,
+              indexSurah: _indexSurah,
+              widget: widget,
+            )
+          else
+            const SizedBox(),
+          if (numberSurah != 114)
+            ActionButton(
+              indexSurah: _indexSurah,
+              widget: widget,
+              type: ButtonActionType.next,
+            )
+          else
+            const SizedBox()
+        ],
+      ),
+    );
+  }
+
+  ListTile _buildItem(int index) {
+    return ListTile(
+      dense: true,
+      contentPadding: const EdgeInsets.all(16),
+      tileColor: index.isOdd ? Color.fromARGB(255, 4, 23, 77) : const Color(0xff011240),
+      title: RichText(
+        textAlign: TextAlign.justify,
+        textDirection: TextDirection.rtl,
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: (index == 0 && numberSurah != 1 ? _ayatSurah[index].text!.substring(39) : _ayatSurah[index].text) ??
+                  '',
+              style: const TextStyle(
+                fontFamily: 'IsepMisbah',
+                fontSize: 22,
+                color: Color(0xffFAFBFB),
+                height: 2,
+              ),
+            ),
+            WidgetSpan(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: RubElHizb(
+                  title: (index + 1).toString(),
                 ),
               ),
+            )
+          ],
+        ),
+      ),
+      isThreeLine: true,
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 16,
+          ),
+          Text(
+            _ayatSurah[index].translationId ?? '',
+            style: const TextStyle(
+              fontFamily: 'Poppins',
+              color: Color(0xffA4A7D3),
+            ),
+          ),
+        ],
       ),
     );
   }

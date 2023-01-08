@@ -1,6 +1,7 @@
 // TODO(mkhoirulwafa18): remove unused code
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quran_app/common/widgets/app_loading.dart';
 // import 'package:flutter_svg/svg.dart';
 // import 'package:intl/intl.dart';
 import 'package:quran_app/l10n/l10n.dart';
@@ -162,16 +163,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               ),
             ),
             const SizedBox(height: 16),
-            if (_dataQuran.isNotEmpty)
-              SurahList(quran: _quran)
-            else
-              const Expanded(
-                child: Center(
-                  child: CircularProgressIndicator(
-                    color: Color(0xffE3C3F8),
-                  ),
-                ),
-              )
+            if (_dataQuran.isNotEmpty) SurahList(quran: _quran) else const AppLoading()
           ],
         ),
       ),

@@ -17,15 +17,28 @@ class SurahList extends StatelessWidget {
     return Expanded(
       child: ColoredBox(
         color: const Color(0xff011240),
-        child: ListView.separated(
-          itemCount: _quran.length,
-          separatorBuilder: (_, i) => const Divider(
-            color: Color(0xffA4A7D3),
-          ),
-          itemBuilder: (BuildContext context, int index) {
-            return _buildItem(index, context);
-          },
-        ),
+        child: _quran.isNotEmpty
+            ? ListView.separated(
+                itemCount: _quran.length,
+                separatorBuilder: (_, i) => const Divider(
+                  color: Color(0xffA4A7D3),
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  return _buildItem(index, context);
+                },
+              )
+            : const Expanded(
+                child: Center(
+                  child: Text(
+                    'Tidak ada surah yang cocok dengan pencarian.\nCoba ulangi ketik surah yang kamu cari.',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
       ),
     );
   }

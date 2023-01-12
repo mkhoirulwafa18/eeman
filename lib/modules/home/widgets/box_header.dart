@@ -55,7 +55,6 @@ class BoxHeader extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   color: Colors.white.withOpacity(0.8),
-                                  // fontSize: 16,
                                 ),
                               ),
                               Text(
@@ -64,7 +63,6 @@ class BoxHeader extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   color: Colors.white.withOpacity(0.8),
-                                  // fontSize: 16,
                                 ),
                               ),
                             ],

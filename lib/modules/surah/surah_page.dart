@@ -77,7 +77,9 @@ class _SurahPageState extends State<SurahPage> {
                     );
                   }
                   index -= 1;
-                  return _ayatSurah.length != index ? _buildItem(index) : _buildFooter();
+                  return _ayatSurah.length != index
+                      ? _buildItem(index)
+                      : _buildFooter();
                 },
               )
             : const AppLoading(),
@@ -116,14 +118,18 @@ class _SurahPageState extends State<SurahPage> {
     return ListTile(
       dense: true,
       contentPadding: const EdgeInsets.all(16),
-      tileColor: index.isOdd ? Color.fromARGB(255, 4, 23, 77) : const Color(0xff011240),
+      tileColor: index.isOdd
+          ? Color.fromARGB(255, 4, 23, 77)
+          : const Color(0xff011240),
       title: RichText(
         textAlign: TextAlign.justify,
         textDirection: TextDirection.rtl,
         text: TextSpan(
           children: [
             TextSpan(
-              text: (index == 0 && numberSurah != 1 ? _ayatSurah[index].text!.substring(39) : _ayatSurah[index].text) ??
+              text: (index == 0 && numberSurah != 1
+                      ? _ayatSurah[index].text!.substring(39)
+                      : _ayatSurah[index].text) ??
                   '',
               style: const TextStyle(
                 fontFamily: 'IsepMisbah',

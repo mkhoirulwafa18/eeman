@@ -19,7 +19,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   List<Quran> _quran = [];
 
   Future<void> readJson() async {
-    final quranResponse = await rootBundle.loadString('assets/sources/quran.json');
+    final quranResponse =
+        await rootBundle.loadString('assets/sources/quran.json');
     final quranData = quranFromJson(quranResponse);
     setState(() {
       _dataQuran = quranData;
@@ -98,7 +99,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               ),
             ),
             const SizedBox(height: 16),
-            if (_dataQuran.isNotEmpty) SurahList(quran: _quran) else const AppLoading()
+            if (_dataQuran.isNotEmpty)
+              SurahList(quran: _quran)
+            else
+              const AppLoading()
           ],
         ),
       ),

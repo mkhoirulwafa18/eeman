@@ -25,7 +25,8 @@ class ActionButton extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: () {
                 debugPrint('$_indexSurah, index surah banggggggggggggggggg');
-                Navigator.pushReplacement<MaterialPageRoute<dynamic>, MaterialPageRoute<dynamic>>(
+                Navigator.pushReplacement<MaterialPageRoute<dynamic>,
+                    MaterialPageRoute<dynamic>>(
                   context,
                   MaterialPageRoute(
                     builder: (context) => SurahPage(
@@ -38,7 +39,9 @@ class ActionButton extends StatelessWidget {
                 );
               },
               icon: Icon(
-                type == ButtonActionType.back ? Icons.arrow_back : Icons.arrow_forward,
+                type == ButtonActionType.back
+                    ? Icons.arrow_back
+                    : Icons.arrow_forward,
               ),
               label: Text(
                 type == ButtonActionType.back ? 'Kembali' : 'Lanjut',

@@ -34,7 +34,8 @@ class QuranAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: const Color(0xff011240),
       leading: showBack
           ? GestureDetector(
-              onTap: () => Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false),
+              onTap: () =>
+                  Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false),
               child: const Icon(Icons.arrow_back),
             )
           : null,

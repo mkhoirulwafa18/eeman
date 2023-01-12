@@ -1,17 +1,15 @@
-// To parse this JSON data, do
-//
-//     final quran = quranFromJson(jsonString);
-
-// ignore_for_file: constant_identifier_names, inference_failure_on_instance_creation, lines_longer_than_80_chars, cast_nullable_to_non_nullable
-
+// ignore_for_file: constant_identifier_names, inference_failure_on_instance_creation, lines_longer_than_80_chars, cast_nullable_to_non_nullable, avoid_dynamic_calls, inference_failure_on_untyped_parameter
 import 'dart:convert';
 
-// ignore: avoid_dynamic_calls
 List<Quran> quranFromJson(String str) => List<Quran>.from(
-      json.decode(str).map((quran) => Quran.fromJson(quran as Map<String, dynamic>)) as Iterable<dynamic>,
+      json
+              .decode(str)
+              .map((quran) => Quran.fromJson(quran as Map<String, dynamic>))
+          as Iterable<dynamic>,
     );
 
-String quranToJson(List<Quran> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String quranToJson(List<Quran> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Quran {
   Quran({
@@ -35,12 +33,14 @@ class Quran {
         numberOfSurah: json['number_of_surah'] as int?,
         place: placeValues.map[json['place']],
         recitations: List<Recitation>.from(
-          (json['recitations']).map((recite) => Recitation.fromJson(recite as Map<String, dynamic>))
-              as Iterable<dynamic>,
+          (json['recitations']).map(
+            (recite) => Recitation.fromJson(recite as Map<String, dynamic>),
+          ) as Iterable<dynamic>,
         ),
         type: typeValues.map[json['type']],
         verses: List<Verse>.from(
-          (json['verses'] as Iterable<dynamic>).map((x) => Verse.fromJson(x as Map<String, dynamic>)),
+          (json['verses'] as Iterable<dynamic>)
+              .map((x) => Verse.fromJson(x as Map<String, dynamic>)),
         ),
         tafsir: Tafsir.fromJson(json['tafsir'] as Map<String, dynamic>),
       );
@@ -75,7 +75,8 @@ class NameTranslations {
     this.id,
   });
 
-  factory NameTranslations.fromJson(Map<String, dynamic> json) => NameTranslations(
+  factory NameTranslations.fromJson(Map<String, dynamic> json) =>
+      NameTranslations(
         ar: json['ar'] as String?,
         en: json['en'] as String?,
         id: json['id'] as String?,
@@ -181,8 +182,12 @@ class Kemenag {
   Map<String, dynamic> toJson() => {
         'name': kemenagNameValues.reverse[name],
         'source': sourceValues.reverse[source],
-        'text': Map.from(text as Map<dynamic, dynamic>)
-            .map(MapEntry<String, dynamic>.new as MapEntry<dynamic, dynamic> Function(dynamic, dynamic)),
+        'text': Map.from(text as Map<dynamic, dynamic>).map(
+          MapEntry<String, dynamic>.new as MapEntry<dynamic, dynamic> Function(
+            dynamic,
+            dynamic,
+          ),
+        ),
       };
 }
 
@@ -193,12 +198,16 @@ final kemenagNameValues = EnumValues({'Kemenag': KemenagName.KEMENAG});
 enum Source { APLIKASI_QURAN_KEMENTRIAN_AGAMA_REPUBLIK_INDONESIA }
 
 final sourceValues = EnumValues(
-  {'Aplikasi Quran Kementrian Agama Republik Indonesia': Source.APLIKASI_QURAN_KEMENTRIAN_AGAMA_REPUBLIK_INDONESIA},
+  {
+    'Aplikasi Quran Kementrian Agama Republik Indonesia':
+        Source.APLIKASI_QURAN_KEMENTRIAN_AGAMA_REPUBLIK_INDONESIA
+  },
 );
 
 enum Type { MAKKIYAH, MADANIYAH }
 
-final typeValues = EnumValues({'Madaniyah': Type.MADANIYAH, 'Makkiyah': Type.MAKKIYAH});
+final typeValues =
+    EnumValues({'Madaniyah': Type.MADANIYAH, 'Makkiyah': Type.MAKKIYAH});
 
 class Verse {
   Verse({

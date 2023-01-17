@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:quran_app/modules/home/widgets/glassmorphism.dart';
-import 'package:quran_app/modules/home/widgets/rub_el_hizb.dart';
+import 'package:quran_app/modules/surah_list/widgets/glassmorphism.dart';
+import 'package:quran_app/modules/surah_list/widgets/rub_el_hizb.dart';
 
 class SurahInfo extends StatelessWidget {
   const SurahInfo({

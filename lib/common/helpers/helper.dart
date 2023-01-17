@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:quran_app/common/constants/constant.dart';
-import 'package:quran_app/modules/home/models/quran.dart';
+import 'package:quran_app/modules/surah_list/models/quran.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppStorage {

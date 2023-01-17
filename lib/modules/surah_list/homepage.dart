@@ -5,7 +5,7 @@ import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/surah_list/models/quran.dart';
 
 import 'package:quran_app/modules/surah_list/widgets/quran_appbar.dart';
-import 'package:quran_app/modules/surah_list/widgets/surah_list.dart';
+import 'package:quran_app/modules/surah_list/widgets/surah_list_data.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             ),
             const SizedBox(height: 16),
             if (_dataQuran.isNotEmpty)
-              SurahList(quran: _quran)
+              SurahListData(quran: _quran)
             else
               const AppLoading()
           ],

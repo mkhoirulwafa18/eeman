@@ -119,7 +119,7 @@ class _SurahPageState extends State<SurahPage> {
       dense: true,
       contentPadding: const EdgeInsets.all(16),
       tileColor: index.isOdd
-          ? Color.fromARGB(255, 4, 23, 77)
+          ? const Color.fromARGB(255, 4, 23, 77)
           : const Color(0xff011240),
       title: RichText(
         textAlign: TextAlign.justify,

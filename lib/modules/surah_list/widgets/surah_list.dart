@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quran_app/modules/surah/surah_page.dart';
 import 'package:quran_app/modules/surah_list/models/quran.dart';
 import 'package:quran_app/modules/surah_list/widgets/rub_el_hizb.dart';
-import 'package:quran_app/modules/surah/surah_page.dart';
 
 class SurahList extends StatelessWidget {
   const SurahList({

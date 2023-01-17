@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/l10n/l10n.dart';
-import 'package:quran_app/modules/surah_list/homepage.dart';
 import 'package:quran_app/modules/surah/surah_page.dart';
+import 'package:quran_app/modules/surah_list/homepage.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

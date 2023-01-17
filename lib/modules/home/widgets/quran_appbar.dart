@@ -1,7 +1,8 @@
+import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class QuranAppBar extends StatelessWidget implements PreferredSizeWidget {
+class QuranAppBar extends StatefulWidget implements PreferredSizeWidget {
   const QuranAppBar({
     super.key,
     required this.appBar,
@@ -11,8 +12,22 @@ class QuranAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBar appBar;
   final String title;
   final bool showBack;
+
+  @override
+  State<QuranAppBar> createState() => _QuranAppBarState();
   @override
   Size get preferredSize => Size.fromHeight(appBar.preferredSize.height);
+}
+
+class _QuranAppBarState extends State<QuranAppBar> {
+  bool isDarkModeEnabled = false;
+
+  // ignore: avoid_positional_boolean_parameters
+  void onStateChanged(bool isDarkModeEnabled) {
+    setState(() {
+      this.isDarkModeEnabled = isDarkModeEnabled;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +39,7 @@ class QuranAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       centerTitle: true,
       title: Text(
-        title,
+        widget.title,
         style: const TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w600,
@@ -32,21 +47,19 @@ class QuranAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       backgroundColor: const Color(0xff011240),
-      leading: showBack
+      leading: widget.showBack
           ? GestureDetector(
               onTap: () =>
                   Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false),
               child: const Icon(Icons.arrow_back),
             )
           : null,
-      // actions: const [
-      //   Padding(
-      //     padding: EdgeInsets.all(16),
-      //     child: Icon(
-      //       Icons.search,
-      //     ),
-      //   ),
-      // ],
+      actions: [
+        DayNightSwitcherIcon(
+          isDarkModeEnabled: isDarkModeEnabled,
+          onStateChanged: onStateChanged,
+        ),
+      ],
     );
   }
 }

@@ -7,14 +7,15 @@ import 'package:quran_app/modules/surah_list/models/quran.dart';
 import 'package:quran_app/modules/surah_list/widgets/quran_appbar.dart';
 import 'package:quran_app/modules/surah_list/widgets/surah_list_data.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class SurahListPage extends StatefulWidget {
+  const SurahListPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<SurahListPage> createState() => _SurahListPageState();
 }
 
-class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+class _SurahListPageState extends State<SurahListPage>
+    with WidgetsBindingObserver {
   List<Quran> _dataQuran = [];
   List<Quran> _quran = [];
 
@@ -63,8 +64,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
     return Scaffold(
       appBar: QuranAppBar(
-        appBar: AppBar(),
-        title: l10n.homePageAppBarTitle,
+        title: l10n.surahListPageAppBarTitle,
         showBack: false,
       ),
       backgroundColor: const Color(0xff011240),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
+import 'package:quran_app/modules/surah/widgets/action_button.dart';
+import 'package:quran_app/modules/surah/widgets/surah_info.dart';
 import 'package:quran_app/modules/surah_list/models/quran.dart';
 import 'package:quran_app/modules/surah_list/widgets/quran_appbar.dart';
 import 'package:quran_app/modules/surah_list/widgets/rub_el_hizb.dart';
-import 'package:quran_app/modules/surah/widgets/action_button.dart';
-import 'package:quran_app/modules/surah/widgets/surah_info.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class SurahPage extends StatefulWidget {
@@ -55,7 +55,6 @@ class _SurahPageState extends State<SurahPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: QuranAppBar(
-        appBar: AppBar(),
         title: title,
       ),
       backgroundColor: const Color(0xff011240),

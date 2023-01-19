@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quran_app/common/constants/app_colors.dart';
 import 'package:quran_app/modules/surah/surah_page.dart';
 import 'package:quran_app/modules/surah_list/models/quran.dart';
 import 'package:quran_app/modules/surah_list/widgets/rub_el_hizb.dart';
@@ -16,24 +17,24 @@ class SurahListData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ColoredBox(
-        color: const Color(0xff011240),
+        color: AppColors().backgroundColor,
         child: _quran.isNotEmpty
             ? ListView.separated(
                 itemCount: _quran.length,
-                separatorBuilder: (_, i) => const Divider(
-                  color: Color(0xffA4A7D3),
+                separatorBuilder: (_, i) => Divider(
+                  color: AppColors().backgroundColor2,
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return _buildItem(index, context);
                 },
               )
-            : const Expanded(
+            : Expanded(
                 child: Center(
                   child: Text(
                     'Tidak ada surah yang cocok dengan pencarian.\nCoba ulangi ketik surah yang kamu cari.',
                     style: TextStyle(
                       fontFamily: 'Poppins',
-                      color: Colors.white,
+                      color: AppColors().backgroundColor2,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -50,8 +51,8 @@ class SurahListData extends StatelessWidget {
       ),
       title: Text(
         _quran[index].name ?? '',
-        style: const TextStyle(
-          color: Color(0xffFAFBFB),
+        style: TextStyle(
+          color: AppColors().backgroundColor2,
           fontFamily: 'Poppins',
           fontSize: 16,
         ),
@@ -65,8 +66,8 @@ class SurahListData extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: _quran[index].nameTranslations!.id ?? '',
-                    style: const TextStyle(
-                      color: Color(0xffA4A7D3),
+                    style: TextStyle(
+                      color: AppColors().backgroundColor2.withOpacity(0.7),
                       fontFamily: 'Poppins',
                       fontSize: 10,
                     ),
@@ -81,7 +82,7 @@ class SurahListData extends StatelessWidget {
                       child: SvgPicture.asset(
                         'assets/icons/mecca.svg',
                         width: 12,
-                        color: const Color(0xfffafbfb),
+                        color: AppColors().backgroundColor2,
                       ),
                     )
                   else
@@ -89,7 +90,7 @@ class SurahListData extends StatelessWidget {
                       child: SvgPicture.asset(
                         'assets/icons/medina.svg',
                         width: 16,
-                        color: const Color(0xfffafbfb),
+                        color: AppColors().backgroundColor2,
                       ),
                     ),
                 ],
@@ -101,8 +102,8 @@ class SurahListData extends StatelessWidget {
       dense: true,
       trailing: Text(
         _quran[index].nameTranslations!.ar ?? '',
-        style: const TextStyle(
-          color: Color(0xFFB9A0FF),
+        style: TextStyle(
+          color: AppColors().backgroundColor2,
           fontFamily: 'IsepMisbah',
           fontSize: 20,
         ),

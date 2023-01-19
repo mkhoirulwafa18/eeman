@@ -6,5 +6,9 @@
     },
     "tabBarSurahLabel": "Surah",
     "tabBarJuzLabel": "Juz",
-    "homePageAppBarTitle": "Quran App"
+    "surahListPageAppBarTitle": "Quran App",
+    "doaSehariHari": "Do'a\nSehari-hari",
+    "quranOffline": "Quran\n(Offline)",
+    "shalatTime": "Jadwal\nShalat",
+    "tasbihDigital": "Tasbih\nDigital"
 }

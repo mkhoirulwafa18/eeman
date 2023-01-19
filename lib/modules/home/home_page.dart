@@ -74,23 +74,6 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
               ),
             ),
           ),
-          Center(
-            child: Positioned(
-              top: appBarSize < kToolbarHeight ? kToolbarHeight : appBarSize,
-              child: Opacity(
-                opacity: hideTitleWhenExpanded ? 1.0 - percent : 1.0,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 24),
-                  child: HourMinute(
-                    hourMinute: Intl.withLocale(
-                      'id',
-                      () => DateFormat('HH:mm').format(DateTime.now()),
-                    ).toString(),
-                  ),
-                ),
-              ),
-            ),
-          ),
           Positioned(
             left: 0,
             right: 0,

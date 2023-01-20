@@ -6,9 +6,10 @@
     },
     "tabBarSurahLabel": "Surah",
     "tabBarJuzLabel": "Juz",
-    "surahListPageAppBarTitle": "Quran App",
+    "surahListPageAppBarTitle": "Eeman",
     "doaSehariHari": "Do'a\nSehari-hari",
     "quranOffline": "Quran\n(Offline)",
     "shalatTime": "Jadwal\nShalat",
-    "tasbihDigital": "Tasbih\nDigital"
+    "tasbihDigital": "Tasbih\nDigital",
+    "errorNoSurahFound": "Tidak ada surah yang cocok dengan pencarian.\nCoba ulangi ketik surah yang kamu cari."
 }

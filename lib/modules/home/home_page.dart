@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:quran_app/common/constants/app_colors.dart';
 import 'package:quran_app/modules/home/widgets/app_title.dart';
 import 'package:quran_app/modules/home/widgets/header_card.dart';

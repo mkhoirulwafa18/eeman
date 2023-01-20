@@ -1,22 +1,32 @@
-import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/common/constants/text_styles.dart';
+import 'package:quran_app/modules/home/widgets/input_box.dart';
 
 class QuranAppBar extends StatefulWidget implements PreferredSizeWidget {
   const QuranAppBar({
     super.key,
-    required this.appBar,
     required this.title,
+    this.subtitle = '',
     this.showBack = true,
+    this.onSearchChanged,
+    required this.height,
+    this.withSearch = false,
+    this.content,
   });
-  final AppBar appBar;
   final String title;
+  final String? subtitle;
   final bool showBack;
+  final void Function(String)? onSearchChanged;
+  final double height;
+  final bool withSearch;
+  final Widget? content;
 
   @override
   State<QuranAppBar> createState() => _QuranAppBarState();
   @override
-  Size get preferredSize => Size.fromHeight(appBar.preferredSize.height);
+  Size get preferredSize => Size.fromHeight(height);
 }
 
 class _QuranAppBarState extends State<QuranAppBar> {
@@ -31,33 +41,66 @@ class _QuranAppBarState extends State<QuranAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      systemOverlayStyle: const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.light, // For Android (dark icons)
-        statusBarBrightness: Brightness.dark, // For iOS (dark icons)
-      ),
-      elevation: 0,
-      centerTitle: true,
-      title: Text(
-        widget.title,
-        style: const TextStyle(
-          fontFamily: 'Poppins',
-          fontWeight: FontWeight.w600,
-          fontSize: 16,
-        ),
-      ),
-      backgroundColor: const Color(0xff011240),
-      leading: widget.showBack
-          ? GestureDetector(
-              onTap: () =>
-                  Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false),
-              child: const Icon(Icons.arrow_back),
-            )
-          : null,
-      actions: [
-        DayNightSwitcherIcon(
-          isDarkModeEnabled: isDarkModeEnabled,
-          onStateChanged: onStateChanged,
+    return Stack(
+      children: [
+        AppBar(
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.dark,
+          ),
+          elevation: 5,
+          centerTitle: true,
+          title: Text(
+            widget.title,
+            style: AppTextStyle().lightBoldTitle,
+          ),
+          backgroundColor: AppColors().backgroundColor2,
+          leading: widget.showBack
+              ? GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: const Icon(Icons.arrow_back_rounded),
+                )
+              : null,
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(widget.height),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (widget.subtitle == '') ...[
+                        const SizedBox()
+                      ] else ...[
+                        Text(
+                          widget.subtitle!,
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                            color: AppColors().backgroundColor,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                      ],
+                      if (widget.withSearch) ...[
+                        InputBox(
+                          labelText: 'Cari Surah',
+                          onChanged: widget.onSearchChanged,
+                        ),
+                      ],
+                      if (widget.content != null) ...[
+                        widget.content ?? const SizedBox()
+                      ]
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ],
     );

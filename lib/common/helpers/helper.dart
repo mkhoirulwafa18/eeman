@@ -25,13 +25,14 @@ class AppStorage {
 class AOTD {
   static void setAyatOfTheDay(List<Quran> data) {
     final surahNo = Random().nextInt(145);
-    AppStorage().setStorage(randomSurah, surahNo);
+    AppStorage().setStorage(Constants().randomSurah, surahNo);
     final maxAyat = data.isNotEmpty ? data[surahNo].numberOfAyah : 0;
-    AppStorage().setStorage(randomAyat, Random().nextInt(maxAyat! + 1));
+    AppStorage()
+        .setStorage(Constants().randomAyat, Random().nextInt(maxAyat! + 1));
   }
 
   static void setLastHitAotd() {
     final surahNo = Random().nextInt(145);
-    AppStorage().setStorage(lastHitAotd, surahNo);
+    AppStorage().setStorage(Constants().lastHitAotd, surahNo);
   }
 }

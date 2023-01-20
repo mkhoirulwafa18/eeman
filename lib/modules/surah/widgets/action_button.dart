@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quran_app/common/constants/app_colors.dart';
 import 'package:quran_app/modules/surah/surah_page.dart';
 
 enum ButtonActionType { back, next }
@@ -24,7 +25,6 @@ class ActionButton extends StatelessWidget {
             height: 50,
             child: ElevatedButton.icon(
               onPressed: () {
-                debugPrint('$_indexSurah, index surah banggggggggggggggggg');
                 Navigator.pushReplacement<MaterialPageRoute<dynamic>,
                     MaterialPageRoute<dynamic>>(
                   context,
@@ -48,7 +48,7 @@ class ActionButton extends StatelessWidget {
                 style: const TextStyle(fontFamily: 'Poppins'),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xffb9a0ff),
+                backgroundColor: AppColors().backgroundColor2,
               ),
             ),
           );

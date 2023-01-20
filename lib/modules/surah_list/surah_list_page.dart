@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quran_app/common/constants/app_colors.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/surah_list/models/quran.dart';
@@ -64,40 +65,20 @@ class _SurahListPageState extends State<SurahListPage>
 
     return Scaffold(
       appBar: QuranAppBar(
+        // TODO(mkhoirulwafa18): move the search to be adjusted by content args from appbar
+        height: MediaQuery.of(context).size.height / 5,
         title: l10n.surahListPageAppBarTitle,
+        subtitle: 'Surah List',
         showBack: false,
+        withSearch: true,
+        onSearchChanged: _onSearch,
       ),
-      backgroundColor: const Color(0xff011240),
+      backgroundColor: AppColors().backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 16),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: const Color(0xffE3C3F8),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: TextFormField(
-                  cursorColor: const Color(0xffE3C3F8),
-                  decoration: const InputDecoration(
-                    labelStyle: TextStyle(
-                      color: Color(0xffE3C3F8),
-                    ),
-                    focusColor: Color(0xff011240),
-                    border: InputBorder.none,
-                    labelText: 'Cari Surah',
-                  ),
-                  style: const TextStyle(color: Colors.white),
-                  onChanged: _onSearch,
-                ),
-              ),
-            ),
             const SizedBox(height: 16),
             if (_dataQuran.isNotEmpty)
               SurahListData(quran: _quran)

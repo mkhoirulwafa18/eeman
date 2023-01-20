@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/surah/surah_page.dart';
 import 'package:quran_app/modules/surah_list/models/quran.dart';
 import 'package:quran_app/modules/surah_list/widgets/rub_el_hizb.dart';
@@ -15,6 +16,7 @@ class SurahListData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Expanded(
       child: ColoredBox(
         color: AppColors().backgroundColor,
@@ -31,7 +33,7 @@ class SurahListData extends StatelessWidget {
             : Expanded(
                 child: Center(
                   child: Text(
-                    'Tidak ada surah yang cocok dengan pencarian.\nCoba ulangi ketik surah yang kamu cari.',
+                    l10n.errorNoSurahFound,
                     style: TextStyle(
                       fontFamily: 'Poppins',
                       color: AppColors().backgroundColor2,

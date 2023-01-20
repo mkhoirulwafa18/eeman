@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quran_app/common/constants/app_colors.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/modules/surah/widgets/action_button.dart';
 import 'package:quran_app/modules/surah/widgets/surah_info.dart';
@@ -31,7 +32,7 @@ class _SurahPageState extends State<SurahPage> {
   int totalAyat = 0;
   int lastReadAyat = 0;
 
-  Future<void> readJson() async {
+  Future<void> initialState() async {
     final data = widget.dataQuran;
     setState(() {
       _indexSurah = widget.noAyat;
@@ -48,16 +49,17 @@ class _SurahPageState extends State<SurahPage> {
   @override
   void initState() {
     super.initState();
-    readJson();
+    initialState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: QuranAppBar(
+        height: 100,
         title: title,
       ),
-      backgroundColor: const Color(0xff011240),
+      backgroundColor: AppColors().backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
         child: _ayatSurah.isNotEmpty
@@ -117,9 +119,9 @@ class _SurahPageState extends State<SurahPage> {
     return ListTile(
       dense: true,
       contentPadding: const EdgeInsets.all(16),
-      tileColor: index.isOdd
-          ? const Color.fromARGB(255, 4, 23, 77)
-          : const Color(0xff011240),
+      tileColor: index.isEven
+          ? AppColors().backgroundColor
+          : AppColors().backgroundColorAlter,
       title: RichText(
         textAlign: TextAlign.justify,
         textDirection: TextDirection.rtl,
@@ -130,10 +132,10 @@ class _SurahPageState extends State<SurahPage> {
                       ? _ayatSurah[index].text!.substring(39)
                       : _ayatSurah[index].text) ??
                   '',
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'IsepMisbah',
                 fontSize: 22,
-                color: Color(0xffFAFBFB),
+                color: AppColors().backgroundColor2,
                 height: 2,
               ),
             ),
@@ -157,9 +159,9 @@ class _SurahPageState extends State<SurahPage> {
           ),
           Text(
             _ayatSurah[index].translationId ?? '',
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'Poppins',
-              color: Color(0xffA4A7D3),
+              color: AppColors().backgroundColor2,
             ),
           ),
         ],

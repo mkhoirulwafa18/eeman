@@ -65,7 +65,7 @@ class _SurahListPageState extends State<SurahListPage>
 
     return Scaffold(
       appBar: QuranAppBar(
-        // TODO(mkhoirulwafa18): move the search to be adjusted by content args from appbar
+        // TODO(mkhoirulwafa18): move search to be adjusted by content args
         height: MediaQuery.of(context).size.height / 5,
         title: l10n.surahListPageAppBarTitle,
         subtitle: 'Surah List',

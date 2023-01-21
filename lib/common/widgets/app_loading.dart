@@ -8,12 +8,14 @@ class AppLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Center(
-        child: CircularProgressIndicator(
-          color: AppColors().backgroundColor2,
+    return Column(
+      children: [
+        Center(
+          child: CircularProgressIndicator(
+            color: AppColors().backgroundColor2,
+          ),
         ),
-      ),
+      ],
     );
   }
 }

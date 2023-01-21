@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
+import 'package:quran_app/services/dio.dart';
 
 class HeaderCard extends StatefulWidget {
   const HeaderCard({
@@ -22,80 +25,110 @@ class _HeaderCardState extends State<HeaderCard> {
       Intl.withLocale('id', () => DateFormat('HH:mm').format(DateTime.now()))
           .toString();
 
-  @override
-  void initState() {
-    super.initState();
-    Timer.periodic(const Duration(minutes: 1), (timer) {
-      setState(() {
-        _time = Intl.withLocale(
-          'id',
-          () => DateFormat('EEEE, dd MMMM yyyy').format(DateTime.now()),
-        ).toString();
-        _hourMinute = Intl.withLocale(
-          'id',
-          () => DateFormat('HH:mm').format(DateTime.now()),
-        ).toString();
-      });
+  late Timer _timer;
+
+  void setTimeAndHour(Timer timer) {
+    setState(() {
+      _time = Intl.withLocale(
+        'id',
+        () => DateFormat('EEEE, dd MMMM yyyy').format(DateTime.now()),
+      ).toString();
+      _hourMinute = Intl.withLocale(
+        'id',
+        () => DateFormat('HH:mm').format(DateTime.now()),
+      ).toString();
     });
   }
 
   @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(minutes: 1), setTimeAndHour);
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      width: MediaQuery.of(context).size.width / 1.2,
-      decoration: BoxDecoration(
-        color: AppColors().backgroundColor,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            blurRadius: 4,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 5,
-          ),
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: AppColors().backgroundColor2,
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
+    return BlocProvider(
+      create: (context) => PrayertimeCubit(DioHelper()),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        width: MediaQuery.of(context).size.width / 1.2,
+        decoration: BoxDecoration(
+          color: AppColors().backgroundColor,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.5),
+              blurRadius: 4,
+              offset: const Offset(0, 4),
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 8,
+          ],
+        ),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: AppColors().backgroundColor2,
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
               ),
-              child: Text(
-                _time,
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                  color: AppColors().backgroundColor,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                child: Text(
+                  _time,
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 16,
+                    color: AppColors().backgroundColor,
+                  ),
                 ),
               ),
             ),
-          ),
-          HourMinute(hourMinute: _hourMinute),
-          Text(
-            '2 jam 20 menit menuju Ashar',
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 16,
-              color: AppColors().backgroundColor2,
+            HourMinute(hourMinute: _hourMinute),
+            BlocBuilder<PrayertimeCubit, PrayertimeState>(
+              builder: (context, state) {
+                if (state.props.isNotEmpty) {
+                  debugPrint(state.toString());
+                  return Text(
+                    '2 jam 20 menit menuju Ashar',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                      color: AppColors().backgroundColor2,
+                    ),
+                  );
+                } else {
+                  debugPrint(state.toString());
+                  return Text(
+                    'Jangan lupa shalat nya yaa :)',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                      color: AppColors().backgroundColor2,
+                    ),
+                  );
+                }
+              },
             ),
-          ),
-          const SizedBox(
-            height: 24,
-          )
-        ],
+            const SizedBox(
+              height: 24,
+            )
+          ],
+        ),
       ),
     );
   }

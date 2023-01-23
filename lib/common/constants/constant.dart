@@ -155,36 +155,43 @@ double setFontSize(double size) => size.sp;
 TextStyle inputLabel = TextStyle(
   color: backgroundColor.withOpacity(0.7),
   fontFamily: 'Poppins',
-  fontSize: 12,
+  fontSize: setFontSize(12),
 );
 
 TextStyle inputText = TextStyle(
   color: backgroundColor,
   fontFamily: 'Poppins',
-  fontSize: 14,
+  fontSize: setFontSize(14),
 );
 
 TextStyle lightBoldTitle = TextStyle(
   color: backgroundColor,
   fontFamily: 'Poppins',
   fontWeight: FontWeight.w600,
-  fontSize: 20,
+  fontSize: setFontSize(20),
 );
 
 TextStyle smallText = TextStyle(
   color: backgroundColor,
   fontFamily: 'Poppins',
-  fontSize: 12,
+  fontSize: setFontSize(12),
 );
 TextStyle mediumText = TextStyle(
   fontFamily: 'Poppins',
-  fontSize: 16,
+  fontSize: setFontSize(16),
   color: backgroundColor,
 );
 TextStyle largeText = TextStyle(
   color: backgroundColor,
   fontFamily: 'Poppins',
-  fontSize: 24,
+  fontSize: setFontSize(24),
+);
+
+TextStyle arabicText = TextStyle(
+  fontFamily: 'IsepMisbah',
+  fontSize: setFontSize(22),
+  color: backgroundColor2,
+  height: 2,
 );
 
 /// -----------------------------------

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/common/constants/constant.dart';
 
 class AppLoading extends StatelessWidget {
   const AppLoading({
@@ -12,7 +12,7 @@ class AppLoading extends StatelessWidget {
       children: [
         Center(
           child: CircularProgressIndicator(
-            color: AppColors().backgroundColor2,
+            color: backgroundColor2,
           ),
         ),
       ],

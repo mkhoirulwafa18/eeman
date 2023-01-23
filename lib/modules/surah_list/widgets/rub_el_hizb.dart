@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/common/constants/constant.dart';
 
 class RubElHizb extends StatelessWidget {
   const RubElHizb({
@@ -19,7 +19,7 @@ class RubElHizb extends StatelessWidget {
         SvgPicture.asset(
           'assets/icons/rubhizb.svg',
           width: 40,
-          color: color ?? AppColors().backgroundColor2,
+          color: color ?? backgroundColor2,
         ),
         SizedBox(
           width: 40,
@@ -28,7 +28,7 @@ class RubElHizb extends StatelessWidget {
             child: Text(
               title,
               style: TextStyle(
-                color: color ?? AppColors().backgroundColor2,
+                color: color ?? backgroundColor2,
                 fontFamily: 'IsepMisbah',
               ),
               textAlign: TextAlign.center,

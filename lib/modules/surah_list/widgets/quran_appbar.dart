@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quran_app/common/constants/app_colors.dart';
-import 'package:quran_app/common/constants/text_styles.dart';
+import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/modules/home/widgets/input_box.dart';
 
 class QuranAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -52,9 +51,9 @@ class _QuranAppBarState extends State<QuranAppBar> {
           centerTitle: true,
           title: Text(
             widget.title,
-            style: AppTextStyle().lightBoldTitle,
+            style: lightBoldTitle,
           ),
-          backgroundColor: AppColors().backgroundColor2,
+          backgroundColor: backgroundColor2,
           leading: widget.showBack
               ? GestureDetector(
                   onTap: () => Navigator.pop(context),
@@ -79,7 +78,7 @@ class _QuranAppBarState extends State<QuranAppBar> {
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w600,
                             fontSize: 20,
-                            color: AppColors().backgroundColor,
+                            color: backgroundColor,
                           ),
                         ),
                         const SizedBox(

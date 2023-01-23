@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/utils/bottomsheet.dart';
 import 'package:quran_app/modules/home/widgets/card_menu.dart';
@@ -24,7 +24,7 @@ class MenuList extends StatelessWidget {
                 showAppBottomSheet(context);
               },
               child: CardMenu(
-                color: AppColors().cardGreyColor,
+                color: cardGreyColor,
                 icon: SvgPicture.asset('assets/icons/praying-hands.svg'),
                 title: l10n.doaSehariHari,
                 bg: CirclePosition.doa,
@@ -43,7 +43,7 @@ class MenuList extends StatelessWidget {
                 );
               },
               child: CardMenu(
-                color: AppColors().cardPeachColor,
+                color: cardPeachColor,
                 icon: SvgPicture.asset('assets/icons/al-quran.svg'),
                 title: l10n.quranOffline,
                 bg: CirclePosition.quran,
@@ -62,7 +62,7 @@ class MenuList extends StatelessWidget {
                 Navigator.pushNamed(context, '/prayer-time');
               },
               child: CardMenu(
-                color: AppColors().cardGreenColor,
+                color: cardGreenColor,
                 icon: Image.asset(
                   'assets/icons/shalat.png',
                   height: 110,
@@ -76,7 +76,7 @@ class MenuList extends StatelessWidget {
             ),
             GestureDetector(
               child: CardMenu(
-                color: AppColors().cardYellowColor,
+                color: cardYellowColor,
                 icon: SvgPicture.asset('assets/icons/tasbih.svg'),
                 title: l10n.tasbihDigital,
                 bg: CirclePosition.tasbih,

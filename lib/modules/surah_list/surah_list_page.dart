@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/surah_list/models/quran.dart';
@@ -73,7 +73,7 @@ class _SurahListPageState extends State<SurahListPage>
         withSearch: true,
         onSearchChanged: _onSearch,
       ),
-      backgroundColor: AppColors().backgroundColor,
+      backgroundColor: backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

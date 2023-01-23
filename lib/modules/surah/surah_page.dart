@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/modules/surah/widgets/action_button.dart';
 import 'package:quran_app/modules/surah/widgets/surah_info.dart';
@@ -59,7 +59,7 @@ class _SurahPageState extends State<SurahPage> {
         height: 100,
         title: title,
       ),
-      backgroundColor: AppColors().backgroundColor,
+      backgroundColor: backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
         child: _ayatSurah.isNotEmpty
@@ -119,9 +119,7 @@ class _SurahPageState extends State<SurahPage> {
     return ListTile(
       dense: true,
       contentPadding: const EdgeInsets.all(16),
-      tileColor: index.isEven
-          ? AppColors().backgroundColor
-          : AppColors().backgroundColorAlter,
+      tileColor: index.isEven ? backgroundColor : backgroundColorAlter,
       title: RichText(
         textAlign: TextAlign.justify,
         textDirection: TextDirection.rtl,
@@ -135,7 +133,7 @@ class _SurahPageState extends State<SurahPage> {
               style: TextStyle(
                 fontFamily: 'IsepMisbah',
                 fontSize: 22,
-                color: AppColors().backgroundColor2,
+                color: backgroundColor2,
                 height: 2,
               ),
             ),
@@ -161,7 +159,7 @@ class _SurahPageState extends State<SurahPage> {
             _ayatSurah[index].translationId ?? '',
             style: TextStyle(
               fontFamily: 'Poppins',
-              color: AppColors().backgroundColor2,
+              color: backgroundColor2,
             ),
           ),
         ],

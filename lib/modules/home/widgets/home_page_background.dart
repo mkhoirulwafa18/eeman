@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/common/constants/constant.dart';
 
 class HomePageBackground extends StatelessWidget {
   const HomePageBackground({super.key});
@@ -12,7 +12,7 @@ class HomePageBackground extends StatelessWidget {
     return Column(
       children: [
         Container(
-          color: AppColors().backgroundColor2,
+          color: backgroundColor2,
           height: kBackgroundContainerHeight + safeArea.top,
         ),
       ],

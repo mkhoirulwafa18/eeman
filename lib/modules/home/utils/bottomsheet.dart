@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/modules/home/models/doa_daily.dart';
 
@@ -23,7 +23,7 @@ void showAppBottomSheet(BuildContext context) {
               builder: (_, controller) {
                 return DecoratedBox(
                   decoration: BoxDecoration(
-                    color: AppColors().backgroundColor,
+                    color: backgroundColor,
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(25),
                       topRight: Radius.circular(25),
@@ -95,7 +95,7 @@ class _BottomSheetDoaContentState extends State<BottomSheetDoaContent> {
                     title: Text(
                       _doa[index].title ?? '',
                       style: TextStyle(
-                        color: AppColors().backgroundColor2,
+                        color: backgroundColor2,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Poppins',
                         fontSize: 16,
@@ -105,7 +105,7 @@ class _BottomSheetDoaContentState extends State<BottomSheetDoaContent> {
                       Text(
                         _doa[index].arabic ?? '',
                         style: TextStyle(
-                          color: AppColors().backgroundColor2,
+                          color: backgroundColor2,
                           fontFamily: 'IsepMisbah',
                           fontSize: 20,
                         ),
@@ -116,7 +116,7 @@ class _BottomSheetDoaContentState extends State<BottomSheetDoaContent> {
                       Text(
                         _doa[index].latin ?? '',
                         style: TextStyle(
-                          color: AppColors().backgroundColor2,
+                          color: backgroundColor2,
                           fontFamily: 'Poppins',
                           fontSize: 14,
                         ),
@@ -127,7 +127,7 @@ class _BottomSheetDoaContentState extends State<BottomSheetDoaContent> {
                       Text(
                         _doa[index].translation ?? '',
                         style: TextStyle(
-                          color: AppColors().backgroundColor2,
+                          color: backgroundColor2,
                           fontFamily: 'Poppins',
                           fontSize: 14,
                         ),

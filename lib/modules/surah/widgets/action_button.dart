@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/modules/surah/surah_page.dart';
 
 enum ButtonActionType { back, next }
@@ -48,7 +48,7 @@ class ActionButton extends StatelessWidget {
                 style: const TextStyle(fontFamily: 'Poppins'),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors().backgroundColor2,
+                backgroundColor: backgroundColor2,
               ),
             ),
           );

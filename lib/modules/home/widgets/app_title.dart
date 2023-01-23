@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/common/constants/constant.dart';
 
 class AppTitle extends StatelessWidget {
   const AppTitle({
@@ -14,7 +14,7 @@ class AppTitle extends StatelessWidget {
         fontFamily: 'Poppins',
         fontWeight: FontWeight.w600,
         fontSize: 32,
-        color: AppColors().backgroundColor,
+        color: backgroundColor,
       ),
     );
   }

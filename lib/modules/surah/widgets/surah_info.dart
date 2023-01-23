@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/modules/surah_list/widgets/rub_el_hizb.dart';
 
 class SurahInfo extends StatelessWidget {
@@ -27,7 +27,7 @@ class SurahInfo extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: AppColors().backgroundColor2,
+          color: backgroundColor2,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.5),
@@ -40,7 +40,7 @@ class SurahInfo extends StatelessWidget {
           children: [
             RubElHizb(
               title: numberSurah.toString(),
-              color: AppColors().backgroundColor,
+              color: backgroundColor,
             ),
             const SizedBox(
               height: 8,
@@ -48,7 +48,7 @@ class SurahInfo extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                color: AppColors().backgroundColor,
+                color: backgroundColor,
                 fontFamily: 'Poppins',
                 fontSize: 16,
               ),
@@ -56,7 +56,7 @@ class SurahInfo extends StatelessWidget {
             Text(
               translation,
               style: TextStyle(
-                color: AppColors().backgroundColor.withOpacity(0.5),
+                color: backgroundColor.withOpacity(0.5),
                 fontFamily: 'Poppins',
               ),
             ),
@@ -66,7 +66,7 @@ class SurahInfo extends StatelessWidget {
             Text(
               '$revelation - $totalAyat ayat',
               style: TextStyle(
-                color: AppColors().backgroundColor,
+                color: backgroundColor,
                 fontFamily: 'Poppins',
                 fontSize: 12,
               ),
@@ -78,7 +78,7 @@ class SurahInfo extends StatelessWidget {
               SvgPicture.asset(
                 'assets/icons/basmalah.svg',
                 width: MediaQuery.of(context).size.width / 2,
-                color: AppColors().backgroundColor,
+                color: backgroundColor,
               )
             ] else
               const SizedBox()

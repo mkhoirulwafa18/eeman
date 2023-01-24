@@ -94,43 +94,25 @@ class _BottomSheetDoaContentState extends State<BottomSheetDoaContent> {
                   child: ExpansionTile(
                     title: Text(
                       _doa[index].title ?? '',
-                      style: TextStyle(
-                        color: backgroundColor2,
+                      style: mediumText.copyWith(
                         fontWeight: FontWeight.bold,
-                        fontFamily: 'Poppins',
-                        fontSize: 16,
+                        color: backgroundColor2,
                       ),
                     ),
                     children: [
                       Text(
                         _doa[index].arabic ?? '',
-                        style: TextStyle(
-                          color: backgroundColor2,
-                          fontFamily: 'IsepMisbah',
-                          fontSize: 20,
-                        ),
+                        style: arabicText,
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8),
                       Text(
                         _doa[index].latin ?? '',
-                        style: TextStyle(
-                          color: backgroundColor2,
-                          fontFamily: 'Poppins',
-                          fontSize: 14,
-                        ),
+                        style: inputText.copyWith(color: backgroundColor2),
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8),
                       Text(
                         _doa[index].translation ?? '',
-                        style: TextStyle(
-                          color: backgroundColor2,
-                          fontFamily: 'Poppins',
-                          fontSize: 14,
-                        ),
+                        style: inputText.copyWith(color: backgroundColor2),
                       ),
                     ],
                   ),

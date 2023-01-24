@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quran_app/common/constants/constant.dart';
 
 class CardMenu extends StatelessWidget {
   const CardMenu({
@@ -75,9 +76,7 @@ class CardMenu extends StatelessWidget {
                   icon,
                   Text(
                     title,
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 16,
+                    style: mediumText.copyWith(
                       color: Colors.white,
                     ),
                     textAlign: TextAlign.center,

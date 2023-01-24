@@ -39,7 +39,7 @@ class SurahInfo extends StatelessWidget {
         child: Column(
           children: [
             RubElHizb(
-              title: numberSurah.toString(),
+              number: numberSurah.toString(),
               color: backgroundColor,
             ),
             const SizedBox(
@@ -47,11 +47,7 @@ class SurahInfo extends StatelessWidget {
             ),
             Text(
               title,
-              style: TextStyle(
-                color: backgroundColor,
-                fontFamily: 'Poppins',
-                fontSize: 16,
-              ),
+              style: mediumText,
             ),
             Text(
               translation,
@@ -65,11 +61,7 @@ class SurahInfo extends StatelessWidget {
             ),
             Text(
               '$revelation - $totalAyat ayat',
-              style: TextStyle(
-                color: backgroundColor,
-                fontFamily: 'Poppins',
-                fontSize: 12,
-              ),
+              style: smallText,
             ),
             if (numberSurah != 1) ...[
               const SizedBox(

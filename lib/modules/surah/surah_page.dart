@@ -130,18 +130,13 @@ class _SurahPageState extends State<SurahPage> {
                       ? _ayatSurah[index].text!.substring(39)
                       : _ayatSurah[index].text) ??
                   '',
-              style: TextStyle(
-                fontFamily: 'IsepMisbah',
-                fontSize: 22,
-                color: backgroundColor2,
-                height: 2,
-              ),
+              style: arabicText,
             ),
             WidgetSpan(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: RubElHizb(
-                  title: (index + 1).toString(),
+                  number: (index + 1).toString(),
                 ),
               ),
             )

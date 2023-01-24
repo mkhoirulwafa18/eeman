@@ -49,14 +49,12 @@ class SurahListData extends StatelessWidget {
   ListTile _buildItem(int index, BuildContext context) {
     return ListTile(
       leading: RubElHizb(
-        title: _quran[index].numberOfSurah.toString(),
+        number: _quran[index].numberOfSurah.toString(),
       ),
       title: Text(
         _quran[index].name ?? '',
-        style: TextStyle(
+        style: mediumText.copyWith(
           color: backgroundColor2,
-          fontFamily: 'Poppins',
-          fontSize: 16,
         ),
       ),
       subtitle: Row(
@@ -68,10 +66,9 @@ class SurahListData extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: _quran[index].nameTranslations!.id ?? '',
-                    style: TextStyle(
+                    style: mediumText.copyWith(
                       color: backgroundColor2.withOpacity(0.7),
-                      fontFamily: 'Poppins',
-                      fontSize: 10,
+                      fontSize: setFontSize(24),
                     ),
                   ),
                   const WidgetSpan(
@@ -104,11 +101,7 @@ class SurahListData extends StatelessWidget {
       dense: true,
       trailing: Text(
         _quran[index].nameTranslations!.ar ?? '',
-        style: TextStyle(
-          color: backgroundColor2,
-          fontFamily: 'IsepMisbah',
-          fontSize: 20,
-        ),
+        style: arabicText,
       ),
       onTap: () {
         Navigator.push<MaterialPageRoute<dynamic>>(

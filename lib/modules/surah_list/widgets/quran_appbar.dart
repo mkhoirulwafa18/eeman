@@ -74,11 +74,9 @@ class _QuranAppBarState extends State<QuranAppBar> {
                       ] else ...[
                         Text(
                           widget.subtitle!,
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
+                          style: mediumText.copyWith(
                             fontWeight: FontWeight.w600,
-                            fontSize: 20,
-                            color: backgroundColor,
+                            fontSize: setFontSize(48),
                           ),
                         ),
                         const SizedBox(

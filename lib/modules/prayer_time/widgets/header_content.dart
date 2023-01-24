@@ -57,11 +57,6 @@ class PrayerTimeHeaderContent extends StatelessWidget {
           ),
           BlocBuilder<PrayertimeCubit, PrayertimeState>(
             builder: (context, state) {
-              if (state is PrayertimeLoading) {
-                return const SizedBox(
-                  height: 10,
-                );
-              }
               if (state is PrayertimeLoaded) {
                 return Row(
                   children: [
@@ -71,12 +66,14 @@ class PrayerTimeHeaderContent extends StatelessWidget {
                     ),
                     Text(
                       state.city,
-                      style: smallText,
+                      style: mediumText,
                     )
                   ],
                 );
               }
-              return Text(state.toString());
+              return const SizedBox(
+                height: 10,
+              );
             },
           )
         ],

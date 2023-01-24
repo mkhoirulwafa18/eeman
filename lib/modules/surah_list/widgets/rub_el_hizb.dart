@@ -5,11 +5,11 @@ import 'package:quran_app/common/constants/constant.dart';
 class RubElHizb extends StatelessWidget {
   const RubElHizb({
     super.key,
-    required this.title,
+    required this.number,
     this.color,
   });
 
-  final String title;
+  final String number;
   final Color? color;
 
   @override
@@ -26,7 +26,7 @@ class RubElHizb extends StatelessWidget {
           height: 40,
           child: Align(
             child: Text(
-              title,
+              number,
               style: TextStyle(
                 color: color ?? backgroundColor2,
                 fontFamily: 'IsepMisbah',

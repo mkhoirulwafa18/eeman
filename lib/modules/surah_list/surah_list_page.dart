@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
+import 'package:quran_app/common/widgets/custom_app_bar.dart';
 import 'package:quran_app/l10n/l10n.dart';
+import 'package:quran_app/modules/home/widgets/input_box.dart';
 import 'package:quran_app/modules/surah_list/models/quran.dart';
-
-import 'package:quran_app/modules/surah_list/widgets/quran_appbar.dart';
 import 'package:quran_app/modules/surah_list/widgets/surah_list_data.dart';
 
 class SurahListPage extends StatefulWidget {
@@ -64,14 +64,14 @@ class _SurahListPageState extends State<SurahListPage>
     final l10n = context.l10n;
 
     return Scaffold(
-      appBar: QuranAppBar(
-        // TODO(mkhoirulwafa18): move search to be adjusted by content args
+      appBar: CustomAppBar(
         height: MediaQuery.of(context).size.height / 5,
         title: l10n.surahListPageAppBarTitle,
-        subtitle: 'Surah List',
         showBack: false,
-        withSearch: true,
-        onSearchChanged: _onSearch,
+        content: InputBox(
+          labelText: l10n.findSurah,
+          onChanged: _onSearch,
+        ),
       ),
       backgroundColor: backgroundColor,
       body: Padding(

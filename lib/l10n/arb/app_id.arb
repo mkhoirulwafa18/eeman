@@ -1,12 +1,7 @@
 {
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    },
-    "tabBarSurahLabel": "Surah",
-    "tabBarJuzLabel": "Juz",
-    "surahListPageAppBarTitle": "Eeman",
+    "@@locale": "id",
+    "appName": "Eeman",
+    "surahListPageAppBarTitle": "Kumpulan Surah",
     "doaSehariHari": "Do'a\nSehari-hari",
     "quranOffline": "Quran\n(Offline)",
     "shalatTime": "Jadwal\nShalat",

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
+import 'package:quran_app/common/widgets/custom_app_bar.dart';
 import 'package:quran_app/modules/surah/widgets/action_button.dart';
 import 'package:quran_app/modules/surah/widgets/surah_info.dart';
 import 'package:quran_app/modules/surah_list/models/quran.dart';
-import 'package:quran_app/modules/surah_list/widgets/quran_appbar.dart';
 import 'package:quran_app/modules/surah_list/widgets/rub_el_hizb.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -55,7 +55,7 @@ class _SurahPageState extends State<SurahPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: QuranAppBar(
+      appBar: CustomAppBar(
         height: 100,
         title: title,
       ),

@@ -6,5 +6,6 @@
     "quranOffline": "Quran\n(Offline)",
     "shalatTime": "Jadwal\nShalat",
     "tasbihDigital": "Tasbih\nDigital",
-    "errorNoSurahFound": "Tidak ada surah yang cocok dengan pencarian.\nCoba ulangi ketik surah yang kamu cari."
+    "errorNoSurahFound": "Tidak ada surah yang cocok dengan pencarian.\nCoba ulangi ketik surah yang kamu cari.",
+    "findSurah": "Cari Surah"
 }

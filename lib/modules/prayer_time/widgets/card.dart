@@ -55,7 +55,7 @@ class CardItem extends StatelessWidget {
           title == shalats[5] ||
           title == shalats[6],
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
@@ -75,10 +75,8 @@ class CardItem extends StatelessWidget {
                   children: [
                     Text(
                       hour,
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
-                        fontSize: setFontSize(72),
+                      style: lightBoldTitle.copyWith(
+                        fontSize: 50,
                         color: isPassed == -1
                             ? backgroundColor
                             : backgroundColor.withOpacity(0.7),
@@ -86,9 +84,8 @@ class CardItem extends StatelessWidget {
                     ),
                     Text(
                       title,
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: setFontSize(32),
+                      style: mediumText.copyWith(
+                        // fontSize: setFontSize(32),
                         color: isPassed == -1
                             ? backgroundColor
                             : backgroundColor.withOpacity(0.7),

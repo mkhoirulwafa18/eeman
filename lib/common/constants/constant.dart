@@ -145,9 +145,6 @@ bool isBigPhoneHeight(BuildContext context) =>
 double setWidth(double width) => ScreenUtil().setWidth(width);
 double setHeight(double height) => ScreenUtil().setHeight(height);
 
-/// Setting fontsize
-double setFontSize(double size) => size.sp;
-
 /// -----------------------------------
 /// Constant Base Text Styling
 /// -----------------------------------
@@ -155,41 +152,41 @@ double setFontSize(double size) => size.sp;
 TextStyle inputLabel = TextStyle(
   color: backgroundColor.withOpacity(0.7),
   fontFamily: 'Poppins',
-  fontSize: setFontSize(12),
+  fontSize: 14,
 );
 
 TextStyle inputText = TextStyle(
   color: backgroundColor,
   fontFamily: 'Poppins',
-  fontSize: setFontSize(14),
+  fontSize: 16,
 );
 
 TextStyle lightBoldTitle = TextStyle(
   color: backgroundColor,
   fontFamily: 'Poppins',
   fontWeight: FontWeight.w600,
-  fontSize: setFontSize(20),
+  fontSize: 32,
 );
 
 TextStyle smallText = TextStyle(
   color: backgroundColor,
   fontFamily: 'Poppins',
-  fontSize: setFontSize(12),
+  fontSize: 12,
 );
 TextStyle mediumText = TextStyle(
   fontFamily: 'Poppins',
-  fontSize: setFontSize(16),
+  fontSize: 16,
   color: backgroundColor,
 );
 TextStyle largeText = TextStyle(
   color: backgroundColor,
   fontFamily: 'Poppins',
-  fontSize: setFontSize(24),
+  fontSize: 24,
 );
 
 TextStyle arabicText = TextStyle(
   fontFamily: 'IsepMisbah',
-  fontSize: setFontSize(22),
+  fontSize: 24,
   color: backgroundColor2,
   height: 2,
 );

@@ -350,7 +350,7 @@ class Meta {
     midnightMode = json['midnightMode'] as String?;
     school = json['school'] as String?;
     offset = json['offset'] != null
-        ? Offset.fromJson(json['offset'] as Map<String, dynamic>)
+        ? OffsetPT.fromJson(json['offset'] as Map<String, dynamic>)
         : null;
   }
   double? latitude;
@@ -360,7 +360,7 @@ class Meta {
   String? latitudeAdjustmentMethod;
   String? midnightMode;
   String? school;
-  Offset? offset;
+  OffsetPT? offset;
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -448,8 +448,8 @@ class Location {
   }
 }
 
-class Offset {
-  Offset({
+class OffsetPT {
+  OffsetPT({
     this.imsak,
     this.fajr,
     this.sunrise,
@@ -461,7 +461,7 @@ class Offset {
     this.midnight,
   });
 
-  Offset.fromJson(Map<String, dynamic> json) {
+  OffsetPT.fromJson(Map<String, dynamic> json) {
     imsak = json['Imsak'] as int?;
     fajr = json['Fajr'] as int?;
     sunrise = json['Sunrise'] as int?;

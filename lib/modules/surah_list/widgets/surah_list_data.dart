@@ -66,9 +66,8 @@ class SurahListData extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: _quran[index].nameTranslations!.id ?? '',
-                    style: mediumText.copyWith(
+                    style: smallText.copyWith(
                       color: backgroundColor2.withOpacity(0.7),
-                      fontSize: setFontSize(24),
                     ),
                   ),
                   const WidgetSpan(

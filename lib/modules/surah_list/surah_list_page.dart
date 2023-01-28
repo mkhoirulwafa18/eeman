@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
+import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/widgets/input_box.dart';
@@ -63,9 +63,9 @@ class _SurahListPageState extends State<SurahListPage>
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return Scaffold(
+    return BasePage(
       appBar: CustomAppBar(
-        height: MediaQuery.of(context).size.height / 5,
+        height: MediaQuery.of(context).size.height / 5.5,
         title: l10n.surahListPageAppBarTitle,
         showBack: false,
         content: InputBox(
@@ -73,19 +73,14 @@ class _SurahListPageState extends State<SurahListPage>
           onChanged: _onSearch,
         ),
       ),
-      backgroundColor: backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 16),
-            if (_dataQuran.isNotEmpty)
-              SurahListData(quran: _quran)
-            else
-              const AppLoading()
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (_dataQuran.isNotEmpty)
+            SurahListData(quran: _quran)
+          else
+            const AppLoading()
+        ],
       ),
     );
   }

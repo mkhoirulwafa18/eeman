@@ -7,13 +7,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.title,
     this.showBack = true,
-    required this.height,
+    this.height,
     this.content,
   });
 
   final String title;
   final bool showBack;
-  final double height;
+  final double? height;
   final Widget? content;
 
   @override
@@ -28,8 +28,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           elevation: 5,
           centerTitle: true,
           title: Text(
-            title,
-            style: lightBoldTitle,
+            title.replaceAll('\n', ' '),
+            style: lightBoldTitle.copyWith(fontSize: 24),
           ),
           backgroundColor: backgroundColor2,
           leading: showBack
@@ -38,18 +38,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: const Icon(Icons.arrow_back_rounded),
                 )
               : null,
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(height),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: (content != null) ? content : const SizedBox(),
-            ),
-          ),
+          bottom: content != null
+              ? PreferredSize(
+                  preferredSize: Size.fromHeight(height ?? kToolbarHeight),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: content,
+                  ),
+                )
+              : const PreferredSize(
+                  preferredSize: Size.zero,
+                  child: SizedBox(),
+                ),
         ),
       ],
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(height);
+  Size get preferredSize => Size.fromHeight(height ?? kToolbarHeight);
 }

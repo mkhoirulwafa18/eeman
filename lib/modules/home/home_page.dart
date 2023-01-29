@@ -1,36 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/modules/home/widgets/app_title.dart';
 import 'package:quran_app/modules/home/widgets/header_card.dart';
 import 'package:quran_app/modules/home/widgets/menu_list.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: <Widget>[
-            SliverPersistentHeader(
-              pinned: true,
-              floating: true,
-              delegate: CustomSliverDelegate(
-                expandedHeight: MediaQuery.of(context).size.height / 5,
-              ),
+    return BasePage.noPadding(
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverPersistentHeader(
+            pinned: true,
+            floating: true,
+            delegate: CustomSliverDelegate(
+              expandedHeight: MediaQuery.of(context).size.height / 5,
             ),
-            const SliverToBoxAdapter(
-              child: MenuList(),
-            )
-          ],
-        ),
+          ),
+          const SliverToBoxAdapter(
+            child: MenuList(),
+          )
+        ],
       ),
     );
   }

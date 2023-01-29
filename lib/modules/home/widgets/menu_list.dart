@@ -14,77 +14,81 @@ class MenuList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () {
-                showAppBottomSheet(context);
-              },
-              child: CardMenu(
-                color: cardGreyColor,
-                icon: SvgPicture.asset('assets/icons/praying-hands.svg'),
-                title: l10n.doaSehariHari,
-                bg: CirclePosition.doa,
-              ),
-            ),
-            const SizedBox(
-              width: 16,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push<MaterialPageRoute<dynamic>>(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SurahListPage(),
-                  ),
-                );
-              },
-              child: CardMenu(
-                color: cardPeachColor,
-                icon: SvgPicture.asset('assets/icons/al-quran.svg'),
-                title: l10n.quranOffline,
-                bg: CirclePosition.quran,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/prayer-time');
-              },
-              child: CardMenu(
-                color: cardGreenColor,
-                icon: Image.asset(
-                  'assets/icons/shalat.png',
-                  height: 110,
+    return Container(
+      padding: const EdgeInsets.only(top: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  showAppBottomSheet(context);
+                },
+                child: CardMenu(
+                  color: cardGreyColor,
+                  icon: SvgPicture.asset('assets/icons/praying-hands.svg'),
+                  title: l10n.doaSehariHari,
+                  bg: CirclePosition.doa,
                 ),
-                title: l10n.shalatTime,
-                bg: CirclePosition.shalat,
               ),
-            ),
-            const SizedBox(
-              width: 16,
-            ),
-            GestureDetector(
-              child: CardMenu(
-                color: cardYellowColor,
-                icon: SvgPicture.asset('assets/icons/tasbih.svg'),
-                title: l10n.tasbihDigital,
-                bg: CirclePosition.tasbih,
+              const SizedBox(
+                width: 16,
               ),
-            ),
-          ],
-        ),
-      ],
+              GestureDetector(
+                onTap: () {
+                  Navigator.push<MaterialPageRoute<dynamic>>(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SurahListPage(),
+                    ),
+                  );
+                },
+                child: CardMenu(
+                  color: cardPeachColor,
+                  icon: SvgPicture.asset('assets/icons/al-quran.svg'),
+                  title: l10n.quranOffline,
+                  bg: CirclePosition.quran,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/prayer-time');
+                },
+                child: CardMenu(
+                  color: cardGreenColor,
+                  icon: Image.asset(
+                    'assets/icons/shalat.png',
+                    height: 110,
+                  ),
+                  title: l10n.shalatTime,
+                  bg: CirclePosition.shalat,
+                ),
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              GestureDetector(
+                child: CardMenu(
+                  color: cardYellowColor,
+                  icon: SvgPicture.asset('assets/icons/tasbih.svg'),
+                  title: l10n.tasbihDigital,
+                  bg: CirclePosition.tasbih,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

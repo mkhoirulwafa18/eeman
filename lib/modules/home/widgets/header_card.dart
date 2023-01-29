@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/modules/home/utils/transformer.dart';
 import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
-import 'package:quran_app/services/dio.dart';
+import 'package:quran_app/modules/prayer_time/models/prayer_time.dart';
 
 class HeaderCard extends StatefulWidget {
   const HeaderCard({
@@ -19,7 +20,7 @@ class HeaderCard extends StatefulWidget {
 class _HeaderCardState extends State<HeaderCard> {
   String _time = Intl.withLocale(
     'id',
-    () => DateFormat('EEEE, dd MMMM yyyy').format(DateTime.now()),
+    () => DateFormat('EEEE, dd MMM').format(DateTime.now()),
   ).toString();
   String _hourMinute =
       Intl.withLocale('id', () => DateFormat('HH:mm').format(DateTime.now()))
@@ -31,7 +32,7 @@ class _HeaderCardState extends State<HeaderCard> {
     setState(() {
       _time = Intl.withLocale(
         'id',
-        () => DateFormat('EEEE, dd MMMM yyyy').format(DateTime.now()),
+        () => DateFormat('EEEE, dd MMM').format(DateTime.now()),
       ).toString();
       _hourMinute = Intl.withLocale(
         'id',
@@ -44,6 +45,10 @@ class _HeaderCardState extends State<HeaderCard> {
   void initState() {
     super.initState();
     _timer = Timer.periodic(const Duration(minutes: 1), setTimeAndHour);
+    context.read<PrayertimeCubit>().getTimings(
+          DateTime.now().month.toString(),
+          DateTime.now().year.toString(),
+        );
   }
 
   @override
@@ -54,81 +59,104 @@ class _HeaderCardState extends State<HeaderCard> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => PrayertimeCubit(DioHelper()),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        width: MediaQuery.of(context).size.width / 1.2,
-        decoration: BoxDecoration(
-          color: AppColors().backgroundColor,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.5),
-              blurRadius: 4,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 5,
-            ),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: AppColors().backgroundColor2,
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                child: Text(
-                  _time,
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 16,
-                    color: AppColors().backgroundColor,
+    return Container(
+      width: MediaQuery.of(context).size.width / 1.2,
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        border: Border.all(color: backgroundColor),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.5),
+            blurRadius: 4,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  color: backgroundColor2,
+                  borderRadius: const BorderRadius.only(
+                    bottomRight: Radius.circular(20),
+                    topLeft: Radius.circular(20),
                   ),
                 ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(_time, style: smallText),
+                ),
               ),
-            ),
-            HourMinute(hourMinute: _hourMinute),
-            BlocBuilder<PrayertimeCubit, PrayertimeState>(
-              builder: (context, state) {
-                if (state.props.isNotEmpty) {
-                  debugPrint(state.toString());
-                  return Text(
-                    '2 jam 20 menit menuju Ashar',
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 16,
-                      color: AppColors().backgroundColor2,
-                    ),
-                  );
-                } else {
-                  debugPrint(state.toString());
-                  return Text(
-                    'Jangan lupa shalat nya yaa :)',
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 16,
-                      color: AppColors().backgroundColor2,
-                    ),
-                  );
+              BlocBuilder<PrayertimeCubit, PrayertimeState>(
+                builder: (context, state) {
+                  //TODO(mkhoirulwafa18): add shimmer if state is PrayertimeLoading
+                  if (state is PrayertimeLoaded) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.place_rounded,
+                            color: Colors.redAccent,
+                            size: 16,
+                          ),
+                          Text(
+                            state.city,
+                            style: smallText.copyWith(color: backgroundColor2),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                },
+              ),
+            ],
+          ),
+          HourMinute(hourMinute: _hourMinute),
+          BlocBuilder<PrayertimeCubit, PrayertimeState>(
+            builder: (context, state) {
+              if (state is PrayertimeLoaded) {
+                final listTimings =
+                    state.data.data![DateTime.now().day - 1].timings;
+                final todayTimings = fromTimingToList(listTimings ?? Timings());
+                var timeDiff = '';
+                final format = DateFormat('HH:mm');
+                final start = format.parse(_hourMinute);
+                var end = DateTime.now();
+
+                for (var i = 0; i < todayTimings.length; i++) {
+                  final time = todayTimings[i];
+                  end = format.parse(time['value'].toString().split(' ')[0]);
+
+                  if (end.isAfter(start)) {
+                    timeDiff =
+                        '${end.difference(start).inHours} jam ${end.difference(start).inMinutes % 60} menit menuju ${time['name']}';
+                    break;
+                  }
                 }
-              },
-            ),
-            const SizedBox(
-              height: 24,
-            )
-          ],
-        ),
+                return Text(
+                  timeDiff,
+                  style: mediumText.copyWith(color: backgroundColor2),
+                  textAlign: TextAlign.center,
+                );
+              } else {
+                return Text(
+                  'Jangan lupa sholat nya yaa <3',
+                  style: mediumText.copyWith(color: backgroundColor2),
+                );
+              }
+            },
+          ),
+          const SizedBox(
+            height: 16,
+          )
+        ],
       ),
     );
   }
@@ -146,12 +174,7 @@ class HourMinute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       _hourMinute,
-      style: TextStyle(
-        fontFamily: 'Poppins',
-        fontWeight: FontWeight.w600,
-        fontSize: 64,
-        color: AppColors().backgroundColor2,
-      ),
+      style: lightBoldTitle.copyWith(color: backgroundColor2, fontSize: 50),
     );
   }
 }

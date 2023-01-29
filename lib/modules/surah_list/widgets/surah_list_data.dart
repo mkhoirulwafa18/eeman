@@ -78,7 +78,7 @@ class SurahListData extends StatelessWidget {
                   if (_quran[index].place == Place.mecca)
                     WidgetSpan(
                       child: SvgPicture.asset(
-                        'assets/icons/mecca.svg',
+                        '$iconAsset/mecca.svg',
                         width: 12,
                         color: backgroundColor2,
                       ),
@@ -86,7 +86,7 @@ class SurahListData extends StatelessWidget {
                   else
                     WidgetSpan(
                       child: SvgPicture.asset(
-                        'assets/icons/medina.svg',
+                        '$iconAsset/medina.svg',
                         width: 16,
                         color: backgroundColor2,
                       ),

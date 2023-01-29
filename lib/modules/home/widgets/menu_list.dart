@@ -28,7 +28,7 @@ class MenuList extends StatelessWidget {
                 },
                 child: CardMenu(
                   color: cardGreyColor,
-                  icon: SvgPicture.asset('assets/icons/praying-hands.svg'),
+                  icon: SvgPicture.asset('$iconAsset/praying-hands.svg'),
                   title: l10n.doaSehariHari,
                   bg: CirclePosition.doa,
                 ),
@@ -47,7 +47,7 @@ class MenuList extends StatelessWidget {
                 },
                 child: CardMenu(
                   color: cardPeachColor,
-                  icon: SvgPicture.asset('assets/icons/al-quran.svg'),
+                  icon: SvgPicture.asset('$iconAsset/al-quran.svg'),
                   title: l10n.quranOffline,
                   bg: CirclePosition.quran,
                 ),
@@ -67,7 +67,7 @@ class MenuList extends StatelessWidget {
                 child: CardMenu(
                   color: cardGreenColor,
                   icon: Image.asset(
-                    'assets/icons/shalat.png',
+                    '$iconAsset/shalat.png',
                     height: 110,
                   ),
                   title: l10n.shalatTime,
@@ -80,7 +80,7 @@ class MenuList extends StatelessWidget {
               GestureDetector(
                 child: CardMenu(
                   color: cardYellowColor,
-                  icon: SvgPicture.asset('assets/icons/tasbih.svg'),
+                  icon: SvgPicture.asset('$iconAsset/tasbih.svg'),
                   title: l10n.tasbihDigital,
                   bg: CirclePosition.tasbih,
                 ),

@@ -69,7 +69,7 @@ class SurahInfo extends StatelessWidget {
                 height: 16,
               ),
               SvgPicture.asset(
-                'assets/icons/basmalah.svg',
+                '$iconAsset/basmalah.svg',
                 width: 0.4.sw,
                 color: backgroundColor,
               )

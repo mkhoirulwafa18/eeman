@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
@@ -22,7 +23,7 @@ class _SurahListPageState extends State<SurahListPage>
 
   Future<void> readJson() async {
     final quranResponse =
-        await rootBundle.loadString('assets/sources/quran.json');
+        await rootBundle.loadString('$sourcesAsset/quran.json');
     final quranData = quranFromJson(quranResponse);
     setState(() {
       _dataQuran = quranData;

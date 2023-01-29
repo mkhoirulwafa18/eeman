@@ -58,7 +58,7 @@ class _BottomSheetDoaContentState extends State<BottomSheetDoaContent> {
   List<DoaDaily> _doaData = [];
 
   Future<void> readJson() async {
-    final doaResponse = await rootBundle.loadString('assets/sources/doa.json');
+    final doaResponse = await rootBundle.loadString('$sourcesAsset/doa.json');
     final doaData = doaDailyFromJson(doaResponse);
     setState(() {
       _doaData = doaData;

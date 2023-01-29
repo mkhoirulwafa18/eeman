@@ -17,7 +17,7 @@ class RubElHizb extends StatelessWidget {
     return Stack(
       children: [
         SvgPicture.asset(
-          'assets/icons/rubhizb.svg',
+          '$iconAsset/rubhizb.svg',
           width: 40,
           color: color ?? backgroundColor2,
         ),

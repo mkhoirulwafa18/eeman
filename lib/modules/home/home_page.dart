@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/app_colors.dart';
+import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/modules/home/widgets/app_title.dart';
 import 'package:quran_app/modules/home/widgets/header_card.dart';
 import 'package:quran_app/modules/home/widgets/menu_list.dart';
@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors().backgroundColor,
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: CustomScrollView(
           slivers: <Widget>[
@@ -23,14 +23,11 @@ class _HomePageState extends State<HomePage> {
               pinned: true,
               floating: true,
               delegate: CustomSliverDelegate(
-                expandedHeight: MediaQuery.of(context).size.height / 3.5,
+                expandedHeight: MediaQuery.of(context).size.height / 5,
               ),
             ),
             const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: MenuList(),
-              ),
+              child: MenuList(),
             )
           ],
         ),
@@ -54,9 +51,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     final appBarSize = expandedHeight - shrinkOffset;
-    final cardTopPosition = expandedHeight / 2.3 - shrinkOffset;
-    final proportion = 2 - (expandedHeight / appBarSize);
-    final percent = proportion < 0 || proportion > 1 ? 0.0 : proportion;
+    final cardTopPosition = expandedHeight / 3.5 - shrinkOffset;
     return SizedBox(
       height: expandedHeight + expandedHeight / 1.5,
       child: Stack(
@@ -64,13 +59,10 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
           SizedBox(
             height: appBarSize < kToolbarHeight ? kToolbarHeight : appBarSize,
             child: AppBar(
-              backgroundColor: AppColors().backgroundColor2,
-              elevation: 0,
+              backgroundColor: backgroundColor2,
+              elevation: 5,
               centerTitle: true,
-              title: Opacity(
-                opacity: hideTitleWhenExpanded ? 1.0 - percent : 1.0,
-                child: const AppTitle(),
-              ),
+              title: const AppTitle(),
             ),
           ),
           Positioned(
@@ -78,17 +70,11 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
             right: 0,
             top: cardTopPosition > 0 ? cardTopPosition : 0,
             bottom: 0,
-            child: Opacity(
-              opacity: percent,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30 * percent),
-                child: Column(
-                  children: const [
-                    AppTitle(),
-                    HeaderCard(),
-                  ],
-                ),
-              ),
+            child: Column(
+              children: const [
+                SizedBox(height: 16),
+                HeaderCard(),
+              ],
             ),
           ),
         ],

@@ -76,9 +76,7 @@ class CardMenu extends StatelessWidget {
                   icon,
                   Text(
                     title,
-                    style: mediumText.copyWith(
-                      color: Colors.white,
-                    ),
+                    style: mediumText.copyWith(color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
                 ],

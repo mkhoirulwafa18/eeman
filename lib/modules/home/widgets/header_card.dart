@@ -133,10 +133,15 @@ class _HeaderCardState extends State<HeaderCard> {
                 for (var i = 0; i < todayTimings.length; i++) {
                   final time = todayTimings[i];
                   end = format.parse(time['value'].toString().split(' ')[0]);
+                  final hours = end.difference(start).inHours != 0
+                      ? '${end.difference(start).inHours} jam'
+                      : '';
+                  final minutes = (end.difference(start).inMinutes % 60) != 0
+                      ? '${end.difference(start).inMinutes % 60} menit'
+                      : '';
 
                   if (end.isAfter(start)) {
-                    timeDiff =
-                        '${end.difference(start).inHours} jam ${end.difference(start).inMinutes % 60} menit menuju ${time['name']}';
+                    timeDiff = '$hours $minutes menuju ${time['name']}';
                     break;
                   }
                 }

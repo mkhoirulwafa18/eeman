@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
+import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
 import 'package:quran_app/modules/surah/widgets/action_button.dart';
 import 'package:quran_app/modules/surah/widgets/surah_info.dart';
@@ -54,17 +55,14 @@ class _SurahPageState extends State<SurahPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        height: 100,
-        title: title,
-      ),
-      backgroundColor: backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        child: _ayatSurah.isNotEmpty
-            ? ScrollablePositionedList.builder(
+    return BasePage.noPadding(
+      appBar: CustomAppBar(title: title),
+      child: _ayatSurah.isNotEmpty
+          ? Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: ScrollablePositionedList.builder(
                 itemScrollController: controller,
+                shrinkWrap: true,
                 itemPositionsListener: ItemPositionsListener.create(),
                 itemCount: _ayatSurah.length + 2,
                 itemBuilder: (context, index) {
@@ -82,9 +80,9 @@ class _SurahPageState extends State<SurahPage> {
                       ? _buildItem(index)
                       : _buildFooter();
                 },
-              )
-            : const AppLoading(),
-      ),
+              ),
+            )
+          : const AppLoading(),
     );
   }
 

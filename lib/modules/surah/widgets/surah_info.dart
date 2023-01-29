@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/modules/surah_list/widgets/rub_el_hizb.dart';
@@ -69,7 +70,7 @@ class SurahInfo extends StatelessWidget {
               ),
               SvgPicture.asset(
                 'assets/icons/basmalah.svg',
-                width: MediaQuery.of(context).size.width / 2,
+                width: 0.4.sw,
                 color: backgroundColor,
               )
             ] else

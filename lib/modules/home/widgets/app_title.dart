@@ -10,12 +10,7 @@ class AppTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       'Eeman',
-      style: TextStyle(
-        fontFamily: 'Poppins',
-        fontWeight: FontWeight.w600,
-        fontSize: 32,
-        color: backgroundColor,
-      ),
+      style: lightBoldTitle,
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/modules/home/utils/transformer.dart';
 import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
 import 'package:quran_app/modules/prayer_time/models/prayer_time.dart';
@@ -93,7 +94,9 @@ class _HeaderCardState extends State<HeaderCard> {
               ),
               BlocBuilder<PrayertimeCubit, PrayertimeState>(
                 builder: (context, state) {
-                  //TODO(mkhoirulwafa18): add shimmer if state is PrayertimeLoading
+                  if (state is PrayertimeLoading) {
+                    return const AppLoading();
+                  }
                   if (state is PrayertimeLoaded) {
                     return Padding(
                       padding: const EdgeInsets.only(right: 16),

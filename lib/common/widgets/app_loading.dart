@@ -4,7 +4,10 @@ import 'package:quran_app/common/constants/constant.dart';
 class AppLoading extends StatelessWidget {
   const AppLoading({
     super.key,
+    this.bgColor,
   });
+
+  final Color? bgColor;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +15,8 @@ class AppLoading extends StatelessWidget {
       children: [
         Center(
           child: CircularProgressIndicator(
-            color: backgroundColor2,
+            color: bgColor ?? backgroundColor2,
+            strokeWidth: 2,
           ),
         ),
       ],

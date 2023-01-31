@@ -99,20 +99,31 @@ class _BottomSheetDoaContentState extends State<BottomSheetDoaContent> {
                         color: backgroundColor2,
                       ),
                     ),
+                    iconColor: backgroundColor2,
+                    childrenPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     children: [
                       Text(
                         _doa[index].arabic ?? '',
                         style: arabicText,
+                        textDirection: TextDirection.rtl,
                       ),
                       const SizedBox(height: 8),
                       Text(
                         _doa[index].latin ?? '',
-                        style: inputText.copyWith(color: backgroundColor2),
+                        style: inputLabel.copyWith(
+                          color: backgroundColor2.withOpacity(0.7),
+                        ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 4),
+                      Divider(
+                        color: backgroundColor2.withOpacity(.5),
+                      ),
+                      const SizedBox(height: 4),
                       Text(
                         _doa[index].translation ?? '',
-                        style: inputText.copyWith(color: backgroundColor2),
+                        style: inputLabel.copyWith(
+                            color: backgroundColor2.withOpacity(0.7)),
                       ),
                     ],
                   ),

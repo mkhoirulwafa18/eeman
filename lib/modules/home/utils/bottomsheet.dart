@@ -123,7 +123,8 @@ class _BottomSheetDoaContentState extends State<BottomSheetDoaContent> {
                       Text(
                         _doa[index].translation ?? '',
                         style: inputLabel.copyWith(
-                            color: backgroundColor2.withOpacity(0.7)),
+                          color: backgroundColor2.withOpacity(0.7),
+                        ),
                       ),
                     ],
                   ),

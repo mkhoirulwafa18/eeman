@@ -65,24 +65,27 @@ class _SurahListPageState extends State<SurahListPage>
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return BasePage(
-      appBar: CustomAppBar(
-        height: MediaQuery.of(context).size.height / 5.5,
-        title: l10n.surahListPageAppBarTitle,
-        showBack: false,
-        content: InputBox(
-          labelText: l10n.findSurah,
-          onChanged: _onSearch,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: BasePage(
+        appBar: CustomAppBar(
+          height: MediaQuery.of(context).size.height / 5.5,
+          title: l10n.surahListPageAppBarTitle,
+          showBack: false,
+          content: InputBox(
+            labelText: l10n.findSurah,
+            onChanged: _onSearch,
+          ),
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (_dataQuran.isNotEmpty)
-            SurahListData(quran: _quran)
-          else
-            const AppLoading()
-        ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (_dataQuran.isNotEmpty)
+              SurahListData(quran: _quran)
+            else
+              const AppLoading()
+          ],
+        ),
       ),
     );
   }

@@ -53,7 +53,6 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
             height: appBarSize < kToolbarHeight ? kToolbarHeight : appBarSize,
             child: AppBar(
               backgroundColor: backgroundColor2,
-              elevation: 5,
               centerTitle: true,
               title: const AppTitle(),
             ),

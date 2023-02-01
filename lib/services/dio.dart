@@ -10,7 +10,7 @@ class DioHelper {
   DioHelper() {
     _dio = Dio(
       BaseOptions(
-        baseUrl: 'http://api.aladhan.com/v1/calendar',
+        baseUrl: 'http://api.aladhan.com/v1/calendarByCity',
       ),
     );
     _dio.interceptors
@@ -25,9 +25,11 @@ class DioHelper {
         lat = value.latitude;
         long = value.longitude;
       });
+
+      final city = await getCityName();
       // ignore: inference_failure_on_function_invocation
       final response = await _dio.get(
-        '?latitude=${lat.toString()}&longitude=${long.toString()}&method=11&month=$month&year=$year',
+        '?city=$city&country=Indonesia&method=11&month=$month&year=$year',
       );
       final result = PrayerTime.fromJson(response.data as Map<String, dynamic>);
       return result;
@@ -42,7 +44,7 @@ class DioHelper {
         lat,
         long,
       );
-      return placemarks[0].locality.toString();
+      return placemarks[0].subAdministrativeArea.toString();
     }
     return 'Lokasi tidak ditemukan';
   }

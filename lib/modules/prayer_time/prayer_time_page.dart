@@ -15,7 +15,7 @@ class PrayerTimePage extends StatelessWidget {
     final l10n = context.l10n;
     return BasePage(
       appBar: CustomAppBar(
-        height: MediaQuery.of(context).size.height / 4,
+        height: MediaQuery.of(context).size.height / 3.5,
         title: l10n.shalatTime,
         content: const PrayerTimeHeaderContent(),
       ),

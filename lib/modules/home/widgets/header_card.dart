@@ -142,21 +142,22 @@ class _HeaderCardState extends State<HeaderCard> {
                   final minutes = (end.difference(start).inMinutes % 60) != 0
                       ? '${end.difference(start).inMinutes % 60} menit'
                       : '';
+                  final to = 'menuju ${time['name']}';
 
                   if (end.isAfter(start)) {
-                    timeDiff = '$hours $minutes menuju ${time['name']}';
+                    timeDiff = '$hours $minutes $to';
                     break;
                   }
                 }
                 return Text(
                   timeDiff,
-                  style: mediumText.copyWith(color: backgroundColor2),
+                  style: smallText.copyWith(color: backgroundColor2),
                   textAlign: TextAlign.center,
                 );
               } else {
                 return Text(
                   'Jangan lupa sholat nya yaa <3',
-                  style: mediumText.copyWith(color: backgroundColor2),
+                  style: smallText.copyWith(color: backgroundColor2),
                 );
               }
             },

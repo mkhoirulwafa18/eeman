@@ -32,8 +32,8 @@ class PrayerTimeHeaderContent extends StatelessWidget {
             ),
             child: DatePicker(
               DateTime.now().subtract(Duration(days: DateTime.now().day - 1)),
-              height: MediaQuery.of(context).size.height / 5 / 1.8,
-              width: MediaQuery.of(context).size.height / 5 / 1.8 * 0.7,
+              height: MediaQuery.of(context).size.height / 5 / 1.5,
+              width: MediaQuery.of(context).size.height / 5 / 1.8 * 0.9,
               initialSelectedDate: DateTime.now(),
               controller: controller,
               selectionColor: backgroundColor2,
@@ -63,10 +63,11 @@ class PrayerTimeHeaderContent extends StatelessWidget {
                     const Icon(
                       Icons.place_rounded,
                       color: Colors.redAccent,
+                      size: 16,
                     ),
                     Text(
                       state.city,
-                      style: mediumText,
+                      style: smallText,
                     )
                   ],
                 );

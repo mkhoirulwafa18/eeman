@@ -11,6 +11,7 @@ dependencies:
   bloc: ^8.1.0
   date_picker_timeline: ^1.2.3
   dio: ^4.0.6
+  dio_cache_interceptor: ^3.3.1
   equatable: ^2.0.5
   flutter:
     sdk: flutter

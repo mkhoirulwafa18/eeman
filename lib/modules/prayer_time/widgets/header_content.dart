@@ -16,6 +16,12 @@ class PrayerTimeHeaderContent extends StatelessWidget {
     final halfBackgroundColor2 = backgroundColor2.withOpacity(0.5);
     return StatefulWrapper(
       onInit: () {
+        if (DateTime.now().month != dateCubit.previousState?.month) {
+          context.read<PrayertimeCubit>().getTimings(
+                DateTime.now().month.toString(),
+                DateTime.now().year.toString(),
+              );
+        }
         WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
           controller.animateToDate(
             DateTime.now(),
@@ -47,6 +53,17 @@ class PrayerTimeHeaderContent extends StatelessWidget {
               dayTextStyle: smallText.copyWith(color: halfBackgroundColor2),
               onDateChange: (date) {
                 controller.animateToDate(date);
+
+                if (date.month != dateCubit.previousState?.month) {
+                  context
+                      .read<PrayertimeCubit>()
+                      .getTimings(date.month.toString(), date.year.toString());
+                } else {
+                  context.read<PrayertimeCubit>().getTimings(
+                        dateCubit.previousState?.month.toString() ?? '',
+                        dateCubit.previousState?.year.toString() ?? '',
+                      );
+                }
                 dateCubit.onSelectDate(date);
                 debugPrint('${dateCubit.state}');
               },

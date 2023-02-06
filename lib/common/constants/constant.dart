@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Constants {
+  final String baseUrl = 'http://api.aladhan.com/v1/calendarByCity';
   final String randomSurah = 'noRandomSurah';
   final String randomAyat = 'noRandomAyat';
   final String lastHitAotd = 'lastHitAotd';
@@ -21,6 +22,7 @@ class Constants {
     'Awal Sepertiga Malam',
     'Akhir Sepertiga Malam',
   ];
+  final int cacheDays = 31;
 }
 
 /// --------------

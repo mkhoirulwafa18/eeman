@@ -58,3 +58,6 @@ flutter:
     - family: IsepMisbah
       fonts:
         - asset: assets/fonts/isepMisbah.ttf
+    - family: DsDigital
+      fonts:
+        - asset: assets/fonts/dsdigi.ttf

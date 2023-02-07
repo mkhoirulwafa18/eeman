@@ -8,6 +8,7 @@ import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
 import 'package:quran_app/modules/prayer_time/prayer_time_page.dart';
 import 'package:quran_app/modules/surah/surah_page.dart';
 import 'package:quran_app/modules/surah_list/surah_list_page.dart';
+import 'package:quran_app/modules/tasbih/tasbih_page.dart';
 import 'package:quran_app/services/dio.dart';
 
 class App extends StatelessWidget {
@@ -47,6 +48,7 @@ class App extends StatelessWidget {
                 dataQuran: [],
               ),
           '/prayer-time': (context) => const PrayerTimePage(),
+          '/tasbih': (context) => const TasbihPage(),
         },
       ),
     );

@@ -78,6 +78,9 @@ class MenuList extends StatelessWidget {
                 width: 16,
               ),
               GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/tasbih');
+                },
                 child: CardMenu(
                   color: cardYellowColor,
                   icon: SvgPicture.asset('$iconAsset/tasbih.svg'),

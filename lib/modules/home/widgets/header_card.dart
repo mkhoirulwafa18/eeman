@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
+import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/utils/transformer.dart';
 import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
 import 'package:quran_app/modules/prayer_time/models/prayer_time.dart';
@@ -60,6 +61,7 @@ class _HeaderCardState extends State<HeaderCard> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       width: MediaQuery.of(context).size.width / 1.2,
       decoration: BoxDecoration(
@@ -137,12 +139,13 @@ class _HeaderCardState extends State<HeaderCard> {
                   final time = todayTimings[i];
                   end = format.parse(time['value'].toString().split(' ')[0]);
                   final hours = end.difference(start).inHours != 0
-                      ? '${end.difference(start).inHours} jam'
+                      ? end.difference(start).inHours.toString() + l10n.hour
                       : '';
                   final minutes = (end.difference(start).inMinutes % 60) != 0
-                      ? '${end.difference(start).inMinutes % 60} menit'
+                      ? (end.difference(start).inMinutes % 60).toString() +
+                          l10n.minute
                       : '';
-                  final to = 'menuju ${time['name']}';
+                  final to = l10n.to + time['name'].toString();
 
                   if (end.isAfter(start)) {
                     timeDiff = '$hours $minutes $to';
@@ -150,13 +153,13 @@ class _HeaderCardState extends State<HeaderCard> {
                   }
                 }
                 return Text(
-                  timeDiff,
+                  timeDiff.trim() != '' ? timeDiff : l10n.dontForgetPray,
                   style: smallText.copyWith(color: backgroundColor2),
                   textAlign: TextAlign.center,
                 );
               } else {
                 return Text(
-                  'Jangan lupa sholat nya yaa <3',
+                  l10n.dontForgetPray,
                   style: smallText.copyWith(color: backgroundColor2),
                 );
               }

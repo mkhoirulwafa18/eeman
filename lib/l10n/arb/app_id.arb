@@ -7,5 +7,9 @@
     "shalatTime": "Jadwal\nShalat",
     "tasbihDigital": "Tasbih\nDigital",
     "errorNoSurahFound": "Tidak ada surah yang cocok dengan pencarian.\nCoba ulangi ketik surah yang kamu cari.",
-    "findSurah": "Cari Surah"
+    "findSurah": "Cari Surah",
+    "dontForgetPray":"Jangan lupa sholat nya yaa <3",
+    "hour": "jam",
+    "minute": "menit",
+    "to": "menuju"
 }

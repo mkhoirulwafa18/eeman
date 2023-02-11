@@ -71,7 +71,6 @@ class _SurahListPageState extends State<SurahListPage>
         appBar: CustomAppBar(
           height: MediaQuery.of(context).size.height / 5.5,
           title: l10n.surahListPageAppBarTitle,
-          showBack: false,
           content: InputBox(
             labelText: l10n.findSurah,
             onChanged: _onSearch,

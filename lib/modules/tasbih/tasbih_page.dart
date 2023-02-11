@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
@@ -30,13 +31,15 @@ class TasbihPage extends StatelessWidget {
                       height: 100,
                     ),
                     Container(
+                      width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.all(16),
+                      margin: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                       decoration: BoxDecoration(
                         color: backgroundColor2.withOpacity(.7),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: RichText(
-                        textAlign: TextAlign.justify,
+                        textAlign: TextAlign.center,
                         text: TextSpan(
                           children: [
                             TextSpan(
@@ -44,7 +47,7 @@ class TasbihPage extends StatelessWidget {
                               style: lightBoldTitle.copyWith(
                                 fontFamily: 'DsDigital',
                                 fontSize: 70,
-                                color: backgroundColor.withOpacity(.2),
+                                color: backgroundColor.withOpacity(.1),
                               ),
                             ),
                             TextSpan(
@@ -52,7 +55,6 @@ class TasbihPage extends StatelessWidget {
                               style: lightBoldTitle.copyWith(
                                 fontFamily: 'DsDigital',
                                 fontSize: 70,
-                                // color: backgroundColor.withOpacity(.2),
                               ),
                             ),
                           ],
@@ -104,7 +106,11 @@ class TasbihPage extends StatelessWidget {
                       height: 30,
                     ),
                     GestureDetector(
-                      onTap: () => context.read<CounterCubit>().increment(),
+                      onTap: () {
+                        context.read<CounterCubit>().increment();
+                        HapticFeedback.mediumImpact();
+                        SystemSound.play(SystemSoundType.click);
+                      },
                       child: Container(
                         width: 126,
                         height: 126,

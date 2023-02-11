@@ -129,20 +129,35 @@ class _HeaderCardState extends State<HeaderCard> {
               if (state is PrayertimeLoaded) {
                 final listTimings =
                     state.data.data![DateTime.now().day - 1].timings;
+                final tomorrowListTimings = state
+                    .data
+                    .data![DateTime.now().add(const Duration(days: 1)).day - 1]
+                    .timings;
                 final todayTimings = fromTimingToList(listTimings ?? Timings());
+                final tomorrowTimings =
+                    fromTimingToList(tomorrowListTimings ?? Timings());
                 var timeDiff = '';
                 final format = DateFormat('HH:mm');
                 final start = format.parse(_hourMinute);
                 var end = DateTime.now();
+                final tomorrowLT = format
+                    .parse(
+                      tomorrowTimings[0]['value'].toString().split(' ')[0],
+                    )
+                    .add(const Duration(days: 1))
+                    .difference(start);
+                final tomorrowLastThird =
+                    // ignore: lines_longer_than_80_chars
+                    '${tomorrowLT.inHours} ${l10n.hour} ${tomorrowLT.inMinutes % 60} ${l10n.minute} ${l10n.to} ${tomorrowTimings[0]['name']}';
 
                 for (var i = 0; i < todayTimings.length; i++) {
                   final time = todayTimings[i];
                   end = format.parse(time['value'].toString().split(' ')[0]);
-                  final hours = end.difference(start).inHours != 0
-                      ? '${end.difference(start).inHours} ${l10n.hour}'
-                      : '';
-                  final minutes = (end.difference(start).inMinutes % 60) != 0
-                      ? '${end.difference(start).inMinutes % 60} ${l10n.minute}'
+                  final diff = end.difference(start);
+                  final hours =
+                      diff.inHours != 0 ? '${diff.inHours} ${l10n.hour}' : '';
+                  final minutes = (diff.inMinutes % 60) != 0
+                      ? '${diff.inMinutes % 60} ${l10n.minute}'
                       : '';
                   final to = '${l10n.to} ${time['name']}';
 
@@ -152,7 +167,7 @@ class _HeaderCardState extends State<HeaderCard> {
                   }
                 }
                 return Text(
-                  timeDiff.trim() != '' ? timeDiff : l10n.dontForgetPray,
+                  timeDiff.trim() != '' ? timeDiff : tomorrowLastThird,
                   style: smallText.copyWith(color: backgroundColor2),
                   textAlign: TextAlign.center,
                 );

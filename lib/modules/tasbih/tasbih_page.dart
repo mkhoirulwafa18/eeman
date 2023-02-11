@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
+import 'package:quran_app/common/widgets/custom_app_bar.dart';
+import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/tasbih/cubit/counter_cubit.dart';
 import 'package:quran_app/modules/tasbih/widgets/custom_painter.dart';
 
@@ -11,7 +13,11 @@ class TasbihPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return BasePage(
+      appBar: CustomAppBar(
+        title: l10n.tasbihDigital,
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Center(

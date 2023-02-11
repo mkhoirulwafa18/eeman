@@ -139,13 +139,12 @@ class _HeaderCardState extends State<HeaderCard> {
                   final time = todayTimings[i];
                   end = format.parse(time['value'].toString().split(' ')[0]);
                   final hours = end.difference(start).inHours != 0
-                      ? end.difference(start).inHours.toString() + l10n.hour
+                      ? '${end.difference(start).inHours} ${l10n.hour}'
                       : '';
                   final minutes = (end.difference(start).inMinutes % 60) != 0
-                      ? (end.difference(start).inMinutes % 60).toString() +
-                          l10n.minute
+                      ? '${end.difference(start).inMinutes % 60} ${l10n.minute}'
                       : '';
-                  final to = l10n.to + time['name'].toString();
+                  final to = '${l10n.to} ${time['name']}';
 
                   if (end.isAfter(start)) {
                     timeDiff = '$hours $minutes $to';

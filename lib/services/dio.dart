@@ -59,7 +59,8 @@ class DioHelper {
       await getCurrentLocation().then((value) async {
         lat = value.latitude;
         long = value.longitude;
-      });
+        // ignore: invalid_return_type_for_catch_error, avoid_print, inference_failure_on_untyped_parameter
+      }).catchError((e) => print(e.toString()));
 
       final city = await getCityName();
       final country = await getCountryName();

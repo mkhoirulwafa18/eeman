@@ -21,9 +21,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Stack(
       children: [
         AppBar(
-          systemOverlayStyle: const SystemUiOverlayStyle(
+          systemOverlayStyle: SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.light,
-            statusBarBrightness: Brightness.dark,
+            statusBarColor: backgroundColor2,
           ),
           elevation: 5,
           centerTitle: true,

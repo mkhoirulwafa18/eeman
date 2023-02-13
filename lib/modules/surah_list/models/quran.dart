@@ -18,7 +18,6 @@ class Quran {
     this.numberOfAyah,
     this.numberOfSurah,
     this.place,
-    this.recitations,
     this.type,
     this.verses,
     this.tafsir,
@@ -32,11 +31,6 @@ class Quran {
         numberOfAyah: json['number_of_ayah'] as int?,
         numberOfSurah: json['number_of_surah'] as int?,
         place: placeValues.map[json['place']],
-        recitations: List<Recitation>.from(
-          (json['recitations']).map(
-            (recite) => Recitation.fromJson(recite as Map<String, dynamic>),
-          ) as Iterable<dynamic>,
-        ),
         type: typeValues.map[json['type']],
         verses: List<Verse>.from(
           (json['verses'] as Iterable<dynamic>)
@@ -50,7 +44,6 @@ class Quran {
   int? numberOfAyah;
   int? numberOfSurah;
   Place? place;
-  List<Recitation>? recitations;
   Type? type;
   List<Verse>? verses;
   Tafsir? tafsir;
@@ -61,7 +54,6 @@ class Quran {
         'number_of_ayah': numberOfAyah,
         'number_of_surah': numberOfSurah,
         'place': placeValues.reverse[place],
-        'recitations': List<dynamic>.from(recitations!.map((x) => x.toJson())),
         'type': typeValues.reverse[type],
         'verses': List<dynamic>.from(verses!.map((x) => x.toJson())),
         'tafsir': tafsir?.toJson(),
@@ -96,38 +88,6 @@ class NameTranslations {
 enum Place { mecca, medina }
 
 final placeValues = EnumValues({'Mecca': Place.mecca, 'Medina': Place.medina});
-
-class Recitation {
-  Recitation({
-    this.name,
-    this.audioUrl,
-  });
-
-  factory Recitation.fromJson(Map<String, dynamic> json) => Recitation(
-        name: recitationNameValues.map[json['name']],
-        audioUrl: json['audio_url'] as String?,
-      );
-
-  RecitationName? name;
-  String? audioUrl;
-
-  Map<String, dynamic> toJson() => {
-        'name': recitationNameValues.reverse[name],
-        'audio_url': audioUrl,
-      };
-}
-
-enum RecitationName {
-  MISHARI_RASHID_AL_AFASY,
-  ABDUR_RAHMAN_AS_SUDAIS,
-  SAAD_AL_GHAMDI,
-}
-
-final recitationNameValues = EnumValues({
-  'Abdur-Rahman as-Sudais': RecitationName.ABDUR_RAHMAN_AS_SUDAIS,
-  'Mishari Rashid al-`Afasy': RecitationName.MISHARI_RASHID_AL_AFASY,
-  'Saad al-Ghamdi': RecitationName.SAAD_AL_GHAMDI
-});
 
 class Tafsir {
   Tafsir({

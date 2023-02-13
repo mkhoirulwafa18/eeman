@@ -37,7 +37,7 @@ class TasbihPage extends StatelessWidget {
                       height: 100,
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width,
+                      width: 320,
                       padding: const EdgeInsets.all(16),
                       margin: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                       decoration: BoxDecoration(

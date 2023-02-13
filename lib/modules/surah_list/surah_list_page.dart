@@ -58,7 +58,6 @@ class _SurahListPageState extends State<SurahListPage>
   void initState() {
     super.initState();
     readJson();
-    setStatusBar(color: backgroundColor2, brightness: Brightness.light);
   }
 
   @override

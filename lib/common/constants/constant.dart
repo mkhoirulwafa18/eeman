@@ -101,6 +101,55 @@ void setStatusBar({
   );
 }
 
+/// ----------------
+/// Check Internet Connection
+/// ----------------
+Future<bool> checkInternetConnection() async {
+  try {
+    final result = await InternetAddress.lookup('google.com');
+    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      return true;
+    }
+  } on SocketException catch (_) {
+    return false;
+  }
+  return false;
+}
+
+/// ----------------
+/// Show Dialog
+/// ----------------
+void showMyDialog(BuildContext context, String title, String content) {
+  // ignore: inference_failure_on_function_invocation
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: backgroundColor2,
+        title: Text(
+          title,
+          style: lightBoldTitle,
+        ),
+        content: Text(
+          content,
+          style: mediumText,
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text(
+              'Tutup',
+              style: smallText,
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 /// -----------------------------------
 /// Font and size scaling screen utils
 /// -----------------------------------

@@ -30,7 +30,7 @@ class ActionButton extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => SurahPage(
-                      noAyat: type == ButtonActionType.back
+                      noSurah: type == ButtonActionType.back
                           ? (_indexSurah - 1)
                           : (_indexSurah == 114 ? 1 : _indexSurah + 1),
                       dataQuran: widget.dataQuran,

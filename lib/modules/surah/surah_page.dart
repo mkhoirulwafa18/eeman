@@ -12,11 +12,11 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 class SurahPage extends StatefulWidget {
   const SurahPage({
     super.key,
-    required this.noAyat,
+    required this.noSurah,
     required this.dataQuran,
     this.startAyat = 0,
   });
-  final int noAyat;
+  final int noSurah;
   final List<Quran> dataQuran;
   final int? startAyat;
   @override
@@ -36,7 +36,7 @@ class _SurahPageState extends State<SurahPage> {
   Future<void> initialState() async {
     final data = widget.dataQuran;
     setState(() {
-      _indexSurah = widget.noAyat;
+      _indexSurah = widget.noSurah;
       _ayatSurah = data[_indexSurah].verses ?? [];
       title = data[_indexSurah].name ?? '';
       numberSurah = data[_indexSurah].numberOfSurah ?? 0;

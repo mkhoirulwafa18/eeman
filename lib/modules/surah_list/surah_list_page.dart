@@ -79,7 +79,10 @@ class _SurahListPageState extends State<SurahListPage>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (_dataQuran.isNotEmpty)
-              SurahListData(quran: _quran)
+              SurahListData(
+                quran: _quran,
+                dataQuran: _dataQuran,
+              )
             else
               const AppLoading()
           ],

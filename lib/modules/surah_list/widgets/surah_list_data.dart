@@ -10,9 +10,11 @@ class SurahListData extends StatelessWidget {
   const SurahListData({
     super.key,
     required List<Quran> quran,
+    required this.dataQuran,
   }) : _quran = quran;
 
   final List<Quran> _quran;
+  final List<Quran> dataQuran;
 
   @override
   Widget build(BuildContext context) {
@@ -107,8 +109,8 @@ class SurahListData extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => SurahPage(
-              noAyat: index,
-              dataQuran: _quran,
+              noSurah: _quran[index].numberOfSurah! - 1,
+              dataQuran: dataQuran,
             ),
           ),
         );

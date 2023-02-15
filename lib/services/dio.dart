@@ -6,6 +6,8 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:quran_app/common/constants/constant.dart';
@@ -76,14 +78,22 @@ class DioHelper {
   }
 
   Future<String> getCityName() async {
-    if (lat != 0 && long != 0) {
-      final placemarks = await placemarkFromCoordinates(
-        lat,
-        long,
-      );
-      return placemarks[0].subAdministrativeArea.toString();
+    try {
+      if (lat != 0 && long != 0) {
+        final placemarks = await placemarkFromCoordinates(
+          lat,
+          long,
+        );
+        return placemarks[0].subAdministrativeArea.toString();
+      }
+      return 'Lokasi tidak ditemukan';
+    } catch (e) {
+      if (e is PlatformException) {
+        // error.message.contains('Network error')
+        debugPrint(e.toString());
+      }
+      return 'Lokasi tidak ditemukan';
     }
-    return 'Lokasi tidak ditemukan';
   }
 
   Future<String> getCountryName() async {

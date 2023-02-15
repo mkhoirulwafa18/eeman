@@ -11,5 +11,7 @@
     "dontForgetPray":"Jangan lupa sholat nya yaa <3",
     "hour": "jam",
     "minute": "menit",
-    "to": "menuju"
+    "to": "menuju",
+    "internetNeeded": "Internet Dibutuhkan",
+    "internetNeededDesc": "Untuk memutar audio quran membutuhkan koneksi internet, mohon periksa kembali koneksi internet kamu."
 }

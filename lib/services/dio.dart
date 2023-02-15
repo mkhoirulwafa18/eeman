@@ -19,7 +19,7 @@ class DioHelper {
   DioHelper() {
     _dio = Dio(
       BaseOptions(
-        baseUrl: Constants().baseUrl,
+        baseUrl: baseUrl,
       ),
     );
     _dio.interceptors.add(
@@ -31,7 +31,7 @@ class DioHelper {
           ),
           policy: CachePolicy.refreshForceCache,
           maxStale: Duration(
-            days: Constants().cacheDays,
+            days: cacheDays,
           ),
           priority: CachePriority.high,
           hitCacheOnErrorExcept: [401, 404],

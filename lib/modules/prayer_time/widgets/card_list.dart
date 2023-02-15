@@ -33,10 +33,10 @@ class CardList extends StatelessWidget {
             final listTimings = state.data.data;
             final todayTimings = listTimings?[selectedDate.day - 1].timings;
             return ListView.builder(
-              itemCount: Constants().shalats.length,
+              itemCount: shalats.length,
               itemBuilder: (context, index) => CardItem(
                 time: todayTimings!,
-                title: Constants().shalats[index],
+                title: shalats[index],
                 selectedDate: selectedDate,
               ),
             );

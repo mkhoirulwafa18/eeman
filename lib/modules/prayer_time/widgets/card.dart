@@ -16,7 +16,6 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shalats = Constants().shalats;
     final hour = title == shalats[0]
         ? time.fajr!.split(' ')[0]
         : title == shalats[1]

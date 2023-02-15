@@ -4,26 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Constants {
-  final String baseUrl = 'http://api.aladhan.com/v1/calendarByCity';
-  final String randomSurah = 'noRandomSurah';
-  final String randomAyat = 'noRandomAyat';
-  final String lastHitAotd = 'lastHitAotd';
-  final shalats = [
-    'Subuh',
-    'Matahari Terbit',
-    'Dzuhur',
-    'Ashar',
-    'Matahari Terbenam',
-    'Maghrib',
-    'Isha',
-    'Imsak',
-    'Tengah Malam',
-    'Awal Sepertiga Malam',
-    'Akhir Sepertiga Malam',
-  ];
-  final int cacheDays = 31;
-}
+String get baseUrl => 'http://api.aladhan.com/v1/calendarByCity';
+String get baseAudioUrl => 'https://everyayah.com/data/Alafasy_128kbps';
+String get randomSurah => 'noRandomSurah';
+String get randomAyat => 'noRandomAyat';
+String get lastHitAotd => 'lastHitAotd';
+List<String> get shalats => [
+      'Subuh',
+      'Matahari Terbit',
+      'Dzuhur',
+      'Ashar',
+      'Matahari Terbenam',
+      'Maghrib',
+      'Isha',
+      'Imsak',
+      'Tengah Malam',
+      'Awal Sepertiga Malam',
+      'Akhir Sepertiga Malam',
+    ];
+int get cacheDays => 31;
 
 /// --------------
 /// Constant Color

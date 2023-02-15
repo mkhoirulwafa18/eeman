@@ -34,7 +34,7 @@ class TasbihPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const SizedBox(
-                      height: 100,
+                      height: 90,
                     ),
                     Container(
                       width: 320,
@@ -52,7 +52,7 @@ class TasbihPage extends StatelessWidget {
                               text: '0' * (6 - state.count.toString().length),
                               style: lightBoldTitle.copyWith(
                                 fontFamily: 'DsDigital',
-                                fontSize: 70,
+                                fontSize: 50,
                                 color: backgroundColor.withOpacity(.1),
                               ),
                             ),
@@ -60,14 +60,14 @@ class TasbihPage extends StatelessWidget {
                               text: state.count.toString(),
                               style: lightBoldTitle.copyWith(
                                 fontFamily: 'DsDigital',
-                                fontSize: 70,
+                                fontSize: 50,
                               ),
                             ),
                           ],
                         ),
                       ),
                     ),
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 30),
                     SizedBox(
                       width: 400,
                       child: Row(

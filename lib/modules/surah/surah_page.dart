@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
+import 'package:quran_app/modules/surah/cubit/murattal_cubit.dart';
 import 'package:quran_app/modules/surah/widgets/action_button.dart';
 import 'package:quran_app/modules/surah/widgets/surah_info.dart';
 import 'package:quran_app/modules/surah_list/models/quran.dart';
@@ -55,34 +57,37 @@ class _SurahPageState extends State<SurahPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BasePage.noPadding(
-      appBar: CustomAppBar(title: title),
-      child: _ayatSurah.isNotEmpty
-          ? Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: ScrollablePositionedList.builder(
-                itemScrollController: controller,
-                shrinkWrap: true,
-                itemPositionsListener: ItemPositionsListener.create(),
-                itemCount: _ayatSurah.length + 2,
-                itemBuilder: (context, index) {
-                  if (index == 0) {
-                    return SurahInfo(
-                      numberSurah: numberSurah,
-                      title: title,
-                      translation: translation,
-                      revelation: revelation.name,
-                      totalAyat: totalAyat,
-                    );
-                  }
-                  index -= 1;
-                  return _ayatSurah.length != index
-                      ? _buildItem(index)
-                      : _buildFooter();
-                },
-              ),
-            )
-          : const AppLoading(),
+    return BlocProvider(
+      create: (context) => MurattalCubit(),
+      child: BasePage.noPadding(
+        appBar: CustomAppBar(title: title),
+        child: _ayatSurah.isNotEmpty
+            ? Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: ScrollablePositionedList.builder(
+                  itemScrollController: controller,
+                  shrinkWrap: true,
+                  itemPositionsListener: ItemPositionsListener.create(),
+                  itemCount: _ayatSurah.length + 2,
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return SurahInfo(
+                        numberSurah: numberSurah,
+                        title: title,
+                        translation: translation,
+                        revelation: revelation.name,
+                        totalAyat: totalAyat,
+                      );
+                    }
+                    index -= 1;
+                    return _ayatSurah.length != index
+                        ? _buildItem(index)
+                        : _buildFooter();
+                  },
+                ),
+              )
+            : const AppLoading(),
+      ),
     );
   }
 

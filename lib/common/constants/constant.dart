@@ -223,11 +223,13 @@ TextStyle smallText = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 12,
 );
+
 TextStyle mediumText = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 16,
   color: backgroundColor,
 );
+
 TextStyle largeText = TextStyle(
   color: backgroundColor,
   fontFamily: 'Poppins',

@@ -13,5 +13,19 @@
     "minute": "menit",
     "to": "menuju",
     "internetNeeded": "Internet Dibutuhkan",
-    "internetNeededDesc": "Untuk memutar audio quran membutuhkan koneksi internet, mohon periksa kembali koneksi internet kamu."
+    "internetNeededDesc": "Untuk memutar audio quran membutuhkan koneksi internet, mohon periksa kembali koneksi internet kamu.",
+    "tafsirSource": "Sumber = Kementrian Agama Republik Indonesia",
+    "tafsirBottomSheetTitle": "Tafsir surah {surahName} ayat {ayah}",
+    "@tafsirBottomSheetTitle": {
+        "placeholders": {
+            "surahName": {
+                "type": "String",
+                "example": "Al-Fatiha"
+            },
+            "ayah": {
+                "type": "String",
+                "example": "1"
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/modules/surah/surah_page.dart';
+import 'package:quran_app/modules/surah_list/models/quran.dart';
 
 enum ButtonActionType { back, next }
 
@@ -8,12 +9,12 @@ class ActionButton extends StatelessWidget {
   const ActionButton({
     super.key,
     required int indexSurah,
-    required this.widget,
+    required this.dataQuran,
     required this.type,
   }) : _indexSurah = indexSurah;
 
   final int _indexSurah;
-  final SurahPage widget;
+  final List<Quran> dataQuran;
   final ButtonActionType type;
 
   @override
@@ -33,7 +34,7 @@ class ActionButton extends StatelessWidget {
                       noSurah: type == ButtonActionType.back
                           ? (_indexSurah - 1)
                           : (_indexSurah == 114 ? 1 : _indexSurah + 1),
-                      dataQuran: widget.dataQuran,
+                      dataQuran: dataQuran,
                     ),
                   ),
                 );

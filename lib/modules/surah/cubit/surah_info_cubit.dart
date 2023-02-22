@@ -7,8 +7,9 @@ part 'surah_info_state.dart';
 class SurahInfoCubit extends Cubit<SurahInfoState> {
   SurahInfoCubit()
       : super(
-          const SurahInfoInitial(
-            ayatSurah: [],
+          SurahInfoInitial(
+            ayatSurah: const [],
+            tafsirSurah: Tafsir(),
             lastReadAyat: 0,
             numberSurah: 0,
             revelation: Type.MAKKIYAH,
@@ -22,6 +23,7 @@ class SurahInfoCubit extends Cubit<SurahInfoState> {
     emit(
       SurahInfoLoaded(
         ayatSurah: dataQuran[noSurah].verses ?? [],
+        tafsirSurah: dataQuran[noSurah].tafsir ?? Tafsir(),
         title: dataQuran[noSurah].name ?? '',
         numberSurah: dataQuran[noSurah].numberOfSurah ?? 0,
         translation: dataQuran[noSurah].nameTranslations!.id ?? '',

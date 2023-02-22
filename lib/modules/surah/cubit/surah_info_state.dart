@@ -10,6 +10,7 @@ abstract class SurahInfoState extends Equatable {
 class SurahInfoInitial extends SurahInfoState {
   const SurahInfoInitial({
     required this.ayatSurah,
+    required this.tafsirSurah,
     required this.title,
     required this.numberSurah,
     required this.translation,
@@ -18,6 +19,7 @@ class SurahInfoInitial extends SurahInfoState {
     required this.lastReadAyat,
   });
   final List<Verse> ayatSurah;
+  final Tafsir tafsirSurah;
   final String title;
   final int numberSurah;
   final String translation;
@@ -27,6 +29,7 @@ class SurahInfoInitial extends SurahInfoState {
   @override
   List<Object> get props => [
         ayatSurah,
+        tafsirSurah,
         title,
         numberSurah,
         translation,
@@ -39,6 +42,7 @@ class SurahInfoInitial extends SurahInfoState {
 class SurahInfoLoaded extends SurahInfoInitial {
   const SurahInfoLoaded({
     required super.ayatSurah,
+    required super.tafsirSurah,
     required super.title,
     required super.numberSurah,
     required super.translation,

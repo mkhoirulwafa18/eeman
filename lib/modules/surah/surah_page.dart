@@ -6,6 +6,7 @@ import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
 import 'package:quran_app/modules/surah/cubit/murattal_cubit.dart';
 import 'package:quran_app/modules/surah/cubit/surah_info_cubit.dart';
+import 'package:quran_app/modules/surah/utils/tafsir_bottomsheet.dart';
 import 'package:quran_app/modules/surah/widgets/action_button.dart';
 import 'package:quran_app/modules/surah/widgets/surah_info.dart';
 import 'package:quran_app/modules/surah_list/models/quran.dart';
@@ -60,7 +61,7 @@ class SurahPage extends StatelessWidget {
                           }
                           index -= 1;
                           return state.ayatSurah.length != index
-                              ? _buildItem(index, state)
+                              ? _buildItem(context, index, state)
                               : _buildFooter(state);
                         },
                       ),
@@ -102,7 +103,7 @@ class SurahPage extends StatelessWidget {
     );
   }
 
-  ListTile _buildItem(int index, SurahInfoLoaded state) {
+  ListTile _buildItem(BuildContext context, int index, SurahInfoLoaded state) {
     return ListTile(
       dense: true,
       contentPadding: const EdgeInsets.all(16),
@@ -147,12 +148,15 @@ class SurahPage extends StatelessWidget {
                   ),
                 ),
                 WidgetSpan(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Icon(
-                      Icons.info,
-                      size: 15,
-                      color: backgroundColor2.withOpacity(.5),
+                  child: GestureDetector(
+                    onTap: () => showTafsirBottomSheet(context, state, index),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Icon(
+                        Icons.info,
+                        size: 15,
+                        color: backgroundColor2.withOpacity(.5),
+                      ),
                     ),
                   ),
                 )

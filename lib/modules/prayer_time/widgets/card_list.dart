@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/stateful_wrapper.dart';
+import 'package:quran_app/modules/home/utils/transformer.dart';
 import 'package:quran_app/modules/prayer_time/cubit/datepicker_cubit.dart';
 import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
+import 'package:quran_app/modules/prayer_time/models/prayer_time.dart';
 import 'package:quran_app/modules/prayer_time/widgets/card.dart';
 
 class CardList extends StatelessWidget {
@@ -31,12 +32,14 @@ class CardList extends StatelessWidget {
                   );
             }
             final listTimings = state.data.data;
-            final todayTimings = listTimings?[selectedDate.day - 1].timings;
+            final todayTimings = fromTimingToList(
+              listTimings?[selectedDate.day - 1].timings ?? Timings(),
+            );
             return ListView.builder(
-              itemCount: shalats.length,
+              itemCount: todayTimings.length,
               itemBuilder: (context, index) => CardItem(
-                time: todayTimings!,
-                title: shalats[index],
+                time: todayTimings[index]['value'].toString(),
+                title: todayTimings[index]['name'].toString(),
                 selectedDate: selectedDate,
               ),
             );

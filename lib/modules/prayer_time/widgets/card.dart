@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
-import 'package:quran_app/modules/prayer_time/models/prayer_time.dart';
 
 class CardItem extends StatelessWidget {
   const CardItem({
@@ -10,33 +9,13 @@ class CardItem extends StatelessWidget {
     required this.selectedDate,
   });
 
-  final Timings time;
+  final String time;
   final String title;
   final DateTime selectedDate;
 
   @override
   Widget build(BuildContext context) {
-    final hour = title == shalats[0]
-        ? time.fajr!.split(' ')[0]
-        : title == shalats[1]
-            ? time.sunrise!.split(' ')[0]
-            : title == shalats[2]
-                ? time.dhuhr!.split(' ')[0]
-                : title == shalats[3]
-                    ? time.asr!.split(' ')[0]
-                    : title == shalats[4]
-                        ? time.sunset!.split(' ')[0]
-                        : title == shalats[5]
-                            ? time.maghrib!.split(' ')[0]
-                            : title == shalats[6]
-                                ? time.isha!.split(' ')[0]
-                                : title == shalats[7]
-                                    ? time.imsak!.split(' ')[0]
-                                    : title == shalats[8]
-                                        ? time.midnight!.split(' ')[0]
-                                        : title == shalats[9]
-                                            ? time.firstthird!.split(' ')[0]
-                                            : time.lastthird!.split(' ')[0];
+    final hour = time.split(' ')[0];
     final isPassed = DateTime.now().compareTo(
       DateTime(
         selectedDate.year,
@@ -47,12 +26,7 @@ class CardItem extends StatelessWidget {
       ),
     );
     return Visibility(
-      visible: title == shalats[0] ||
-          title == shalats[1] ||
-          title == shalats[2] ||
-          title == shalats[3] ||
-          title == shalats[5] ||
-          title == shalats[6],
+      visible: title != shalats[4],
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Container(

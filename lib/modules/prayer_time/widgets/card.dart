@@ -58,7 +58,6 @@ class CardItem extends StatelessWidget {
                     Text(
                       title,
                       style: mediumText.copyWith(
-                        // fontSize: setFontSize(32),
                         color: isPassed == -1
                             ? backgroundColor
                             : backgroundColor.withOpacity(0.7),

@@ -47,9 +47,9 @@ class App extends StatelessWidget {
         routes: {
           '/': (context) => const HomePage(),
           '/surah-list': (context) => const SurahListPage(),
-          '/surah': (context) => const SurahPage(
+          '/surah': (context) => SurahPage(
                 noSurah: 0,
-                dataQuran: [],
+                dataQuran: const [],
               ),
           '/prayer-time': (context) => const PrayerTimePage(),
           '/tasbih': (context) => const TasbihPage(),

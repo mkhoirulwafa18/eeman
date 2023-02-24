@@ -81,7 +81,7 @@ class _SurahListPageState extends State<SurahListPage>
   MaterialBanner _showMaterialBanner(BuildContext context) {
     return MaterialBanner(
       content: Text(
-        'Maaf, kamu belum menentukan terakhir baca kamu,\nMari mulai dari surah pertama, Al-Fatiha',
+        context.l10n.lastReadError,
         style: smallText,
       ),
       backgroundColor: Colors.blueAccent,
@@ -95,7 +95,7 @@ class _SurahListPageState extends State<SurahListPage>
             goToSurah(noSurah: 0, startScroll: false);
           },
           child: Text(
-            'Al-Fatiha',
+            context.l10n.alFatiha,
             style: smallText.copyWith(color: backgroundColor2),
           ),
         ),
@@ -107,7 +107,7 @@ class _SurahListPageState extends State<SurahListPage>
             ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
           },
           child: Text(
-            'Tutup',
+            context.l10n.close,
             style: smallText.copyWith(color: backgroundColor2),
           ),
         ),
@@ -125,7 +125,6 @@ class _SurahListPageState extends State<SurahListPage>
     } else {
       goToSurah(noSurah: numberSurah - 1, startScroll: true);
     }
-    debugPrint('Index Surah last read => $numberSurah.');
   }
 
   @override
@@ -151,7 +150,7 @@ class _SurahListPageState extends State<SurahListPage>
             width: 30,
           ),
           label: Text(
-            'Terakhir Baca',
+            l10n.lastRead,
             style: smallText,
           ),
         ),

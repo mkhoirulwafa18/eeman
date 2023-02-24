@@ -1,11 +1,16 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/services/preferences.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/widgets/input_box.dart';
+import 'package:quran_app/modules/surah/surah_page.dart';
 import 'package:quran_app/modules/surah_list/models/quran.dart';
 import 'package:quran_app/modules/surah_list/widgets/surah_list_data.dart';
 
@@ -60,6 +65,69 @@ class _SurahListPageState extends State<SurahListPage>
     readJson();
   }
 
+  void goToSurah({int? noSurah, bool? startScroll}) {
+    Navigator.push<MaterialPageRoute<dynamic>>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SurahPage(
+          noSurah: noSurah!,
+          dataQuran: _dataQuran,
+          startScroll: startScroll,
+        ),
+      ),
+    );
+  }
+
+  MaterialBanner _showMaterialBanner(BuildContext context) {
+    return MaterialBanner(
+      content: Text(
+        'Maaf, kamu belum menentukan terakhir baca kamu,\nMari mulai dari surah pertama, Al-Fatiha',
+        style: smallText,
+      ),
+      backgroundColor: Colors.blueAccent,
+      actions: [
+        OutlinedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+          ),
+          onPressed: () {
+            ScaffoldMessenger.of(context).removeCurrentMaterialBanner();
+            goToSurah(noSurah: 0, startScroll: false);
+          },
+          child: Text(
+            'Al-Fatiha',
+            style: smallText.copyWith(color: backgroundColor2),
+          ),
+        ),
+        OutlinedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+          ),
+          onPressed: () {
+            ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+          },
+          child: Text(
+            'Tutup',
+            style: smallText.copyWith(color: backgroundColor2),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future<void> navigateToLastRead() async {
+    final preferences = await Preferences.getInstance();
+    final numberSurah = preferences.getLastSurahRead();
+    if (numberSurah == 0) {
+      ScaffoldMessenger.of(context)
+        ..removeCurrentMaterialBanner()
+        ..showMaterialBanner(_showMaterialBanner(context));
+    } else {
+      goToSurah(noSurah: numberSurah - 1, startScroll: true);
+    }
+    debugPrint('Index Surah last read => $numberSurah.');
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -73,6 +141,18 @@ class _SurahListPageState extends State<SurahListPage>
           content: InputBox(
             labelText: l10n.findSurah,
             onChanged: _onSearch,
+          ),
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: backgroundColor2,
+          onPressed: navigateToLastRead,
+          icon: SvgPicture.asset(
+            '$iconAsset/last_read.svg',
+            width: 30,
+          ),
+          label: Text(
+            'Terakhir Baca',
+            style: smallText,
           ),
         ),
         child: Column(

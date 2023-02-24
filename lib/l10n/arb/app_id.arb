@@ -27,5 +27,9 @@
                 "example": "1"
             }
         }
-    }
+    },
+    "lastRead": "Terakhir Baca",
+    "alFatiha": "Al-Fatiha",
+    "close": "Tutup",
+    "lastReadError": "Maaf, kamu belum menentukan terakhir baca kamu,\nMari mulai dari surah pertama, Al-Fatiha"
 }

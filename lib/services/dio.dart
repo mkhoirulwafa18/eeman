@@ -110,8 +110,8 @@ class DioHelper {
   Future<Position> getCurrentLocation() async {
     final isServiceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!isServiceEnabled) {
-      await Future.error('Aktifkan Layanan Lokasi Anda.');
       await Geolocator.openLocationSettings();
+      await Future.error('Aktifkan Layanan Lokasi Anda.');
     }
 
     var permission = await Geolocator.checkPermission();

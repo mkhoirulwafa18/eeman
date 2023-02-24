@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/services/preferences.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
@@ -18,11 +19,11 @@ class SurahPage extends StatelessWidget {
     super.key,
     required this.noSurah,
     required this.dataQuran,
-    this.startAyat = 0,
+    this.startScroll = false,
   });
   final int noSurah;
   final List<Quran> dataQuran;
-  final int? startAyat;
+  final bool? startScroll;
   final controller = ItemScrollController();
 
   @override
@@ -33,7 +34,13 @@ class SurahPage extends StatelessWidget {
           create: (context) => MurattalCubit(),
         ),
         BlocProvider(
-          create: (context) => SurahInfoCubit()..init(noSurah, dataQuran),
+          create: (context) => SurahInfoCubit()
+            ..init(
+              noSurah: noSurah,
+              dataQuran: dataQuran,
+              startScroll: startScroll ?? false,
+              controller: controller,
+            ),
         ),
       ],
       child: BlocBuilder<SurahInfoCubit, SurahInfoState>(
@@ -103,68 +110,103 @@ class SurahPage extends StatelessWidget {
     );
   }
 
-  ListTile _buildItem(BuildContext context, int index, SurahInfoLoaded state) {
-    return ListTile(
-      dense: true,
-      contentPadding: const EdgeInsets.all(16),
-      tileColor: index.isEven ? backgroundColor : backgroundColorAlter,
-      title: RichText(
-        textAlign: TextAlign.justify,
-        textDirection: TextDirection.rtl,
-        text: TextSpan(
-          children: [
-            TextSpan(
-              text: (index == 0 && state.numberSurah != 1
-                      ? state.ayatSurah[index].text!.substring(39)
-                      : state.ayatSurah[index].text) ??
-                  '',
-              style: arabicText,
-            ),
-            WidgetSpan(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: RubElHizb(
-                  number: (index + 1).toString(),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-      isThreeLine: true,
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 16,
-          ),
-          RichText(
+  Widget _buildItem(BuildContext context, int index, SurahInfoLoaded state) {
+    Future<void> setLastRead() async {
+      final preferences = await Preferences.getInstance();
+
+      await preferences.setLastSurahRead(state.numberSurah);
+      await preferences.setLastAyahRead(index + 1);
+      // ignore: use_build_context_synchronously
+      context
+          .read<SurahInfoCubit>()
+          .setLastRead(state, state.numberSurah, index + 1);
+    }
+
+    return Stack(
+      children: [
+        ListTile(
+          onLongPress: setLastRead,
+          dense: true,
+          contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
+          tileColor: index.isEven ? backgroundColor : backgroundColorAlter,
+          title: RichText(
+            textAlign: TextAlign.justify,
+            textDirection: TextDirection.rtl,
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: state.ayatSurah[index].translationId ?? '',
-                  style: smallText.copyWith(
-                    color: backgroundColor2,
-                  ),
+                  text: (index == 0 && state.numberSurah != 1
+                          ? state.ayatSurah[index].text!.substring(39)
+                          : state.ayatSurah[index].text) ??
+                      '',
+                  style: arabicText,
                 ),
                 WidgetSpan(
-                  child: GestureDetector(
-                    onTap: () => showTafsirBottomSheet(context, state, index),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5),
-                      child: Icon(
-                        Icons.info,
-                        size: 15,
-                        color: backgroundColor2.withOpacity(.5),
-                      ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: RubElHizb(
+                      number: (index + 1).toString(),
                     ),
                   ),
                 )
               ],
             ),
           ),
+          isThreeLine: true,
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 16,
+              ),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: state.ayatSurah[index].translationId ?? '',
+                      style: smallText.copyWith(
+                        color: backgroundColor2,
+                      ),
+                    ),
+                    WidgetSpan(
+                      child: GestureDetector(
+                        onTap: () =>
+                            showTafsirBottomSheet(context, state, index),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Icon(
+                            Icons.info,
+                            size: 15,
+                            color: backgroundColor2.withOpacity(.5),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (state.indexLastSurah == state.numberSurah &&
+            state.indexLastAyah - 1 == index) ...[
+          GestureDetector(
+            onTap: setLastRead,
+            child: Icon(
+              Icons.book_rounded,
+              color: backgroundColor2,
+            ),
+          )
+        ] else ...[
+          GestureDetector(
+            onTap: setLastRead,
+            child: Icon(
+              Icons.book_outlined,
+              color: backgroundColor2.withOpacity(.3),
+            ),
+          )
         ],
-      ),
+      ],
     );
   }
 }

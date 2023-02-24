@@ -49,7 +49,7 @@ class _SurahInfoState extends State<SurahInfo> with WidgetsBindingObserver {
       child: BlocBuilder<MurattalCubit, MurattalState>(
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
             child: Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(

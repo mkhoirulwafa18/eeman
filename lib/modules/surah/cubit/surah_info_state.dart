@@ -16,7 +16,8 @@ class SurahInfoInitial extends SurahInfoState {
     required this.translation,
     required this.revelation,
     required this.totalAyat,
-    required this.lastReadAyat,
+    required this.indexLastSurah,
+    required this.indexLastAyah,
   });
   final List<Verse> ayatSurah;
   final Tafsir tafsirSurah;
@@ -25,7 +26,8 @@ class SurahInfoInitial extends SurahInfoState {
   final String translation;
   final Type revelation;
   final int totalAyat;
-  final int lastReadAyat;
+  final int indexLastSurah;
+  final int indexLastAyah;
   @override
   List<Object> get props => [
         ayatSurah,
@@ -35,7 +37,8 @@ class SurahInfoInitial extends SurahInfoState {
         translation,
         revelation,
         totalAyat,
-        lastReadAyat
+        indexLastSurah,
+        indexLastAyah
       ];
 }
 
@@ -48,6 +51,20 @@ class SurahInfoLoaded extends SurahInfoInitial {
     required super.translation,
     required super.revelation,
     required super.totalAyat,
-    required super.lastReadAyat,
+    required super.indexLastSurah,
+    required super.indexLastAyah,
   });
+
+  @override
+  List<Object> get props => [
+        ayatSurah,
+        tafsirSurah,
+        title,
+        numberSurah,
+        translation,
+        revelation,
+        totalAyat,
+        indexLastSurah,
+        indexLastAyah
+      ];
 }

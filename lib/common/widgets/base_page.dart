@@ -6,6 +6,7 @@ class BasePage extends StatelessWidget {
     super.key,
     this.appBar,
     this.bgColor,
+    this.floatingActionButton,
     required this.child,
   }) : padding = const EdgeInsets.all(16);
 
@@ -13,6 +14,7 @@ class BasePage extends StatelessWidget {
     super.key,
     this.appBar,
     this.bgColor,
+    this.floatingActionButton,
     required this.child,
   }) : padding = EdgeInsets.zero;
 
@@ -20,6 +22,7 @@ class BasePage extends StatelessWidget {
   final Color? bgColor;
   final Widget child;
   final EdgeInsetsGeometry padding;
+  final Widget? floatingActionButton;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +34,7 @@ class BasePage extends StatelessWidget {
           padding: padding,
           child: child,
         ),
+        floatingActionButton: floatingActionButton,
       ),
     );
   }

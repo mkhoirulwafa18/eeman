@@ -12,9 +12,8 @@ class PrayertimeCubit extends Cubit<PrayertimeState> {
   Future<void> getTimings(String month, String year) async {
     emit(PrayertimeLoading());
     final response = await dioHelper.getTimings(month, year);
-    final city = await dioHelper.getCityName();
-    response.code == 200
-        ? emit(PrayertimeLoaded(data: response, city: city))
-        : emit(PrayertimeError(error: response.toString()));
+    response.error!.isEmpty
+        ? emit(PrayertimeLoaded(data: response.data!, city: response.city!))
+        : emit(PrayertimeError(error: response.error.toString()));
   }
 }

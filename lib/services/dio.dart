@@ -14,6 +14,7 @@ import 'package:quran_app/common/constants/constant.dart';
 
 import 'package:quran_app/modules/prayer_time/models/prayer_time.dart';
 import 'package:quran_app/services/app_path_provider.dart';
+import 'package:quran_app/services/get_timings_model.dart';
 
 class DioHelper {
   DioHelper() {
@@ -56,55 +57,57 @@ class DioHelper {
   double lat = 0;
   double long = 0;
 
-  Future<PrayerTime> getTimings(String month, String year) async {
+  Future<GetTimingsResponse> getTimings(String month, String year) async {
     try {
       await getCurrentLocation().then((value) async {
         lat = value.latitude;
         long = value.longitude;
-        // ignore: invalid_return_type_for_catch_error, avoid_print, inference_failure_on_untyped_parameter
-      }).catchError((e) => print(e.toString()));
+        // ignore: invalid_return_type_for_catch_error, inference_failure_on_untyped_parameter
+      }).catchError((e) => debugPrint(e.toString()));
 
-      final city = await getCityName();
-      final country = await getCountryName();
-      // ignore: inference_failure_on_function_invocation
-      final response = await _dio.get(
-        '?city=$city&country=$country&method=11&month=$month&year=$year',
-      );
-      final result = PrayerTime.fromJson(response.data as Map<String, dynamic>);
-      return result;
+      final cityCountry = await getCityAndCountry();
+
+      if (cityCountry.length == 2) {
+        // ignore: inference_failure_on_function_invocation
+        final response = await _dio.get(
+          // ignore: lines_longer_than_80_chars
+          '?city=${cityCountry[0]}&country=${cityCountry[1]}&method=11&month=$month&year=$year',
+        );
+        final result =
+            PrayerTime.fromJson(response.data as Map<String, dynamic>);
+        return GetTimingsResponse(data: result, city: cityCountry[0]);
+      } else {
+        return GetTimingsResponse(error: cityCountry[0]);
+      }
     } on DioError catch (e) {
-      throw Exception(e.toString());
+      return GetTimingsResponse(error: e.message);
     }
   }
 
-  Future<String> getCityName() async {
+  Future<List<String>> getCityAndCountry() async {
     try {
-      if (lat != 0 && long != 0) {
-        final placemarks = await placemarkFromCoordinates(
-          lat,
-          long,
-        );
-        return placemarks[0].subAdministrativeArea.toString();
+      final internet = await checkInternetConnection();
+      if (!internet) {
+        return ['No Internet Connection'];
+      } else {
+        if (lat != 0 && long != 0) {
+          final placemarks = await placemarkFromCoordinates(
+            lat,
+            long,
+          );
+          return [
+            placemarks[0].subAdministrativeArea.toString(),
+            placemarks[0].country.toString()
+          ];
+        }
+        return [];
       }
-      return 'Lokasi tidak ditemukan';
     } catch (e) {
       if (e is PlatformException) {
-        // error.message.contains('Network error')
         debugPrint(e.toString());
       }
-      return 'Lokasi tidak ditemukan';
+      return [];
     }
-  }
-
-  Future<String> getCountryName() async {
-    if (lat != 0 && long != 0) {
-      final placemarks = await placemarkFromCoordinates(
-        lat,
-        long,
-      );
-      return placemarks[0].country.toString();
-    }
-    return 'Lokasi tidak ditemukan';
   }
 
   Future<Position> getCurrentLocation() async {

@@ -97,7 +97,10 @@ class _HeaderCardState extends State<HeaderCard> {
               BlocBuilder<PrayertimeCubit, PrayertimeState>(
                 builder: (context, state) {
                   if (state is PrayertimeLoading) {
-                    return const AppLoading();
+                    return const Padding(
+                      padding: EdgeInsets.all(8),
+                      child: AppLoading(),
+                    );
                   }
                   if (state is PrayertimeLoaded) {
                     return Padding(

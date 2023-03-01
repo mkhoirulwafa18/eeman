@@ -9,12 +9,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showBack = true,
     this.height,
     this.content,
+    this.actions,
   });
 
   final String title;
   final bool showBack;
   final double? height;
   final Widget? content;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: const Icon(Icons.arrow_back_rounded),
                 )
               : null,
+          actions: actions,
           bottom: content != null
               ? PreferredSize(
                   preferredSize: Size.fromHeight(height ?? kToolbarHeight),

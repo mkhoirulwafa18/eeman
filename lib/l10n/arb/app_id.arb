@@ -31,5 +31,20 @@
     "lastRead": "Terakhir Baca",
     "alFatiha": "Al-Fatiha",
     "close": "Tutup",
-    "lastReadError": "Maaf, kamu belum menentukan terakhir baca kamu,\nMari mulai dari surah pertama, Al-Fatiha"
+    "refresh": "Muat Ulang",
+    "lastReadError": "Maaf, kamu belum menentukan terakhir baca kamu,\nMari mulai dari surah pertama, Al-Fatiha",
+    "find": "Cari",
+    "findAyah": "Cari Ayat",
+    "whatAyah": "Ayat ke berapa?",
+    "setLastReadInfo": "Berhasil menandai ayat {i} sebagai terakhir dibaca.",
+    "@setLastReadInfo": {
+        "placeholders": {
+            "i": {
+                "type": "String",
+                "example": "1"
+            }
+        }
+    },
+    "noInternetConnection": "Koneksi Internet Terputus",
+    "featureNeedInternet": "Fitur ini membutuhkan akses internet\nperiksa koneksi internet kamu."
 }

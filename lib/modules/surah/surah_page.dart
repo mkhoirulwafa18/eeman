@@ -5,8 +5,10 @@ import 'package:quran_app/common/services/preferences.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
+import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/surah/cubit/murattal_cubit.dart';
 import 'package:quran_app/modules/surah/cubit/surah_info_cubit.dart';
+import 'package:quran_app/modules/surah/utils/dialog_search_ayah.dart';
 import 'package:quran_app/modules/surah/utils/tafsir_bottomsheet.dart';
 import 'package:quran_app/modules/surah/widgets/action_button.dart';
 import 'package:quran_app/modules/surah/widgets/surah_info.dart';
@@ -25,6 +27,7 @@ class SurahPage extends StatelessWidget {
   final List<Quran> dataQuran;
   final bool? startScroll;
   final controller = ItemScrollController();
+  final searchAyahController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,23 @@ class SurahPage extends StatelessWidget {
         builder: (context, state) {
           if (state is SurahInfoLoaded) {
             return BasePage.noPadding(
-              appBar: CustomAppBar(title: state.title),
+              appBar: CustomAppBar(
+                title: state.title,
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      // ignore: inference_failure_on_function_invocation
+                      showSearchAyahDialog(
+                        context,
+                        searchAyahController,
+                        controller,
+                        state.totalAyat,
+                      );
+                    },
+                    icon: const Icon(Icons.search),
+                  )
+                ],
+              ),
               child: state.ayatSurah.isNotEmpty
                   ? Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),
@@ -116,10 +135,17 @@ class SurahPage extends StatelessWidget {
 
       await preferences.setLastSurahRead(state.numberSurah);
       await preferences.setLastAyahRead(index + 1);
-      // ignore: use_build_context_synchronously
+      // ignore_for_file: use_build_context_synchronously
       context
           .read<SurahInfoCubit>()
           .setLastRead(state, state.numberSurah, index + 1);
+      ScaffoldMessenger.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(context.l10n.setLastReadInfo((index + 1).toString())),
+          ),
+        );
     }
 
     return Stack(

@@ -10,6 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.height,
     this.content,
     this.actions,
+    this.onBackTapped,
   });
 
   final String title;
@@ -17,6 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double? height;
   final Widget? content;
   final List<Widget>? actions;
+  final void Function()? onBackTapped;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           backgroundColor: backgroundColor2,
           leading: showBack
               ? GestureDetector(
-                  onTap: () => Navigator.pop(context),
+                  onTap: onBackTapped ?? () => Navigator.pop(context),
                   child: const Icon(Icons.arrow_back_rounded),
                 )
               : null,

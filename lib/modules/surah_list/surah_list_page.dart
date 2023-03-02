@@ -84,7 +84,7 @@ class _SurahListPageState extends State<SurahListPage>
         context.l10n.lastReadError,
         style: smallText,
       ),
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: backgroundColor2,
       actions: [
         OutlinedButton(
           style: ButtonStyle(
@@ -135,6 +135,10 @@ class _SurahListPageState extends State<SurahListPage>
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: BasePage(
         appBar: CustomAppBar(
+          onBackTapped: () {
+            ScaffoldMessenger.of(context).removeCurrentMaterialBanner();
+            Navigator.of(context).pop();
+          },
           height: MediaQuery.of(context).size.height / 5.5,
           title: l10n.surahListPageAppBarTitle,
           content: InputBox(

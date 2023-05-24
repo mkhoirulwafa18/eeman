@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/home_page.dart';
+import 'package:quran_app/modules/prayer_time/cubit/alarmlist_cubit.dart';
 import 'package:quran_app/modules/prayer_time/cubit/datepicker_cubit.dart';
+import 'package:quran_app/modules/prayer_time/cubit/list_filter.dart';
 import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
 import 'package:quran_app/modules/prayer_time/prayer_time_page.dart';
 import 'package:quran_app/modules/surah/surah_page.dart';
@@ -21,6 +23,12 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider<DatepickerCubit>(
           create: (context) => DatepickerCubit(),
+        ),
+        BlocProvider<AlarmListCubit>(
+          create: (context) => AlarmListCubit()..init(),
+        ),
+        BlocProvider<ListFilterPrayerTimeCubit>(
+          create: (context) => ListFilterPrayerTimeCubit()..init(),
         ),
         BlocProvider<PrayertimeCubit>(
           create: (context) => PrayertimeCubit(DioHelper()),

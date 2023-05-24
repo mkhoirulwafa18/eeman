@@ -50,24 +50,6 @@ class MurattalCubit extends Cubit<MurattalState> {
         onErrorAudioPlaying(context, e);
       },
     );
-    player.playerStateStream.listen((state) {
-      if (state.playing) {
-        emit(MurattalPaused());
-      } else {
-        emit(MurattalPlaying());
-      }
-      switch (state.processingState) {
-        case ProcessingState.completed:
-        case ProcessingState.idle:
-        case ProcessingState.loading:
-        case ProcessingState.ready:
-          emit(MurattalPaused());
-          break;
-        case ProcessingState.buffering:
-          emit(MurattalPlaying());
-          break;
-      }
-    });
   }
 
   Future<void> onErrorAudioPlaying(BuildContext context, Object e) async {
@@ -89,20 +71,46 @@ class MurattalCubit extends Cubit<MurattalState> {
     }
   }
 
-  Future<void> togglePlay(BuildContext context) async {
+  Future<void> play(BuildContext context) async {
     try {
       final internet = await checkInternetConnection();
-      if (internet) {
+      if (internet && !player.playing) {
         await player.setAudioSource(
           playlist,
           initialIndex: 0,
           initialPosition: Duration.zero,
         );
       } else {
-        throw PlayerException(0, 'Source error');
+        if (!internet) throw PlayerException(0, 'Source error');
       }
 
-      player.playing ? await player.pause() : await player.play();
+      emit(MurattalPlaying());
+      debugPrint('PLaayyWEEssdddd');
+
+      debugPrint(state.toString());
+      await player.play();
+    } on PlayerException catch (e) {
+      if (e.message.toString() == 'Source error') {
+        // ignore: use_build_context_synchronously
+        showMyDialog(
+          context,
+          context.l10n.internetNeeded,
+          context.l10n.internetNeededDesc,
+        );
+      }
+    }
+  }
+
+  Future<void> pause(BuildContext context) async {
+    try {
+      if (player.playing) {
+        emit(MurattalPaused());
+        debugPrint('PAUuuusseEdddD');
+        debugPrint(state.toString());
+        await player.pause();
+      } else {
+        throw PlayerException(0, 'Source error');
+      }
     } on PlayerException catch (e) {
       if (e.message.toString() == 'Source error') {
         // ignore: use_build_context_synchronously

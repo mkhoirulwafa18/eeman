@@ -46,100 +46,103 @@ class _SurahInfoState extends State<SurahInfo> with WidgetsBindingObserver {
         Navigator.pop(context);
         return Future.value(false);
       },
-      child: BlocBuilder<MurattalCubit, MurattalState>(
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: backgroundColor2,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
-                    blurRadius: 4,
-                    offset: const Offset(0, 4),
-                  )
-                ],
-              ),
-              child: Column(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: backgroundColor2,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.5),
+                blurRadius: 4,
+                offset: const Offset(0, 4),
+              )
+            ],
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const SizedBox(
-                        width: 40,
-                      ),
-                      RubElHizb(
-                        number: widget.numberSurah.toString(),
-                        color: backgroundColor,
-                      ),
-                      if (state is MurattalLoading) const AppLoading(),
-                      if (state is MurattalPlaying)
-                        GestureDetector(
+                  const SizedBox(
+                    width: 40,
+                  ),
+                  RubElHizb(
+                    number: widget.numberSurah.toString(),
+                    color: backgroundColor,
+                  ),
+                  BlocBuilder<MurattalCubit, MurattalState>(
+                    builder: (context, state) {
+                      if (state is MurattalPlaying) {
+                        return GestureDetector(
                           onTap: () {
-                            context.read<MurattalCubit>().togglePlay(context);
+                            context.read<MurattalCubit>().pause(context);
                           },
                           child: Icon(
-                            Icons.pause_circle,
+                            Icons.stop_circle,
                             color: backgroundColor,
                             size: 40,
                           ),
-                        ),
-                      if (state is MurattalLoaded || state is MurattalPaused)
-                        GestureDetector(
+                        );
+                      }
+                      if (state is MurattalLoaded || state is MurattalPaused) {
+                        return GestureDetector(
                           onTap: () {
-                            context.read<MurattalCubit>().togglePlay(context);
+                            context.read<MurattalCubit>().play(context);
                           },
                           child: Icon(
                             Icons.play_circle,
                             color: backgroundColor,
                             size: 40,
                           ),
-                        )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    widget.title,
-                    style: mediumText,
-                  ),
-                  Text(
-                    widget.translation,
-                    style: TextStyle(
-                      color: backgroundColor.withOpacity(0.5),
-                      fontFamily: 'Poppins',
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Text(
-                    '${widget.revelation} - ${widget.totalAyat} ayat',
-                    style: smallText,
-                  ),
-                  if (widget.numberSurah != 1) ...[
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    SvgPicture.asset(
-                      '$iconAsset/basmalah.svg',
-                      width: 0.4.sw,
-                      color: backgroundColor,
-                    )
-                  ] else
-                    const SizedBox(),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                        );
+                      } else {
+                        return const AppLoading();
+                      }
+                    },
+                  )
                 ],
               ),
-            ),
-          );
-        },
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                widget.title,
+                style: mediumText,
+              ),
+              Text(
+                widget.translation,
+                style: TextStyle(
+                  color: backgroundColor.withOpacity(0.5),
+                  fontFamily: 'Poppins',
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Text(
+                '${widget.revelation} - ${widget.totalAyat} ayat',
+                style: smallText,
+              ),
+              if (widget.numberSurah != 1) ...[
+                const SizedBox(
+                  height: 16,
+                ),
+                SvgPicture.asset(
+                  '$iconAsset/basmalah.svg',
+                  width: 0.4.sw,
+                  color: backgroundColor,
+                )
+              ] else
+                const SizedBox(),
+              const SizedBox(
+                height: 16,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

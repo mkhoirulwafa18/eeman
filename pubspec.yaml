@@ -17,8 +17,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
+  flutter_local_notifications: ^13.0.0
   flutter_localizations:
     sdk: flutter
+  flutter_native_splash: ^2.2.18
+  flutter_native_timezone: ^2.0.0
   flutter_screenutil: ^5.6.0
   flutter_svg: ^1.1.6
   geocoding: ^2.0.5
@@ -27,6 +30,7 @@ dependencies:
   hive_flutter: ^1.1.0
   intl: ^0.17.0
   just_audio: ^0.9.31
+  notification_permissions: ^0.6.1
   path_provider: ^2.0.12
   scrollable_positioned_list: ^0.3.5
   shared_preferences: ^2.0.15
@@ -34,6 +38,7 @@ dependencies:
 dev_dependencies:
   bloc_test: ^9.1.0
   build_runner: ^2.3.3
+  flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
   hive_generator: ^2.0.0
@@ -42,6 +47,22 @@ dev_dependencies:
 
 dependency_overrides:
   test_api: ^0.4.17
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/launcher_icon/launcher.png"
+  min_sdk_android: 20
+  adaptive_icon_background: "#234D60"
+  adaptive_icon_foreground: "assets/launcher_icon/icon_adaptive.png"
+
+flutter_native_splash:
+  color: "#244C64"
+  image: assets/launcher_icon/launcher.png
+
+  android_12:
+    image: assets/launcher_icon/launcher.png
+    icon_background_color: "#244C64"
 
 flutter:
   uses-material-design: true

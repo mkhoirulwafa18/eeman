@@ -5,6 +5,7 @@ class Preferences {
   static const _preferencesBox = '_preferencesBox';
   static const _lastSurahRead = '_lastSurahRead';
   static const _lastAyahRead = '_lastAyahRead';
+  static const _prayerTimeFilter = '_prayerTimeFilter';
   final Box<Object> _box;
 
   // This doesn't have to be a singleton.
@@ -28,4 +29,10 @@ class Preferences {
 
   Future<void> setLastAyahRead(int indexAyah) =>
       _setValue(_lastAyahRead, indexAyah);
+
+  List<String> getPrayerTimeFilter() =>
+      _getValue(_prayerTimeFilter, defaultValue: []);
+
+  Future<void> setPrayerTimeFilter(List<String> filters) =>
+      _setValue(_prayerTimeFilter, filters);
 }

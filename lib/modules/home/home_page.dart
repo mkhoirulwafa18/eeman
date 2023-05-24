@@ -55,6 +55,21 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
               backgroundColor: backgroundColor2,
               centerTitle: true,
               title: const AppTitle(),
+              actions: [
+                GestureDetector(
+                  onTap: () {
+                    showInfoDialog(
+                      context,
+                      'Eeman App',
+                      'Eeman - Aplikasi Islami dengan fitur doa sehari-hari, Quran offline, jadwal sholat, tasbih digital, dan alarm sholat.\n\nbuilt with <3 by Wafastarz.',
+                    );
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 24),
+                    child: Icon(Icons.info_outline_rounded),
+                  ),
+                )
+              ],
             ),
           ),
           Positioned(

@@ -10,6 +10,8 @@ String get randomSurah => 'noRandomSurah';
 String get randomAyat => 'noRandomAyat';
 String get lastHitAotd => 'lastHitAotd';
 List<String> get shalats => [
+      'Akhir Sepertiga Malam',
+      'Imsak',
       'Subuh',
       'Matahari Terbit',
       'Dzuhur',
@@ -17,10 +19,8 @@ List<String> get shalats => [
       'Matahari Terbenam',
       'Maghrib',
       'Isha',
-      'Imsak',
       'Tengah Malam',
       'Awal Sepertiga Malam',
-      'Akhir Sepertiga Malam',
     ];
 int get cacheDays => 31;
 
@@ -134,6 +134,61 @@ void showMyDialog(BuildContext context, String title, String content) {
           style: mediumText,
         ),
         actions: <Widget>[
+          TextButton(
+            child: Text(
+              'Tutup',
+              style: smallText,
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+/// ----------------
+/// Show Dialog
+/// ----------------
+void showInfoDialog(BuildContext context, String title, String content) {
+  // ignore: inference_failure_on_function_invocation
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: backgroundColor2,
+        title: Text(
+          title,
+          style: lightBoldTitle,
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              content,
+              style: smallText,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Text(
+              'Menemukan bug? atau mau request fitur lain? kirim saran dan feedback kalian ke email dengan cara klik button dibawah, Termimakasih.',
+              style: smallText,
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          ElevatedButton(
+            child: Text(
+              'Request Fitur / Laporkan Bug',
+              style: smallText,
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
           TextButton(
             child: Text(
               'Tutup',

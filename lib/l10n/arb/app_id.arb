@@ -46,5 +46,16 @@
         }
     },
     "noInternetConnection": "Koneksi Internet Terputus",
-    "featureNeedInternet": "Fitur ini membutuhkan akses internet\nperiksa koneksi internet kamu."
+    "featureNeedInternet": "Fitur ini membutuhkan akses internet\nperiksa koneksi internet kamu.",
+    "filterList": "Filter List",
+    "apply": "Terapkan",
+    "setLastReadInfo": "Berhasil menandai ayat {i} sebagai terakhir dibaca.",
+    "@setLastReadInfo": {
+        "placeholders": {
+            "i": {
+                "type": "String",
+                "example": "1"
+            }
+        }
+    }
 }

@@ -50,7 +50,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.mkhoirulwafa.quran_app"
+        applicationId "com.wafastarz.eeman"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion 32
         versionCode flutterVersionCode.toInteger()
@@ -81,17 +81,17 @@ android {
         production {
             dimension "default"
             applicationIdSuffix ""
-            manifestPlaceholders = [appName: "Quran App"]
+            manifestPlaceholders = [appName: "Eeman"]
         }
         staging {
             dimension "default"
             applicationIdSuffix ".stg"
-            manifestPlaceholders = [appName: "[STG] Quran App"]
+            manifestPlaceholders = [appName: "[STG] Eeman"]
         }
         development {
             dimension "default"
             applicationIdSuffix ".dev"
-            manifestPlaceholders = [appName: "[DEV] Quran App"]
+            manifestPlaceholders = [appName: "[DEV] Eeman"]
         }
     }
 

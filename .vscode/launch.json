@@ -28,8 +28,8 @@
       "name": "Launch production",
       "request": "launch",
       "type": "dart",
-      "program": "lib/main_production.dart",
-      "args": ["--flavor", "production", "--target", "lib/main_production.dart", "--no-sound-null-safety"]
+      "program": "lib/main.dart",
+      "args": ["--flavor", "production", "--target", "lib/main.dart", "--no-sound-null-safety"]
     }
   ]
 }

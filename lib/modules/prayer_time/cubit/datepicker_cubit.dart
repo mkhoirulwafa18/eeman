@@ -9,6 +9,10 @@ class DatepickerCubit extends Cubit<DateTime> {
     emit(selected);
   }
 
+  void resetToInitial() {
+    emit(DateTime.now());
+  }
+
   @override
   void onChange(Change<DateTime> change) {
     super.onChange(change);

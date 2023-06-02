@@ -1,7 +1,8 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
-import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/prayer_time/cubit/datepicker_cubit.dart';
 import 'package:quran_app/modules/prayer_time/cubit/list_filter.dart';
 import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
@@ -18,7 +19,8 @@ void showFilterPrayerTimeDialog(
           return AlertDialog(
             backgroundColor: backgroundColor2,
             title: Text(
-              context.l10n.filterList,
+              // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
+              'Filter List',
               style: lightBoldTitle,
             ),
             content: SingleChildScrollView(
@@ -29,10 +31,7 @@ void showFilterPrayerTimeDialog(
                   children: shalats
                       .map(
                         (e) => CheckboxListTile(
-                          title: Text(
-                            e,
-                            style: smallText,
-                          ),
+                          title: Text(e, style: smallText),
                           onChanged: (value) {
                             if (value != null) {
                               !value
@@ -54,7 +53,8 @@ void showFilterPrayerTimeDialog(
             actions: <Widget>[
               OutlinedButton(
                 child: Text(
-                  context.l10n.close,
+                  // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
+                  'Tutup',
                   style: smallText,
                 ),
                 onPressed: () {
@@ -63,7 +63,8 @@ void showFilterPrayerTimeDialog(
               ),
               OutlinedButton(
                 child: Text(
-                  context.l10n.apply,
+                  // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
+                  'Terapkan',
                   style: smallText,
                 ),
                 onPressed: () {

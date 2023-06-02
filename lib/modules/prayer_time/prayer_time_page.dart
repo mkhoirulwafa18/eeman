@@ -30,6 +30,7 @@ class PrayerTimePage extends StatelessWidget {
                 onPressed: () {
                   // ignore: inference_failure_on_function_invocation
                   showFilterPrayerTimeDialog(context);
+                  // debugPrint('udah di clickkkk');
                 },
                 icon: const Icon(Icons.filter_alt_outlined),
               )

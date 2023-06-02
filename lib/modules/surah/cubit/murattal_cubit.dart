@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -54,13 +56,13 @@ class MurattalCubit extends Cubit<MurattalState> {
 
   Future<void> onErrorAudioPlaying(BuildContext context, Object e) async {
     final internet = await checkInternetConnection();
+    final l10n = context.l10n;
     if (!internet && !errorAlreadyShowed) {
       errorAlreadyShowed = true;
-      // ignore: use_build_context_synchronously
       showMyDialog(
         context,
-        context.l10n.internetNeeded,
-        context.l10n.internetNeededDesc,
+        l10n.internetNeeded,
+        l10n.internetNeededDesc,
       );
     }
     if (e is PlayerException) {
@@ -91,7 +93,6 @@ class MurattalCubit extends Cubit<MurattalState> {
       await player.play();
     } on PlayerException catch (e) {
       if (e.message.toString() == 'Source error') {
-        // ignore: use_build_context_synchronously
         showMyDialog(
           context,
           context.l10n.internetNeeded,
@@ -113,7 +114,6 @@ class MurattalCubit extends Cubit<MurattalState> {
       }
     } on PlayerException catch (e) {
       if (e.message.toString() == 'Source error') {
-        // ignore: use_build_context_synchronously
         showMyDialog(
           context,
           context.l10n.internetNeeded,

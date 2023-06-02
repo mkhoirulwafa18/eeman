@@ -1,6 +1,7 @@
 {
     "@@locale": "id",
     "appName": "Eeman",
+    "appDesc": "Eeman - Aplikasi Islami dengan fitur doa sehari-hari, Quran offline, jadwal sholat, tasbih digital, dan alarm sholat.\n\nbuilt with <3 by Wafastarz.",
     "surahListPageAppBarTitle": "Kumpulan Surah",
     "doaSehariHari": "Do'a\nSehari-hari",
     "quranOffline": "Quran\n(Offline)",
@@ -57,5 +58,7 @@
                 "example": "1"
             }
         }
-    }
+    },
+    "feedbackAndReport": "Request Fitur / Laporkan Bug",
+    "feedbackInfo": "Menemukan bug? atau mau request fitur lain? kirim saran dan feedback kalian ke email dengan cara klik button dibawah, Termimakasih."
 }

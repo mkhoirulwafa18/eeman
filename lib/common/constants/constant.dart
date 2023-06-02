@@ -1,8 +1,12 @@
 import 'dart:io';
 
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:quran_app/l10n/l10n.dart';
 
 String get baseUrl => 'http://api.aladhan.com/v1/calendarByCity';
 String get baseAudioUrl => 'https://everyayah.com/data/Alafasy_128kbps';
@@ -153,6 +157,7 @@ void showMyDialog(BuildContext context, String title, String content) {
 /// Show Dialog
 /// ----------------
 void showInfoDialog(BuildContext context, String title, String content) {
+  final l10n = context.l10n;
   // ignore: inference_failure_on_function_invocation
   showDialog(
     context: context,
@@ -174,7 +179,7 @@ void showInfoDialog(BuildContext context, String title, String content) {
               height: 16,
             ),
             Text(
-              'Menemukan bug? atau mau request fitur lain? kirim saran dan feedback kalian ke email dengan cara klik button dibawah, Termimakasih.',
+              l10n.feedbackInfo,
               style: smallText,
             ),
           ],
@@ -182,16 +187,34 @@ void showInfoDialog(BuildContext context, String title, String content) {
         actions: <Widget>[
           ElevatedButton(
             child: Text(
-              'Request Fitur / Laporkan Bug',
+              l10n.feedbackAndReport,
               style: smallText,
             ),
             onPressed: () {
-              Navigator.of(context).pop();
+              // Navigator.push<MaterialPageRoute<dynamic>>(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => const ReportFeedbackPage(),
+              //       ),
+              //     );
+              Navigator.pop(context);
+              BetterFeedback.of(context).show((feedback) async {
+                // draft an email and send to developer
+                final screenshotFilePath =
+                    await writeImageToStorage(feedback.screenshot);
+                final email = Email(
+                  body: feedback.text,
+                  subject: 'Eeman App Feedback',
+                  recipients: ['wafastarzteam@gmail.com'],
+                  attachmentPaths: [screenshotFilePath],
+                );
+                await FlutterEmailSender.send(email);
+              });
             },
           ),
           TextButton(
             child: Text(
-              'Tutup',
+              l10n.close,
               style: smallText,
             ),
             onPressed: () {
@@ -202,6 +225,18 @@ void showInfoDialog(BuildContext context, String title, String content) {
       );
     },
   );
+}
+
+/// ----------------------------------
+/// Write image to Storage for Info Dialog Feedback
+/// ----------------------------------
+/// to save screenshot to storage and then send to email app
+Future<String> writeImageToStorage(Uint8List feedbackScreenshot) async {
+  final output = await getTemporaryDirectory();
+  final screenshotFilePath = '${output.path}/feedback.png';
+  final screenshotFile = File(screenshotFilePath);
+  await screenshotFile.writeAsBytes(feedbackScreenshot);
+  return screenshotFilePath;
 }
 
 /// -----------------------------------

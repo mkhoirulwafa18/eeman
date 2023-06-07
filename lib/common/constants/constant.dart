@@ -155,6 +155,7 @@ void showMyDialog(BuildContext context, String title, String content) {
 
 /// ----------------
 /// Show Dialog
+/// in HomePage which showing appInfo and request feature or send feedback func
 /// ----------------
 void showInfoDialog(BuildContext context, String title, String content) {
   final l10n = context.l10n;

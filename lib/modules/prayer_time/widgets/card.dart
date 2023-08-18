@@ -1,8 +1,6 @@
-// ignore_for_file: unrelated_type_equality_checks, use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:notification_permissions/notification_permissions.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/services/notifications.dart';
@@ -15,11 +13,13 @@ class CardItem extends StatelessWidget {
     required this.time,
     required this.title,
     required this.selectedDate,
+    required this.active,
   });
 
   final String time;
   final String title;
   final DateTime selectedDate;
+  final bool active;
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +77,9 @@ class CardItem extends StatelessWidget {
                       ? backgroundColor2
                       : backgroundColor2.withOpacity(0.7),
                   boxShadow: isPassed == -1 ? [primaryShadow] : [],
+                  border: isPassed == -1 && active
+                      ? Border.all(color: Colors.red, width: 2)
+                      : null,
                 ),
                 child: Column(
                   children: [
@@ -115,7 +118,7 @@ class CardItem extends StatelessWidget {
                                 : Icons.alarm_off_rounded,
                             color: backgroundColor,
                             size: 30,
-                          )
+                          ),
                         ],
                       ),
                     ),

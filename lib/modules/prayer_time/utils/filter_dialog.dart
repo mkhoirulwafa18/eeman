@@ -61,10 +61,9 @@ void showFilterPrayerTimeDialog(
                   Navigator.of(context).pop();
                 },
               ),
-              OutlinedButton(
-                child: Text(
-                  context.l10n.apply,
-                  style: smallText,
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(backgroundColor),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -74,6 +73,10 @@ void showFilterPrayerTimeDialog(
                         dateCubit.state.year.toString(),
                       );
                 },
+                child: Text(
+                  context.l10n.apply,
+                  style: smallText.copyWith(color: backgroundColor2),
+                ),
               ),
             ],
           );

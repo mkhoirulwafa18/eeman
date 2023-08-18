@@ -14,7 +14,7 @@
         "development",
         "--target",
         "lib/main_development.dart",
-        "--no-sound-null-safety"
+        // "--no-sound-null-safety"
       ]
     },
     {

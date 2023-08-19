@@ -1,5 +1,7 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran_app/app/view/widgets/custom_feedback.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/home_page.dart';
@@ -37,31 +39,48 @@ class App extends StatelessWidget {
           create: (context) => CounterCubit(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        builder: (ctx, child) {
-          setupScreenUtil(ctx);
-          return MediaQuery(
-            data: MediaQuery.of(ctx).copyWith(textScaleFactor: 1),
-            child: ScrollConfiguration(
-              behavior: MyBehavior(),
-              child: child!,
-            ),
-          );
-        },
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const HomePage(),
-          '/surah-list': (context) => const SurahListPage(),
-          '/surah': (context) => SurahPage(
-                noSurah: 0,
-                dataQuran: const [],
+      child: BetterFeedback(
+        theme: FeedbackThemeData(
+          feedbackSheetColor: Colors.grey[50]!,
+          drawColors: [
+            Colors.red,
+            Colors.green,
+            Colors.blue,
+            Colors.yellow,
+          ],
+        ),
+        feedbackBuilder: (context, onSubmit, scrollController) =>
+            CustomFeedbackForm(
+          onSubmit: onSubmit,
+          scrollController: scrollController,
+        ),
+        pixelRatio: 1,
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          builder: (ctx, child) {
+            setupScreenUtil(ctx);
+            return MediaQuery(
+              data: MediaQuery.of(ctx).copyWith(textScaleFactor: 1),
+              child: ScrollConfiguration(
+                behavior: MyBehavior(),
+                child: child!,
               ),
-          '/prayer-time': (context) => const PrayerTimePage(),
-          '/tasbih': (context) => const TasbihPage(),
-        },
+            );
+          },
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const HomePage(),
+            '/surah-list': (context) => const SurahListPage(),
+            '/surah': (context) => SurahPage(
+                  noSurah: 0,
+                  dataQuran: const [],
+                ),
+            '/prayer-time': (context) => const PrayerTimePage(),
+            '/tasbih': (context) => const TasbihPage(),
+          },
+        ),
       ),
     );
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
@@ -29,10 +31,7 @@ void showFilterPrayerTimeDialog(
                   children: shalats
                       .map(
                         (e) => CheckboxListTile(
-                          title: Text(
-                            e,
-                            style: smallText,
-                          ),
+                          title: Text(e, style: smallText),
                           onChanged: (value) {
                             if (value != null) {
                               !value

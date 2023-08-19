@@ -1,7 +1,8 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quran_app/common/constants/constant.dart';
-import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/widgets/input_box.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -19,7 +20,8 @@ void showSearchAyahDialog(
       return AlertDialog(
         backgroundColor: backgroundColor2,
         title: Text(
-          context.l10n.findAyah,
+          // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
+          'Cari Ayat',
           style: lightBoldTitle,
         ),
         content: Column(
@@ -34,7 +36,8 @@ void showSearchAyahDialog(
               height: 8,
             ),
             InputBox(
-              labelText: context.l10n.whatAyah,
+              // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
+              labelText: 'Ayat ke berapa?',
               controller: controller,
               maxLength: 3,
               autofocus: true,
@@ -48,7 +51,8 @@ void showSearchAyahDialog(
         actions: <Widget>[
           OutlinedButton(
             child: Text(
-              context.l10n.close,
+              // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
+              'Tutup',
               style: smallText,
             ),
             onPressed: () {
@@ -57,7 +61,8 @@ void showSearchAyahDialog(
           ),
           OutlinedButton(
             child: Text(
-              context.l10n.find,
+              // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
+              'Cari',
               style: smallText,
             ),
             onPressed: () {

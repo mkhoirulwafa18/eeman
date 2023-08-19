@@ -29,7 +29,7 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "args": ["--flavor", "production", "--target", "lib/main.dart", "--no-sound-null-safety"]
+      "args": ["--flavor", "production", "--target", "lib/main.dart"]
     }
   ]
 }

@@ -782,9 +782,6 @@ packages:
     source: hosted
     version: "2.3.0"
   path_provider_linux:
-    source: hosted
-    version: "2.2.0"
-=======
     dependency: transitive
     description:
       name: path_provider_linux
@@ -792,7 +789,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
->>>>>>> f20d207d447b3672d8a8ee84c7a2da1d83238fab
   path_provider_platform_interface:
     dependency: transitive
     description:

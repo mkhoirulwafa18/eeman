@@ -58,7 +58,7 @@ class _SurahInfoState extends State<SurahInfo> with WidgetsBindingObserver {
                 color: Colors.black.withOpacity(0.5),
                 blurRadius: 4,
                 offset: const Offset(0, 4),
-              )
+              ),
             ],
           ),
           child: Column(
@@ -102,7 +102,7 @@ class _SurahInfoState extends State<SurahInfo> with WidgetsBindingObserver {
                         return const AppLoading();
                       }
                     },
-                  )
+                  ),
                 ],
               ),
               const SizedBox(
@@ -134,7 +134,7 @@ class _SurahInfoState extends State<SurahInfo> with WidgetsBindingObserver {
                   '$iconAsset/basmalah.svg',
                   width: 0.4.sw,
                   color: backgroundColor,
-                )
+                ),
               ] else
                 const SizedBox(),
               const SizedBox(

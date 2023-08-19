@@ -167,7 +167,7 @@ class _SurahListPageState extends State<SurahListPage>
                 dataQuran: _dataQuran,
               )
             else
-              const AppLoading()
+              const AppLoading(),
           ],
         ),
       ),

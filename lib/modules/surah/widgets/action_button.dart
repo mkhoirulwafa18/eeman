@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/surah/surah_page.dart';
 import 'package:quran_app/modules/surah_list/models/quran.dart';
 
@@ -19,6 +20,8 @@ class ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return _indexSurah == 144
         ? const SizedBox()
         : SizedBox(
@@ -45,7 +48,7 @@ class ActionButton extends StatelessWidget {
                     : Icons.arrow_forward,
               ),
               label: Text(
-                type == ButtonActionType.back ? 'Kembali' : 'Lanjut',
+                type == ButtonActionType.back ? l10n.back : l10n.next,
                 style: const TextStyle(fontFamily: 'Poppins'),
               ),
               style: ElevatedButton.styleFrom(

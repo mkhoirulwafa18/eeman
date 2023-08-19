@@ -11,6 +11,7 @@ void showSearchAyahDialog(
   ItemScrollController scrollController,
   int totalAyat,
 ) {
+  final l10n = context.l10n;
   // ignore: inference_failure_on_function_invocation
   showDialog(
     context: context,
@@ -26,7 +27,7 @@ void showSearchAyahDialog(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Jumlah Ayat = $totalAyat',
+              l10n.totalAyat(totalAyat.toString()),
               style: smallText,
             ),
             const SizedBox(
@@ -39,7 +40,7 @@ void showSearchAyahDialog(
               autofocus: true,
               keyboardType: TextInputType.number,
               formatter: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
+                FilteringTextInputFormatter.digitsOnly,
               ],
             ),
           ],

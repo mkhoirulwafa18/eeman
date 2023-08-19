@@ -32,7 +32,7 @@ class PrayerTimePage extends StatelessWidget {
                   showFilterPrayerTimeDialog(context);
                 },
                 icon: const Icon(Icons.filter_alt_outlined),
-              )
+              ),
             ],
           ),
           child: CardList(selectedDate: state),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
+import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/widgets/app_title.dart';
 import 'package:quran_app/modules/home/widgets/header_card.dart';
 import 'package:quran_app/modules/home/widgets/menu_list.dart';
@@ -22,7 +23,7 @@ class HomePage extends StatelessWidget {
           ),
           const SliverToBoxAdapter(
             child: MenuList(),
-          )
+          ),
         ],
       ),
     );
@@ -45,6 +46,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
   ) {
     final appBarSize = expandedHeight - shrinkOffset;
     final cardTopPosition = expandedHeight / 3.5 - shrinkOffset;
+    final l10n = context.l10n;
     return SizedBox(
       height: expandedHeight + expandedHeight / 1.5,
       child: Stack(
@@ -60,15 +62,15 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                   onTap: () {
                     showInfoDialog(
                       context,
-                      'Eeman App',
-                      'Eeman - Aplikasi Islami dengan fitur doa sehari-hari, Quran offline, jadwal sholat, tasbih digital, dan alarm sholat.\n\nbuilt with <3 by Wafastarz.',
+                      '${l10n.appName} App',
+                      l10n.appInfo,
                     );
                   },
                   child: const Padding(
                     padding: EdgeInsets.only(right: 24),
                     child: Icon(Icons.info_outline_rounded),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -77,8 +79,8 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
             right: 0,
             top: cardTopPosition > 0 ? cardTopPosition : 0,
             bottom: 0,
-            child: Column(
-              children: const [
+            child: const Column(
+              children: [
                 SizedBox(height: 16),
                 HeaderCard(),
               ],

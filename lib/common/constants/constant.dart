@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quran_app/l10n/l10n.dart';
 
 String get baseUrl => 'http://api.aladhan.com/v1/calendarByCity';
 String get baseAudioUrl => 'https://everyayah.com/data/Alafasy_128kbps';
@@ -119,6 +120,7 @@ Future<bool> checkInternetConnection() async {
 /// Show Dialog
 /// ----------------
 void showMyDialog(BuildContext context, String title, String content) {
+  final l10n = context.l10n;
   // ignore: inference_failure_on_function_invocation
   showDialog(
     context: context,
@@ -136,7 +138,7 @@ void showMyDialog(BuildContext context, String title, String content) {
         actions: <Widget>[
           TextButton(
             child: Text(
-              'Tutup',
+              l10n.close,
               style: smallText,
             ),
             onPressed: () {
@@ -153,6 +155,7 @@ void showMyDialog(BuildContext context, String title, String content) {
 /// Show Dialog
 /// ----------------
 void showInfoDialog(BuildContext context, String title, String content) {
+  final l10n = context.l10n;
   // ignore: inference_failure_on_function_invocation
   showDialog(
     context: context,
@@ -174,7 +177,7 @@ void showInfoDialog(BuildContext context, String title, String content) {
               height: 16,
             ),
             Text(
-              'Menemukan bug? atau mau request fitur lain? kirim saran dan feedback kalian ke email dengan cara klik button dibawah, Termimakasih.',
+              l10n.findBugQuestion,
               style: smallText,
             ),
           ],
@@ -182,7 +185,7 @@ void showInfoDialog(BuildContext context, String title, String content) {
         actions: <Widget>[
           ElevatedButton(
             child: Text(
-              'Request Fitur / Laporkan Bug',
+              l10n.requestFeatureOrReportBug,
               style: smallText,
             ),
             onPressed: () {
@@ -191,7 +194,7 @@ void showInfoDialog(BuildContext context, String title, String content) {
           ),
           TextButton(
             child: Text(
-              'Tutup',
+              l10n.close,
               style: smallText,
             ),
             onPressed: () {

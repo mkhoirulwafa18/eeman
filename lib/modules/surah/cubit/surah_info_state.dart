@@ -38,7 +38,7 @@ class SurahInfoInitial extends SurahInfoState {
         revelation,
         totalAyat,
         indexLastSurah,
-        indexLastAyah
+        indexLastAyah,
       ];
 }
 
@@ -65,6 +65,6 @@ class SurahInfoLoaded extends SurahInfoInitial {
         revelation,
         totalAyat,
         indexLastSurah,
-        indexLastAyah
+        indexLastAyah,
       ];
 }

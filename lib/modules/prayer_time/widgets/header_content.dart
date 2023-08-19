@@ -85,7 +85,7 @@ class PrayerTimeHeaderContent extends StatelessWidget {
                     Text(
                       state.city,
                       style: smallText,
-                    )
+                    ),
                   ],
                 );
               }
@@ -93,7 +93,7 @@ class PrayerTimeHeaderContent extends StatelessWidget {
                 height: 10,
               );
             },
-          )
+          ),
         ],
       ),
     );

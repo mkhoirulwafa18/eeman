@@ -64,7 +64,7 @@ class SurahPage extends StatelessWidget {
                       );
                     },
                     icon: const Icon(Icons.search),
-                  )
+                  ),
                 ],
               ),
               child: state.ayatSurah.isNotEmpty
@@ -123,7 +123,7 @@ class SurahPage extends StatelessWidget {
               type: ButtonActionType.next,
             )
           else
-            const SizedBox()
+            const SizedBox(),
         ],
       ),
     );
@@ -174,7 +174,7 @@ class SurahPage extends StatelessWidget {
                       number: (index + 1).toString(),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -207,7 +207,7 @@ class SurahPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -222,7 +222,7 @@ class SurahPage extends StatelessWidget {
               Icons.book_rounded,
               color: backgroundColor2,
             ),
-          )
+          ),
         ] else ...[
           GestureDetector(
             onTap: setLastRead,
@@ -230,7 +230,7 @@ class SurahPage extends StatelessWidget {
               Icons.book_outlined,
               color: backgroundColor2.withOpacity(.3),
             ),
-          )
+          ),
         ],
       ],
     );

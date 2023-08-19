@@ -11,6 +11,7 @@ import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
 void showFilterPrayerTimeDialog(
   BuildContext context,
 ) {
+  final l10n = context.l10n;
   // ignore: inference_failure_on_function_invocation
   showDialog(
     context: context,
@@ -20,7 +21,7 @@ void showFilterPrayerTimeDialog(
           return AlertDialog(
             backgroundColor: backgroundColor2,
             title: Text(
-              context.l10n.filterList,
+              l10n.filterList,
               style: lightBoldTitle,
             ),
             content: SingleChildScrollView(
@@ -53,7 +54,7 @@ void showFilterPrayerTimeDialog(
             actions: <Widget>[
               OutlinedButton(
                 child: Text(
-                  context.l10n.close,
+                  l10n.close,
                   style: smallText,
                 ),
                 onPressed: () {
@@ -73,7 +74,7 @@ void showFilterPrayerTimeDialog(
                       );
                 },
                 child: Text(
-                  context.l10n.apply,
+                  l10n.apply,
                   style: smallText.copyWith(color: backgroundColor2),
                 ),
               ),

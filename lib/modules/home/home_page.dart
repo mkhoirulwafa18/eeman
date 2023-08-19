@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
           ),
           const SliverToBoxAdapter(
             child: MenuList(),
-          )
+          ),
         ],
       ),
     );
@@ -63,14 +63,14 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                     showInfoDialog(
                       context,
                       l10n.appName,
-                      l10n.appDesc,
+                      l10n.appInfo,
                     );
                   },
                   child: const Padding(
                     padding: EdgeInsets.only(right: 24),
                     child: Icon(Icons.info_outline_rounded),
                   ),
-                )
+                ),
               ],
             ),
           ),

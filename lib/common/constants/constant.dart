@@ -123,6 +123,7 @@ Future<bool> checkInternetConnection() async {
 /// Show Dialog
 /// ----------------
 void showMyDialog(BuildContext context, String title, String content) {
+  final l10n = context.l10n;
   // ignore: inference_failure_on_function_invocation
   showDialog(
     context: context,
@@ -140,7 +141,7 @@ void showMyDialog(BuildContext context, String title, String content) {
         actions: <Widget>[
           TextButton(
             child: Text(
-              'Tutup',
+              l10n.close,
               style: smallText,
             ),
             onPressed: () {

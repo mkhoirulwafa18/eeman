@@ -185,7 +185,7 @@ class _HeaderCardState extends State<HeaderCard> {
           ),
           const SizedBox(
             height: 16,
-          )
+          ),
         ],
       ),
     );

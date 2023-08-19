@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/prayer_time/cubit/datepicker_cubit.dart';
 import 'package:quran_app/modules/prayer_time/cubit/list_filter.dart';
 import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
@@ -10,6 +11,7 @@ import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
 void showFilterPrayerTimeDialog(
   BuildContext context,
 ) {
+  final l10n = context.l10n;
   // ignore: inference_failure_on_function_invocation
   showDialog(
     context: context,
@@ -19,8 +21,7 @@ void showFilterPrayerTimeDialog(
           return AlertDialog(
             backgroundColor: backgroundColor2,
             title: Text(
-              // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
-              'Filter List',
+              l10n.filterList,
               style: lightBoldTitle,
             ),
             content: SingleChildScrollView(
@@ -53,19 +54,16 @@ void showFilterPrayerTimeDialog(
             actions: <Widget>[
               OutlinedButton(
                 child: Text(
-                  // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
-                  'Tutup',
+                  l10n.close,
                   style: smallText,
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
-              OutlinedButton(
-                child: Text(
-                  // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
-                  'Terapkan',
-                  style: smallText,
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(backgroundColor),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -75,6 +73,10 @@ void showFilterPrayerTimeDialog(
                         dateCubit.state.year.toString(),
                       );
                 },
+                child: Text(
+                  l10n.apply,
+                  style: smallText.copyWith(color: backgroundColor2),
+                ),
               ),
             ],
           );

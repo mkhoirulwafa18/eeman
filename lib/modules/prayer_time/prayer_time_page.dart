@@ -33,7 +33,7 @@ class PrayerTimePage extends StatelessWidget {
                   // debugPrint('udah di clickkkk');
                 },
                 icon: const Icon(Icons.filter_alt_outlined),
-              )
+              ),
             ],
           ),
           child: CardList(selectedDate: state),

@@ -160,7 +160,7 @@ enum Source { APLIKASI_QURAN_KEMENTRIAN_AGAMA_REPUBLIK_INDONESIA }
 final sourceValues = EnumValues(
   {
     'Aplikasi Quran Kementrian Agama Republik Indonesia':
-        Source.APLIKASI_QURAN_KEMENTRIAN_AGAMA_REPUBLIK_INDONESIA
+        Source.APLIKASI_QURAN_KEMENTRIAN_AGAMA_REPUBLIK_INDONESIA,
   },
 );
 

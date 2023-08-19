@@ -97,7 +97,7 @@ class DioHelper {
           );
           return [
             placemarks[0].subAdministrativeArea.toString(),
-            placemarks[0].country.toString()
+            placemarks[0].country.toString(),
           ];
         }
         return [];

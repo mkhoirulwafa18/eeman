@@ -21,6 +21,7 @@ class CardList extends StatelessWidget {
   Widget build(BuildContext context) {
     final dateCubit = context.read<DatepickerCubit>();
     final l10n = context.l10n;
+
     return StatefulWrapper(
       onInit: () {
         context.read<PrayertimeCubit>().getTimings(
@@ -78,6 +79,7 @@ class CardList extends StatelessWidget {
                 time: todayTimings[index]['value'].toString(),
                 title: todayTimings[index]['name'].toString(),
                 selectedDate: selectedDate,
+                active: index == firstIndexNotPassed,
               ),
             );
           }
@@ -121,7 +123,7 @@ class CardList extends StatelessWidget {
                       l10n.refresh,
                       style: smallText,
                     ),
-                  )
+                  ),
                 ],
               ),
             );

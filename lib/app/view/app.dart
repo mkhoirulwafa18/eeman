@@ -41,19 +41,19 @@ class App extends StatelessWidget {
       ],
       child: BetterFeedback(
         theme: FeedbackThemeData(
-        feedbackSheetColor: Colors.grey[50]!,
-        drawColors: [
+          feedbackSheetColor: Colors.grey[50]!,
+          drawColors: [
             Colors.red,
             Colors.green,
             Colors.blue,
             Colors.yellow,
           ],
         ),
-        feedbackBuilder: (context, onSubmit, scrollController) => 
-              CustomFeedbackForm(
-                onSubmit: onSubmit,
-                scrollController: scrollController,
-              ),
+        feedbackBuilder: (context, onSubmit, scrollController) =>
+            CustomFeedbackForm(
+          onSubmit: onSubmit,
+          scrollController: scrollController,
+        ),
         pixelRatio: 1,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -87,10 +87,11 @@ class App extends StatelessWidget {
 }
 
 class MyBehavior extends ScrollBehavior {
-  Widget buildViewportChrome(
+  @override
+  Widget buildOverscrollIndicator(
     BuildContext context,
     Widget child,
-    AxisDirection axisDirection,
+    ScrollableDetails details,
   ) {
     return child;
   }

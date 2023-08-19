@@ -1,7 +1,9 @@
 {
     "@@locale": "id",
     "appName": "Eeman",
-    "appDesc": "Eeman - Aplikasi Islami dengan fitur doa sehari-hari, Quran offline, jadwal sholat, tasbih digital, dan alarm sholat.\n\nbuilt with <3 by Wafastarz.",
+    "appInfo": "Eeman - Aplikasi Islami dengan fitur doa sehari-hari, Quran offline, jadwal sholat, tasbih digital, dan alarm sholat.\n\nbuilt with <3 by Wafastarz.",
+    "back": "Kembali",
+    "next": "Lanjut",
     "surahListPageAppBarTitle": "Kumpulan Surah",
     "doaSehariHari": "Do'a\nSehari-hari",
     "quranOffline": "Quran\n(Offline)",
@@ -52,6 +54,15 @@
     "apply": "Terapkan",
     "setLastReadInfo": "Berhasil menandai ayat {i} sebagai terakhir dibaca.",
     "@setLastReadInfo": {
+        "placeholders": {
+            "i": {
+                "type": "String",
+                "example": "1"
+            }
+        }
+    },
+    "totalAyat": "Jumlah Ayat = {i}",
+    "@totalAyat": {
         "placeholders": {
             "i": {
                 "type": "String",

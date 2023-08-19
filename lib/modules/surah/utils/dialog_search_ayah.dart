@@ -1,8 +1,7 @@
-// ignore_for_file: lines_longer_than_80_chars
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/widgets/input_box.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -12,6 +11,7 @@ void showSearchAyahDialog(
   ItemScrollController scrollController,
   int totalAyat,
 ) {
+  final l10n = context.l10n;
   // ignore: inference_failure_on_function_invocation
   showDialog(
     context: context,
@@ -19,8 +19,7 @@ void showSearchAyahDialog(
       return AlertDialog(
         backgroundColor: backgroundColor2,
         title: Text(
-          // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
-          'Cari Ayat',
+          context.l10n.findAyah,
           style: lightBoldTitle,
         ),
         content: Column(
@@ -28,21 +27,20 @@ void showSearchAyahDialog(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Jumlah Ayat = $totalAyat',
+              l10n.totalAyat(totalAyat.toString()),
               style: smallText,
             ),
             const SizedBox(
               height: 8,
             ),
             InputBox(
-              // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
-              labelText: 'Ayat ke berapa?',
+              labelText: context.l10n.whatAyah,
               controller: controller,
               maxLength: 3,
               autofocus: true,
               keyboardType: TextInputType.number,
               formatter: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
+                FilteringTextInputFormatter.digitsOnly,
               ],
             ),
           ],
@@ -50,8 +48,7 @@ void showSearchAyahDialog(
         actions: <Widget>[
           OutlinedButton(
             child: Text(
-              // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
-              'Tutup',
+              context.l10n.close,
               style: smallText,
             ),
             onPressed: () {
@@ -60,8 +57,7 @@ void showSearchAyahDialog(
           ),
           OutlinedButton(
             child: Text(
-              // TODO(mkhoirulwafa18): use plain bcs there is problem when using context.l10n
-              'Cari',
+              context.l10n.find,
               style: smallText,
             ),
             onPressed: () {

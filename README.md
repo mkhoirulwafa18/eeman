@@ -59,6 +59,7 @@ For more detailed docs related to the code, head toward [here](/Docs.md)
 
 **Eeman** will be always free and open source for everyone. If you like it, please consider supporting me [via Ko-Fi](https://ko-fi.com/wafastarz) for some coffee to code more!
 and also via [Saweria](https://saweria.co/wafastarz18)
+
 [![Saweria](/assets/saweria.png)](https://saweria.co/wafastarz18)
 
 ## 🤝 Contributing

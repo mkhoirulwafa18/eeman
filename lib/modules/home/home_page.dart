@@ -62,7 +62,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                   onTap: () {
                     showInfoDialog(
                       context,
-                      '${l10n.appName} App',
+                      l10n.appName,
                       l10n.appInfo,
                     );
                   },

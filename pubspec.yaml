@@ -1,10 +1,10 @@
 name: quran_app
 description: Quran app
-version: 1.0.0+1
+version: 1.0.0+2
 publish_to: none
 
 environment:
-  sdk: ">=2.18.0 <3.0.0"
+  sdk: ">=2.19.0 <3.0.0"
   flutter: 3.3.8
 
 dependencies:
@@ -14,12 +14,15 @@ dependencies:
   dio_cache_interceptor: ^3.3.1
   dio_cache_interceptor_hive_store: ^3.2.0
   equatable: ^2.0.5
+  feedback: ^2.6.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
+  flutter_email_sender: ^5.2.0
   flutter_local_notifications: ^13.0.0
   flutter_localizations:
     sdk: flutter
+  flutter_markdown: ^0.6.14
   flutter_native_splash: ^2.2.18
   flutter_native_timezone: ^2.0.0
   flutter_screenutil: ^5.6.0

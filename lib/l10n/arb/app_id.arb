@@ -70,6 +70,6 @@
             }
         }
     },
-    "findBugQuestion": "Menemukan bug? atau mau request fitur lain? kirim saran dan feedback kalian ke email dengan cara klik button dibawah, Termimakasih.",
-    "requestFeatureOrReportBug": "Request Fitur / Laporkan Bug"
+    "feedbackAndReport": "Request Fitur / Laporkan Bug",
+    "feedbackInfo": "Menemukan bug? atau mau request fitur lain? kirim saran dan feedback kalian ke email dengan cara klik button dibawah, Termimakasih."
 }

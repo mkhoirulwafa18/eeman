@@ -19,7 +19,7 @@ void showSearchAyahDialog(
       return AlertDialog(
         backgroundColor: backgroundColor2,
         title: Text(
-          context.l10n.findAyah,
+          l10n.findAyah,
           style: lightBoldTitle,
         ),
         content: Column(
@@ -34,7 +34,7 @@ void showSearchAyahDialog(
               height: 8,
             ),
             InputBox(
-              labelText: context.l10n.whatAyah,
+              labelText: l10n.whatAyah,
               controller: controller,
               maxLength: 3,
               autofocus: true,
@@ -48,7 +48,7 @@ void showSearchAyahDialog(
         actions: <Widget>[
           OutlinedButton(
             child: Text(
-              context.l10n.close,
+              l10n.close,
               style: smallText,
             ),
             onPressed: () {
@@ -57,7 +57,7 @@ void showSearchAyahDialog(
           ),
           OutlinedButton(
             child: Text(
-              context.l10n.find,
+              l10n.find,
               style: smallText,
             ),
             onPressed: () {

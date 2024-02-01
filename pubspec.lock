@@ -383,10 +383,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_markdown
-      sha256: "2b206d397dd7836ea60035b2d43825c8a303a76a5098e66f42d55a753e18d431"
+      sha256: "30088ce826b5b9cfbf9e8bece34c716c8a59fa54461dcae1e4ac01a94639e762"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.17+1"
+    version: "0.6.18+3"
   flutter_native_splash:
     dependency: "direct main"
     description:

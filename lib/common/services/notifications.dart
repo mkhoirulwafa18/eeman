@@ -1,18 +1,17 @@
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
-// ignore_for_file: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, lines_longer_than_80_chars
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationHelper {
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   Future<void> configureLocalTimeZone() async {
     tz.initializeTimeZones();
-    final timeZone = await FlutterNativeTimezone.getLocalTimezone();
+    final timeZone = await FlutterTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timeZone));
   }
 
@@ -23,8 +22,7 @@ class NotificationHelper {
         // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
         );
 
-    const initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const initializationSettings = InitializationSettings(
       iOS: initializationSettingsDarwin,
@@ -93,8 +91,7 @@ class NotificationHelper {
         android: AndroidNotificationDetails(
           'reminder',
           'adzan notification',
-          channelDescription:
-              'this notification is for adzan notification on prayer time page',
+          channelDescription: 'this notification is for adzan notification on prayer time page',
           importance: Importance.max,
           priority: Priority.high,
           sound: RawResourceAndroidNotificationSound(sound),
@@ -134,8 +131,7 @@ class NotificationHelper {
         iOS: DarwinNotificationDetails(sound: '$sound.mp3'),
       ),
       androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
       payload: 'It could be anything you pass',
     );
@@ -144,8 +140,7 @@ class NotificationHelper {
   /// Request IOS permissions
   void requestIOSPermissions() {
     flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
         ?.requestPermissions(
           alert: true,
           badge: true,
@@ -154,6 +149,5 @@ class NotificationHelper {
   }
 
   Future<void> cancelAll() async => flutterLocalNotificationsPlugin.cancelAll();
-  Future<void> cancel(int id) async =>
-      flutterLocalNotificationsPlugin.cancel(id);
+  Future<void> cancel(int id) async => flutterLocalNotificationsPlugin.cancel(id);
 }

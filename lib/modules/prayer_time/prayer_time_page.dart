@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
 import 'package:quran_app/l10n/l10n.dart';
@@ -32,7 +33,10 @@ class PrayerTimePage extends StatelessWidget {
                   showFilterPrayerTimeDialog(context);
                   // debugPrint('udah di clickkkk');
                 },
-                icon: const Icon(Icons.filter_alt_outlined),
+                icon: Icon(
+                  Icons.filter_alt_outlined,
+                  color: backgroundColor,
+                ),
               ),
             ],
           ),

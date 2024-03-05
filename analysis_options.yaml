@@ -3,3 +3,4 @@ linter:
   rules:
     public_member_api_docs: false
     use_build_context_synchronously: false
+    lines_longer_than_80_chars: false

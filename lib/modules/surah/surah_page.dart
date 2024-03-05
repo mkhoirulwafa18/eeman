@@ -63,7 +63,10 @@ class SurahPage extends StatelessWidget {
                         state.totalAyat,
                       );
                     },
-                    icon: const Icon(Icons.search),
+                    icon: Icon(
+                      Icons.search,
+                      color: backgroundColor,
+                    ),
                   ),
                 ],
               ),
@@ -136,9 +139,7 @@ class SurahPage extends StatelessWidget {
       await preferences.setLastSurahRead(state.numberSurah);
       await preferences.setLastAyahRead(index + 1);
       // ignore_for_file: use_build_context_synchronously
-      context
-          .read<SurahInfoCubit>()
-          .setLastRead(state, state.numberSurah, index + 1);
+      context.read<SurahInfoCubit>().setLastRead(state, state.numberSurah, index + 1);
       ScaffoldMessenger.of(context)
         ..removeCurrentSnackBar()
         ..showSnackBar(
@@ -196,8 +197,7 @@ class SurahPage extends StatelessWidget {
                     ),
                     WidgetSpan(
                       child: GestureDetector(
-                        onTap: () =>
-                            showTafsirBottomSheet(context, state, index),
+                        onTap: () => showTafsirBottomSheet(context, state, index),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 5),
                           child: Icon(
@@ -214,8 +214,7 @@ class SurahPage extends StatelessWidget {
             ],
           ),
         ),
-        if (state.indexLastSurah == state.numberSurah &&
-            state.indexLastAyah - 1 == index) ...[
+        if (state.indexLastSurah == state.numberSurah && state.indexLastAyah - 1 == index) ...[
           GestureDetector(
             onTap: setLastRead,
             child: Icon(

@@ -29,8 +29,7 @@ class ActionButton extends StatelessWidget {
             height: 50,
             child: ElevatedButton.icon(
               onPressed: () {
-                Navigator.pushReplacement<MaterialPageRoute<dynamic>,
-                    MaterialPageRoute<dynamic>>(
+                Navigator.pushReplacement<MaterialPageRoute<dynamic>, MaterialPageRoute<dynamic>>(
                   context,
                   MaterialPageRoute(
                     builder: (context) => SurahPage(
@@ -43,13 +42,12 @@ class ActionButton extends StatelessWidget {
                 );
               },
               icon: Icon(
-                type == ButtonActionType.back
-                    ? Icons.arrow_back
-                    : Icons.arrow_forward,
+                type == ButtonActionType.back ? Icons.arrow_back : Icons.arrow_forward,
+                color: backgroundColor,
               ),
               label: Text(
                 type == ButtonActionType.back ? l10n.back : l10n.next,
-                style: const TextStyle(fontFamily: 'Poppins'),
+                style: TextStyle(fontFamily: 'Poppins', color: backgroundColor),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: backgroundColor2,

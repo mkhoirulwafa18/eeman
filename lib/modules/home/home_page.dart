@@ -66,9 +66,12 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
                       l10n.appInfo,
                     );
                   },
-                  child: const Padding(
-                    padding: EdgeInsets.only(right: 24),
-                    child: Icon(Icons.info_outline_rounded),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 24),
+                    child: Icon(
+                      Icons.info_outline_rounded,
+                      color: backgroundColor,
+                    ),
                   ),
                 ),
               ],

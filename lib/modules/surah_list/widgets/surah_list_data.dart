@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/l10n/l10n.dart';
-import 'package:quran_app/modules/surah/surah_page.dart';
-import 'package:quran_app/modules/surah_list/models/quran.dart';
 import 'package:quran_app/modules/surah_list/models/surah.dart';
 import 'package:quran_app/modules/surah_list/widgets/rub_el_hizb.dart';
 
@@ -56,7 +54,7 @@ class SurahListData extends StatelessWidget {
         number: _surah[index].number.toString(),
       ),
       title: Text(
-        _surah[index].nameTransliteration.toString(),
+        _surah[index].nameTransliteration,
         style: mediumText.copyWith(
           color: Colors.black,
         ),
@@ -69,7 +67,7 @@ class SurahListData extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: _surah[index].nameTranslation.toString(),
+                    text: _surah[index].nameTranslation,
                     style: smallText.copyWith(
                       color: backgroundColor2.withOpacity(0.7),
                     ),
@@ -103,11 +101,11 @@ class SurahListData extends StatelessWidget {
       ),
       dense: true,
       trailing: Text(
-        _surah[index].nameShort.toString(),
+        _surah[index].nameShort,
         style: arabicText,
       ),
       onTap: () {
-        log(_surah[index].nameTransliteration.toString());
+        log(_surah[index].nameTransliteration);
         // Navigator.push<MaterialPageRoute<dynamic>>(
         //   context,
         //   MaterialPageRoute(

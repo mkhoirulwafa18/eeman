@@ -44,7 +44,6 @@ class _SurahListPageState extends State<SurahListPage> with WidgetsBindingObserv
         _surah = _dataSurah
             .where(
               (element) => element.nameTransliteration
-                  .toString()
                   .toLowerCase()
                   .replaceAll(
                     RegExp("[^0-9a-zA-Z']"),

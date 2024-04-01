@@ -17,7 +17,7 @@ dependencies:
   feedback: ^2.6.0
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.1
+  flutter_bloc: ^8.1.5
   flutter_email_sender: ^5.2.0
   flutter_local_notifications: ^13.0.0
   flutter_localizations:

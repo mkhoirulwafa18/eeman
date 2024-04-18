@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:quran_app/common/services/preferences.dart';
-import 'package:quran_app/modules/surah_list/models/quran.dart';
+import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 part 'surah_info_state.dart';
@@ -15,7 +15,7 @@ class SurahInfoCubit extends Cubit<SurahInfoState> {
             ayatSurah: const [],
             tafsirSurah: Tafsir(),
             numberSurah: 0,
-            revelation: Type.MAKKIYAH,
+            revelation: Type,
             title: '',
             totalAyat: 0,
             translation: '',
@@ -26,7 +26,7 @@ class SurahInfoCubit extends Cubit<SurahInfoState> {
 
   Future<void> goToLastRead(
     int noSurah,
-    List<Quran> dataQuran,
+    List dataQuran,
     ItemScrollController controller,
   ) async {
     final preferences = await Preferences.getInstance();
@@ -61,35 +61,35 @@ class SurahInfoCubit extends Cubit<SurahInfoState> {
     );
   }
 
-  Future<bool> isLastSurah(int noSurah, List<Quran> dataQuran) async {
+  Future<bool> isLastSurah(int noSurah, List dataQuran) async {
     final preferences = await Preferences.getInstance();
     final lastSurah = preferences.getLastSurahRead();
     return lastSurah == dataQuran[noSurah].numberOfSurah;
   }
 
-  Future<void> init({
-    int noSurah = 0,
-    List<Quran> dataQuran = const [],
-    // ignore: avoid_positional_boolean_parameters
-    bool startScroll = false,
-    ItemScrollController? controller,
-  }) async {
-    final preferences = await Preferences.getInstance();
-    emit(
-      SurahInfoLoaded(
-        ayatSurah: dataQuran[noSurah].verses ?? [],
-        tafsirSurah: dataQuran[noSurah].tafsir ?? Tafsir(),
-        title: dataQuran[noSurah].name ?? '',
-        numberSurah: dataQuran[noSurah].numberOfSurah ?? 0,
-        translation: dataQuran[noSurah].nameTranslations!.id ?? '',
-        revelation: dataQuran[noSurah].type ?? Type.MAKKIYAH,
-        totalAyat: dataQuran[noSurah].numberOfAyah ?? 0,
-        indexLastSurah: preferences.getLastSurahRead(),
-        indexLastAyah: preferences.getLastAyahRead(),
-      ),
-    );
-    if (startScroll) {
-      await goToLastRead(noSurah, dataQuran, controller!);
-    }
-  }
+  // Future<void> init({
+  //   int noSurah = 0,
+  //   List<Quran> dataQuran = const [],
+  //   // ignore: avoid_positional_boolean_parameters
+  //   bool startScroll = false,
+  //   ItemScrollController? controller,
+  // }) async {
+  //   final preferences = await Preferences.getInstance();
+  //   emit(
+  //     SurahInfoLoaded(
+  //       ayatSurah: dataQuran[noSurah].verses ?? [],
+  //       tafsirSurah: dataQuran[noSurah].tafsir ?? Tafsir(),
+  //       title: dataQuran[noSurah].name ?? '',
+  //       numberSurah: dataQuran[noSurah].numberOfSurah ?? 0,
+  //       translation: dataQuran[noSurah].nameTranslations!.id ?? '',
+  //       revelation: dataQuran[noSurah].type ?? Type,
+  //       totalAyat: dataQuran[noSurah].numberOfAyah ?? 0,
+  //       indexLastSurah: preferences.getLastSurahRead(),
+  //       indexLastAyah: preferences.getLastAyahRead(),
+  //     ),
+  //   );
+  //   if (startScroll) {
+  //     await goToLastRead(noSurah, dataQuran, controller!);
+  //   }
+  // }
 }

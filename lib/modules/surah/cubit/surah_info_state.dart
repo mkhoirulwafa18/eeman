@@ -19,7 +19,7 @@ class SurahInfoInitial extends SurahInfoState {
     required this.indexLastSurah,
     required this.indexLastAyah,
   });
-  final List<Verse> ayatSurah;
+  final List ayatSurah;
   final Tafsir tafsirSurah;
   final String title;
   final int numberSurah;

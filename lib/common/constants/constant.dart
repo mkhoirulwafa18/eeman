@@ -202,8 +202,7 @@ void showInfoDialog(BuildContext context, String title, String content) {
               Navigator.pop(context);
               BetterFeedback.of(context).show((feedback) async {
                 // draft an email and send to developer
-                final screenshotFilePath =
-                    await writeImageToStorage(feedback.screenshot);
+                final screenshotFilePath = await writeImageToStorage(feedback.screenshot);
                 final email = Email(
                   body: feedback.text,
                   subject: 'Eeman App Feedback',
@@ -276,12 +275,9 @@ void setupScreenUtil(BuildContext context) {
   );
 }
 
-bool isSmallPhoneHeight(BuildContext context) =>
-    MediaQuery.of(context).size.height < 700;
-bool isReallySmallPhoneHeight(BuildContext context) =>
-    MediaQuery.of(context).size.height < 600;
-bool isBigPhoneHeight(BuildContext context) =>
-    MediaQuery.of(context).size.height > 1200;
+bool isSmallPhoneHeight(BuildContext context) => MediaQuery.of(context).size.height < 700;
+bool isReallySmallPhoneHeight(BuildContext context) => MediaQuery.of(context).size.height < 600;
+bool isBigPhoneHeight(BuildContext context) => MediaQuery.of(context).size.height > 1200;
 
 /// Setting height and width
 double setWidth(double width) => ScreenUtil().setWidth(width);
@@ -329,7 +325,7 @@ TextStyle largeText = TextStyle(
 );
 
 TextStyle arabicText = TextStyle(
-  fontFamily: 'IsepMisbah',
+  fontFamily: 'Indopak',
   fontSize: 24,
   color: backgroundColor2,
   height: 2,

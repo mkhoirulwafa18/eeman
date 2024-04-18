@@ -4,7 +4,7 @@ import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/utils/bottomsheet.dart';
 import 'package:quran_app/modules/home/widgets/card_menu.dart';
-import 'package:quran_app/modules/surah_list/surah_list_page.dart';
+import 'package:quran_app/modules/surah_list/surah_list.dart';
 
 class MenuList extends StatelessWidget {
   const MenuList({

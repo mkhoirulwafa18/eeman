@@ -12,8 +12,7 @@ import 'package:quran_app/modules/surah/utils/dialog_search_ayah.dart';
 import 'package:quran_app/modules/surah/utils/tafsir_bottomsheet.dart';
 import 'package:quran_app/modules/surah/widgets/action_button.dart';
 import 'package:quran_app/modules/surah/widgets/surah_info.dart';
-import 'package:quran_app/modules/surah_list/models/quran.dart';
-import 'package:quran_app/modules/surah_list/widgets/rub_el_hizb.dart';
+import 'package:quran_app/modules/surah_list/presentation/widgets/rub_el_hizb.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class SurahPage extends StatelessWidget {
@@ -24,7 +23,7 @@ class SurahPage extends StatelessWidget {
     this.startScroll = false,
   });
   final int noSurah;
-  final List<Quran> dataQuran;
+  final List dataQuran;
   final bool? startScroll;
   final controller = ItemScrollController();
   final searchAyahController = TextEditingController();
@@ -38,12 +37,13 @@ class SurahPage extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => SurahInfoCubit()
-            ..init(
-              noSurah: noSurah,
-              dataQuran: dataQuran,
-              startScroll: startScroll ?? false,
-              controller: controller,
-            ),
+          // ..init(
+          //   noSurah: noSurah,
+          //   dataQuran: dataQuran,
+          //   startScroll: startScroll ?? false,
+          //   controller: controller,
+          // ),
+          ,
         ),
       ],
       child: BlocBuilder<SurahInfoCubit, SurahInfoState>(
@@ -84,7 +84,7 @@ class SurahPage extends StatelessWidget {
                               numberSurah: state.numberSurah,
                               title: state.title,
                               translation: state.translation,
-                              revelation: state.revelation.name,
+                              revelation: state.revelation.toString(),
                               totalAyat: state.totalAyat,
                             );
                           }
@@ -161,13 +161,13 @@ class SurahPage extends StatelessWidget {
             textDirection: TextDirection.rtl,
             text: TextSpan(
               children: [
-                TextSpan(
-                  text: (index == 0 && state.numberSurah != 1
-                          ? state.ayatSurah[index].text!.substring(39)
-                          : state.ayatSurah[index].text) ??
-                      '',
-                  style: arabicText,
-                ),
+                // TextSpan(
+                //   text: (index == 0 && state.numberSurah != 1
+                //           ? state.ayatSurah[index].text!.substring(39)
+                //           : state.ayatSurah[index].text) ??
+                //       '',
+                //   style: arabicText,
+                // ),
                 WidgetSpan(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -189,12 +189,12 @@ class SurahPage extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   children: [
-                    TextSpan(
-                      text: state.ayatSurah[index].translationId ?? '',
-                      style: smallText.copyWith(
-                        color: backgroundColor2,
-                      ),
-                    ),
+                    // TextSpan(
+                    //   text: state.ayatSurah[index].translationId ?? '',
+                    //   style: smallText.copyWith(
+                    //     color: backgroundColor2,
+                    //   ),
+                    // ),
                     WidgetSpan(
                       child: GestureDetector(
                         onTap: () => showTafsirBottomSheet(context, state, index),

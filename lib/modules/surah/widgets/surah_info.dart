@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/modules/surah/cubit/murattal_cubit.dart';
-import 'package:quran_app/modules/surah_list/widgets/rub_el_hizb.dart';
+import 'package:quran_app/modules/surah_list/presentation/widgets/rub_el_hizb.dart';
 
 class SurahInfo extends StatefulWidget {
   const SurahInfo({

@@ -13,6 +13,7 @@ dependencies:
   dio: ^4.0.6
   dio_cache_interceptor: ^3.3.1
   dio_cache_interceptor_hive_store: ^3.2.0
+  download_assets: ^3.0.3
   equatable: ^2.0.5
   feedback: ^2.6.0
   flutter:
@@ -26,10 +27,11 @@ dependencies:
   flutter_native_splash: ^2.2.18
   flutter_screenutil: ^5.6.0
   flutter_slidable: ^3.0.0
-  flutter_svg: ^1.1.6
+  flutter_svg: ^2.0.10+1
   flutter_timezone: ^1.0.8
   geocoding: ^2.0.5
   geolocator: ^9.0.2
+  get_it: ^7.7.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   intl: ^0.18.1
@@ -41,7 +43,8 @@ dependencies:
 
 dev_dependencies:
   bloc_test: ^9.1.0
-  build_runner: ^2.4.8
+  build_runner: ^2.4.9
+  flutter_gen_runner: ^5.4.0
   flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
@@ -65,12 +68,21 @@ flutter_native_splash:
     image: assets/launcher_icon/launcher.png
     icon_background_color: "#244C64"
 
+flutter_gen:
+  output: assets/gen/ # Optional (default: lib/gen/)
+  line_length: 120 # Optional (default: 80)
+
+  # Optional
+  integrations:
+    flutter_svg: true
+
 flutter:
   uses-material-design: true
   generate: true
   assets:
     - assets/sources/
     - assets/icons/
+    - assets/fonts/
   fonts:
     - family: Poppins
       fonts:
@@ -78,9 +90,9 @@ flutter:
         - asset: assets/fonts/Poppins-Light.ttf
         - asset: assets/fonts/Poppins-Bold.ttf
           weight: 700
-    - family: IsepMisbah
+    - family: Indopak
       fonts:
-        - asset: assets/fonts/isepMisbah.ttf
+        - asset: assets/fonts/indopak.ttf
     - family: DsDigital
       fonts:
         - asset: assets/fonts/dsdigi.ttf

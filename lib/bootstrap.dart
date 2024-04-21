@@ -10,7 +10,6 @@ import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/services/notifications.dart';
 import 'package:quran_app/locator.dart';
 import 'package:quran_app/modules/prayer_time/models/alarm_model.dart';
-import 'package:quran_app/modules/surah_list/locator.dart';
 import 'package:quran_app/services/app_path_provider.dart';
 
 class AppBlocObserver extends BlocObserver {

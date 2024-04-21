@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/l10n/l10n.dart';
-import 'package:quran_app/modules/surah/cubit/surah_info_cubit.dart';
+import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 
 void showTafsirBottomSheet(
   BuildContext context,
-  SurahInfoLoaded state,
+  Surah surah,
   int index,
 ) {
   showModalBottomSheet<void>(
@@ -36,7 +36,7 @@ void showTafsirBottomSheet(
                       children: [
                         Text(
                           l10n.tafsirBottomSheetTitle(
-                            state.title,
+                            surah.name?.transliteration?.id ?? '',
                             (index + 1).toString(),
                           ),
                           style: largeText.copyWith(

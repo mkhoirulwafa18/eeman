@@ -29,7 +29,7 @@ class RubElHizb extends StatelessWidget {
               number,
               style: TextStyle(
                 color: color ?? backgroundColor2,
-                fontFamily: 'Indopak',
+                fontFamily: 'isepMisbah',
               ),
               textAlign: TextAlign.center,
             ),

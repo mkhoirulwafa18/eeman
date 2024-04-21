@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 import 'package:quran_app/modules/surah_list/domain/surah_list_usecase.dart';
@@ -15,7 +17,7 @@ class SurahListCubit extends Cubit<SurahListState> {
   Future<void> loadSurah() async {
     try {
       data = await _surahListUseCase.getSurahList();
-      emit(SurahListLoaded(data));
+      emit(SurahListLoaded(surahList: data, searchResult: data));
     } catch (error) {
       emit(SurahListError(error.toString()));
     }
@@ -41,8 +43,7 @@ class SurahListCubit extends Cubit<SurahListState> {
             )
             .toList();
       }
-
-      emit(SurahListLoaded(result));
+      emit(SurahListLoaded(surahList: data, searchResult: result));
     }
   }
 }

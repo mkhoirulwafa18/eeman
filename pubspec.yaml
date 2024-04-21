@@ -37,9 +37,12 @@ dependencies:
   intl: ^0.18.1
   just_audio: ^0.9.31
   notification_permissions: ^0.6.1
+  path: ^1.9.0
   path_provider: ^2.0.12
+  permission_handler: ^11.3.1
   scrollable_positioned_list: ^0.3.5
   shared_preferences: ^2.0.15
+  sqflite: ^2.3.3
 
 dev_dependencies:
   bloc_test: ^9.1.0
@@ -93,6 +96,9 @@ flutter:
     - family: Indopak
       fonts:
         - asset: assets/fonts/indopak.ttf
+    - family: isepMisbah
+      fonts:
+        - asset: assets/fonts/isepMisbah.ttf
     - family: DsDigital
       fonts:
         - asset: assets/fonts/dsdigi.ttf

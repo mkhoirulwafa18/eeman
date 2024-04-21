@@ -69,6 +69,7 @@ void showSearchAyahDialog(
                       controller.value.text,
                     ),
                     duration: const Duration(seconds: 1),
+                    curve: Curves.easeInOut,
                   );
                 }
               }

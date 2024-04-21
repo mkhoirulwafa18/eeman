@@ -325,7 +325,7 @@ TextStyle largeText = TextStyle(
 );
 
 TextStyle arabicText = TextStyle(
-  fontFamily: 'Indopak',
+  fontFamily: 'isepMisbah',
   fontSize: 24,
   color: backgroundColor2,
   height: 2,

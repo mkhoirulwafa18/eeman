@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -53,6 +55,7 @@ class SurahListView extends StatelessWidget {
     );
   }
 
+  // TODO(mkhoirulwafa18): redesign local data system
   Future<void> navigateToLastRead(BuildContext context) async {
     final preferences = await Preferences.getInstance();
     final numberSurah = preferences.getLastSurahRead();
@@ -83,7 +86,10 @@ class SurahListView extends StatelessWidget {
               title: l10n.surahListPageAppBarTitle,
               content: InputBox(
                 labelText: l10n.findSurah,
-                onChanged: (key) => context.read<SurahListCubit>().onSearch(key),
+                onChanged: (key) {
+                  log('ini adalah keywordnya : $key');
+                  context.read<SurahListCubit>().onSearch(key);
+                },
               ),
             ),
             floatingActionButton: FloatingActionButton.extended(
@@ -102,9 +108,7 @@ class SurahListView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (state is SurahListLoaded)
-                  SurahListData(
-                    dataQuran: state.surahList,
-                  )
+                  SurahListData(surahList: state.surahList, searchResult: state.searchResult)
                 else
                   const AppLoading(),
               ],

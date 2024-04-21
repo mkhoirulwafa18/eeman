@@ -20,9 +20,10 @@ class SurahListError extends SurahListState {
 }
 
 class SurahListLoaded extends SurahListState {
-  const SurahListLoaded(this.surahList);
+  const SurahListLoaded({required this.surahList, required this.searchResult});
   final List<Surah> surahList;
+  final List<Surah> searchResult;
 
   @override
-  List<Object> get props => [surahList];
+  List<Object> get props => [surahList, searchResult];
 }

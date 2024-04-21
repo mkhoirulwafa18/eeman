@@ -11,6 +11,7 @@ import 'package:quran_app/modules/prayer_time/cubit/list_filter.dart';
 import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
 import 'package:quran_app/modules/prayer_time/prayer_time_page.dart';
 import 'package:quran_app/modules/surah/surah_page.dart';
+import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 import 'package:quran_app/modules/surah_list/surah_list.dart';
 import 'package:quran_app/modules/tasbih/cubit/counter_cubit.dart';
 import 'package:quran_app/modules/tasbih/tasbih_page.dart';
@@ -73,8 +74,8 @@ class App extends StatelessWidget {
             '/': (context) => const HomePage(),
             '/surah-list': (context) => const SurahListPage(),
             '/surah': (context) => SurahPage(
-                  noSurah: 0,
-                  dataQuran: const [],
+                  selectedSurah: Surah(),
+                  surahList: const [],
                 ),
             '/prayer-time': (context) => const PrayerTimePage(),
             '/tasbih': (context) => const TasbihPage(),

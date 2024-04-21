@@ -101,23 +101,14 @@ class $AssetsSourcesGen {
   /// File path: assets/sources/doa.json
   String get doa => 'assets/sources/doa.json';
 
-  /// File path: assets/sources/latin_biasa.db
-  String get latinBiasa => 'assets/sources/latin_biasa.db';
-
   /// File path: assets/sources/quran.json
   String get quran => 'assets/sources/quran.json';
 
   /// File path: assets/sources/surah.json
   String get surah => 'assets/sources/surah.json';
 
-  /// File path: assets/sources/tafsir_wajiz.db
-  String get tafsirWajiz => 'assets/sources/tafsir_wajiz.db';
-
-  /// File path: assets/sources/terjemahan.db
-  String get terjemahan => 'assets/sources/terjemahan.db';
-
   /// List of all assets
-  List<String> get values => [alQuranIndopak, doa, latinBiasa, quran, surah, tafsirWajiz, terjemahan];
+  List<String> get values => [alQuranIndopak, doa, quran, surah];
 }
 
 class Assets {

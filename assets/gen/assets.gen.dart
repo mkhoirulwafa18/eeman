@@ -54,6 +54,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/medina.svg
   SvgGenImage get medina => const SvgGenImage('assets/icons/medina.svg');
 
+  /// File path: assets/icons/pattern-2.svg
+  SvgGenImage get pattern2 => const SvgGenImage('assets/icons/pattern-2.svg');
+
   /// File path: assets/icons/pattern.png
   AssetGenImage get patternPng => const AssetGenImage('assets/icons/pattern.png');
 
@@ -82,6 +85,7 @@ class $AssetsIconsGen {
         lastRead,
         mecca,
         medina,
+        pattern2,
         patternPng,
         patternSvg,
         prayingHands,
@@ -96,7 +100,10 @@ class $AssetsSourcesGen {
   const $AssetsSourcesGen();
 
   /// File path: assets/sources/al-quran-indopak.db
-  String get alQuranIndopak => 'assets/sources/al-quran-indopak.db';
+  String get alQuranIndopakDb => 'assets/sources/al-quran-indopak.db';
+
+  /// File path: assets/sources/al-quran-indopak.sqbpro
+  String get alQuranIndopakSqbpro => 'assets/sources/al-quran-indopak.sqbpro';
 
   /// File path: assets/sources/doa.json
   String get doa => 'assets/sources/doa.json';
@@ -108,7 +115,7 @@ class $AssetsSourcesGen {
   String get surah => 'assets/sources/surah.json';
 
   /// List of all assets
-  List<String> get values => [alQuranIndopak, doa, quran, surah];
+  List<String> get values => [alQuranIndopakDb, alQuranIndopakSqbpro, doa, quran, surah];
 }
 
 class Assets {

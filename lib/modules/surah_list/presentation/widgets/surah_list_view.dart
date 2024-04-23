@@ -1,15 +1,21 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/global_variable.dart';
+import 'package:quran_app/common/local_data/last_read_ayah_local_data.dart';
 import 'package:quran_app/common/services/preferences.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/widgets/input_box.dart';
+import 'package:quran_app/modules/surah/data/domain/verse_model.dart';
+import 'package:quran_app/modules/surah/presentation/surah_page.dart';
+import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 import 'package:quran_app/modules/surah_list/presentation/blocs/cubit/surah_list_cubit.dart';
 import 'package:quran_app/modules/surah_list/presentation/blocs/state/surah_list_state.dart';
 import 'package:quran_app/modules/surah_list/presentation/widgets/surah_list_data.dart';
@@ -55,16 +61,25 @@ class SurahListView extends StatelessWidget {
     );
   }
 
-  // TODO(mkhoirulwafa18): redesign local data system
-  Future<void> navigateToLastRead(BuildContext context) async {
-    final preferences = await Preferences.getInstance();
-    final numberSurah = preferences.getLastSurahRead();
-    if (numberSurah == 0) {
+  Future<void> navigateToLastRead(BuildContext context, List<Surah> surahList) async {
+    final stringData = await locator<LastReadAyahLocalData>().getValue();
+    log('clicked terakhir baca : $stringData');
+    if (stringData != null) {
+      final ayah = Verse.fromMap(jsonDecode(stringData) as Map<String, dynamic>);
+      await Navigator.push<MaterialPageRoute<dynamic>>(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SurahPage(
+            selectedSurah: surahList[ayah.suraId - 1],
+            surahList: surahList,
+            lastReadAyah: ayah,
+          ),
+        ),
+      );
+    } else {
       ScaffoldMessenger.of(context)
         ..removeCurrentMaterialBanner()
         ..showMaterialBanner(_showMaterialBanner(context));
-    } else {
-      // goToSurah(noSurah: numberSurah - 1, startScroll: true);
     }
   }
 
@@ -94,7 +109,7 @@ class SurahListView extends StatelessWidget {
             ),
             floatingActionButton: FloatingActionButton.extended(
               backgroundColor: backgroundColor2,
-              onPressed: () => navigateToLastRead(context),
+              onPressed: () => state is SurahListLoaded ? navigateToLastRead(context, state.surahList) : null,
               icon: SvgPicture.asset(
                 '$iconAsset/last_read.svg',
                 width: 30,

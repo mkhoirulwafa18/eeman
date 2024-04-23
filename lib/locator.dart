@@ -1,10 +1,15 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:quran_app/common/common_locator.dart';
 import 'package:quran_app/common/global_variable.dart';
 import 'package:quran_app/common/services/database_helper.dart';
-import 'package:quran_app/modules/surah/locator.dart';
-import 'package:quran_app/modules/surah_list/locator.dart';
+import 'package:quran_app/modules/surah/surah_locator.dart';
+import 'package:quran_app/modules/surah_list/surah_list_locator.dart';
 
 void setupLocator() {
-  locator.registerFactoryParam<DatabaseHelper, String, dynamic>((name, _) => DatabaseHelper(databaseName: name));
+  locator
+    ..registerFactoryParam<DatabaseHelper, String, dynamic>((name, _) => DatabaseHelper(databaseName: name))
+    ..registerFactory(FlutterSecureStorage.new);
   setupLocatorSurahList();
   setupLocatorSurah();
+  setupLocatorCommon();
 }

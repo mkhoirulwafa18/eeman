@@ -17,6 +17,17 @@ class Verse {
         readText: map['readText'] as String,
       );
 
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'suraId': suraId,
+      'verseId': verseId,
+      'ayahText': ayahText,
+      'indoText': indoText,
+      'readText': readText,
+    };
+  }
+
   final int id;
   final int suraId;
   final int verseId;

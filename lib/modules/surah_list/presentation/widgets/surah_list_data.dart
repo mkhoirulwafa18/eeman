@@ -123,7 +123,6 @@ class SurahListData extends StatelessWidget {
             ),
           ),
         );
-        log('$index ${resultSurah[index].name?.transliteration?.id}');
       },
     );
   }

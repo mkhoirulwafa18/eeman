@@ -1,10 +1,19 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/global_variable.dart';
+import 'package:quran_app/common/local_data/last_read_ayah_local_data.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
+import 'package:quran_app/l10n/l10n.dart';
+import 'package:quran_app/modules/surah/data/domain/verse_model.dart';
+import 'package:quran_app/modules/surah/presentation/blocs/cubit/last_read_cubit.dart';
 import 'package:quran_app/modules/surah/presentation/blocs/cubit/surah_cubit.dart';
+import 'package:quran_app/modules/surah/presentation/blocs/state/last_read_state.dart';
 import 'package:quran_app/modules/surah/presentation/widgets/action_button.dart';
 import 'package:quran_app/modules/surah/presentation/widgets/surah_info.dart';
 import 'package:quran_app/modules/surah/utils/dialog_search_ayah.dart';
@@ -145,17 +154,24 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 //   }
 
 class SurahView extends StatefulWidget {
-  const SurahView({super.key, required this.selectedSurah, required this.surahList});
+  const SurahView({
+    super.key,
+    required this.selectedSurah,
+    required this.surahList,
+    required this.controller,
+    this.lastReadAyah,
+  });
 
   final Surah selectedSurah;
   final List<Surah> surahList;
+  final Verse? lastReadAyah;
+  final ItemScrollController controller;
 
   @override
   State<SurahView> createState() => _SurahViewState();
 }
 
 class _SurahViewState extends State<SurahView> {
-  final controller = ItemScrollController();
   final searchAyahController = TextEditingController();
 
   @override
@@ -181,7 +197,7 @@ class _SurahViewState extends State<SurahView> {
                     showSearchAyahDialog(
                       context,
                       searchAyahController,
-                      controller,
+                      widget.controller,
                       widget.selectedSurah.numberOfVerses ?? 0,
                     );
                   },
@@ -196,7 +212,7 @@ class _SurahViewState extends State<SurahView> {
                 ? Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: ScrollablePositionedList.builder(
-                      itemScrollController: controller,
+                      itemScrollController: widget.controller,
                       shrinkWrap: true,
                       itemPositionsListener: ItemPositionsListener.create(),
                       itemCount: state.verses.length + 2,
@@ -253,27 +269,15 @@ class _SurahViewState extends State<SurahView> {
     );
   }
 
-  Widget _buildItem(BuildContext context, int index, SurahLoaded state) {
-    // Future<void> setLastRead() async {
-    //   final preferences = await Preferences.getInstance();
-
-    //   await preferences.setLastSurahRead(state.numberSurah);
-    //   await preferences.setLastAyahRead(index + 1);
-    //   // ignore_for_file: use_build_context_synchronously
-    //   context.read<SurahInfoCubit>().setLastRead(state, state.numberSurah, index + 1);
-    //   ScaffoldMessenger.of(context)
-    //     ..removeCurrentSnackBar()
-    //     ..showSnackBar(
-    //       SnackBar(
-    //         content: Text(context.l10n.setLastReadInfo((index + 1).toString())),
-    //       ),
-    //     );
-    // }
+  Widget _buildItem(BuildContext context, int index, SurahLoaded surah) {
+    Future<void> setLastRead() async {
+      await context.read<LastReadCubit>().setLastRead(context, surah.verses[index]);
+    }
 
     return Stack(
       children: [
         ListTile(
-          // onLongPress: setLastRead,
+          onLongPress: setLastRead,
           dense: true,
           contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
           tileColor: index.isEven ? backgroundColor : backgroundColorAlter,
@@ -283,7 +287,7 @@ class _SurahViewState extends State<SurahView> {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: state.verses[index].ayahText,
+                  text: surah.verses[index].ayahText,
                   style: arabicText,
                 ),
                 WidgetSpan(
@@ -308,14 +312,14 @@ class _SurahViewState extends State<SurahView> {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: state.verses[index].indoText,
+                      text: surah.verses[index].indoText,
                       style: smallText.copyWith(
                         color: backgroundColor2,
                       ),
                     ),
                     WidgetSpan(
                       child: GestureDetector(
-                        // onTap: () => showTafsirBottomSheet(context, state, index),
+                        // onTap: () => showTafsirBottomSheet(context, surah, index),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 5),
                           child: Icon(
@@ -332,23 +336,23 @@ class _SurahViewState extends State<SurahView> {
             ],
           ),
         ),
-        // if (state.indexLastSurah == state.numberSurah && state.indexLastAyah - 1 == index) ...[
-        //   GestureDetector(
-        //     // onTap: setLastRead,
-        //     child: Icon(
-        //       Icons.book_rounded,
-        //       color: backgroundColor2,
-        //     ),
-        //   ),
-        // ] else ...[
-        GestureDetector(
-          // onTap: setLastRead,
-          child: Icon(
-            Icons.book_outlined,
-            color: backgroundColor2.withOpacity(.3),
-          ),
+        BlocBuilder<LastReadCubit, LastReadState>(
+          builder: (context, lastRead) {
+            bool isLastRead;
+            if (lastRead is LastReadLoaded) {
+              isLastRead = lastRead.verse.suraId == surah.verses[0].suraId && lastRead.verse.verseId == index + 1;
+            } else {
+              isLastRead = false;
+            }
+            return GestureDetector(
+              onTap: setLastRead,
+              child: Icon(
+                isLastRead ? Icons.book_rounded : Icons.book_outlined,
+                color: isLastRead ? backgroundColor2 : backgroundColor2.withOpacity(.3),
+              ),
+            );
+          },
         ),
-        //   ],
       ],
     );
   }

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
@@ -30,9 +29,6 @@ class DatabaseHelper {
 
   // Get all Quran verses for a specific sura
   Future<List<Map<String, dynamic>>> getVersesBySura(int sura) async {
-    log('===================');
-    log('$sura');
-    log('===================');
     final db = await database;
     return db.query(
       quranTable,
@@ -51,7 +47,6 @@ class DatabaseHelper {
     final dbExists = await databaseExists(path);
     if (!dbExists) {
       // If the database doesn't exist, copy it from the asset folder
-      // await Future.delayed(const Duration(milliseconds: 500)); // Wait a bit (optional)
       final data = await rootBundle.load('assets/sources/$databaseName');
       final bytes = data.buffer.asUint8List();
       await File(path).writeAsBytes(bytes);

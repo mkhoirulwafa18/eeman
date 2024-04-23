@@ -6,6 +6,7 @@ import 'package:quran_app/common/global_variable.dart';
 import 'package:quran_app/modules/surah/data/domain/verse_model.dart';
 import 'package:quran_app/modules/surah/domain/surah_usecase.dart';
 import 'package:quran_app/modules/surah/presentation/blocs/cubit/last_read_cubit.dart';
+import 'package:quran_app/modules/surah/presentation/blocs/cubit/murattal_cubit.dart';
 import 'package:quran_app/modules/surah/presentation/blocs/cubit/surah_cubit.dart';
 import 'package:quran_app/modules/surah/presentation/widgets/surah_view.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
@@ -35,6 +36,7 @@ class SurahPage extends StatelessWidget {
             ),
         ),
         BlocProvider(create: (_) => LastReadCubit()),
+        BlocProvider(create: (_) => MurattalCubit()..init(context, selectedSurah)),
       ],
       child: SurahView(
         selectedSurah: selectedSurah,

@@ -53,36 +53,36 @@ class SurahInfo extends StatelessWidget {
                     number: surah.number.toString(),
                     color: backgroundColor,
                   ),
-                  // BlocBuilder<MurattalCubit, MurattalState>(
-                  //   builder: (context, state) {
-                  //     if (state is MurattalPlaying) {
-                  //       return GestureDetector(
-                  //         onTap: () {
-                  //           context.read<MurattalCubit>().pause(context);
-                  //         },
-                  //         child: Icon(
-                  //           Icons.stop_circle,
-                  //           color: backgroundColor,
-                  //           size: 40,
-                  //         ),
-                  //       );
-                  //     }
-                  //     if (state is MurattalLoaded || state is MurattalPaused) {
-                  //       return GestureDetector(
-                  //         onTap: () {
-                  //           context.read<MurattalCubit>().play(context);
-                  //         },
-                  //         child: Icon(
-                  //           Icons.play_circle,
-                  //           color: backgroundColor,
-                  //           size: 40,
-                  //         ),
-                  //       );
-                  //     } else {
-                  //       return const AppLoading();
-                  //     }
-                  //   },
-                  // ),
+                  BlocBuilder<MurattalCubit, MurattalState>(
+                    builder: (context, state) {
+                      if (state is MurattalPlaying) {
+                        return GestureDetector(
+                          onTap: () {
+                            context.read<MurattalCubit>().pause(context);
+                          },
+                          child: Icon(
+                            Icons.pause,
+                            color: backgroundColor,
+                            size: 40,
+                          ),
+                        );
+                      }
+                      if (state is MurattalLoaded || state is MurattalPaused) {
+                        return GestureDetector(
+                          onTap: () {
+                            context.read<MurattalCubit>().play(context);
+                          },
+                          child: Icon(
+                            Icons.play_circle,
+                            color: backgroundColor,
+                            size: 40,
+                          ),
+                        );
+                      } else {
+                        return const AppLoading();
+                      }
+                    },
+                  ),
                 ],
               ),
               const SizedBox(

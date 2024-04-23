@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:quran_app/common/extensions/dialog_extension.dart';
 import 'package:quran_app/l10n/l10n.dart';
 
 String get baseUrl => 'http://api.aladhan.com/v1/calendarByCity';
@@ -117,115 +119,6 @@ Future<bool> checkInternetConnection() async {
     return false;
   }
   return false;
-}
-
-/// ----------------
-/// Show Dialog
-/// ----------------
-void showMyDialog(BuildContext context, String title, String content) {
-  final l10n = context.l10n;
-  // ignore: inference_failure_on_function_invocation
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        backgroundColor: backgroundColor2,
-        title: Text(
-          title,
-          style: lightBoldTitle,
-        ),
-        content: Text(
-          content,
-          style: mediumText,
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: Text(
-              l10n.close,
-              style: smallText,
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
-
-/// ----------------
-/// Show Dialog
-/// in HomePage which showing appInfo and request feature or send feedback func
-/// ----------------
-void showInfoDialog(BuildContext context, String title, String content) {
-  final l10n = context.l10n;
-  // ignore: inference_failure_on_function_invocation
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        backgroundColor: backgroundColor2,
-        title: Text(
-          title,
-          style: lightBoldTitle,
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              content,
-              style: smallText,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Text(
-              l10n.feedbackInfo,
-              style: smallText,
-            ),
-          ],
-        ),
-        actions: <Widget>[
-          ElevatedButton(
-            child: Text(
-              l10n.feedbackAndReport,
-              style: smallText,
-            ),
-            onPressed: () {
-              // Navigator.push<MaterialPageRoute<dynamic>>(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => const ReportFeedbackPage(),
-              //       ),
-              //     );
-              Navigator.pop(context);
-              BetterFeedback.of(context).show((feedback) async {
-                // draft an email and send to developer
-                final screenshotFilePath = await writeImageToStorage(feedback.screenshot);
-                final email = Email(
-                  body: feedback.text,
-                  subject: 'Eeman App Feedback',
-                  recipients: ['wafastarzteam@gmail.com'],
-                  attachmentPaths: [screenshotFilePath],
-                );
-                await FlutterEmailSender.send(email);
-              });
-            },
-          ),
-          TextButton(
-            child: Text(
-              l10n.close,
-              style: smallText,
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
 }
 
 /// ----------------------------------

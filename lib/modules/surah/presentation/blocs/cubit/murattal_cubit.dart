@@ -5,7 +5,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/dialog_extension.dart';
 import 'package:quran_app/l10n/l10n.dart';
+import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 
 part '../state/murattal_state.dart';
 
@@ -17,16 +19,16 @@ class MurattalCubit extends Cubit<MurattalState> {
   List<AudioSource> audioFileName = [];
   bool errorAlreadyShowed = false;
 
-  void init(BuildContext context, int indexSurah, int totalAyat) {
+  void init(BuildContext context, Surah surah) {
     emit(MurattalLoading());
-    final a = '${'0' * (3 - indexSurah.toString().length)}$indexSurah';
+    final a = '${'0' * (3 - surah.number.toString().length)}$surah.number';
     final b = List.generate(
-      totalAyat,
+      surah.numberOfVerses ?? 1,
       (index) => '${'0' * (3 - index.toString().length)}${index + 1}',
       growable: false,
     );
 
-    if (indexSurah != 1) {
+    if (surah.number != 1) {
       audioFileName.add(
         AudioSource.uri(
           Uri.parse('$baseAudioUrl/001001.mp3'),
@@ -59,10 +61,13 @@ class MurattalCubit extends Cubit<MurattalState> {
     final l10n = context.l10n;
     if (!internet && !errorAlreadyShowed) {
       errorAlreadyShowed = true;
-      showMyDialog(
-        context,
-        l10n.internetNeeded,
-        l10n.internetNeededDesc,
+
+      context.showAppDialog(
+        title: l10n.internetNeeded,
+        content: Text(
+          l10n.internetNeededDesc,
+          style: mediumText,
+        ),
       );
     }
     if (e is PlayerException) {
@@ -93,10 +98,12 @@ class MurattalCubit extends Cubit<MurattalState> {
       await player.play();
     } on PlayerException catch (e) {
       if (e.message.toString() == 'Source error') {
-        showMyDialog(
-          context,
-          context.l10n.internetNeeded,
-          context.l10n.internetNeededDesc,
+        context.showAppDialog(
+          title: context.l10n.internetNeeded,
+          content: Text(
+            context.l10n.internetNeededDesc,
+            style: mediumText,
+          ),
         );
       }
     }
@@ -114,10 +121,12 @@ class MurattalCubit extends Cubit<MurattalState> {
       }
     } on PlayerException catch (e) {
       if (e.message.toString() == 'Source error') {
-        showMyDialog(
-          context,
-          context.l10n.internetNeeded,
-          context.l10n.internetNeededDesc,
+        context.showAppDialog(
+          title: context.l10n.internetNeeded,
+          content: Text(
+            context.l10n.internetNeededDesc,
+            style: mediumText,
+          ),
         );
       }
     }

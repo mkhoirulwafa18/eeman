@@ -1,11 +1,11 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
+import 'package:quran_app/gen/assets.gen.dart';
 import 'package:quran_app/modules/surah/presentation/blocs/cubit/murattal_cubit.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 import 'package:quran_app/modules/surah_list/presentation/widgets/rub_el_hizb.dart';
@@ -22,7 +22,7 @@ class SurahInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        // context.read<MurattalCubit>().dispose();
+        context.read<MurattalCubit>().dispose();
         Navigator.pop(context);
         return Future.value(false);
       },
@@ -110,8 +110,7 @@ class SurahInfo extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                SvgPicture.asset(
-                  '$iconAsset/basmalah.svg',
+                Assets.icons.basmalah.svg(
                   width: 0.4.sw,
                   color: backgroundColor,
                 ),

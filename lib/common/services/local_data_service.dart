@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 /// [LocalDataService] is a service to set data to local storage
@@ -19,6 +21,10 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 /// ```
 abstract class LocalDataService {
   Future<void> setString(String key, String value);
+
+  Future<void> setStringList(String key, List<String> value);
+
+  Future<List<String>?> getStringList(String key);
 
   Future<String?> getString(String key);
 
@@ -45,5 +51,16 @@ class LocalDataServiceImpl implements LocalDataService {
     await storage.delete(key: key);
 
     return;
+  }
+
+  @override
+  Future<void> setStringList(String key, List<String> value) {
+    return storage.write(key: key, value: jsonEncode(value));
+  }
+
+  @override
+  Future<List<String>?> getStringList(String key) async {
+    final result = await storage.read(key: key);
+    return result != null ? jsonDecode(result) as List<String> : [];
   }
 }

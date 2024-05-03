@@ -1,40 +1,26 @@
 import 'dart:io';
 
-import 'package:feedback/feedback.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:quran_app/common/extensions/dialog_extension.dart';
-import 'package:quran_app/l10n/l10n.dart';
 
-String get baseUrl => 'http://api.aladhan.com/v1/calendarByCity';
 String get baseAudioUrl => 'https://everyayah.com/data/Alafasy_128kbps';
-String get randomSurah => 'noRandomSurah';
-String get randomAyat => 'noRandomAyat';
-String get lastHitAotd => 'lastHitAotd';
+
 List<String> get shalats => [
-      'Akhir Sepertiga Malam',
-      'Imsak',
       'Subuh',
       'Matahari Terbit',
       'Dzuhur',
       'Ashar',
-      'Matahari Terbenam',
       'Maghrib',
       'Isha',
-      'Tengah Malam',
-      'Awal Sepertiga Malam',
     ];
-int get cacheDays => 31;
 
 /// --------------
 /// Constant Color
 /// --------------
 
-Color get backgroundColor => const Color(0xffF8EDDD);
+Color get backgroundColor => const Color.fromARGB(255, 250, 250, 250);
 Color get backgroundColor2 => const Color(0xff234D60);
 Color get backgroundColorAlter => const Color(0xffF6E8D4);
 
@@ -42,13 +28,6 @@ Color get cardGreyColor => const Color(0xff788E99);
 Color get cardPeachColor => const Color(0xffEA896C);
 Color get cardGreenColor => const Color(0xff00CABC);
 Color get cardYellowColor => const Color(0xffF0A97E);
-
-/// --------------
-/// Asset Location
-/// --------------
-/// Example: ${iconAsset}/logo.svg
-String iconAsset = 'assets/icons';
-String sourcesAsset = 'assets/sources';
 
 /// ------------
 /// Device Size

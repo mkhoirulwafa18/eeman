@@ -1,6 +1,8 @@
+// ignore_for_file: deprecated_member_use_from_same_package
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/gen/assets.gen.dart';
 
 class RubElHizb extends StatelessWidget {
   const RubElHizb({
@@ -16,8 +18,7 @@ class RubElHizb extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SvgPicture.asset(
-          '$iconAsset/rubhizb.svg',
+        Assets.icons.rubhizb.svg(
           width: 40,
           color: color ?? backgroundColor2,
         ),

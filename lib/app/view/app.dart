@@ -1,21 +1,21 @@
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:quran_app/app/view/widgets/custom_feedback.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/common.dart';
+import 'package:quran_app/common/global_variable.dart';
 import 'package:quran_app/l10n/l10n.dart';
-import 'package:quran_app/modules/home/home_page.dart';
-import 'package:quran_app/modules/prayer_time/cubit/alarmlist_cubit.dart';
-import 'package:quran_app/modules/prayer_time/cubit/datepicker_cubit.dart';
-import 'package:quran_app/modules/prayer_time/cubit/list_filter.dart';
-import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
+import 'package:quran_app/modules/home/presentation/home_page.dart';
 import 'package:quran_app/modules/prayer_time/prayer_time_page.dart';
+import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/alarmlist_cubit.dart';
+import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/datepicker_cubit.dart';
+import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/list_filter.dart';
 import 'package:quran_app/modules/surah/surah_page.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 import 'package:quran_app/modules/surah_list/surah_list.dart';
 import 'package:quran_app/modules/tasbih/cubit/counter_cubit.dart';
 import 'package:quran_app/modules/tasbih/tasbih_page.dart';
-import 'package:quran_app/services/dio.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -32,9 +32,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ListFilterPrayerTimeCubit>(
           create: (context) => ListFilterPrayerTimeCubit()..init(),
-        ),
-        BlocProvider<PrayertimeCubit>(
-          create: (context) => PrayertimeCubit(DioHelper()),
         ),
         BlocProvider<CounterCubit>(
           create: (context) => CounterCubit(),
@@ -62,13 +59,15 @@ class App extends StatelessWidget {
           builder: (ctx, child) {
             setupScreenUtil(ctx);
             return MediaQuery(
-              data: MediaQuery.of(ctx).copyWith(textScaleFactor: 1),
+              data: MediaQuery.of(ctx).copyWith(textScaler: TextScaler.noScaling),
               child: ScrollConfiguration(
                 behavior: MyBehavior(),
                 child: child!,
               ),
             );
           },
+          navigatorKey: rootNavigatorKey,
+          scaffoldMessengerKey: scaffoldMessengerKey,
           initialRoute: '/',
           routes: {
             '/': (context) => const HomePage(),
@@ -77,7 +76,14 @@ class App extends StatelessWidget {
                   selectedSurah: Surah(),
                   surahList: const [],
                 ),
-            '/prayer-time': (context) => const PrayerTimePage(),
+            '/prayer-time': (context) => PrayerTimePage(
+                  location: Location(
+                    latitude: 0,
+                    longitude: 0,
+                    timestamp: DateTime.now(),
+                  ),
+                  city: '',
+                ),
             '/tasbih': (context) => const TasbihPage(),
           },
         ),

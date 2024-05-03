@@ -3,6 +3,7 @@
 import 'package:quran_app/modules/surah/data/domain/verse_model.dart';
 import 'package:quran_app/modules/surah/data/repositories/surah_repository.dart';
 
+// * Separate this into different file when using more than 1 member abstracts
 abstract class SurahUseCase {
   Future<List<Verse>> getVersesBySura(int sura);
 }

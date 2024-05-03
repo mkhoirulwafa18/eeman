@@ -1,4 +1,4 @@
-import 'package:quran_app/common/widgets/base_local_data.dart';
+import 'package:quran_app/common/common.dart';
 
 class LastReadAyahLocalData extends BaseLocalData {
   @override

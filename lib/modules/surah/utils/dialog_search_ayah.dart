@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/widgets/input_box.dart';
 import 'package:quran_app/l10n/l10n.dart';
-import 'package:quran_app/modules/home/widgets/input_box.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 void showSearchAyahDialog(

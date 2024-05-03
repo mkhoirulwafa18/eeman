@@ -6,10 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:quran_app/common/constants/constant.dart';
-import 'package:quran_app/common/services/notifications.dart';
+import 'package:quran_app/common/common.dart';
 import 'package:quran_app/locator.dart';
-import 'package:quran_app/modules/prayer_time/models/alarm_model.dart';
 import 'package:quran_app/services/app_path_provider.dart';
 
 class AppBlocObserver extends BlocObserver {
@@ -35,9 +33,8 @@ Future<void> init() async {
   await ScreenUtil.ensureScreenSize();
   await AppPathProvider.initPath();
   await Hive.initFlutter();
-  Hive.registerAdapter(AlarmAdapter());
-  await NotificationHelper().initializeNotification();
-  setStatusBar(color: backgroundColor2, brightness: Brightness.light);
+  NotificationHelper();
+  setStatusBar();
 
   /// Specifies the `SystemUiMode` to have visible when the application is running.
   await SystemChrome.setEnabledSystemUIMode(

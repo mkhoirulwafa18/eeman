@@ -14,12 +14,12 @@ class TasbihPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return BasePage(
+    return BasePage.noPadding(
       appBar: CustomAppBar(
         title: l10n.tasbihDigital,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(30),
         child: Center(
           child: CustomPaint(
             size: const Size(
@@ -75,8 +75,7 @@ class TasbihPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           GestureDetector(
-                            onTap: () =>
-                                context.read<CounterCubit>().decrement(),
+                            onTap: () => context.read<CounterCubit>().decrement(),
                             child: Container(
                               width: 70,
                               height: 70,

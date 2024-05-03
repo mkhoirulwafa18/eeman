@@ -40,6 +40,16 @@ abstract class BaseLocalData {
     await localData.setString(key, value);
   }
 
+  Future<void> setListValue(List<String> value) async {
+    await localData.setStringList(key, value);
+  }
+
+  Future<List<String>?> getListValue() async {
+    final value = await localData.getStringList(key);
+
+    return value;
+  }
+
   Future<void> removeValue() async {
     await localData.remove(key);
 

@@ -1,14 +1,7 @@
-// abstract class NetworkService {
-//   String get baseUrl;
+import 'package:quran_app/common/domain/api_response.dart';
 
-//   Map<String, Object> get headers;
+abstract class NetworkService {
+  String get baseUrl;
 
-//   void updateHeader(Map<String, dynamic> data);
-
-//   Future<ApiResponse> get(String endpoint);
-
-//   Future<ApiResponse> post(
-//     String endpoint, {
-//     Map<String, dynamic>? data,
-//   });
-// }
+  Future<ApiResponse> get(String endpoint);
+}

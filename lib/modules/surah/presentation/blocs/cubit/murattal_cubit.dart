@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -16,32 +18,24 @@ class MurattalCubit extends Cubit<MurattalState> {
 
   AudioPlayer player = AudioPlayer();
   late ConcatenatingAudioSource playlist;
-  List<AudioSource> audioFileName = [];
   bool errorAlreadyShowed = false;
 
   void init(BuildContext context, Surah surah) {
     emit(MurattalLoading());
-    final a = '${'0' * (3 - surah.number.toString().length)}$surah.number';
-    final b = List.generate(
-      surah.numberOfVerses ?? 1,
-      (index) => '${'0' * (3 - index.toString().length)}${index + 1}',
-      growable: false,
-    );
+    final audioFileName = List.generate(surah.numberOfVerses ?? 1, (index) {
+      final verseNumber = index + 1;
+      return AudioSource.uri(
+        Uri.parse(
+          '$baseAudioUrl/${surah.number.toString().padLeft(3, '0')}${verseNumber.toString().padLeft(3, '0')}.mp3',
+        ),
+      );
+    });
 
+    // Add Bismillah audio if not surah 1
     if (surah.number != 1) {
-      audioFileName.add(
-        AudioSource.uri(
-          Uri.parse('$baseAudioUrl/001001.mp3'),
-        ),
-      );
+      audioFileName.insert(0, AudioSource.uri(Uri.parse('$baseAudioUrl/001001.mp3')));
     }
-    for (final e in b) {
-      audioFileName.add(
-        AudioSource.uri(
-          Uri.parse('$baseAudioUrl/$a$e.mp3'),
-        ),
-      );
-    }
+
     playlist = ConcatenatingAudioSource(
       shuffleOrder: DefaultShuffleOrder(),
       children: audioFileName,
@@ -49,7 +43,11 @@ class MurattalCubit extends Cubit<MurattalState> {
     emit(MurattalLoaded(audioFileName, player, playlist));
     // Catching errors during playback (e.g. lost network connection)
     player.playbackEventStream.listen(
-      (event) {},
+      (event) {
+        if (event.processingState == ProcessingState.completed) {
+          emit(MurattalLoaded(audioFileName, player, playlist));
+        }
+      },
       onError: (Object e) {
         onErrorAudioPlaying(context, e);
       },
@@ -61,6 +59,10 @@ class MurattalCubit extends Cubit<MurattalState> {
     final l10n = context.l10n;
     if (!internet && !errorAlreadyShowed) {
       errorAlreadyShowed = true;
+      log('--------------');
+      log(internet.toString());
+      log(internet.toString());
+      log('--------------');
 
       context.showAppDialog(
         title: l10n.internetNeeded,
@@ -92,10 +94,8 @@ class MurattalCubit extends Cubit<MurattalState> {
       }
 
       emit(MurattalPlaying());
-      debugPrint('PLaayyWEEssdddd');
-
-      debugPrint(state.toString());
       await player.play();
+      await player.stop();
     } on PlayerException catch (e) {
       if (e.message.toString() == 'Source error') {
         context.showAppDialog(
@@ -113,8 +113,6 @@ class MurattalCubit extends Cubit<MurattalState> {
     try {
       if (player.playing) {
         emit(MurattalPaused());
-        debugPrint('PAUuuusseEdddD');
-        debugPrint(state.toString());
         await player.pause();
       } else {
         throw PlayerException(0, 'Source error');

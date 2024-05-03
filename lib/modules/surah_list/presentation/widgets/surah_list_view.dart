@@ -3,16 +3,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/common.dart';
 import 'package:quran_app/common/global_variable.dart';
-import 'package:quran_app/common/local_data/last_read_ayah_local_data.dart';
-import 'package:quran_app/common/services/preferences.dart';
-import 'package:quran_app/common/widgets/app_loading.dart';
-import 'package:quran_app/common/widgets/base_page.dart';
-import 'package:quran_app/common/widgets/custom_app_bar.dart';
+import 'package:quran_app/gen/assets.gen.dart';
 import 'package:quran_app/l10n/l10n.dart';
-import 'package:quran_app/modules/home/widgets/input_box.dart';
 import 'package:quran_app/modules/surah/data/domain/verse_model.dart';
 import 'package:quran_app/modules/surah/presentation/surah_page.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
@@ -24,7 +18,7 @@ class SurahListView extends StatelessWidget {
   const SurahListView({super.key});
 
   // void goToSurah({int? noSurah, bool? startScroll}) {
-  MaterialBanner _showMaterialBanner(BuildContext context) {
+  MaterialBanner _showMaterialBanner(BuildContext context, List<Surah> surahList) {
     return MaterialBanner(
       content: Text(
         context.l10n.lastReadError,
@@ -38,7 +32,15 @@ class SurahListView extends StatelessWidget {
           ),
           onPressed: () {
             ScaffoldMessenger.of(context).removeCurrentMaterialBanner();
-            // goToSurah(noSurah: 0, startScroll: false);
+            Navigator.push<MaterialPageRoute<dynamic>>(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SurahPage(
+                  selectedSurah: surahList[0],
+                  surahList: surahList,
+                ),
+              ),
+            );
           },
           child: Text(
             context.l10n.alFatiha,
@@ -79,7 +81,7 @@ class SurahListView extends StatelessWidget {
     } else {
       ScaffoldMessenger.of(context)
         ..removeCurrentMaterialBanner()
-        ..showMaterialBanner(_showMaterialBanner(context));
+        ..showMaterialBanner(_showMaterialBanner(context, surahList));
     }
   }
 
@@ -110,10 +112,7 @@ class SurahListView extends StatelessWidget {
             floatingActionButton: FloatingActionButton.extended(
               backgroundColor: backgroundColor2,
               onPressed: () => state is SurahListLoaded ? navigateToLastRead(context, state.surahList) : null,
-              icon: SvgPicture.asset(
-                '$iconAsset/last_read.svg',
-                width: 30,
-              ),
+              icon: Assets.icons.lastRead.svg(width: 30),
               label: Text(
                 l10n.lastRead,
                 style: smallText,

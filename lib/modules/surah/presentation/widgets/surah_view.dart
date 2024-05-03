@@ -1,15 +1,9 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
-import 'package:quran_app/common/global_variable.dart';
-import 'package:quran_app/common/local_data/last_read_ayah_local_data.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
-import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/surah/data/domain/verse_model.dart';
 import 'package:quran_app/modules/surah/presentation/blocs/cubit/last_read_cubit.dart';
 import 'package:quran_app/modules/surah/presentation/blocs/cubit/surah_cubit.dart';
@@ -20,138 +14,6 @@ import 'package:quran_app/modules/surah/utils/dialog_search_ayah.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 import 'package:quran_app/modules/surah_list/presentation/widgets/rub_el_hizb.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:quran_app/common/constants/constant.dart';
-// import 'package:quran_app/common/services/preferences.dart';
-// import 'package:quran_app/common/widgets/app_loading.dart';
-// import 'package:quran_app/common/widgets/base_page.dart';
-// import 'package:quran_app/common/widgets/custom_app_bar.dart';
-// import 'package:quran_app/l10n/l10n.dart';
-// import 'package:quran_app/modules/surah/cubit/murattal_cubit.dart';
-// import 'package:quran_app/modules/surah/cubit/surah_info_cubit.dart';
-// import 'package:quran_app/modules/surah/utils/dialog_search_ayah.dart';
-// import 'package:quran_app/modules/surah/utils/tafsir_bottomsheet.dart';
-// import 'package:quran_app/modules/surah/presentation/widgets/action_button.dart';
-// import 'package:quran_app/modules/surah/presentation/widgets/surah_info.dart';
-// import 'package:quran_app/modules/surah_list/presentation/widgets/rub_el_hizb.dart';
-// import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-
-// class SurahView extends StatelessWidget {
-//   SurahView({
-//     super.key,
-//     required this.noSurah,
-//     required this.dataQuran,
-//     this.startScroll = false,
-//   });
-//   final int noSurah;
-//   final List dataQuran;
-//   final bool? startScroll;
-//   final controller = ItemScrollController();
-//   final searchAyahController = TextEditingController();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MultiBlocProvider(
-//       providers: [
-//         BlocProvider(
-//           create: (context) => MurattalCubit(),
-//         ),
-//         BlocProvider(
-//           create: (context) => SurahInfoCubit()
-//           // ..init(
-//           //   noSurah: noSurah,
-//           //   dataQuran: dataQuran,
-//           //   startScroll: startScroll ?? false,
-//           //   controller: controller,
-//           // ),
-//           ,
-//         ),
-//       ],
-//       child: BlocBuilder<SurahInfoCubit, SurahInfoState>(
-//         builder: (context, state) {
-//           if (state is SurahInfoLoaded) {
-//             return BasePage.noPadding(
-//               appBar: CustomAppBar(
-//                 title: state.title,
-//                 actions: [
-//                   IconButton(
-//                     onPressed: () {
-//                       // ignore: inference_failure_on_function_invocation
-//                       showSearchAyahDialog(
-//                         context,
-//                         searchAyahController,
-//                         controller,
-//                         state.totalAyat,
-//                       );
-//                     },
-//                     icon: Icon(
-//                       Icons.search,
-//                       color: backgroundColor,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//               child: state.ayatSurah.isNotEmpty
-//                   ? Padding(
-//                       padding: const EdgeInsets.symmetric(vertical: 16),
-//                       child: ScrollablePositionedList.builder(
-//                         itemScrollController: controller,
-//                         shrinkWrap: true,
-//                         itemPositionsListener: ItemPositionsListener.create(),
-//                         itemCount: state.ayatSurah.length + 2,
-//                         itemBuilder: (context, index) {
-//                           if (index == 0) {
-//                             return SurahInfo(
-//                               numberSurah: state.numberSurah,
-//                               title: state.title,
-//                               translation: state.translation,
-//                               revelation: state.revelation.toString(),
-//                               totalAyat: state.totalAyat,
-//                             );
-//                           }
-//                           index -= 1;
-//                           return state.ayatSurah.length != index
-//                               ? _buildItem(context, index, state)
-//                               : _buildFooter(state);
-//                         },
-//                       ),
-//                     )
-//                   : const AppLoading(),
-//             );
-//           } else {
-//             return const AppLoading();
-//           }
-//         },
-//       ),
-//     );
-//   }
-
-//   Padding _buildFooter(SurahInfoLoaded state) {
-//     return Padding(
-//       padding: const EdgeInsets.all(16),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           if (state.numberSurah != 1)
-//             ActionButton(
-//               type: ButtonActionType.back,
-//               indexSurah: noSurah,
-//               dataQuran: dataQuran,
-//             )
-//           else
-//             const SizedBox(),
-//           if (state.numberSurah != 114)
-//             ActionButton(
-//               indexSurah: noSurah,
-//               dataQuran: dataQuran,
-//               type: ButtonActionType.next,
-//             )
-//           else
-//             const SizedBox(),
-//         ],
-//       ),
-//     );
-//   }
 
 class SurahView extends StatefulWidget {
   const SurahView({
@@ -305,9 +167,18 @@ class _SurahViewState extends State<SurahView> {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 16,
+              const SizedBox(height: 16),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: surah.verses[index].readText,
+                      style: TextStyle(color: backgroundColor2, fontSize: 12, fontStyle: FontStyle.italic),
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(height: 8),
               RichText(
                 text: TextSpan(
                   children: [
@@ -317,19 +188,21 @@ class _SurahViewState extends State<SurahView> {
                         color: backgroundColor2,
                       ),
                     ),
-                    WidgetSpan(
-                      child: GestureDetector(
-                        // onTap: () => showTafsirBottomSheet(context, surah, index),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 5),
-                          child: Icon(
-                            Icons.info,
-                            size: 15,
-                            color: backgroundColor2.withOpacity(.5),
-                          ),
-                        ),
-                      ),
-                    ),
+
+                    /// Remove Tafsir for v2.0.0
+                    // WidgetSpan(
+                    //   child: GestureDetector(
+                    //     // onTap: () => showTafsirBottomSheet(context, surah, index),
+                    //     child: Padding(
+                    //       padding: const EdgeInsets.only(left: 5),
+                    //       child: Icon(
+                    //         Icons.info,
+                    //         size: 15,
+                    //         color: backgroundColor2.withOpacity(.5),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

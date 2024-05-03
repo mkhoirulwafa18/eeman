@@ -8,6 +8,7 @@ environment:
   flutter: 3.3.8
 
 dependencies:
+  adhan: ^2.0.0+1
   bloc: ^8.1.0
   date_picker_timeline: ^1.2.3
   dio: ^4.0.6
@@ -35,6 +36,7 @@ dependencies:
   get_it: ^7.7.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  http: ^1.2.1
   intl: ^0.18.1
   just_audio: ^0.9.31
   notification_permissions: ^0.6.1
@@ -73,7 +75,7 @@ flutter_native_splash:
     icon_background_color: "#244C64"
 
 flutter_gen:
-  output: assets/gen/ # Optional (default: lib/gen/)
+  output: lib/gen/ # Optional (default: lib/gen/)
   line_length: 120 # Optional (default: 80)
 
   # Optional

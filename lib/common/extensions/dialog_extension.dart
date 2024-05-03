@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/common.dart';
 import 'package:quran_app/l10n/l10n.dart';
 
 /// [DialogExtension] used for easy showing dialog anywhere in the app.

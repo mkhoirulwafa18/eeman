@@ -1,7 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +37,7 @@ class MurattalCubit extends Cubit<MurattalState> {
       children: audioFileName,
     );
     emit(MurattalLoaded(audioFileName, player, playlist));
+
     // Catching errors during playback (e.g. lost network connection)
     player.playbackEventStream.listen(
       (event) {
@@ -59,10 +56,6 @@ class MurattalCubit extends Cubit<MurattalState> {
     final l10n = context.l10n;
     if (!internet && !errorAlreadyShowed) {
       errorAlreadyShowed = true;
-      log('--------------');
-      log(internet.toString());
-      log(internet.toString());
-      log('--------------');
 
       context.showAppDialog(
         title: l10n.internetNeeded,

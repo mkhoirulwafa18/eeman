@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/presentation/blocs/cubit/home_cubit.dart';
 import 'package:quran_app/modules/home/presentation/blocs/state/home_state.dart';
 import 'package:quran_app/modules/home/presentation/widgets/widgets.dart';
+import 'package:quran_app/modules/prayer_time/prayer_time.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -61,7 +63,19 @@ class HomeView extends StatelessWidget {
                           style: inputLabel.copyWith(color: backgroundColor2, fontWeight: FontWeight.bold),
                         ),
                         GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, '/prayer-time'),
+                          onTap: () {
+                            if (state is HomeLoaded) {
+                              Navigator.push<void>(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (BuildContext context) => PrayerTimePage(
+                                    city: state.currentLocationInCity,
+                                    location: state.currentLocation,
+                                  ),
+                                ),
+                              );
+                            }
+                          },
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
@@ -97,7 +111,13 @@ class HomeView extends StatelessWidget {
                       style: inputLabel.copyWith(color: backgroundColor2, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  MenuList(doaDaily: state is HomeLoaded ? state.doaDaily : []),
+                  MenuList(
+                    doaDaily: state is HomeLoaded ? state.doaDaily : [],
+                    city: state is HomeLoaded ? state.currentLocationInCity : '',
+                    location: state is HomeLoaded
+                        ? state.currentLocation
+                        : Location(latitude: 0, longitude: 0, timestamp: DateTime.now()),
+                  ),
                 ],
               ),
             ),

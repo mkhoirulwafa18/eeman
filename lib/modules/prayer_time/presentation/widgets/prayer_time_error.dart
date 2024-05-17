@@ -4,6 +4,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/prayertime_cubit.dart';
+import 'package:quran_app/modules/prayer_time/presentation/blocs/state/prayertime_state.dart';
 
 class PrayerTimeErrorWidget extends StatelessWidget {
   const PrayerTimeErrorWidget({
@@ -17,7 +18,7 @@ class PrayerTimeErrorWidget extends StatelessWidget {
 
   final AppLocalizations l10n;
   final DateTime selectedDate;
-  final PrayertimeError state;
+  final PrayerTimeError state;
   final Location location;
   final String city;
 
@@ -50,8 +51,8 @@ class PrayerTimeErrorWidget extends StatelessWidget {
               backgroundColor: MaterialStateProperty.all<Color>(backgroundColor2),
             ),
             onPressed: () async {
-              final updatedTimings = await context.read<PrayertimeCubit>().getTimings(selectedDate, location);
-              await context.read<PrayertimeCubit>().updateTimings(updatedTimings, city);
+              final updatedTimings = await context.read<PrayerTimeCubit>().getTiming(selectedDate, location);
+              await context.read<PrayerTimeCubit>().updateTimings(updatedTimings, city);
             },
             child: Text(
               l10n.refresh,

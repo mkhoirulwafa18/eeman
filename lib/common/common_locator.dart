@@ -10,6 +10,10 @@ void setupLocatorCommon() {
     ..registerLazySingleton(LastReadAyahLocalData.new)
     // *LocalData
     ..registerLazySingleton(AlarmListLocalData.new)
+    // *LocalData
+    ..registerLazySingleton(PrayerTimeFilterListLocalData.new)
+    // *LocalData
+    ..registerLazySingleton(PreferencesLocalData.new)
     // *LocationService
     ..registerLazySingleton(LocationService.new)
     // *LocationService

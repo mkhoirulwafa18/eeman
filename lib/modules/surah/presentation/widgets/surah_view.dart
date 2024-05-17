@@ -1,15 +1,20 @@
+// ignore_for_file: avoid_bool_literals_in_conditional_expressions
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
+import 'package:quran_app/modules/settings/presentation/blocs/cubit/settings_cubit.dart';
+import 'package:quran_app/modules/settings/presentation/blocs/state/settings_state.dart';
 import 'package:quran_app/modules/surah/data/domain/verse_model.dart';
 import 'package:quran_app/modules/surah/presentation/blocs/cubit/last_read_cubit.dart';
 import 'package:quran_app/modules/surah/presentation/blocs/cubit/surah_cubit.dart';
 import 'package:quran_app/modules/surah/presentation/blocs/state/last_read_state.dart';
 import 'package:quran_app/modules/surah/presentation/widgets/action_button.dart';
 import 'package:quran_app/modules/surah/presentation/widgets/surah_info.dart';
+import 'package:quran_app/modules/surah/utils/dialog_preferences.dart';
 import 'package:quran_app/modules/surah/utils/dialog_search_ayah.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 import 'package:quran_app/modules/surah_list/presentation/widgets/rub_el_hizb.dart';
@@ -50,6 +55,7 @@ class _SurahViewState extends State<SurahView> {
           return const AppLoading();
         } else if (state is SurahLoaded) {
           return BasePage.noPadding(
+            accentBackground: false,
             appBar: CustomAppBar(
               title: widget.selectedSurah.name?.transliteration?.id ?? '',
               actions: [
@@ -68,26 +74,48 @@ class _SurahViewState extends State<SurahView> {
                     color: backgroundColor,
                   ),
                 ),
+                IconButton(
+                  onPressed: () {
+                    // ignore: inference_failure_on_function_invocation
+                    showPreferencesDialog(
+                      context,
+                      searchAyahController,
+                      widget.selectedSurah.numberOfVerses ?? 0,
+                    );
+                  },
+                  icon: Icon(
+                    Icons.settings,
+                    color: backgroundColor,
+                  ),
+                ),
               ],
             ),
             child: state.verses.isNotEmpty
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: ScrollablePositionedList.builder(
-                      itemScrollController: widget.controller,
-                      shrinkWrap: true,
-                      itemPositionsListener: ItemPositionsListener.create(),
-                      itemCount: state.verses.length + 2,
-                      itemBuilder: (context, index) {
-                        if (index == 0) {
-                          return SurahInfo(surah: widget.selectedSurah);
-                        }
-                        index -= 1;
-                        return widget.selectedSurah.numberOfVerses != index
-                            ? _buildItem(context, index, state)
-                            : _buildFooter(widget.selectedSurah, widget.surahList);
-                      },
-                    ),
+                ? BlocBuilder<SettingsCubit, SettingsState>(
+                    builder: (context, settingState) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: ScrollablePositionedList.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemScrollController: widget.controller,
+                          shrinkWrap: true,
+                          itemPositionsListener: ItemPositionsListener.create(),
+                          itemCount: state.verses.length + 2,
+                          itemBuilder: (context, index) {
+                            if (index == 0) {
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 80),
+                                child: SurahInfo(surah: widget.selectedSurah),
+                              );
+                            }
+                            index -= 1;
+                            return widget.selectedSurah.numberOfVerses != index
+                                ? _buildItem(context, index, state)
+                                : _buildFooter(widget.selectedSurah, widget.surahList);
+                          },
+                        ),
+                      );
+                    },
                   )
                 : const AppLoading(),
           );
@@ -136,13 +164,14 @@ class _SurahViewState extends State<SurahView> {
       await context.read<LastReadCubit>().setLastRead(context, surah.verses[index]);
     }
 
+    final userPref = context.watch<SettingsCubit>().state.userPreferences;
     return Stack(
       children: [
         ListTile(
           onLongPress: setLastRead,
           dense: true,
           contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-          tileColor: index.isEven ? backgroundColor : backgroundColorAlter,
+          tileColor: index.isEven ? backgroundColor : backgroundColor.withAlpha(200),
           title: RichText(
             textAlign: TextAlign.justify,
             textDirection: TextDirection.rtl,
@@ -150,7 +179,7 @@ class _SurahViewState extends State<SurahView> {
               children: [
                 TextSpan(
                   text: surah.verses[index].ayahText,
-                  style: arabicText,
+                  style: arabicText.copyWith(fontSize: userPref?.arabicFontSize),
                 ),
                 WidgetSpan(
                   child: Padding(
@@ -163,47 +192,60 @@ class _SurahViewState extends State<SurahView> {
               ],
             ),
           ),
-          isThreeLine: true,
+          isThreeLine: (userPref?.showLatin != null || userPref?.showTranslation != null)
+              ? ((userPref?.showLatin ?? false) || (userPref!.showTranslation ?? false) ? true : false)
+              : false,
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 16),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: surah.verses[index].readText,
-                      style: TextStyle(color: backgroundColor2, fontSize: 12, fontStyle: FontStyle.italic),
-                    ),
-                  ],
+              Visibility(
+                visible: (userPref?.showLatin ?? false || (userPref?.showTranslation ?? false)) ? true : false,
+                child: const SizedBox(height: 16),
+              ),
+              Visibility(
+                visible: userPref?.showLatin ?? true,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: surah.verses[index].readText,
+                        style: TextStyle(
+                          color: backgroundColor2,
+                          fontSize: userPref?.latinFontSize,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 8),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: surah.verses[index].indoText,
-                      style: smallText.copyWith(
-                        color: backgroundColor2,
+              Visibility(
+                visible: userPref?.showTranslation ?? true,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: surah.verses[index].indoText,
+                        style: smallText.copyWith(color: backgroundColor2, fontSize: userPref?.translationFontSize),
                       ),
-                    ),
 
-                    /// Remove Tafsir for v2.0.0
-                    // WidgetSpan(
-                    //   child: GestureDetector(
-                    //     // onTap: () => showTafsirBottomSheet(context, surah, index),
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.only(left: 5),
-                    //       child: Icon(
-                    //         Icons.info,
-                    //         size: 15,
-                    //         color: backgroundColor2.withOpacity(.5),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                  ],
+                      /// Remove Tafsir for v2.0.0
+                      // WidgetSpan(
+                      //   child: GestureDetector(
+                      //     // onTap: () => showTafsirBottomSheet(context, surah, index),
+                      //     child: Padding(
+                      //       padding: const EdgeInsets.only(left: 5),
+                      //       child: Icon(
+                      //         Icons.info,
+                      //         size: 15,
+                      //         color: backgroundColor2.withOpacity(.5),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                    ],
+                  ),
                 ),
               ),
             ],

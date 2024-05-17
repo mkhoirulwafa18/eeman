@@ -46,12 +46,24 @@ class SurahInfo extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(
-                    width: 40,
-                  ),
                   RubElHizb(
                     number: surah.number.toString(),
                     color: backgroundColor,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        surah.name?.transliteration?.id ?? '',
+                        style: mediumText,
+                      ),
+                      Text(
+                        surah.name?.translation?.id ?? '',
+                        style: TextStyle(
+                          color: backgroundColor.withOpacity(0.5),
+                          fontFamily: 'Poppins',
+                        ),
+                      ),
+                    ],
                   ),
                   BlocBuilder<MurattalCubit, MurattalState>(
                     builder: (context, state) {
@@ -84,20 +96,6 @@ class SurahInfo extends StatelessWidget {
                     },
                   ),
                 ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(
-                surah.name?.transliteration?.id ?? '',
-                style: mediumText,
-              ),
-              Text(
-                surah.name?.translation?.id ?? '',
-                style: TextStyle(
-                  color: backgroundColor.withOpacity(0.5),
-                  fontFamily: 'Poppins',
-                ),
               ),
               const SizedBox(
                 height: 12,

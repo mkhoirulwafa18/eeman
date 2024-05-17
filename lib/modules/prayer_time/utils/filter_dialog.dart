@@ -33,8 +33,8 @@ void showFilterPrayerTimeDialog(
                       onChanged: (value) {
                         if (value != null) {
                           !value
-                              ? context.read<ListFilterPrayerTimeCubit>().onAddFilters(e)
-                              : context.read<ListFilterPrayerTimeCubit>().onRemoveFilters(e);
+                              ? context.read<ListFilterPrayerTimeCubit>().onAddHiddenPray(e)
+                              : context.read<ListFilterPrayerTimeCubit>().onRemoveHiddenPray(e);
                         }
                       },
                       value: !state.contains(e),

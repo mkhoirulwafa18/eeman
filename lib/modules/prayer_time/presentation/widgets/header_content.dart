@@ -5,6 +5,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/datepicker_cubit.dart';
 import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/prayertime_cubit.dart';
+import 'package:quran_app/modules/prayer_time/presentation/blocs/state/prayertime_state.dart';
 
 class PrayerTimeHeaderContent extends StatefulWidget {
   const PrayerTimeHeaderContent({super.key, required this.location, required this.city});
@@ -55,9 +56,9 @@ class _PrayerTimeHeaderContentState extends State<PrayerTimeHeaderContent> {
             dayTextStyle: smallText.copyWith(color: backgroundColor2.withOpacity(0.5)),
             onDateChange: (date) async {
               controller.animateToDate(date);
-              final updatedTimings = await context.read<PrayertimeCubit>().getTimings(date, widget.location);
+              final updatedTimings = await context.read<PrayerTimeCubit>().getTiming(date, widget.location);
 
-              await context.read<PrayertimeCubit>().updateTimings(updatedTimings, widget.city);
+              await context.read<PrayerTimeCubit>().updateTimings(updatedTimings, widget.city);
 
               dateCubit.onSelectDate(date);
             },
@@ -66,9 +67,9 @@ class _PrayerTimeHeaderContentState extends State<PrayerTimeHeaderContent> {
         const SizedBox(
           height: 8,
         ),
-        BlocBuilder<PrayertimeCubit, PrayertimeState>(
+        BlocBuilder<PrayerTimeCubit, PrayerTimeState>(
           builder: (context, state) {
-            if (state is PrayertimeLoaded) {
+            if (state is PrayerTimeLoaded) {
               return Row(
                 children: [
                   const Icon(
@@ -77,7 +78,7 @@ class _PrayerTimeHeaderContentState extends State<PrayerTimeHeaderContent> {
                     size: 16,
                   ),
                   Text(
-                    state.city ?? '',
+                    state.currentLocationInCity,
                     style: smallText,
                   ),
                 ],

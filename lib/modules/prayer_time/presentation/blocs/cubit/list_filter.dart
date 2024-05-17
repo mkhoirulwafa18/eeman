@@ -1,36 +1,43 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:quran_app/common/services/preferences.dart';
+import 'package:quran_app/common/common.dart';
 
+/// Cubit to manage the list of hidden prayer times
 class ListFilterPrayerTimeCubit extends Cubit<List<String>> {
-  ListFilterPrayerTimeCubit() : super([]);
+  /// Constructor initializes the cubit with the [filterStorage] instance
+  ListFilterPrayerTimeCubit(this.filterStorage) : super([]);
 
+  /// Local storage instance for prayer time filters
+  final PrayerTimeFilterListLocalData filterStorage;
+
+  /// Previous state of the cubit
   List<String>? previousState = [];
 
-  // TODO(mkhoirulwafa18): Ganti pakai new system
+  /// Initializes the cubit by retrieving the hidden prayer times from local storage
   Future<void> init() async {
-    final preferences = await Preferences.getInstance();
-    final initial = preferences.getPrayerTimeFilter();
-    emit([...initial]);
+    final hiddenPray = await filterStorage.getListValue();
+
+    if (hiddenPray != null) {
+      emit(hiddenPray);
+    } else {
+      emit([]);
+    }
   }
 
-  Future<void> onAddFilters(String filters) async {
-    final preferences = await Preferences.getInstance();
-    state.add(filters);
-    await preferences.setPrayerTimeFilter([...state]);
-    emit([...state]);
-    debugPrint(state.toString());
+  /// Adds a hidden prayer time to the list and updates local storage
+  Future<void> onAddHiddenPray(String prayName) async {
+    final updatedList = <String>[...state, prayName];
+    await filterStorage.setListValue(updatedList);
+    emit(updatedList);
   }
 
-  Future<void> onRemoveFilters(String filter) async {
-    final preferences = await Preferences.getInstance();
-    state.removeWhere((x) => x == filter);
-    await preferences.setPrayerTimeFilter([...state]);
-    emit([...state]);
-    debugPrint(state.toString());
+  /// Removes a hidden prayer time from the list and updates local storage
+  Future<void> onRemoveHiddenPray(String prayName) async {
+    final updatedList = <String>[...state]..remove(prayName);
+    await filterStorage.setListValue(updatedList);
+    emit(updatedList);
   }
 
-  // Save the prev state
+  /// Saves the previous state of the cubit
   @override
   void onChange(Change<List<String>> change) {
     super.onChange(change);

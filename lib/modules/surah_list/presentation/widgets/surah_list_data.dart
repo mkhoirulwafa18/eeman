@@ -20,37 +20,34 @@ class SurahListData extends StatelessWidget {
     final l10n = context.l10n;
     final surahs = searchResult ?? surahList;
     return Expanded(
-      child: ColoredBox(
-        color: backgroundColor,
-        child: surahs.isNotEmpty
-            ? ListView.separated(
-                physics: const BouncingScrollPhysics(),
-                itemCount: surahs.length,
-                separatorBuilder: (_, i) => Divider(
-                  color: backgroundColor2,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  return SurahListTile(
-                    context: context,
-                    index: index,
-                    surahList: surahList,
-                    resultSurah: surahs,
-                  );
-                },
-              )
-            : Expanded(
-                child: Center(
-                  child: Text(
-                    l10n.errorNoSurahFound,
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      color: backgroundColor2,
-                    ),
-                    textAlign: TextAlign.center,
+      child: surahs.isNotEmpty
+          ? ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              itemCount: surahs.length,
+              separatorBuilder: (_, i) => Divider(
+                color: backgroundColor2,
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                return SurahListTile(
+                  context: context,
+                  index: index,
+                  surahList: surahList,
+                  resultSurah: surahs,
+                );
+              },
+            )
+          : Expanded(
+              child: Center(
+                child: Text(
+                  l10n.errorNoSurahFound,
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: backgroundColor2,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
-      ),
+            ),
     );
   }
 }

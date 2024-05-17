@@ -36,5 +36,5 @@ class HomeLoaded extends HomeState {
   final String currentLocationInCity;
 
   @override
-  List<Object> get props => [todayTiming, doaDaily, currentLocation];
+  List<Object> get props => [todayTiming, tomorrowTiming ?? [], currentLocationInCity, doaDaily, currentLocation];
 }

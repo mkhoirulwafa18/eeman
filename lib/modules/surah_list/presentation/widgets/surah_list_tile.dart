@@ -22,6 +22,7 @@ class SurahListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      tileColor: Colors.transparent,
       leading: RubElHizb(
         number: resultSurah[index].number.toString(),
       ),

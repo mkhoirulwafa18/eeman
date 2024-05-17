@@ -8,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:quran_app/common/common.dart';
 import 'package:quran_app/locator.dart';
-import 'package:quran_app/services/app_path_provider.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -31,7 +30,6 @@ Future<void> init() async {
 
   Bloc.observer = AppBlocObserver();
   await ScreenUtil.ensureScreenSize();
-  await AppPathProvider.initPath();
   await Hive.initFlutter();
   NotificationHelper();
   setStatusBar();

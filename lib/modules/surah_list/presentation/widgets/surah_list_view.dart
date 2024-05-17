@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,7 +64,7 @@ class SurahListView extends StatelessWidget {
 
   Future<void> navigateToLastRead(BuildContext context, List<Surah> surahList) async {
     final stringData = await locator<LastReadAyahLocalData>().getValue();
-    log('clicked terakhir baca : $stringData');
+
     if (stringData != null) {
       final ayah = Verse.fromMap(jsonDecode(stringData) as Map<String, dynamic>);
       await Navigator.push<MaterialPageRoute<dynamic>>(
@@ -104,7 +103,6 @@ class SurahListView extends StatelessWidget {
               content: InputBox(
                 labelText: l10n.findSurah,
                 onChanged: (key) {
-                  log('ini adalah keywordnya : $key');
                   context.read<SurahListCubit>().onSearch(key);
                 },
               ),

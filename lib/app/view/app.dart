@@ -7,14 +7,14 @@ import 'package:quran_app/common/common.dart';
 import 'package:quran_app/common/global_variable.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/presentation/home_page.dart';
-import 'package:quran_app/modules/prayer_time/prayer_time_page.dart';
-import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/alarmlist_cubit.dart';
-import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/datepicker_cubit.dart';
-import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/list_filter.dart';
-import 'package:quran_app/modules/surah/surah_page.dart';
+import 'package:quran_app/modules/prayer_time/prayer_time.dart';
+import 'package:quran_app/modules/qibla/qibla.dart';
+import 'package:quran_app/modules/settings/domain/settings_usecase.dart';
+import 'package:quran_app/modules/settings/presentation/blocs/cubit/settings_cubit.dart';
+import 'package:quran_app/modules/settings/settings.dart';
+import 'package:quran_app/modules/surah/surah.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 import 'package:quran_app/modules/surah_list/surah_list.dart';
-import 'package:quran_app/modules/tasbih/cubit/counter_cubit.dart';
 import 'package:quran_app/modules/tasbih/tasbih_page.dart';
 
 class App extends StatelessWidget {
@@ -28,13 +28,13 @@ class App extends StatelessWidget {
           create: (context) => DatepickerCubit(),
         ),
         BlocProvider<AlarmListCubit>(
-          create: (context) => AlarmListCubit()..init(),
+          create: (context) => AlarmListCubit(locator<AlarmListLocalData>())..init(),
         ),
         BlocProvider<ListFilterPrayerTimeCubit>(
-          create: (context) => ListFilterPrayerTimeCubit()..init(),
+          create: (context) => ListFilterPrayerTimeCubit(locator<PrayerTimeFilterListLocalData>())..init(),
         ),
-        BlocProvider<CounterCubit>(
-          create: (context) => CounterCubit(),
+        BlocProvider<SettingsCubit>(
+          create: (context) => SettingsCubit(locator<SettingsUseCaseImpl>())..init(),
         ),
       ],
       child: BetterFeedback(
@@ -85,6 +85,14 @@ class App extends StatelessWidget {
                   city: '',
                 ),
             '/tasbih': (context) => const TasbihPage(),
+            '/settings': (context) => const SettingsPage(),
+            '/qibla': (context) => QiblaPage(
+                  location: Location(
+                    latitude: 0,
+                    longitude: 0,
+                    timestamp: DateTime.now(),
+                  ),
+                ),
           },
         ),
       ),

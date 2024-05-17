@@ -1,9 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/l10n/l10n.dart';
-import 'package:quran_app/modules/surah/surah_page.dart';
+import 'package:quran_app/modules/surah/surah.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 
 enum ButtonActionType { back, next }
@@ -31,7 +29,6 @@ class ActionButton extends StatelessWidget {
             height: 50,
             child: ElevatedButton.icon(
               onPressed: () {
-                log('actionButton Pressed');
                 Navigator.pushReplacement<MaterialPageRoute<dynamic>, MaterialPageRoute<dynamic>>(
                   context,
                   MaterialPageRoute(

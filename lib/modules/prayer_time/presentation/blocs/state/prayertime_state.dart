@@ -1,29 +1,35 @@
-part of '../cubit/prayertime_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:quran_app/common/domain/pray.dart';
 
-abstract class PrayertimeState extends Equatable {
-  const PrayertimeState();
-
+abstract class PrayerTimeState extends Equatable {
+  const PrayerTimeState();
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-class PrayertimeInitial extends PrayertimeState {}
+class PrayerTimeInitial extends PrayerTimeState {}
 
-class PrayertimeLoading extends PrayertimeInitial {}
+class PrayerTimeLoading extends PrayerTimeState {}
 
-class PrayertimeLoaded extends PrayertimeInitial {
-  PrayertimeLoaded({required this.listOfTiming, this.city});
-  final List<Pray> listOfTiming;
-  final String? city;
-
-  @override
-  List<Object> get props => [listOfTiming, city ?? ''];
-}
-
-class PrayertimeError extends PrayertimeInitial {
-  PrayertimeError({required this.message});
+class PrayerTimeError extends PrayerTimeState {
+  const PrayerTimeError(this.message);
   final String message;
 
   @override
   List<Object> get props => [message];
+}
+
+class PrayerTimeLoaded extends PrayerTimeState {
+  const PrayerTimeLoaded({
+    required this.currentSelectedTiming,
+    required this.currentLocation,
+    required this.currentLocationInCity,
+  });
+  final List<Pray> currentSelectedTiming;
+  final Location currentLocation;
+  final String currentLocationInCity;
+
+  @override
+  List<Object> get props => [currentSelectedTiming, currentLocation, currentLocationInCity];
 }

@@ -22,7 +22,6 @@ List<String> get shalats => [
 
 Color get backgroundColor => const Color.fromARGB(255, 250, 250, 250);
 Color get backgroundColor2 => const Color(0xff234D60);
-Color get backgroundColorAlter => const Color(0xffF6E8D4);
 
 Color get cardGreyColor => const Color(0xff788E99);
 Color get cardPeachColor => const Color(0xffEA896C);

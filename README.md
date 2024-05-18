@@ -8,7 +8,7 @@ An open source, Quran & Prayer Times, built with Flutter<br />
 
 ---
 
-![Eeman Mobile](assets\screenshots\showcase.png)
+![Eeman Mobile](assets/screenshots/showcase.png)
 
 </div>
 

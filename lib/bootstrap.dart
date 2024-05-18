@@ -5,7 +5,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:quran_app/common/common.dart';
 import 'package:quran_app/locator.dart';
 
@@ -30,7 +29,6 @@ Future<void> init() async {
 
   Bloc.observer = AppBlocObserver();
   await ScreenUtil.ensureScreenSize();
-  await Hive.initFlutter();
   NotificationHelper();
   setStatusBar();
 

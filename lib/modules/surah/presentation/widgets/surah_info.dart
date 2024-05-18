@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
+import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/gen/assets.gen.dart';
+import 'package:quran_app/gen/fonts.gen.dart';
 import 'package:quran_app/modules/surah/presentation/blocs/cubit/murattal_cubit.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 import 'package:quran_app/modules/surah_list/presentation/widgets/rub_el_hizb.dart';
@@ -60,7 +62,7 @@ class SurahInfo extends StatelessWidget {
                         surah.name?.translation?.id ?? '',
                         style: TextStyle(
                           color: backgroundColor.withOpacity(0.5),
-                          fontFamily: 'Poppins',
+                          fontFamily: FontFamily.poppins,
                         ),
                       ),
                     ],
@@ -97,26 +99,20 @@ class SurahInfo extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 12,
-              ),
+              const EemanSpacing.vertical12(),
               Text(
                 '${surah.revelation?.id?.name} - ${surah.numberOfVerses} ayat',
                 style: smallText,
               ),
               if (surah.number != 1) ...[
-                const SizedBox(
-                  height: 16,
-                ),
+                const EemanSpacing.vertical16(),
                 Assets.icons.basmalah.svg(
                   width: 0.4.sw,
                   color: backgroundColor,
                 ),
               ] else
                 const SizedBox(),
-              const SizedBox(
-                height: 16,
-              ),
+              const EemanSpacing.vertical16(),
             ],
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/common.dart';
+import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/settings/presentation/blocs/cubit/settings_cubit.dart';
 import 'package:quran_app/modules/settings/presentation/blocs/state/settings_state.dart';
@@ -20,7 +21,7 @@ void showPreferencesDialog(
           return AlertDialog(
             backgroundColor: backgroundColor2,
             title: Text(
-              'Atur tampilan',
+              l10n.setAppearance,
               style: lightBoldTitle,
             ),
             content: Column(
@@ -31,7 +32,7 @@ void showPreferencesDialog(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Tampilkan terjemahan',
+                      l10n.showX('Translation'),
                       style: smallText,
                     ),
                     Switch.adaptive(
@@ -49,7 +50,7 @@ void showPreferencesDialog(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Tampilkan transliteration',
+                      l10n.showX('Latin'),
                       style: smallText,
                     ),
                     Switch.adaptive(
@@ -63,14 +64,12 @@ void showPreferencesDialog(
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const EemanSpacing.vertical12(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Ukuran Font Arabic',
+                      l10n.xFontSize('Arabic'),
                       style: smallText,
                     ),
                     Text(

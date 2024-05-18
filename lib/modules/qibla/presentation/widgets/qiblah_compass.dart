@@ -6,6 +6,7 @@ import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/gen/assets.gen.dart';
+import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/qibla/presentation/blocs/cubit/qibla_cubit.dart';
 import 'package:quran_app/modules/qibla/presentation/blocs/state/qibla_state.dart';
 import 'package:quran_app/modules/qibla/presentation/widgets/location_error.dart';
@@ -23,7 +24,7 @@ class QiblahCompass extends StatelessWidget {
 
         if (state.locationStatus.enabled == false) {
           return LocationErrorWidget(
-            error: 'Hidupkan Lokasi GPS untuk mengakses\nfitur ini.',
+            error: context.l10n.locationNotEnabledErrorMesage,
             callback: () => context.read<QiblahCubit>().requestPermissions(),
           );
         }
@@ -39,12 +40,12 @@ class QiblahCompass extends StatelessWidget {
             );
           case LocationPermission.denied:
             return LocationErrorWidget(
-              error: 'Location service permission denied',
+              error: context.l10n.locationDeniedErrorMesage,
               callback: () => context.read<QiblahCubit>().requestPermissions(),
             );
           case LocationPermission.deniedForever:
             return LocationErrorWidget(
-              error: 'Location service Denied Forever !',
+              error: context.l10n.locationDeniedErrorMesage,
               callback: () => context.read<QiblahCubit>().requestPermissions(),
             );
           // case GeolocationStatus.unknown:

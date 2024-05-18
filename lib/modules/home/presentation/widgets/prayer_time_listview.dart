@@ -57,7 +57,7 @@ class PrayerTimeListView extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        state is HomeLoaded ? state.todayTiming[index].name.replaceAll(' ', '\n') : 'Shalat',
+                        state is HomeLoaded ? state.todayTiming[index].name.replaceAll(' ', '\n') : '',
                         style: smallText.copyWith(color: backgroundColor2, fontSize: 10),
                         textAlign: TextAlign.center,
                       ),

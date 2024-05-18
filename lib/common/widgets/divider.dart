@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/common.dart';
+import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/gen/assets.gen.dart';
 
 class CompassDivider extends StatelessWidget {
@@ -32,9 +33,7 @@ class CompassDivider extends StatelessWidget {
     return Row(
       children: [
         Expanded(child: buildHzAnimatedDivider()),
-        const SizedBox(
-          height: 8,
-        ),
+        const EemanSpacing.vertical8(),
         TweenAnimationBuilder<double>(
           duration: duration,
           tween: Tween(begin: 0, end: .5),
@@ -51,9 +50,7 @@ class CompassDivider extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(
-          height: 8,
-        ),
+        const EemanSpacing.vertical8(),
         Expanded(child: buildHzAnimatedDivider(alignLeft: true)),
       ],
     );

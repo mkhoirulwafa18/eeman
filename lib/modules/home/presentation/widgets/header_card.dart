@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/extensions/time_extension.dart';
+import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/gen/assets.gen.dart';
 import 'package:quran_app/modules/home/presentation/widgets/date_and_place.dart';
 import 'package:quran_app/modules/home/presentation/widgets/next_prayer_time.dart';
@@ -77,9 +78,7 @@ class _HeaderCardState extends State<HeaderCard> {
           NextPrayerTime(
             currentHour: _hourMinute,
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const EemanSpacing.vertical16(),
         ],
       ),
     );

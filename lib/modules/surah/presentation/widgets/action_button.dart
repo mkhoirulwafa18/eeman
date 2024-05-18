@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/gen/fonts.gen.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/surah/surah.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
@@ -47,7 +48,7 @@ class ActionButton extends StatelessWidget {
               ),
               label: Text(
                 type == ButtonActionType.back ? l10n.back : l10n.next,
-                style: TextStyle(fontFamily: 'Poppins', color: backgroundColor),
+                style: TextStyle(fontFamily: FontFamily.poppins, color: backgroundColor),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: backgroundColor2,

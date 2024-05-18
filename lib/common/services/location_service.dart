@@ -12,11 +12,6 @@ class LocationService {
   Location? currentLocation;
 
   Future<Location?> getLocation() async {
-    final internet = await checkInternetConnection();
-    if (!internet) {
-      return null;
-    }
-
     final locationPermission = await _requestLocationPermission();
     if (locationPermission == LocationPermission.denied || locationPermission == LocationPermission.deniedForever) {
       return null; // Indicate permission issue

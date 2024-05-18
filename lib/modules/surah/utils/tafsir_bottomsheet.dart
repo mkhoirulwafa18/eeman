@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 
+/// Currently disabled for v2.0
 void showTafsirBottomSheet(
   BuildContext context,
   Surah surah,
@@ -48,9 +50,7 @@ void showTafsirBottomSheet(
                           l10n.tafsirSource,
                           style: smallText.copyWith(color: backgroundColor2),
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
+                        const EemanSpacing.vertical16(),
                         // Text(
                         //   (index == 0 && state.numberSurah != 1
                         //           ? state.ayatSurah[index].text!.substring(39)
@@ -60,9 +60,7 @@ void showTafsirBottomSheet(
                         //   textAlign: TextAlign.right,
                         //   textDirection: TextDirection.rtl,
                         // ),
-                        const SizedBox(
-                          height: 16,
-                        ),
+                        const EemanSpacing.vertical16(),
                         // Text(
                         //   state.tafsirSurah.id!.kemenag
                         //           ?.text!['${index + 1}'] ??

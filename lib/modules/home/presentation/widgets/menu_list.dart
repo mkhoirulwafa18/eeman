@@ -37,7 +37,7 @@ class MenuList extends StatelessWidget {
               MaterialPageRoute<void>(builder: (BuildContext context) => QiblaPage(location: location)),
             ),
             item: MenuItem(
-              title: 'Arah\nKiblat',
+              title: l10n.qiblaDirection,
               icon: Assets.icons.compassPng.image(width: 50, height: 50),
               bgColor: cardYellowColor,
             ),
@@ -85,7 +85,7 @@ class MenuList extends StatelessWidget {
           GridItem(
             onTap: () => Navigator.pushNamed(context, '/settings'),
             item: MenuItem(
-              title: 'Pengaturan',
+              title: l10n.settings,
               icon: Assets.icons.setting.image(width: 50, height: 50),
               bgColor: cardYellowColor,
             ),

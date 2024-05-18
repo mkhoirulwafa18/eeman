@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/gen/assets.gen.dart';
+import 'package:quran_app/gen/fonts.gen.dart';
 
 class RubElHizb extends StatelessWidget {
   const RubElHizb({
@@ -30,7 +31,7 @@ class RubElHizb extends StatelessWidget {
               number,
               style: TextStyle(
                 color: color ?? backgroundColor2,
-                fontFamily: 'isepMisbah',
+                fontFamily: FontFamily.isepMisbah,
               ),
               textAlign: TextAlign.center,
             ),

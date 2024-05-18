@@ -6,6 +6,7 @@ import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
+import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/modules/settings/presentation/blocs/cubit/settings_cubit.dart';
 import 'package:quran_app/modules/settings/presentation/blocs/state/settings_state.dart';
 import 'package:quran_app/modules/surah/data/domain/verse_model.dart';
@@ -200,7 +201,7 @@ class _SurahViewState extends State<SurahView> {
             children: [
               Visibility(
                 visible: (userPref?.showLatin ?? false || (userPref?.showTranslation ?? false)) ? true : false,
-                child: const SizedBox(height: 16),
+                child: const EemanSpacing.vertical16(),
               ),
               Visibility(
                 visible: userPref?.showLatin ?? true,
@@ -219,7 +220,7 @@ class _SurahViewState extends State<SurahView> {
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
+              const EemanSpacing.vertical8(),
               Visibility(
                 visible: userPref?.showTranslation ?? true,
                 child: RichText(

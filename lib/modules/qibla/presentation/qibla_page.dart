@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
+import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/qibla/presentation/blocs/cubit/qibla_cubit.dart';
 import 'package:quran_app/modules/qibla/presentation/blocs/state/qibla_state.dart';
 import 'package:quran_app/modules/qibla/presentation/widgets/qiblah_compass.dart';
@@ -18,15 +19,15 @@ class QiblaPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => QiblahCubit()..init(),
       child: BasePage.noPadding(
-        appBar: const CustomAppBar(
-          title: 'Qibla',
+        appBar: CustomAppBar(
+          title: context.l10n.qiblaDirection,
         ),
         child: BlocBuilder<QiblahCubit, QiblahState>(
           builder: (context, state) {
             if (state.isSupported) {
               return const QiblahCompass();
             } else {
-              return const Text('Sensor tidak didukung');
+              return Text(context.l10n.sensorNotSupported);
             }
           },
         ),

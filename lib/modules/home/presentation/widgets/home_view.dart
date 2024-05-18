@@ -59,7 +59,7 @@ class HomeView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Jadwal Sholat',
+                          l10n.shalatTime.replaceAll('\n', ' '),
                           style: inputLabel.copyWith(color: backgroundColor2, fontWeight: FontWeight.bold),
                         ),
                         GestureDetector(
@@ -80,7 +80,7 @@ class HomeView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                'more',
+                                l10n.more,
                                 style: smallText.copyWith(color: backgroundColor2),
                               ),
                               const Icon(
@@ -107,7 +107,7 @@ class HomeView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 20, bottom: 8),
                     child: Text(
-                      'Eksplor',
+                      l10n.explore,
                       style: inputLabel.copyWith(color: backgroundColor2, fontWeight: FontWeight.bold),
                     ),
                   ),

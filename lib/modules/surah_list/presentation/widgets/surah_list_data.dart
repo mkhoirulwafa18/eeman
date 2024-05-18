@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/gen/fonts.gen.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 import 'package:quran_app/modules/surah_list/presentation/widgets/surah_list_tile.dart';
@@ -41,7 +42,7 @@ class SurahListData extends StatelessWidget {
                 child: Text(
                   l10n.errorNoSurahFound,
                   style: TextStyle(
-                    fontFamily: 'Poppins',
+                    fontFamily: FontFamily.poppins,
                     color: backgroundColor2,
                   ),
                   textAlign: TextAlign.center,

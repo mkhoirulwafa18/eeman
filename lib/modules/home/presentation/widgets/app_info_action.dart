@@ -2,6 +2,7 @@ import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:quran_app/common/common.dart';
+import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/l10n/l10n.dart';
 
 class AppInfoAction extends StatelessWidget {
@@ -25,9 +26,7 @@ class AppInfoAction extends StatelessWidget {
                 l10n.appInfo,
                 style: smallText,
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              const EemanSpacing.vertical16(),
               Text(
                 l10n.feedbackInfo,
                 style: smallText,
@@ -46,8 +45,8 @@ class AppInfoAction extends StatelessWidget {
                 final screenshotFilePath = await writeImageToStorage(feedback.screenshot);
                 final email = Email(
                   body: feedback.text,
-                  subject: 'Eeman App Feedback',
-                  recipients: ['wafastarzteam@gmail.com'],
+                  subject: l10n.emailFeedbackSubject,
+                  recipients: [emailForReceivingEmailFeedback],
                   attachmentPaths: [screenshotFilePath],
                 );
                 await FlutterEmailSender.send(email);
@@ -57,7 +56,7 @@ class AppInfoAction extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.only(right: 24),
+        padding: const EdgeInsets.only(right: EemanSizes.s24),
         child: Icon(
           Icons.info_outline_rounded,
           color: backgroundColor2,

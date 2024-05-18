@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quran_app/common/widgets/spacing.dart';
+import 'package:quran_app/l10n/l10n.dart';
 
 class LocationErrorWidget extends StatelessWidget {
   const LocationErrorWidget({super.key, this.error, this.callback});
@@ -7,7 +9,7 @@ class LocationErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const box = SizedBox(height: 32);
+    const box = EemanSpacing.vertical32();
     const errorColor = Color(0xffb00020);
 
     return Center(
@@ -26,7 +28,7 @@ class LocationErrorWidget extends StatelessWidget {
           ),
           box,
           ElevatedButton(
-            child: const Text('Retry'),
+            child: Text(context.l10n.retry),
             onPressed: () {
               // ignore: avoid_dynamic_calls, prefer_null_aware_method_calls
               if (callback != null) callback!();

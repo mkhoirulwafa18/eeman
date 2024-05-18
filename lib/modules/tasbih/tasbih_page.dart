@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
+import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/tasbih/cubit/counter_cubit.dart';
 import 'package:quran_app/modules/tasbih/widgets/custom_painter.dart';
@@ -35,9 +36,7 @@ class TasbihPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const SizedBox(
-                        height: 90,
-                      ),
+                      const SizedBox(height: EemanSizes.s80 + EemanSizes.s8),
                       Container(
                         width: 320,
                         padding: const EdgeInsets.all(16),
@@ -69,7 +68,7 @@ class TasbihPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      const EemanSpacing.vertical32(),
                       SizedBox(
                         width: 400,
                         child: Row(
@@ -79,8 +78,8 @@ class TasbihPage extends StatelessWidget {
                             GestureDetector(
                               onTap: () => context.read<CounterCubit>().decrement(),
                               child: Container(
-                                width: 70,
-                                height: 70,
+                                width: EemanSizes.s72,
+                                height: EemanSizes.s72,
                                 decoration: BoxDecoration(
                                   color: backgroundColor2.withOpacity(.5),
                                   shape: BoxShape.circle,
@@ -94,8 +93,8 @@ class TasbihPage extends StatelessWidget {
                             GestureDetector(
                               onTap: () => context.read<CounterCubit>().reset(),
                               child: Container(
-                                width: 70,
-                                height: 70,
+                                width: EemanSizes.s72,
+                                height: EemanSizes.s72,
                                 decoration: BoxDecoration(
                                   color: backgroundColor2.withOpacity(.5),
                                   shape: BoxShape.circle,
@@ -109,9 +108,7 @@ class TasbihPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 30,
-                      ),
+                      const EemanSpacing.vertical32(),
                       GestureDetector(
                         onTap: () {
                           context.read<CounterCubit>().increment();
@@ -128,9 +125,7 @@ class TasbihPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 50,
-                      ),
+                      const EemanSpacing.vertical52(),
                     ],
                   );
                 },

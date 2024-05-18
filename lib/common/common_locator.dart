@@ -15,7 +15,5 @@ void setupLocatorCommon() {
     // *LocalData
     ..registerLazySingleton(PreferencesLocalData.new)
     // *LocationService
-    ..registerLazySingleton(LocationService.new)
-    // *LocationService
-    ..registerLazySingleton(HttpNetworkService.new);
+    ..registerLazySingleton(LocationService.new);
 }

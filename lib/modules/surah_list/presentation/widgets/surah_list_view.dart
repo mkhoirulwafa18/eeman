@@ -16,7 +16,6 @@ import 'package:quran_app/modules/surah_list/presentation/widgets/surah_list_dat
 class SurahListView extends StatelessWidget {
   const SurahListView({super.key});
 
-  // void goToSurah({int? noSurah, bool? startScroll}) {
   MaterialBanner _showMaterialBanner(BuildContext context, List<Surah> surahList) {
     return MaterialBanner(
       content: Text(

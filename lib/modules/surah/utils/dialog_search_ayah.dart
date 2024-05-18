@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/input_box.dart';
+import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -30,9 +31,7 @@ void showSearchAyahDialog(
               l10n.totalAyat(totalAyat.toString()),
               style: smallText,
             ),
-            const SizedBox(
-              height: 8,
-            ),
+            const EemanSpacing.vertical8(),
             InputBox(
               labelText: l10n.whatAyah,
               controller: controller,

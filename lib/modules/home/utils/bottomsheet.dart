@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
+import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/modules/home/data/domain/doa_daily.dart';
 
 void showAppBottomSheet(BuildContext context, List<DoaDaily> doaDaily) {
@@ -86,18 +87,18 @@ class BottomSheetDoaContent extends StatelessWidget {
                         style: arabicText,
                         textDirection: TextDirection.rtl,
                       ),
-                      const SizedBox(height: 8),
+                      const EemanSpacing.vertical8(),
                       Text(
                         doaDaily[index].latin ?? '',
                         style: inputLabel.copyWith(
                           color: backgroundColor2.withOpacity(0.7),
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      const EemanSpacing.vertical4(),
                       Divider(
                         color: backgroundColor2.withOpacity(.5),
                       ),
-                      const SizedBox(height: 4),
+                      const EemanSpacing.vertical4(),
                       Text(
                         doaDaily[index].translation ?? '',
                         style: inputLabel.copyWith(

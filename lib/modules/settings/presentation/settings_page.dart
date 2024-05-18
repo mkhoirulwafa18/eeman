@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/common.dart';
 import 'package:quran_app/common/global_variable.dart';
 import 'package:quran_app/common/widgets/divider.dart';
+import 'package:quran_app/common/widgets/spacing.dart';
+import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/settings/domain/settings_usecase.dart';
 import 'package:quran_app/modules/settings/presentation/blocs/cubit/settings_cubit.dart';
 import 'package:quran_app/modules/settings/presentation/blocs/state/settings_state.dart';
@@ -16,6 +18,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return BlocProvider(
       create: (context) => SettingsCubit(locator<SettingsUseCaseImpl>())..init(),
       child: BlocBuilder<SettingsCubit, SettingsState>(
@@ -32,7 +35,7 @@ class SettingsPage extends StatelessWidget {
                   elevation: 0,
                   scrolledUnderElevation: 0,
                   title: Text(
-                    'Pengaturan',
+                    l10n.settings,
                     style: largeText.copyWith(color: backgroundColor, fontWeight: FontWeight.bold),
                   ),
                   // actions: [AppInfoAction(l10n: l10n)],
@@ -83,7 +86,7 @@ class SettingsPage extends StatelessWidget {
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const SizedBox(height: 16),
+                              const EemanSpacing.vertical16(),
                               Visibility(
                                 visible: state.userPreferences?.showLatin ?? true,
                                 child: RichText(
@@ -101,7 +104,7 @@ class SettingsPage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              const EemanSpacing.vertical8(),
                               Visibility(
                                 visible: state.userPreferences?.showTranslation ?? true,
                                 child: RichText(
@@ -143,7 +146,7 @@ class SettingsPage extends StatelessWidget {
                       ListTile(
                         dense: true,
                         // contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-                        title: const Text('Ukuran Font Arabic'),
+                        title: Text(l10n.xFontSize('Arabic')),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -190,7 +193,7 @@ class SettingsPage extends StatelessWidget {
                       ListTile(
                         dense: true,
                         // contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-                        title: const Text('Tampilkan Latin'),
+                        title: Text(l10n.showX('Latin')),
                         trailing: Switch.adaptive(
                           value: state.userPreferences?.showLatin ?? true,
                           activeColor: backgroundColor2,
@@ -204,7 +207,7 @@ class SettingsPage extends StatelessWidget {
                       ListTile(
                         dense: true,
                         // contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-                        title: const Text('Ukuran Font Latin'),
+                        title: Text(l10n.xFontSize('Latin')),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -251,7 +254,7 @@ class SettingsPage extends StatelessWidget {
                       ListTile(
                         dense: true,
                         // contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-                        title: const Text('Tampilkan Terjemahan'),
+                        title: Text(l10n.showX('Translation')),
                         trailing: Switch.adaptive(
                           value: state.userPreferences?.showTranslation ?? true,
                           activeColor: backgroundColor2,
@@ -265,7 +268,7 @@ class SettingsPage extends StatelessWidget {
                       ListTile(
                         dense: true,
                         // contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-                        title: const Text('Ukuran Font Terjemahan'),
+                        title: Text(l10n.xFontSize('Translation')),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

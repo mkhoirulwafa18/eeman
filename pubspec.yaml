@@ -12,7 +12,7 @@ dependencies:
   bloc: ^8.1.0
   date_picker_timeline: ^1.2.3
   equatable: ^2.0.5
-  feedback: ^2.6.0
+  feedback: ^3.1.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1

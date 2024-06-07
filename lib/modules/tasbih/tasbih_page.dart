@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
 import 'package:quran_app/common/widgets/spacing.dart';
+import 'package:quran_app/gen/fonts.gen.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/tasbih/cubit/counter_cubit.dart';
 import 'package:quran_app/modules/tasbih/widgets/custom_painter.dart';
@@ -15,6 +17,7 @@ class TasbihPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final colorScheme = Theme.of(context).colorScheme;
     return BlocProvider(
       create: (context) => CounterCubit(),
       child: BasePage.noPadding(
@@ -29,7 +32,7 @@ class TasbihPage extends StatelessWidget {
                 323,
                 323 * 1.4086687306501549,
               ),
-              painter: RPSCustomPainter(),
+              painter: RPSCustomPainter(context),
               child: BlocBuilder<CounterCubit, CounterState>(
                 builder: (context, state) {
                   return Column(
@@ -42,7 +45,7 @@ class TasbihPage extends StatelessWidget {
                         padding: const EdgeInsets.all(16),
                         margin: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                         decoration: BoxDecoration(
-                          color: backgroundColor2.withOpacity(.7),
+                          color: colorScheme.primary.withOpacity(.7),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: RichText(
@@ -51,16 +54,17 @@ class TasbihPage extends StatelessWidget {
                             children: [
                               TextSpan(
                                 text: '0' * (6 - state.count.toString().length),
-                                style: lightBoldTitle.copyWith(
-                                  fontFamily: 'DsDigital',
+                                style: context.displayLarge?.copyWith(
+                                  fontFamily: FontFamily.dsDigital,
                                   fontSize: 50,
-                                  color: backgroundColor.withOpacity(.1),
+                                  color: colorScheme.background.withOpacity(.1),
                                 ),
                               ),
                               TextSpan(
                                 text: state.count.toString(),
-                                style: lightBoldTitle.copyWith(
-                                  fontFamily: 'DsDigital',
+                                style: context.displayLarge?.copyWith(
+                                  fontFamily: FontFamily.dsDigital,
+                                  color: colorScheme.secondary,
                                   fontSize: 50,
                                 ),
                               ),
@@ -81,12 +85,12 @@ class TasbihPage extends StatelessWidget {
                                 width: EemanSizes.s72,
                                 height: EemanSizes.s72,
                                 decoration: BoxDecoration(
-                                  color: backgroundColor2.withOpacity(.5),
+                                  color: colorScheme.onBackground.withOpacity(.5),
                                   shape: BoxShape.circle,
                                 ),
                                 child: Icon(
                                   Icons.undo_rounded,
-                                  color: backgroundColor2,
+                                  color: colorScheme.onBackground,
                                 ),
                               ),
                             ),
@@ -96,12 +100,12 @@ class TasbihPage extends StatelessWidget {
                                 width: EemanSizes.s72,
                                 height: EemanSizes.s72,
                                 decoration: BoxDecoration(
-                                  color: backgroundColor2.withOpacity(.5),
+                                  color: colorScheme.onBackground.withOpacity(.5),
                                   shape: BoxShape.circle,
                                 ),
                                 child: Icon(
                                   Icons.replay_rounded,
-                                  color: backgroundColor2,
+                                  color: colorScheme.onBackground,
                                 ),
                               ),
                             ),
@@ -119,7 +123,7 @@ class TasbihPage extends StatelessWidget {
                           width: 126,
                           height: 126,
                           decoration: BoxDecoration(
-                            color: backgroundColor2,
+                            color: colorScheme.onBackground,
                             shape: BoxShape.circle,
                             boxShadow: [primaryShadow],
                           ),

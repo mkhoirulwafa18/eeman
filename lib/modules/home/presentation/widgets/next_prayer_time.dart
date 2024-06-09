@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/domain/pray.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/presentation/blocs/cubit/home_cubit.dart';
 import 'package:quran_app/modules/home/presentation/blocs/state/home_state.dart';
@@ -20,13 +20,13 @@ class NextPrayerTime extends StatelessWidget {
           final timeDiff = _calculateTimeDiff(context, todayTimings, tomorrowTimings ?? []);
           return Text(
             timeDiff,
-            style: smallText.copyWith(color: backgroundColor),
+            style: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.secondary),
             textAlign: TextAlign.center,
           );
         } else {
           return Text(
             context.l10n.dontForgetPray,
-            style: smallText.copyWith(color: backgroundColor),
+            style: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.secondary),
           );
         }
       },

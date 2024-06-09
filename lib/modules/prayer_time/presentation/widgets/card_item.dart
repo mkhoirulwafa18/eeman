@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/alarmlist_cubit.dart';
 import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/list_filter.dart';
 
@@ -42,7 +43,9 @@ class CardItem extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: isPassed ? backgroundColor2 : backgroundColor2.withOpacity(0.7),
+                    color: isPassed
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.primary.withOpacity(0.7),
                     boxShadow: isPassed ? [primaryShadow] : [],
                     border: isPassed && active ? Border.all(color: Colors.red, width: 2) : null,
                   ),
@@ -58,15 +61,19 @@ class CardItem extends StatelessWidget {
                               children: [
                                 Text(
                                   hour,
-                                  style: lightBoldTitle.copyWith(
+                                  style: context.displayLarge?.copyWith(
                                     fontSize: 50,
-                                    color: isPassed ? backgroundColor : backgroundColor.withOpacity(0.7),
+                                    color: isPassed
+                                        ? Theme.of(context).colorScheme.secondary
+                                        : Theme.of(context).colorScheme.secondary.withOpacity(0.7),
                                   ),
                                 ),
                                 Text(
                                   title,
-                                  style: mediumText.copyWith(
-                                    color: isPassed ? backgroundColor : backgroundColor.withOpacity(0.7),
+                                  style: context.bodyMedium?.copyWith(
+                                    color: isPassed
+                                        ? Theme.of(context).colorScheme.secondary
+                                        : Theme.of(context).colorScheme.secondary.withOpacity(0.7),
                                   ),
                                 ),
                               ],
@@ -83,7 +90,7 @@ class CardItem extends StatelessWidget {
                                         ? Icons.alarm_on_rounded
                                         : Icons.alarm_add_rounded)
                                     : Icons.alarm_off_rounded,
-                                color: backgroundColor,
+                                color: Theme.of(context).colorScheme.secondary,
                                 size: 30,
                               ),
                             ),

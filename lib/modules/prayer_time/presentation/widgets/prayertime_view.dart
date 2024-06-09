@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:quran_app/common/common.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/datepicker_cubit.dart';
 import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/prayertime_cubit.dart';
@@ -31,6 +32,7 @@ class PrayerTimeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return BlocBuilder<DatepickerCubit, DateTime>(
       builder: (context, selectedDate) {
         return WillPopScope(
@@ -45,14 +47,14 @@ class PrayerTimeView extends StatelessWidget {
               slivers: <Widget>[
                 // * App Title
                 SliverAppBar(
-                  backgroundColor: backgroundColor2,
-                  foregroundColor: backgroundColor,
+                  backgroundColor: colorScheme.primary,
+                  foregroundColor: colorScheme.secondary,
                   systemOverlayStyle: SystemUiOverlayStyle.light,
                   elevation: 0,
                   scrolledUnderElevation: 0,
                   title: Text(
                     l10n.shalatTime.replaceAll('\n', ' '),
-                    style: largeText.copyWith(color: backgroundColor, fontWeight: FontWeight.bold),
+                    style: context.displayLarge?.copyWith(color: colorScheme.secondary, fontWeight: FontWeight.bold),
                   ),
                   actions: [
                     IconButton(
@@ -62,7 +64,7 @@ class PrayerTimeView extends StatelessWidget {
                       },
                       icon: Icon(
                         Icons.filter_alt_outlined,
-                        color: backgroundColor,
+                        color: colorScheme.secondary,
                       ),
                     ),
                   ],
@@ -76,7 +78,7 @@ class PrayerTimeView extends StatelessWidget {
                   expandedHeight: MediaQuery.of(context).size.height * 0.17,
                   scrolledUnderElevation: 0,
                   automaticallyImplyLeading: false,
-                  backgroundColor: backgroundColor2,
+                  backgroundColor: colorScheme.primary,
                   flexibleSpace: Padding(
                     padding: const EdgeInsets.all(8),
                     child: Column(

@@ -18,18 +18,6 @@ List<String> get shalats => [
       'Isha',
     ];
 
-/// --------------
-/// Constant Color
-/// --------------
-
-Color get backgroundColor => const Color.fromARGB(255, 250, 250, 250);
-Color get backgroundColor2 => const Color(0xff234D60);
-
-Color get cardGreyColor => const Color(0xff788E99);
-Color get cardPeachColor => const Color(0xffEA896C);
-Color get cardGreenColor => const Color(0xff00CABC);
-Color get cardYellowColor => const Color(0xffF0A97E);
-
 /// ------------
 /// Size
 /// ------------
@@ -69,32 +57,6 @@ String? get getDeviceOS => Platform.isAndroid
     : Platform.isIOS
         ? 'ios'
         : null;
-
-MaterialColor primaryCustomSwatch = MaterialColor(0xffF8EDDD, {
-  50: backgroundColor,
-  100: backgroundColor,
-  200: backgroundColor,
-  300: backgroundColor,
-  400: backgroundColor,
-  500: backgroundColor,
-  600: backgroundColor,
-  700: backgroundColor,
-  800: backgroundColor,
-  900: backgroundColor,
-});
-
-MaterialColor primaryCustomSwatchDark = MaterialColor(0xff234D60, {
-  50: backgroundColor2,
-  100: backgroundColor2,
-  200: backgroundColor2,
-  300: backgroundColor2,
-  400: backgroundColor2,
-  500: backgroundColor2,
-  600: backgroundColor2,
-  700: backgroundColor2,
-  800: backgroundColor2,
-  900: backgroundColor2,
-});
 
 /// ----------------
 /// Status Bar Color
@@ -185,49 +147,42 @@ double setHeight(double height) => ScreenUtil().setHeight(height);
 /// Constant Base Text Styling
 /// -----------------------------------
 
-TextStyle inputLabel = TextStyle(
-  color: backgroundColor.withOpacity(0.7),
-  fontFamily: 'Poppins',
-  fontSize: 14,
-);
+// TextStyle inputLabel = TextStyle(
+//   color: backgroundColor.withOpacity(0.7),
+//   fontFamily: 'Poppins',
+//   fontSize: 14,
+// );
 
-TextStyle inputText = TextStyle(
-  color: backgroundColor,
-  fontFamily: 'Poppins',
-  fontSize: 16,
-);
+// TextStyle inputText = TextStyle(
+//   color: backgroundColor,
+//   fontFamily: 'Poppins',
+//   fontSize: 16,
+// );
 
-TextStyle lightBoldTitle = TextStyle(
-  color: backgroundColor,
-  fontFamily: 'Poppins',
-  fontWeight: FontWeight.w600,
-  fontSize: 32,
-);
+// TextStyle displayLarge = TextStyle(
+//   color: backgroundColor,
+//   fontFamily: 'Poppins',
+//   fontWeight: FontWeight.w600,
+//   fontSize: 32,
+// );
 
-TextStyle smallText = TextStyle(
-  color: backgroundColor,
-  fontFamily: 'Poppins',
-  fontSize: 12,
-);
+// TextStyle context.bodySmall = TextStyle(
+//   color: backgroundColor,
+//   fontFamily: 'Poppins',
+//   fontSize: 12,
+// );
 
-TextStyle mediumText = TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 16,
-  color: backgroundColor,
-);
+// TextStyle context.bodyMedium = TextStyle(
+//   fontFamily: 'Poppins',
+//   fontSize: 16,
+//   color: backgroundColor,
+// );
 
-TextStyle largeText = TextStyle(
-  color: backgroundColor,
-  fontFamily: 'Poppins',
-  fontSize: 24,
-);
-
-TextStyle arabicText = TextStyle(
-  fontFamily: 'isepMisbah',
-  fontSize: 24,
-  color: backgroundColor2,
-  height: 2,
-);
+// TextStyle displayLarge = TextStyle(
+//   color: backgroundColor,
+//   fontFamily: 'Poppins',
+//   fontSize: 24,
+// );
 
 /// -----------------------------------
 /// Constant Base Text Styling

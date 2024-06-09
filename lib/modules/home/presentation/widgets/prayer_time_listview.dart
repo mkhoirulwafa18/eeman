@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/gen/assets.gen.dart';
 import 'package:quran_app/modules/home/presentation/blocs/cubit/home_cubit.dart';
 import 'package:quran_app/modules/home/presentation/blocs/state/home_state.dart';
@@ -11,8 +11,8 @@ class PrayerTimeListView extends StatelessWidget {
   PrayerTimeListView({super.key});
 
   final images = <SvgPicture>[
-    Assets.icons.lastThird.svg(height: 90),
     Assets.icons.subuh.svg(height: 90),
+    Assets.icons.sunrise.svg(height: 90),
     Assets.icons.dzuhur.svg(height: 90),
     Assets.icons.ashar.svg(height: 90),
     Assets.icons.maghrib.svg(height: 90),
@@ -50,7 +50,7 @@ class PrayerTimeListView extends StatelessWidget {
                             bottom: 10,
                             child: Text(
                               state is HomeLoaded ? state.todayTiming[index].time : '00:00',
-                              style: mediumText,
+                              style: context.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.secondary),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -58,7 +58,8 @@ class PrayerTimeListView extends StatelessWidget {
                       ),
                       Text(
                         state is HomeLoaded ? state.todayTiming[index].name.replaceAll(' ', '\n') : '',
-                        style: smallText.copyWith(color: backgroundColor2, fontSize: 10),
+                        style: context.bodySmall
+                            ?.copyWith(color: Theme.of(context).colorScheme.onBackground, fontSize: 10),
                         textAlign: TextAlign.center,
                       ),
                     ],

@@ -2,7 +2,7 @@ import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/datepicker_cubit.dart';
 import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/prayertime_cubit.dart';
@@ -33,11 +33,12 @@ class _PrayerTimeHeaderContentState extends State<PrayerTimeHeaderContent> {
   @override
   Widget build(BuildContext context) {
     final dateCubit = context.read<DatepickerCubit>();
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: [
         DecoratedBox(
           decoration: BoxDecoration(
-            color: backgroundColor,
+            color: colorScheme.secondary,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
           child: DatePicker(
@@ -46,15 +47,15 @@ class _PrayerTimeHeaderContentState extends State<PrayerTimeHeaderContent> {
             width: MediaQuery.of(context).size.height / 5 / 1.8 * 0.9,
             initialSelectedDate: DateTime.now(),
             controller: controller,
-            selectionColor: backgroundColor2,
-            selectedTextColor: backgroundColor,
+            selectionColor: colorScheme.primary,
+            selectedTextColor: colorScheme.secondary,
             locale: 'id',
-            dateTextStyle: largeText.copyWith(
-              color: backgroundColor2.withOpacity(0.5),
+            dateTextStyle: context.displayLarge!.copyWith(
+              color: colorScheme.primary.withOpacity(0.5),
               fontWeight: FontWeight.w600,
             ),
-            monthTextStyle: smallText.copyWith(color: backgroundColor2.withOpacity(0.5)),
-            dayTextStyle: smallText.copyWith(color: backgroundColor2.withOpacity(0.5)),
+            monthTextStyle: context.bodySmall!.copyWith(color: colorScheme.primary.withOpacity(0.5)),
+            dayTextStyle: context.bodySmall!.copyWith(color: colorScheme.primary.withOpacity(0.5)),
             onDateChange: (date) async {
               controller.animateToDate(date);
               final updatedTimings = await context.read<PrayerTimeCubit>().getTiming(date, widget.location);
@@ -78,7 +79,7 @@ class _PrayerTimeHeaderContentState extends State<PrayerTimeHeaderContent> {
                   ),
                   Text(
                     state.currentLocationInCity,
-                    style: smallText,
+                    style: context.bodySmall?.copyWith(color: colorScheme.secondary),
                   ),
                 ],
               );

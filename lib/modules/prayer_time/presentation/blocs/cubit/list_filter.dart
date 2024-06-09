@@ -16,8 +16,8 @@ class ListFilterPrayerTimeCubit extends Cubit<List<String>> {
   Future<void> init() async {
     final hiddenPray = await filterStorage.getListValue();
 
-    if (hiddenPray != null) {
-      emit(hiddenPray);
+    if (hiddenPray!.isNotEmpty) {
+      emit(hiddenPray as List<String>);
     } else {
       emit([]);
     }

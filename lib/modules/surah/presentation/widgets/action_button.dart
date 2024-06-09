@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/constant.dart';
+
 import 'package:quran_app/gen/fonts.gen.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/surah/surah.dart';
@@ -44,14 +44,14 @@ class ActionButton extends StatelessWidget {
               },
               icon: Icon(
                 type == ButtonActionType.back ? Icons.arrow_back : Icons.arrow_forward,
-                color: backgroundColor,
+                color: Theme.of(context).colorScheme.background,
               ),
               label: Text(
                 type == ButtonActionType.back ? l10n.back : l10n.next,
-                style: TextStyle(fontFamily: FontFamily.poppins, color: backgroundColor),
+                style: TextStyle(fontFamily: FontFamily.poppins, color: Theme.of(context).colorScheme.background),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: backgroundColor2,
+                backgroundColor: Theme.of(context).colorScheme.onBackground,
               ),
             ),
           );

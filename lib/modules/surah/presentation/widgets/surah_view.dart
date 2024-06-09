@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
+import 'package:quran_app/common/themes/text_styles.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
@@ -72,7 +73,7 @@ class _SurahViewState extends State<SurahView> {
                   },
                   icon: Icon(
                     Icons.search,
-                    color: backgroundColor,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
                 IconButton(
@@ -86,7 +87,7 @@ class _SurahViewState extends State<SurahView> {
                   },
                   icon: Icon(
                     Icons.settings,
-                    color: backgroundColor,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
               ],
@@ -166,13 +167,14 @@ class _SurahViewState extends State<SurahView> {
     }
 
     final userPref = context.watch<SettingsCubit>().state.userPreferences;
+    final colorScheme = Theme.of(context).colorScheme;
     return Stack(
       children: [
         ListTile(
           onLongPress: setLastRead,
           dense: true,
           contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-          tileColor: index.isEven ? backgroundColor : backgroundColor.withAlpha(200),
+          tileColor: index.isEven ? colorScheme.background : colorScheme.background.withAlpha(200),
           title: RichText(
             textAlign: TextAlign.justify,
             textDirection: TextDirection.rtl,
@@ -180,7 +182,8 @@ class _SurahViewState extends State<SurahView> {
               children: [
                 TextSpan(
                   text: surah.verses[index].ayahText,
-                  style: arabicText.copyWith(fontSize: userPref?.arabicFontSize),
+                  style: AppTextStyles.arabicText
+                      .copyWith(fontSize: userPref?.arabicFontSize, color: colorScheme.onBackground),
                 ),
                 WidgetSpan(
                   child: Padding(
@@ -211,7 +214,7 @@ class _SurahViewState extends State<SurahView> {
                       TextSpan(
                         text: surah.verses[index].readText,
                         style: TextStyle(
-                          color: backgroundColor2,
+                          color: colorScheme.onBackground,
                           fontSize: userPref?.latinFontSize,
                           fontStyle: FontStyle.italic,
                         ),
@@ -228,7 +231,10 @@ class _SurahViewState extends State<SurahView> {
                     children: [
                       TextSpan(
                         text: surah.verses[index].indoText,
-                        style: smallText.copyWith(color: backgroundColor2, fontSize: userPref?.translationFontSize),
+                        style: context.bodySmall?.copyWith(
+                          color: colorScheme.onBackground,
+                          fontSize: userPref?.translationFontSize,
+                        ),
                       ),
 
                       /// Remove Tafsir for v2.0.0
@@ -240,7 +246,7 @@ class _SurahViewState extends State<SurahView> {
                       //       child: Icon(
                       //         Icons.info,
                       //         size: 15,
-                      //         color: backgroundColor2.withOpacity(.5),
+                      //         color: Theme.of(context).colorScheme.onBackground.withOpacity(.5),
                       //       ),
                       //     ),
                       //   ),
@@ -264,7 +270,9 @@ class _SurahViewState extends State<SurahView> {
               onTap: setLastRead,
               child: Icon(
                 isLastRead ? Icons.book_rounded : Icons.book_outlined,
-                color: isLastRead ? backgroundColor2 : backgroundColor2.withOpacity(.3),
+                color: isLastRead
+                    ? Theme.of(context).colorScheme.onBackground
+                    : Theme.of(context).colorScheme.onBackground.withOpacity(.3),
               ),
             );
           },

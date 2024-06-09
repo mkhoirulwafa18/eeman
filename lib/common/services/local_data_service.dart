@@ -24,7 +24,7 @@ abstract class LocalDataService {
 
   Future<void> setStringList(String key, List<String> value);
 
-  Future<List<String>?> getStringList(String key);
+  Future<List<dynamic>?> getStringList(String key);
 
   Future<String?> getString(String key);
 
@@ -59,8 +59,8 @@ class LocalDataServiceImpl implements LocalDataService {
   }
 
   @override
-  Future<List<String>?> getStringList(String key) async {
+  Future<List<dynamic>?> getStringList(String key) async {
     final result = await storage.read(key: key);
-    return result != null ? jsonDecode(result) as List<String> : [];
+    return result != null ? jsonDecode(result) as List<dynamic> : [];
   }
 }

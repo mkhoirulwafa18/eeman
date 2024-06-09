@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/list_filter.dart';
 
@@ -15,11 +16,12 @@ void showFilterPrayerTimeDialog(
     context: context,
     builder: (BuildContext context) {
       final state = context.watch<ListFilterPrayerTimeCubit>().state;
+      final colorScheme = Theme.of(context).colorScheme;
       return AlertDialog(
-        backgroundColor: backgroundColor2,
+        backgroundColor: colorScheme.primary,
         title: Text(
           l10n.filterList,
-          style: lightBoldTitle,
+          style: context.displayLarge?.copyWith(color: colorScheme.secondary),
         ),
         content: SingleChildScrollView(
           child: SizedBox(
@@ -29,7 +31,7 @@ void showFilterPrayerTimeDialog(
               children: shalats
                   .map(
                     (e) => CheckboxListTile(
-                      title: Text(e, style: smallText),
+                      title: Text(e, style: context.bodySmall?.copyWith(color: colorScheme.secondary)),
                       onChanged: (value) {
                         if (value != null) {
                           !value
@@ -38,6 +40,8 @@ void showFilterPrayerTimeDialog(
                         }
                       },
                       value: !state.contains(e),
+                      fillColor: MaterialStatePropertyAll(colorScheme.secondary),
+                      checkColor: colorScheme.primary,
                     ),
                   )
                   .toList(),
@@ -48,7 +52,7 @@ void showFilterPrayerTimeDialog(
           OutlinedButton(
             child: Text(
               l10n.close,
-              style: smallText,
+              style: context.bodySmall?.copyWith(color: colorScheme.secondary),
             ),
             onPressed: () {
               Navigator.of(context).pop();
@@ -56,14 +60,14 @@ void showFilterPrayerTimeDialog(
           ),
           ElevatedButton(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(backgroundColor),
+              backgroundColor: MaterialStateProperty.all(colorScheme.secondary),
             ),
             onPressed: () {
               Navigator.of(context).pop();
             },
             child: Text(
               l10n.apply,
-              style: smallText.copyWith(color: backgroundColor2),
+              style: context.bodySmall?.copyWith(color: colorScheme.primary),
             ),
           ),
         ],

@@ -16,10 +16,10 @@ class AlarmListCubit extends Cubit<List<DateTime>> {
 
   /// Initializes the cubit by retrieving the alarms from local storage
   Future<void> init() async {
-    final initial = await alarmStorage.getValue();
+    final initial = await alarmStorage.getListValue();
 
     if (initial != null) {
-      final result = initial as List<dynamic>;
+      final result = initial;
       final alarms = result.map((encoded) => DateTime.parse(encoded as String)).toList();
       emit(alarms);
     } else {
@@ -86,7 +86,7 @@ class AlarmListCubit extends Cubit<List<DateTime>> {
     await NotificationHelper().scheduledNotification(
       hour: selectedDate.hour,
       minutes: selectedDate.minute,
-      id: selectedDate.microsecondsSinceEpoch,
+      id: selectedDate.millisecond,
       title: title,
       sound: 'adzan',
     );

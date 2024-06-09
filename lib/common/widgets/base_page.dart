@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use_from_same_package
 
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/gen/assets.gen.dart';
 
 class BasePage extends StatelessWidget {
@@ -30,7 +29,6 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
       appBar: appBar,
       extendBodyBehindAppBar: true,
       floatingActionButton: floatingActionButton,
@@ -43,14 +41,17 @@ class BasePage extends StatelessWidget {
               left: 0,
               right: 0,
               bottom: 0,
-              child: Assets.icons.bgPattern.svg(color: backgroundColor2.withOpacity(.03), fit: BoxFit.fitHeight),
+              child: Assets.icons.bgPattern
+                  .svg(color: Theme.of(context).colorScheme.onBackground.withOpacity(.03), fit: BoxFit.fitHeight),
             ),
-            if (accentBackground ?? false) ...[
+            if (accentBackground ?? true) ...[
               Positioned(
                 top: -MediaQuery.of(context).size.width / 4,
                 right: -MediaQuery.of(context).size.width / 4,
-                child: Assets.icons.pattern
-                    .svg(color: backgroundColor2.withOpacity(.2), width: MediaQuery.of(context).size.width / 1.3),
+                child: Assets.icons.pattern.svg(
+                  color: Theme.of(context).colorScheme.onBackground.withOpacity(.2),
+                  width: MediaQuery.of(context).size.width / 1.3,
+                ),
               ),
             ],
             Positioned(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/prayertime_cubit.dart';
@@ -31,21 +31,21 @@ class PrayerTimeErrorWidget extends StatelessWidget {
         children: [
           Text(
             state.message == 'No Internet Connection' ? l10n.noInternetConnection : state.message,
-            style: mediumText.copyWith(
-              color: backgroundColor2,
+            style: context.bodyMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
               fontWeight: FontWeight.bold,
             ),
           ),
           const EemanSpacing.vertical8(),
           Text(
             state.message == 'No Internet Connection' ? l10n.featureNeedInternet : '',
-            style: smallText.copyWith(color: backgroundColor2),
+            style: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onBackground),
             textAlign: TextAlign.center,
           ),
           const EemanSpacing.vertical8(),
           ElevatedButton(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(backgroundColor2),
+              backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.onBackground),
             ),
             onPressed: () async {
               final updatedTimings = await context.read<PrayerTimeCubit>().getTiming(selectedDate, location);
@@ -53,7 +53,7 @@ class PrayerTimeErrorWidget extends StatelessWidget {
             },
             child: Text(
               l10n.refresh,
-              style: smallText,
+              style: context.bodySmall,
             ),
           ),
         ],

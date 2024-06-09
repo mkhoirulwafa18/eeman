@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/common.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
+import 'package:quran_app/common/themes/app_theme.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/presentation/blocs/cubit/home_cubit.dart';
 import 'package:quran_app/modules/home/presentation/blocs/state/home_state.dart';
@@ -17,22 +18,26 @@ class HomeView extends StatelessWidget {
     final l10n = context.l10n;
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
+        final theme = context.watch<AppThemeCubit>().state;
         return CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: <Widget>[
             // * App Title
             SliverAppBar(
               backgroundColor: Colors.transparent,
-              systemOverlayStyle: SystemUiOverlayStyle.dark,
+              forceMaterialTransparency: true,
               elevation: 0,
               scrolledUnderElevation: 0,
-              title: Text(
-                l10n.appName,
-                style: lightBoldTitle.copyWith(color: backgroundColor2),
-              ),
-              actions: [AppInfoAction(l10n: l10n)],
+              title: Text(l10n.appName, style: context.displayLarge),
+              actions: [
+                IconButton(
+                  onPressed: () => context.read<AppThemeCubit>().toggleTheme(),
+                  icon: Icon(theme == ThemeMode.dark ? Icons.nightlight : Icons.sunny),
+                ),
+                const AppInfoAction(),
+              ],
               centerTitle: true,
-              // pinned: true,
+              pinned: true,
             ),
             // * Header Card (Pinned when Scrolled)
             const SliverAppBar(
@@ -60,7 +65,10 @@ class HomeView extends StatelessWidget {
                       children: [
                         Text(
                           l10n.shalatTime.replaceAll('\n', ' '),
-                          style: inputLabel.copyWith(color: backgroundColor2, fontWeight: FontWeight.bold),
+                          style: context.bodySmall?.copyWith(
+                            color: Theme.of(context).colorScheme.onBackground,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -81,7 +89,9 @@ class HomeView extends StatelessWidget {
                             children: [
                               Text(
                                 l10n.more,
-                                style: smallText.copyWith(color: backgroundColor2),
+                                style: context.bodySmall?.copyWith(
+                                  color: Theme.of(context).colorScheme.onBackground,
+                                ),
                               ),
                               const Icon(
                                 Icons.arrow_forward_ios_rounded,
@@ -108,7 +118,8 @@ class HomeView extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 20, bottom: 8),
                     child: Text(
                       l10n.explore,
-                      style: inputLabel.copyWith(color: backgroundColor2, fontWeight: FontWeight.bold),
+                      style: context.bodySmall
+                          ?.copyWith(color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
                     ),
                   ),
                   MenuList(
@@ -117,6 +128,9 @@ class HomeView extends StatelessWidget {
                     location: state is HomeLoaded
                         ? state.currentLocation
                         : Location(latitude: 0, longitude: 0, timestamp: DateTime.now()),
+                  ),
+                  const SizedBox(
+                    height: EemanSizes.s24,
                   ),
                 ],
               ),

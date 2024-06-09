@@ -13,9 +13,6 @@ class FontFamily {
   /// Font family: DsDigital
   static const String dsDigital = 'DsDigital';
 
-  /// Font family: Indopak
-  static const String indopak = 'Indopak';
-
   /// Font family: Poppins
   static const String poppins = 'Poppins';
 

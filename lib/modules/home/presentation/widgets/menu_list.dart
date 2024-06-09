@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/domain/menu_item.dart';
 import 'package:quran_app/gen/assets.gen.dart';
 import 'package:quran_app/l10n/l10n.dart';
@@ -39,7 +38,6 @@ class MenuList extends StatelessWidget {
             item: MenuItem(
               title: l10n.qiblaDirection,
               icon: Assets.icons.compassPng.image(width: 50, height: 50),
-              bgColor: cardYellowColor,
             ),
           ),
           GridItem(
@@ -47,7 +45,6 @@ class MenuList extends StatelessWidget {
             item: MenuItem(
               title: l10n.quranOffline,
               icon: Assets.icons.alQuran.svg(width: 30, height: 50),
-              bgColor: cardPeachColor,
             ),
           ),
           GridItem(
@@ -63,7 +60,6 @@ class MenuList extends StatelessWidget {
             item: MenuItem(
               title: l10n.shalatTime,
               icon: Assets.icons.shalatPng.image(width: 50, height: 50),
-              bgColor: cardGreenColor,
             ),
           ),
           GridItem(
@@ -71,7 +67,6 @@ class MenuList extends StatelessWidget {
             item: MenuItem(
               title: l10n.tasbihDigital,
               icon: Assets.icons.tasbih.svg(width: 50, height: 50),
-              bgColor: cardYellowColor,
             ),
           ),
           GridItem(
@@ -79,7 +74,6 @@ class MenuList extends StatelessWidget {
             item: MenuItem(
               title: l10n.doaSehariHari,
               icon: Assets.icons.prayingHands.svg(width: 50, height: 50),
-              bgColor: cardGreyColor,
             ),
           ),
           GridItem(
@@ -87,7 +81,6 @@ class MenuList extends StatelessWidget {
             item: MenuItem(
               title: l10n.settings,
               icon: Assets.icons.setting.image(width: 50, height: 50),
-              bgColor: cardYellowColor,
             ),
           ),
         ],

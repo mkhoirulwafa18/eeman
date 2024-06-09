@@ -11,6 +11,8 @@ void setupLocatorCommon() {
     // *LocalData
     ..registerLazySingleton(AlarmListLocalData.new)
     // *LocalData
+    ..registerLazySingleton(ThemeLocalData.new)
+    // *LocalData
     ..registerLazySingleton(PrayerTimeFilterListLocalData.new)
     // *LocalData
     ..registerLazySingleton(PreferencesLocalData.new)

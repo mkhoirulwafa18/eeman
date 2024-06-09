@@ -2,7 +2,6 @@ import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/common.dart';
 import 'package:quran_app/common/widgets/spacing.dart';
-import 'package:quran_app/l10n/l10n.dart';
 
 /// A data type holding user feedback consisting of a feedback type, free from
 /// feedback text, and a sentiment rating.
@@ -37,7 +36,7 @@ class CustomFeedback {
 
 /// What type of feedback the user wants to provide.
 enum FeedbackType {
-  bugReport,
+  feedback,
   featureRequest,
 }
 
@@ -87,7 +86,7 @@ class _CustomFeedbackFormState extends State<CustomFeedbackForm> {
                   0,
                 ),
                 children: [
-                  Text(context.l10n.feedbackOrFeature),
+                  const Text('Mau kasih feedback atau request fitur?'),
                   Row(
                     children: [
                       const Padding(
@@ -102,7 +101,7 @@ class _CustomFeedbackFormState extends State<CustomFeedbackForm> {
                                 (type) => DropdownMenuItem<FeedbackType>(
                                   value: type,
                                   child: Text(
-                                    type.toString().split('.').last.replaceAll('_', ' '),
+                                    type == FeedbackType.feedback ? 'Feedback' : 'Request Fitur',
                                   ),
                                 ),
                               )
@@ -115,12 +114,12 @@ class _CustomFeedbackFormState extends State<CustomFeedbackForm> {
                     ],
                   ),
                   const EemanSpacing.vertical16(),
-                  Text(context.l10n.writeYourFeedback),
+                  const Text('Masukkan feedback kamu dibawah ya (Tarik keatas)'),
                   TextField(
                     onChanged: (newFeedback) => _customFeedback.feedbackText = newFeedback,
                   ),
                   const EemanSpacing.vertical16(),
-                  Text(context.l10n.wdyt),
+                  const Text('Bagaimana pendapatmu tentang ini?'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: FeedbackRating.values.map(_ratingToIcon).toList(),
@@ -137,7 +136,7 @@ class _CustomFeedbackFormState extends State<CustomFeedbackForm> {
                     extras: _customFeedback.toMap(),
                   )
               : null,
-          child: Text(context.l10n.send.toUpperCase()),
+          child: const Text('KIRIM'),
         ),
         const EemanSpacing.vertical8(),
       ],
@@ -159,7 +158,7 @@ class _CustomFeedbackFormState extends State<CustomFeedbackForm> {
         break;
     }
     return IconButton(
-      color: isSelected ? Theme.of(context).colorScheme.secondary : Colors.grey,
+      color: isSelected ? Theme.of(context).colorScheme.primary : Colors.grey,
       onPressed: () => setState(() => _customFeedback.rating = rating),
       icon: Icon(icon),
       iconSize: EemanSizes.s36,

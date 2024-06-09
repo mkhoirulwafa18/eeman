@@ -2,19 +2,16 @@ import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:quran_app/common/common.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/l10n/l10n.dart';
 
 class AppInfoAction extends StatelessWidget {
-  const AppInfoAction({
-    super.key,
-    required this.l10n,
-  });
-
-  final AppLocalizations l10n;
+  const AppInfoAction({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return GestureDetector(
       onTap: () {
         context.showAppDialog(
@@ -24,19 +21,21 @@ class AppInfoAction extends StatelessWidget {
             children: [
               Text(
                 l10n.appInfo,
-                style: smallText,
+                style: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.secondary),
               ),
               const EemanSpacing.vertical16(),
               Text(
                 l10n.feedbackInfo,
-                style: smallText,
+                style: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.secondary),
               ),
             ],
           ),
           action: ElevatedButton(
+            style:
+                ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Theme.of(context).colorScheme.secondary)),
             child: Text(
               l10n.feedbackAndReport,
-              style: smallText.copyWith(color: backgroundColor2),
+              style: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.primary),
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -59,7 +58,7 @@ class AppInfoAction extends StatelessWidget {
         padding: const EdgeInsets.only(right: EemanSizes.s24),
         child: Icon(
           Icons.info_outline_rounded,
-          color: backgroundColor2,
+          color: Theme.of(context).colorScheme.onBackground,
         ),
       ),
     );

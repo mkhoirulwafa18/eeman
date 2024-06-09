@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 
 class InputBox extends StatelessWidget {
   const InputBox({
@@ -27,16 +27,16 @@ class InputBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: backgroundColor2,
-        border: Border.all(color: backgroundColor, width: 4),
+        color: Theme.of(context).colorScheme.primary,
+        border: Border.all(color: Theme.of(context).colorScheme.secondary, width: 4),
         borderRadius: BorderRadius.circular(50),
       ),
       child: TextFormField(
         enabled: enabled,
-        cursorColor: backgroundColor,
+        cursorColor: Theme.of(context).colorScheme.secondary,
         controller: controller,
         onChanged: onChanged,
-        style: inputText,
+        style: context.bodyMedium,
         autofocus: autofocus,
         inputFormatters: formatter,
         keyboardType: keyboardType,
@@ -44,10 +44,10 @@ class InputBox extends StatelessWidget {
         decoration: InputDecoration(
           isDense: true,
           labelText: labelText,
-          labelStyle: inputLabel,
-          floatingLabelStyle: inputLabel.copyWith(height: 1),
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          labelStyle: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.secondary.withOpacity(0.7)),
+          floatingLabelStyle:
+              context.bodySmall?.copyWith(height: 1, color: Theme.of(context).colorScheme.secondary.withOpacity(0.7)),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           border: InputBorder.none,
           counterText: '',
         ),

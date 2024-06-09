@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -25,21 +25,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Stack(
       children: [
         AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle(
+          systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.light,
-            statusBarColor: backgroundColor2,
+            statusBarColor: Colors.transparent,
           ),
           elevation: 5,
           centerTitle: true,
+          foregroundColor: Theme.of(context).colorScheme.secondary,
           title: Text(
             title.replaceAll('\n', ' '),
-            style: lightBoldTitle.copyWith(fontSize: 24),
+            style: context.displayLarge?.copyWith(fontSize: 24, color: Theme.of(context).colorScheme.secondary),
           ),
-          backgroundColor: backgroundColor2,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           leading: showBack
               ? GestureDetector(
                   onTap: onBackTapped ?? () => Navigator.pop(context),
-                  child: Icon(Icons.arrow_back_rounded, color: backgroundColor),
+                  child: Icon(Icons.arrow_back_rounded, color: Theme.of(context).colorScheme.secondary),
                 )
               : null,
           actions: actions,

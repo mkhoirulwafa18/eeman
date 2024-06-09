@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/common/common.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 
 class GridItem extends StatelessWidget {
   const GridItem({super.key, required this.item, required this.onTap});
@@ -11,9 +12,9 @@ class GridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.background.withAlpha(180),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
-        border: Border.all(color: backgroundColor2.withOpacity(.15)),
+        border: Border.all(color: Theme.of(context).colorScheme.onBackground.withOpacity(.15)),
       ),
       child: Center(
         child: ListTile(
@@ -31,7 +32,7 @@ class GridItem extends StatelessWidget {
             item.title,
             // textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
-            style: smallText.copyWith(color: backgroundColor2),
+            style: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onBackground),
           ),
         ),
       ),

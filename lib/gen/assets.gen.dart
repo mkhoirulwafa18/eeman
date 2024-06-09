@@ -26,14 +26,11 @@ class $AssetsFontsGen {
   /// File path: assets/fonts/dsdigi.ttf
   String get dsdigi => 'assets/fonts/dsdigi.ttf';
 
-  /// File path: assets/fonts/indopak.ttf
-  String get indopak => 'assets/fonts/indopak.ttf';
-
   /// File path: assets/fonts/isepMisbah.ttf
   String get isepMisbah => 'assets/fonts/isepMisbah.ttf';
 
   /// List of all assets
-  List<String> get values => [poppinsBold, poppinsLight, poppinsRegular, dsdigi, indopak, isepMisbah];
+  List<String> get values => [poppinsBold, poppinsLight, poppinsRegular, dsdigi, isepMisbah];
 }
 
 class $AssetsIconsGen {
@@ -66,9 +63,6 @@ class $AssetsIconsGen {
   /// File path: assets/icons/isya.svg
   SvgGenImage get isya => const SvgGenImage('assets/icons/isya.svg');
 
-  /// File path: assets/icons/lastThird.svg
-  SvgGenImage get lastThird => const SvgGenImage('assets/icons/lastThird.svg');
-
   /// File path: assets/icons/last_read.svg
   SvgGenImage get lastRead => const SvgGenImage('assets/icons/last_read.svg');
 
@@ -86,9 +80,6 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/needle.svg
   SvgGenImage get needle => const SvgGenImage('assets/icons/needle.svg');
-
-  /// File path: assets/icons/pattern-2.svg
-  SvgGenImage get pattern2 => const SvgGenImage('assets/icons/pattern-2.svg');
 
   /// File path: assets/icons/pattern.svg
   SvgGenImage get pattern => const SvgGenImage('assets/icons/pattern.svg');
@@ -111,6 +102,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/subuh.svg
   SvgGenImage get subuh => const SvgGenImage('assets/icons/subuh.svg');
 
+  /// File path: assets/icons/sunrise.svg
+  SvgGenImage get sunrise => const SvgGenImage('assets/icons/sunrise.svg');
+
   /// File path: assets/icons/tasbih.svg
   SvgGenImage get tasbih => const SvgGenImage('assets/icons/tasbih.svg');
 
@@ -125,14 +119,12 @@ class $AssetsIconsGen {
         compassSvg,
         dzuhur,
         isya,
-        lastThird,
         lastRead,
         maghrib,
         mecca,
         medina,
         mosque,
         needle,
-        pattern2,
         pattern,
         prayingHands,
         rubhizb,
@@ -140,6 +132,7 @@ class $AssetsIconsGen {
         shalatPng,
         shalatSvg,
         subuh,
+        sunrise,
         tasbih
       ];
 }
@@ -156,14 +149,11 @@ class $AssetsSourcesGen {
   /// File path: assets/sources/doa.json
   String get doa => 'assets/sources/doa.json';
 
-  /// File path: assets/sources/quran.json
-  String get quran => 'assets/sources/quran.json';
-
   /// File path: assets/sources/surah.json
   String get surah => 'assets/sources/surah.json';
 
   /// List of all assets
-  List<String> get values => [alQuranIndopakDb, alQuranIndopakSqbpro, doa, quran, surah];
+  List<String> get values => [alQuranIndopakDb, alQuranIndopakSqbpro, doa, surah];
 }
 
 class Assets {

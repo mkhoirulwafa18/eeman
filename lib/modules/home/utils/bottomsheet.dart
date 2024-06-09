@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
+import 'package:quran_app/common/themes/text_styles.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/modules/home/data/domain/doa_daily.dart';
@@ -23,7 +24,7 @@ void showAppBottomSheet(BuildContext context, List<DoaDaily> doaDaily) {
               builder: (_, controller) {
                 return DecoratedBox(
                   decoration: BoxDecoration(
-                    color: backgroundColor,
+                    color: Theme.of(context).colorScheme.background,
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(25),
                       topRight: Radius.circular(25),
@@ -74,36 +75,34 @@ class BottomSheetDoaContent extends StatelessWidget {
                   child: ExpansionTile(
                     title: Text(
                       doaDaily[index].title ?? '',
-                      style: mediumText.copyWith(
+                      style: context.bodyMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: backgroundColor2,
+                        color: Theme.of(context).colorScheme.onBackground,
                       ),
                     ),
-                    iconColor: backgroundColor2,
+                    iconColor: Theme.of(context).colorScheme.onBackground,
                     childrenPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     children: [
                       Text(
                         doaDaily[index].arabic ?? '',
-                        style: arabicText,
+                        style: AppTextStyles.arabicText,
                         textDirection: TextDirection.rtl,
                       ),
                       const EemanSpacing.vertical8(),
                       Text(
                         doaDaily[index].latin ?? '',
-                        style: inputLabel.copyWith(
-                          color: backgroundColor2.withOpacity(0.7),
-                        ),
+                        style: context.bodySmall
+                            ?.copyWith(height: 1, color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7)),
                       ),
                       const EemanSpacing.vertical4(),
                       Divider(
-                        color: backgroundColor2.withOpacity(.5),
+                        color: Theme.of(context).colorScheme.onBackground.withOpacity(.5),
                       ),
                       const EemanSpacing.vertical4(),
                       Text(
                         doaDaily[index].translation ?? '',
-                        style: inputLabel.copyWith(
-                          color: backgroundColor2.withOpacity(0.7),
-                        ),
+                        style: context.bodySmall
+                            ?.copyWith(height: 1, color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7)),
                       ),
                     ],
                   ),

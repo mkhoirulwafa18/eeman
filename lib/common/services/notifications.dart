@@ -1,4 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages, lines_longer_than_80_chars
+import 'dart:developer';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -16,6 +18,9 @@ class NotificationHelper {
     // Configure Timezone
     tz.initializeTimeZones();
     final timeZone = await FlutterTimezone.getLocalTimezone();
+    log('timeZone');
+    log(timeZone);
+    log('timeZone');
     tz.setLocalLocation(tz.getLocation(timeZone));
 
     // Initialize Notification

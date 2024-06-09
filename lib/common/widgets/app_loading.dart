@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/constant.dart';
 
 class AppLoading extends StatelessWidget {
   const AppLoading({
@@ -18,7 +17,7 @@ class AppLoading extends StatelessWidget {
         width: size?.toDouble() ?? 20,
         height: size?.toDouble() ?? 20,
         child: CircularProgressIndicator(
-          color: bgColor ?? backgroundColor2,
+          color: bgColor ?? Theme.of(context).colorScheme.onBackground,
           strokeWidth: 2,
         ),
       ),

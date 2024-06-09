@@ -18,6 +18,7 @@
     "to": "menuju",
     "more":"lebih banyak",
     "explore": "Eksplor",
+    "nightMode": "Mode Malam",
     "internetNeeded": "Internet Dibutuhkan",
     "internetNeededDesc": "Untuk memutar audio quran membutuhkan koneksi internet, mohon periksa kembali koneksi internet kamu.",
     "tafsirSource": "Sumber = Kementrian Agama Republik Indonesia",
@@ -103,5 +104,7 @@
             }
         }
     },
-    "setAppearance": "Atur tampilan"
+    "setAppearance": "Atur tampilan",
+    "turnOnLocation": "Aktifkan Layanan Lokasi",
+    "needLocationServiceWantToEnable": "Aplikasi ini memerlukan layanan lokasi untuk mengakses fitur tertentu.\nApakah Anda ingin mengaktifkannya?"
 }

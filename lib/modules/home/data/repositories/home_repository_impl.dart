@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:adhan/adhan.dart';
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
@@ -46,7 +44,6 @@ class HomeRepositoryImpl extends HomeRepository {
   Future<String> getCity(Location location) async {
     final locationService = locator<LocationService>();
     final city = await locationService.getCity(location);
-    log(city ?? 'gada');
     return city ?? '';
   }
 }

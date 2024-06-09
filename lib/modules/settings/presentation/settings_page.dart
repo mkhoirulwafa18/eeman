@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/common.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/common/global_variable.dart';
+import 'package:quran_app/common/themes/app_theme.dart';
+import 'package:quran_app/common/themes/text_styles.dart';
 import 'package:quran_app/common/widgets/divider.dart';
 import 'package:quran_app/common/widgets/spacing.dart';
+import 'package:quran_app/gen/assets.gen.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/settings/domain/settings_usecase.dart';
 import 'package:quran_app/modules/settings/presentation/blocs/cubit/settings_cubit.dart';
@@ -19,6 +23,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final colorScheme = Theme.of(context).colorScheme;
     return BlocProvider(
       create: (context) => SettingsCubit(locator<SettingsUseCaseImpl>())..init(),
       child: BlocBuilder<SettingsCubit, SettingsState>(
@@ -29,16 +34,15 @@ class SettingsPage extends StatelessWidget {
               slivers: <Widget>[
                 // * App Title
                 SliverAppBar(
-                  backgroundColor: backgroundColor2,
-                  foregroundColor: backgroundColor,
+                  backgroundColor: colorScheme.primary,
+                  foregroundColor: colorScheme.secondary,
                   systemOverlayStyle: SystemUiOverlayStyle.light,
                   elevation: 0,
                   scrolledUnderElevation: 0,
                   title: Text(
                     l10n.settings,
-                    style: largeText.copyWith(color: backgroundColor, fontWeight: FontWeight.bold),
+                    style: context.displayLarge?.copyWith(color: colorScheme.secondary, fontWeight: FontWeight.bold),
                   ),
-                  // actions: [AppInfoAction(l10n: l10n)],
                   centerTitle: true,
                   pinned: true,
                 ),
@@ -49,7 +53,7 @@ class SettingsPage extends StatelessWidget {
                   expandedHeight: MediaQuery.of(context).size.height * 0.25,
                   scrolledUnderElevation: 0,
                   automaticallyImplyLeading: false,
-                  backgroundColor: backgroundColor2,
+                  backgroundColor: colorScheme.primary,
                   flexibleSpace: Padding(
                     padding: const EdgeInsets.all(8),
                     child: Column(
@@ -65,8 +69,8 @@ class SettingsPage extends StatelessWidget {
                               children: [
                                 TextSpan(
                                   text: 'اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَۙ',
-                                  style: arabicText.copyWith(
-                                    color: backgroundColor,
+                                  style: AppTextStyles.arabicText.copyWith(
+                                    color: colorScheme.secondary,
                                     fontSize: state.userPreferences?.arabicFontSize,
                                   ),
                                 ),
@@ -75,7 +79,7 @@ class SettingsPage extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(horizontal: 8),
                                     child: RubElHizb(
                                       number: '2',
-                                      color: backgroundColor,
+                                      color: colorScheme.secondary,
                                     ),
                                   ),
                                 ),
@@ -95,7 +99,7 @@ class SettingsPage extends StatelessWidget {
                                       TextSpan(
                                         text: "al-ḥamdu lillāhi rabbil-'ālamīn",
                                         style: TextStyle(
-                                          color: backgroundColor,
+                                          color: colorScheme.secondary,
                                           fontSize: state.userPreferences?.latinFontSize,
                                           fontStyle: FontStyle.italic,
                                         ),
@@ -112,8 +116,8 @@ class SettingsPage extends StatelessWidget {
                                     children: [
                                       TextSpan(
                                         text: 'Segala puji bagi Allah, Tuhan seluruh alam,',
-                                        style: smallText.copyWith(
-                                          color: backgroundColor,
+                                        style: context.bodySmall?.copyWith(
+                                          color: colorScheme.secondary,
                                           fontSize: state.userPreferences?.translationFontSize,
                                         ),
                                       ),
@@ -136,17 +140,38 @@ class SettingsPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      ListTile(
+                        dense: true,
+                        // contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
+                        title: Text(
+                          l10n.nightMode,
+                          style: context.bodySmall?.copyWith(color: colorScheme.onBackground),
+                        ),
+                        trailing: Switch.adaptive(
+                          value: context.watch<AppThemeCubit>().state == ThemeMode.dark,
+                          activeTrackColor: colorScheme.secondary,
+                          activeColor: colorScheme.primary,
+                          activeThumbImage: Assets.icons.mosque.provider(),
+                          onChanged: (value) {
+                            context.read<AppThemeCubit>().toggleTheme();
+                          },
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(left: 16),
                         child: Text(
                           'Arabic',
-                          style: inputLabel.copyWith(color: backgroundColor2, fontWeight: FontWeight.bold),
+                          style: context.bodyMedium
+                              ?.copyWith(color: colorScheme.onBackground, fontWeight: FontWeight.bold),
                         ),
                       ),
                       ListTile(
                         dense: true,
                         // contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-                        title: Text(l10n.xFontSize('Arabic')),
+                        title: Text(
+                          l10n.xFontSize('Arabic'),
+                          style: context.bodySmall?.copyWith(color: colorScheme.onBackground),
+                        ),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -157,7 +182,7 @@ class SettingsPage extends StatelessWidget {
                               allowedInteraction: SliderInteraction.tapAndSlide,
                               label: state.userPreferences?.arabicFontSize.toString(),
                               value: state.userPreferences?.arabicFontSize ?? 24,
-                              activeColor: backgroundColor2,
+                              activeColor: colorScheme.onBackground,
                               onChanged: (value) {
                                 context.read<SettingsCubit>().setPreferences(
                                       state.userPreferences?.copyWith(arabicFontSize: value) ?? const UserPreferences(),
@@ -173,8 +198,8 @@ class SettingsPage extends StatelessWidget {
                 const SliverPadding(padding: EdgeInsets.only(bottom: 16)),
                 SliverToBoxAdapter(
                   child: CompassDivider(
-                    compassColor: backgroundColor2,
-                    linesColor: backgroundColor2,
+                    compassColor: colorScheme.onBackground,
+                    linesColor: colorScheme.onBackground,
                   ),
                 ),
                 const SliverPadding(padding: EdgeInsets.only(bottom: 16)),
@@ -187,16 +212,20 @@ class SettingsPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 16),
                         child: Text(
                           'Latin',
-                          style: inputLabel.copyWith(color: backgroundColor2, fontWeight: FontWeight.bold),
+                          style: context.bodyMedium
+                              ?.copyWith(color: colorScheme.onBackground, fontWeight: FontWeight.bold),
                         ),
                       ),
                       ListTile(
                         dense: true,
                         // contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-                        title: Text(l10n.showX('Latin')),
+                        title: Text(
+                          l10n.showX('Latin'),
+                          style: context.bodySmall?.copyWith(color: colorScheme.onBackground),
+                        ),
                         trailing: Switch.adaptive(
                           value: state.userPreferences?.showLatin ?? true,
-                          activeColor: backgroundColor2,
+                          activeColor: colorScheme.onBackground,
                           onChanged: (value) {
                             context.read<SettingsCubit>().setPreferences(
                                   state.userPreferences?.copyWith(showLatin: value) ?? const UserPreferences(),
@@ -207,7 +236,10 @@ class SettingsPage extends StatelessWidget {
                       ListTile(
                         dense: true,
                         // contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-                        title: Text(l10n.xFontSize('Latin')),
+                        title: Text(
+                          l10n.xFontSize('Latin'),
+                          style: context.bodySmall?.copyWith(color: colorScheme.onBackground),
+                        ),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -218,7 +250,7 @@ class SettingsPage extends StatelessWidget {
                               allowedInteraction: SliderInteraction.tapAndSlide,
                               label: state.userPreferences?.latinFontSize.toString(),
                               value: state.userPreferences?.latinFontSize ?? 12,
-                              activeColor: backgroundColor2,
+                              activeColor: colorScheme.onBackground,
                               onChanged: (value) {
                                 context.read<SettingsCubit>().setPreferences(
                                       state.userPreferences?.copyWith(latinFontSize: value) ?? const UserPreferences(),
@@ -234,8 +266,8 @@ class SettingsPage extends StatelessWidget {
                 const SliverPadding(padding: EdgeInsets.only(bottom: 16)),
                 SliverToBoxAdapter(
                   child: CompassDivider(
-                    compassColor: backgroundColor2,
-                    linesColor: backgroundColor2,
+                    compassColor: colorScheme.onBackground,
+                    linesColor: colorScheme.onBackground,
                   ),
                 ),
                 const SliverPadding(padding: EdgeInsets.only(bottom: 16)),
@@ -248,16 +280,20 @@ class SettingsPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 16),
                         child: Text(
                           'Terjemahan',
-                          style: inputLabel.copyWith(color: backgroundColor2, fontWeight: FontWeight.bold),
+                          style: context.bodyMedium
+                              ?.copyWith(color: colorScheme.onBackground, fontWeight: FontWeight.bold),
                         ),
                       ),
                       ListTile(
                         dense: true,
                         // contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-                        title: Text(l10n.showX('Translation')),
+                        title: Text(
+                          l10n.showX('Translation'),
+                          style: context.bodySmall?.copyWith(color: colorScheme.onBackground),
+                        ),
                         trailing: Switch.adaptive(
                           value: state.userPreferences?.showTranslation ?? true,
-                          activeColor: backgroundColor2,
+                          activeColor: colorScheme.onBackground,
                           onChanged: (value) {
                             context.read<SettingsCubit>().setPreferences(
                                   state.userPreferences?.copyWith(showTranslation: value) ?? const UserPreferences(),
@@ -268,7 +304,10 @@ class SettingsPage extends StatelessWidget {
                       ListTile(
                         dense: true,
                         // contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-                        title: Text(l10n.xFontSize('Translation')),
+                        title: Text(
+                          l10n.xFontSize('Translation'),
+                          style: context.bodySmall?.copyWith(color: colorScheme.onBackground),
+                        ),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -279,7 +318,7 @@ class SettingsPage extends StatelessWidget {
                               allowedInteraction: SliderInteraction.tapAndSlide,
                               label: state.userPreferences?.translationFontSize.toString(),
                               value: state.userPreferences?.translationFontSize ?? 12,
-                              activeColor: backgroundColor2,
+                              activeColor: colorScheme.onBackground,
                               onChanged: (value) {
                                 context.read<SettingsCubit>().setPreferences(
                                       state.userPreferences?.copyWith(translationFontSize: value) ??

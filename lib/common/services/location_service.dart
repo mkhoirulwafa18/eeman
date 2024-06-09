@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:quran_app/common/common.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/common/global_variable.dart';
 import 'package:quran_app/l10n/l10n.dart';
 
@@ -57,21 +57,20 @@ class LocationService {
       context: rootNavigatorKey.currentContext!,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: backgroundColor2,
+          backgroundColor: Theme.of(context).colorScheme.background,
           title: Text(
-            'Aktifkan Layanan Lokasi',
-            style: lightBoldTitle,
+            context.l10n.turnOnLocation,
+            style: context.displayLarge,
           ),
           content: Text(
-            'Aplikasi ini memerlukan layanan lokasi untuk mengakses fitur tertentu. '
-            'Apakah Anda ingin mengaktifkannya?',
-            style: smallText,
+            context.l10n.needLocationServiceWantToEnable,
+            style: context.bodySmall,
           ),
           actions: <Widget>[
             OutlinedButton(
               child: Text(
                 context.l10n.close,
-                style: smallText,
+                style: context.bodySmall,
               ),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -80,7 +79,7 @@ class LocationService {
             ElevatedButton(
               child: Text(
                 'Aktifkan',
-                style: smallText,
+                style: context.bodySmall,
               ),
               onPressed: () async {
                 await Geolocator.openLocationSettings();

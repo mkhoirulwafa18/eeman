@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/common/widgets/app_loading.dart';
 import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/gen/assets.gen.dart';
@@ -22,6 +22,7 @@ class SurahInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return WillPopScope(
       onWillPop: () {
         context.read<MurattalCubit>().dispose();
@@ -34,7 +35,7 @@ class SurahInfo extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: backgroundColor2,
+            color: colorScheme.primary,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.5),
@@ -50,18 +51,18 @@ class SurahInfo extends StatelessWidget {
                 children: [
                   RubElHizb(
                     number: surah.number.toString(),
-                    color: backgroundColor,
+                    color: colorScheme.secondary,
                   ),
                   Column(
                     children: [
                       Text(
                         surah.name?.transliteration?.id ?? '',
-                        style: mediumText,
+                        style: context.bodyMedium?.copyWith(color: colorScheme.secondary),
                       ),
                       Text(
                         surah.name?.translation?.id ?? '',
                         style: TextStyle(
-                          color: backgroundColor.withOpacity(0.5),
+                          color: colorScheme.secondary.withOpacity(0.5),
                           fontFamily: FontFamily.poppins,
                         ),
                       ),
@@ -76,7 +77,7 @@ class SurahInfo extends StatelessWidget {
                           },
                           child: Icon(
                             Icons.pause,
-                            color: backgroundColor,
+                            color: colorScheme.secondary,
                             size: 40,
                           ),
                         );
@@ -88,7 +89,7 @@ class SurahInfo extends StatelessWidget {
                           },
                           child: Icon(
                             Icons.play_circle,
-                            color: backgroundColor,
+                            color: colorScheme.secondary,
                             size: 40,
                           ),
                         );
@@ -102,13 +103,13 @@ class SurahInfo extends StatelessWidget {
               const EemanSpacing.vertical12(),
               Text(
                 '${surah.revelation?.id?.name} - ${surah.numberOfVerses} ayat',
-                style: smallText,
+                style: context.bodySmall?.copyWith(color: colorScheme.secondary),
               ),
               if (surah.number != 1) ...[
                 const EemanSpacing.vertical16(),
                 Assets.icons.basmalah.svg(
                   width: 0.4.sw,
-                  color: backgroundColor,
+                  color: colorScheme.secondary,
                 ),
               ] else
                 const SizedBox(),

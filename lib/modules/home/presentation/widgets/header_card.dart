@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/common/extensions/time_extension.dart';
+import 'package:quran_app/common/themes/app_colors.dart';
 import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/gen/assets.gen.dart';
 import 'package:quran_app/modules/home/presentation/widgets/date_and_place.dart';
@@ -36,7 +37,7 @@ class _HeaderCardState extends State<HeaderCard> {
   }
 
   // Initialize the timer to update the current time every minute
-  void _initTimer() {
+  Future<void> _initTimer() async {
     _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
       setState(_updateCurrentTime);
     });
@@ -57,13 +58,15 @@ class _HeaderCardState extends State<HeaderCard> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
+            color: Theme.of(context).colorScheme.onBackground.withOpacity(0.2),
             blurRadius: 4,
+            spreadRadius: 2,
             offset: const Offset(0, 4),
           ),
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Display date and place
           DateAndPlace(time: _time),
@@ -71,7 +74,7 @@ class _HeaderCardState extends State<HeaderCard> {
           // Display hour and minute
           Text(
             _hourMinute,
-            style: lightBoldTitle.copyWith(color: backgroundColor, fontSize: 50),
+            style: context.displayLarge?.copyWith(color: AppColors.white, fontSize: 50),
           ),
 
           // Display next prayer time

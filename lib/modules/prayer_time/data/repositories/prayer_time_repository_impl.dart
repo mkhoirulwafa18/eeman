@@ -9,7 +9,7 @@ class PrayerTimeRepositoryImpl extends PrayerTimeRepository {
   @override
   Future<List<Pray>> getTiming(DateTime date, Location location) async {
     final myCoordinates = Coordinates(location.latitude, location.longitude);
-    final params = CalculationMethod.singapore.getParameters()..madhab = Madhab.shafi;
+    final params = CalculationMethod.muslim_world_league.getParameters()..madhab = Madhab.shafi;
     final prayerTimes = PrayerTimes(myCoordinates, DateComponents.from(date), params);
     final list = [
       DateFormat('HH:mm').format(prayerTimes.fajr),

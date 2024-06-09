@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/common/widgets/input_box.dart';
 import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/l10n/l10n.dart';
@@ -18,10 +18,10 @@ void showSearchAyahDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        backgroundColor: backgroundColor2,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           l10n.findAyah,
-          style: lightBoldTitle,
+          style: context.displayLarge,
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -29,7 +29,7 @@ void showSearchAyahDialog(
           children: [
             Text(
               l10n.totalAyat(totalAyat.toString()),
-              style: smallText,
+              style: context.bodySmall,
             ),
             const EemanSpacing.vertical8(),
             InputBox(
@@ -48,7 +48,7 @@ void showSearchAyahDialog(
           OutlinedButton(
             child: Text(
               l10n.close,
-              style: smallText,
+              style: context.bodySmall,
             ),
             onPressed: () {
               Navigator.of(context).pop();
@@ -57,7 +57,7 @@ void showSearchAyahDialog(
           OutlinedButton(
             child: Text(
               l10n.find,
-              style: smallText,
+              style: context.bodySmall,
             ),
             onPressed: () {
               if (controller.value.text.isNotEmpty) {

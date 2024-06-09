@@ -44,7 +44,7 @@ abstract class BaseLocalData {
     await localData.setStringList(key, value);
   }
 
-  Future<List<String>?> getListValue() async {
+  Future<List<dynamic>?> getListValue() async {
     final value = await localData.getStringList(key);
 
     return value;

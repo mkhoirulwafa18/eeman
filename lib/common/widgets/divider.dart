@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/common.dart';
 import 'package:quran_app/common/widgets/spacing.dart';
 import 'package:quran_app/gen/assets.gen.dart';
 
@@ -19,7 +18,7 @@ class CompassDivider extends StatelessWidget {
         duration: duration,
         tween: Tween(begin: 0, end: 1),
         curve: Curves.easeOut,
-        child: Divider(height: 1, thickness: .5, color: linesColor ?? backgroundColor),
+        child: Divider(height: 1, thickness: .5, color: linesColor ?? Theme.of(context).colorScheme.background),
         builder: (_, value, child) {
           return Transform.scale(
             scaleX: value,
@@ -46,7 +45,7 @@ class CompassDivider extends StatelessWidget {
             height: 32,
             width: 32,
             child: Assets.icons.compassFull.svg(
-              colorFilter: ColorFilter.mode(compassColor ?? backgroundColor, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(compassColor ?? Theme.of(context).colorScheme.background, BlendMode.srcIn),
             ),
           ),
         ),

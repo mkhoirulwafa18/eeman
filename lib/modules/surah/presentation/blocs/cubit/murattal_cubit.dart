@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/common/extensions/dialog_extension.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
 
@@ -61,7 +62,7 @@ class MurattalCubit extends Cubit<MurattalState> {
         title: l10n.internetNeeded,
         content: Text(
           l10n.internetNeededDesc,
-          style: mediumText,
+          style: context.bodyMedium,
         ),
       );
     }
@@ -95,7 +96,7 @@ class MurattalCubit extends Cubit<MurattalState> {
           title: context.l10n.internetNeeded,
           content: Text(
             context.l10n.internetNeededDesc,
-            style: mediumText,
+            style: context.bodyMedium,
           ),
         );
       }
@@ -116,7 +117,7 @@ class MurattalCubit extends Cubit<MurattalState> {
           title: context.l10n.internetNeeded,
           content: Text(
             context.l10n.internetNeededDesc,
-            style: mediumText,
+            style: context.bodyMedium,
           ),
         );
       }

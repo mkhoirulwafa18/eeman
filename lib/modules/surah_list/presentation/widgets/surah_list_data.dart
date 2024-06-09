@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/gen/fonts.gen.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
@@ -19,6 +18,7 @@ class SurahListData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final colorScheme = Theme.of(context).colorScheme;
     final surahs = searchResult ?? surahList;
     return Expanded(
       child: surahs.isNotEmpty
@@ -26,7 +26,7 @@ class SurahListData extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               itemCount: surahs.length,
               separatorBuilder: (_, i) => Divider(
-                color: backgroundColor2,
+                color: colorScheme.onBackground,
               ),
               itemBuilder: (BuildContext context, int index) {
                 return SurahListTile(
@@ -43,7 +43,7 @@ class SurahListData extends StatelessWidget {
                   l10n.errorNoSurahFound,
                   style: TextStyle(
                     fontFamily: FontFamily.poppins,
-                    color: backgroundColor2,
+                    color: colorScheme.onBackground,
                   ),
                   textAlign: TextAlign.center,
                 ),

@@ -1,7 +1,8 @@
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package
 
 import 'package:flutter/material.dart';
-import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
+import 'package:quran_app/common/themes/text_styles.dart';
 import 'package:quran_app/gen/assets.gen.dart';
 import 'package:quran_app/modules/surah/presentation/surah_page.dart';
 import 'package:quran_app/modules/surah_list/data/domain/surah_model.dart';
@@ -21,6 +22,7 @@ class SurahListTile extends StatelessWidget {
   final List<Surah> surahList;
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return ListTile(
       tileColor: Colors.transparent,
       leading: RubElHizb(
@@ -28,8 +30,8 @@ class SurahListTile extends StatelessWidget {
       ),
       title: Text(
         resultSurah[index].name?.transliteration?.id ?? '',
-        style: mediumText.copyWith(
-          color: backgroundColor2,
+        style: context.bodyMedium?.copyWith(
+          color: colorScheme.onBackground,
         ),
       ),
       subtitle: Row(
@@ -41,8 +43,8 @@ class SurahListTile extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: resultSurah[index].name?.translation!.id ?? '',
-                    style: smallText.copyWith(
-                      color: backgroundColor2.withOpacity(0.7),
+                    style: context.bodySmall?.copyWith(
+                      color: colorScheme.onBackground.withOpacity(0.7),
                     ),
                   ),
                   const WidgetSpan(
@@ -54,14 +56,14 @@ class SurahListTile extends StatelessWidget {
                     WidgetSpan(
                       child: Assets.icons.mecca.svg(
                         width: 12,
-                        color: backgroundColor2,
+                        color: colorScheme.onBackground,
                       ),
                     )
                   else
                     WidgetSpan(
                       child: Assets.icons.medina.svg(
                         width: 16,
-                        color: backgroundColor2,
+                        color: colorScheme.onBackground,
                       ),
                     ),
                 ],
@@ -73,7 +75,7 @@ class SurahListTile extends StatelessWidget {
       dense: true,
       trailing: Text(
         resultSurah[index].name?.short ?? '',
-        style: arabicText,
+        style: AppTextStyles.arabicText,
       ),
       onTap: () {
         Navigator.push<MaterialPageRoute<dynamic>>(

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/common.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/common/global_variable.dart';
 import 'package:quran_app/gen/assets.gen.dart';
 import 'package:quran_app/l10n/l10n.dart';
@@ -17,16 +18,17 @@ class SurahListView extends StatelessWidget {
   const SurahListView({super.key});
 
   MaterialBanner _showMaterialBanner(BuildContext context, List<Surah> surahList) {
+    final colorScheme = Theme.of(context).colorScheme;
     return MaterialBanner(
       content: Text(
         context.l10n.lastReadError,
-        style: smallText,
+        style: context.bodySmall,
       ),
-      backgroundColor: backgroundColor2,
+      backgroundColor: colorScheme.primary,
       actions: [
         OutlinedButton(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+            backgroundColor: MaterialStateProperty.all<Color>(colorScheme.secondary),
           ),
           onPressed: () {
             ScaffoldMessenger.of(context).removeCurrentMaterialBanner();
@@ -42,19 +44,16 @@ class SurahListView extends StatelessWidget {
           },
           child: Text(
             context.l10n.alFatiha,
-            style: smallText.copyWith(color: backgroundColor2),
+            style: context.bodySmall?.copyWith(color: colorScheme.primary),
           ),
         ),
         OutlinedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
-          ),
           onPressed: () {
             ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
           },
           child: Text(
             context.l10n.close,
-            style: smallText.copyWith(color: backgroundColor2),
+            style: context.bodySmall?.copyWith(color: colorScheme.secondary),
           ),
         ),
       ],
@@ -86,7 +85,7 @@ class SurahListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-
+    final colorScheme = Theme.of(context).colorScheme;
     return BlocBuilder<SurahListCubit, SurahListState>(
       builder: (context, state) {
         return GestureDetector(
@@ -107,12 +106,12 @@ class SurahListView extends StatelessWidget {
               ),
             ),
             floatingActionButton: FloatingActionButton.extended(
-              backgroundColor: backgroundColor2,
+              backgroundColor: colorScheme.onBackground,
               onPressed: () => state is SurahListLoaded ? navigateToLastRead(context, state.surahList) : null,
               icon: Assets.icons.lastRead.svg(width: 30),
               label: Text(
                 l10n.lastRead,
-                style: smallText,
+                style: context.bodySmall?.copyWith(color: colorScheme.background),
               ),
             ),
             child: Column(

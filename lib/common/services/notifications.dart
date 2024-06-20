@@ -18,14 +18,11 @@ class NotificationHelper {
     // Configure Timezone
     tz.initializeTimeZones();
     final timeZone = await FlutterTimezone.getLocalTimezone();
-    log('timeZone');
-    log(timeZone);
-    log('timeZone');
     tz.setLocalLocation(tz.getLocation(timeZone));
 
     // Initialize Notification
     const initializationSettingsDarwin = DarwinInitializationSettings();
-    const initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const initializationSettingsAndroid = AndroidInitializationSettings('ic_launcher');
 
     const initializationSettings = InitializationSettings(
       iOS: initializationSettingsDarwin,

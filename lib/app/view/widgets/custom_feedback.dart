@@ -1,5 +1,7 @@
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
+import 'package:quran_app/common/common.dart';
+import 'package:quran_app/common/widgets/spacing.dart';
 
 /// A data type holding user feedback consisting of a feedback type, free from
 /// feedback text, and a sentiment rating.
@@ -34,7 +36,7 @@ class CustomFeedback {
 
 /// What type of feedback the user wants to provide.
 enum FeedbackType {
-  bugReport,
+  feedback,
   featureRequest,
 }
 
@@ -73,19 +75,22 @@ class _CustomFeedbackFormState extends State<CustomFeedbackForm> {
         Expanded(
           child: Stack(
             children: [
-              if (widget.scrollController != null)
-                const FeedbackSheetDragHandle(),
+              if (widget.scrollController != null) const FeedbackSheetDragHandle(),
               ListView(
                 controller: widget.scrollController,
                 // Pad the top by 20 to match the corner radius if drag enabled.
                 padding: EdgeInsets.fromLTRB(
-                    16, widget.scrollController != null ? 20 : 16, 16, 0,),
+                  EemanSizes.s16,
+                  widget.scrollController != null ? EemanSizes.s20 : EemanSizes.s16,
+                  EemanSizes.s16,
+                  0,
+                ),
                 children: [
                   const Text('Mau kasih feedback atau request fitur?'),
                   Row(
                     children: [
                       const Padding(
-                        padding: EdgeInsets.only(right: 8),
+                        padding: EdgeInsets.only(right: EemanSizes.s8),
                         child: Text('*'),
                       ),
                       Flexible(
@@ -95,27 +100,25 @@ class _CustomFeedbackFormState extends State<CustomFeedbackForm> {
                               .map(
                                 (type) => DropdownMenuItem<FeedbackType>(
                                   value: type,
-                                  child: Text(type
-                                      .toString()
-                                      .split('.')
-                                      .last
-                                      .replaceAll('_', ' '),),
+                                  child: Text(
+                                    type == FeedbackType.feedback ? 'Feedback' : 'Request Fitur',
+                                  ),
                                 ),
                               )
                               .toList(),
-                          onChanged: (feedbackType) => setState(() =>
-                              _customFeedback.feedbackType = feedbackType,),
+                          onChanged: (feedbackType) => setState(
+                            () => _customFeedback.feedbackType = feedbackType,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  const Text('Masukkan feedback dibawah ya'),
+                  const EemanSpacing.vertical16(),
+                  const Text('Masukkan feedback kamu dibawah ya (Tarik keatas)'),
                   TextField(
-                    onChanged: (newFeedback) =>
-                        _customFeedback.feedbackText = newFeedback,
+                    onChanged: (newFeedback) => _customFeedback.feedbackText = newFeedback,
                   ),
-                  const SizedBox(height: 16),
+                  const EemanSpacing.vertical16(),
                   const Text('Bagaimana pendapatmu tentang ini?'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -135,7 +138,7 @@ class _CustomFeedbackFormState extends State<CustomFeedbackForm> {
               : null,
           child: const Text('KIRIM'),
         ),
-        const SizedBox(height: 8),
+        const EemanSpacing.vertical8(),
       ],
     );
   }
@@ -155,10 +158,10 @@ class _CustomFeedbackFormState extends State<CustomFeedbackForm> {
         break;
     }
     return IconButton(
-      color: isSelected ? Theme.of(context).colorScheme.secondary : Colors.grey,
+      color: isSelected ? Theme.of(context).colorScheme.primary : Colors.grey,
       onPressed: () => setState(() => _customFeedback.rating = rating),
       icon: Icon(icon),
-      iconSize: 36,
+      iconSize: EemanSizes.s36,
     );
   }
 }

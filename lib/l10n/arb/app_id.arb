@@ -9,12 +9,16 @@
     "quranOffline": "Quran\n(Offline)",
     "shalatTime": "Jadwal\nShalat",
     "tasbihDigital": "Tasbih\nDigital",
+    "qiblaDirection": "Arah\nKiblat",
     "errorNoSurahFound": "Tidak ada surah yang cocok dengan pencarian.\nCoba ulangi ketik surah yang kamu cari.",
     "findSurah": "Cari Surah",
     "dontForgetPray":"Jangan lupa sholat nya yaa <3",
     "hour": "jam",
     "minute": "menit",
     "to": "menuju",
+    "more":"lebih banyak",
+    "explore": "Eksplor",
+    "nightMode": "Mode Malam",
     "internetNeeded": "Internet Dibutuhkan",
     "internetNeededDesc": "Untuk memutar audio quran membutuhkan koneksi internet, mohon periksa kembali koneksi internet kamu.",
     "tafsirSource": "Sumber = Kementrian Agama Republik Indonesia",
@@ -71,5 +75,36 @@
         }
     },
     "feedbackAndReport": "Request Fitur / Laporkan Bug",
-    "feedbackInfo": "Menemukan bug? atau mau request fitur lain? kirim saran dan feedback kalian ke email dengan cara klik button dibawah, Termimakasih."
+    "feedbackInfo": "Menemukan bug? atau mau request fitur lain? kirim saran dan feedback kalian ke email dengan cara klik button dibawah, Termimakasih.",
+    "emailFeedbackSubject": "Eeman App Feedback",
+    "feedbackOrFeature": "Mau kasih feedback atau request fitur?",
+    "writeYourFeedback": "Masukkan feedback kamu dibawah ya",
+    "wdyt": "Bagaimana pendapatmu tentang ini?",
+    "send": "Kirim",
+    "settings": "Pengaturan",
+    "retry": "Coba Lagi",
+    "locationNotEnabledErrorMesage": "Hidupkan Lokasi GPS untuk mengakses\nfitur ini.",
+    "locationDeniedErrorMesage": "Akses Lokasi ponsel ini ditolak\nIzinkan akses Lokasi terlebih dahului",
+    "sensorNotSupported": "Sensor tidak didukung",
+    "xFontSize":"Ukuran Font {type}",
+    "@xFontSize": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "example": "Arabic"
+            }
+        }
+    },
+    "showX":"Tampilkan {type}",
+    "@showX": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "example": "Latin"
+            }
+        }
+    },
+    "setAppearance": "Atur tampilan",
+    "turnOnLocation": "Aktifkan Layanan Lokasi",
+    "needLocationServiceWantToEnable": "Aplikasi ini memerlukan layanan lokasi untuk mengakses fitur tertentu.\nApakah Anda ingin mengaktifkannya?"
 }

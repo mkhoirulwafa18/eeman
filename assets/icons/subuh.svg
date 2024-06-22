@@ -1,0 +1,52 @@
+<svg width="195" height="288" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#prefix__clip0_430_1582)">
+        <rect width="195" height="288" rx="16" fill="url(#prefix__paint0_linear_430_1582)" />
+        <path fill="#D9D9D9" d="M-30 184h250v156H-30z" />
+        <path fill="url(#prefix__paint1_linear_430_1582)" d="M-30 184h250v156H-30z" />
+        <path
+            d="M97.21 91.719a28.214 28.214 0 0026.246-17.154 28.214 28.214 0 00-25.672-39.279l-.286 28.217-.287 28.216z"
+            fill="#FFDBB1" />
+        <path
+            d="M188.461 48.547h-.019M151.019 48H151M139.019 74H139M117.019 30H117M100.019 57H100M112.019 77H112M117.019 19H117M76.02 11H76M109.019 11H109M95.02 19H95M20.02 11H20M46.02 94H46M41.02 105H41M14.02 102H14M144.019 14H144M168.019 23H168M104.019 31H104M135.019 92H135M158.019 88H158M158.019 88H158M158.019 109H158M181.019 105H181M181.019 105H181M133.019 37H133M173.019 41H173M161.019 67H161M157.019 85H157M180.019 81H180M180.019 81H180M180.019 102H180M155.019 30H155M129.019 98H129M122.019 64H122M111.019 87H111M186.438 70.696v.048M4.75 60.398c.057.128.276.133.4.133M7.483 56.398c.135.014.274.086.4.133M17 82c.136.037.237.17.333.267M26.02 37H26M26.02 37H26M46.02 37H46M63.02 23H63M42.574 15.769h.332M22.02 76.231H22M22.02 76.231H22M42.02 76.231H42M70.02 110.769H70M41 98.769c.136.037.237.17.333.266M46.02 93H46M46.02 93H46M66.02 93H66M59.02 62.231H59M38.574 55h.332"
+            stroke="#FFCCFB" stroke-linecap="round" />
+        <path d="M26.5 128l70.581 70.5H-44.08L26.5 128z" fill="url(#prefix__paint2_linear_430_1582)" />
+        <path d="M168.5 128l70.581 70.5H97.919L168.5 128z" fill="url(#prefix__paint3_linear_430_1582)" />
+        <path d="M99 110l114.315 92.25h-228.63L99 110z" fill="url(#prefix__paint4_linear_430_1582)" />
+        <path
+            d="M36.5 131l4.763 18h-9.526l4.763-18zM129.5 129l4.763 18h-9.526l4.763-18zM82.5 146l4.763 18h-9.526l4.763-18zM166.5 141l3.031 12h-6.062l3.031-12zM183.5 159l3.031 12h-6.062l3.031-12zM103.5 117l3.031 12h-6.062l3.031-12zM99.5 237l3.031 12h-6.062l3.031-12z"
+            fill="#001044" />
+        <path
+            d="M83.5 149l3.031 12H80.47l3.031-12zM35.5 161l3.031 12H32.47l3.031-12zM10.5 146l4.763 18H5.737l4.763-18zM130.5 186l4.763 18h-9.526l4.763-18zM83.5 203l4.763 18h-9.526l4.763-18zM152.5 162l3.031 12h-6.062l3.031-12zM186.5 199l3.031 12h-6.062l3.031-12zM104.5 174l3.031 12h-6.062l3.031-12zM23.5 256l4.763 18h-9.526l4.763-18zM69.5 165l3.031 12H66.47l3.031-12zM21.5 177l3.031 12H18.47l3.031-12zM32.5 200l8.227 31.5H24.273L32.5 200zM153.5 203l8.227 31.5h-16.454L153.5 203zM59.5 238l8.227 31.5H51.273L59.5 238zM122.5 248l10.825 41.25h-21.65L122.5 248z"
+            fill="#001044" />
+    </g>
+    <defs>
+        <linearGradient id="prefix__paint0_linear_430_1582" x1="97.5" y1="0" x2="97.5" y2="288"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#181A5A" />
+            <stop offset=".375" stop-color="#004CA1" />
+        </linearGradient>
+        <linearGradient id="prefix__paint1_linear_430_1582" x1="95" y1="420.537" x2="95" y2="184"
+            gradientUnits="userSpaceOnUse">
+            <stop />
+            <stop offset=".77" stop-color="#2E2C66" />
+        </linearGradient>
+        <linearGradient id="prefix__paint2_linear_430_1582" x1="26.5" y1="128" x2="26.5" y2="222"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#00092C" />
+            <stop offset=".39" stop-color="#2E2D67" />
+        </linearGradient>
+        <linearGradient id="prefix__paint3_linear_430_1582" x1="168.5" y1="128" x2="168.5" y2="222"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#00092C" />
+            <stop offset=".39" stop-color="#2E2D67" />
+        </linearGradient>
+        <linearGradient id="prefix__paint4_linear_430_1582" x1="99" y1="296.5" x2="99" y2="110"
+            gradientUnits="userSpaceOnUse">
+            <stop />
+            <stop offset=".77" stop-color="#2E2C66" />
+        </linearGradient>
+        <clipPath id="prefix__clip0_430_1582">
+            <rect width="195" height="288" rx="16" fill="#fff" />
+        </clipPath>
+    </defs>
+</svg>

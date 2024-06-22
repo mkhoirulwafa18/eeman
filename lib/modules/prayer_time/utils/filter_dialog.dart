@@ -3,10 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/common/constants/constant.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/l10n/l10n.dart';
-import 'package:quran_app/modules/prayer_time/cubit/datepicker_cubit.dart';
-import 'package:quran_app/modules/prayer_time/cubit/list_filter.dart';
-import 'package:quran_app/modules/prayer_time/cubit/prayertime_cubit.dart';
+import 'package:quran_app/modules/prayer_time/presentation/blocs/cubit/list_filter.dart';
 
 void showFilterPrayerTimeDialog(
   BuildContext context,
@@ -16,71 +15,62 @@ void showFilterPrayerTimeDialog(
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return BlocBuilder<ListFilterPrayerTimeCubit, List<String>>(
-        builder: (context, state) {
-          return AlertDialog(
-            backgroundColor: backgroundColor2,
-            title: Text(
-              l10n.filterList,
-              style: lightBoldTitle,
+      final state = context.watch<ListFilterPrayerTimeCubit>().state;
+      final colorScheme = Theme.of(context).colorScheme;
+      return AlertDialog(
+        backgroundColor: colorScheme.primary,
+        title: Text(
+          l10n.filterList,
+          style: context.displayLarge?.copyWith(color: colorScheme.secondary),
+        ),
+        content: SingleChildScrollView(
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: shalats
+                  .map(
+                    (e) => CheckboxListTile(
+                      title: Text(e, style: context.bodySmall?.copyWith(color: colorScheme.secondary)),
+                      onChanged: (value) {
+                        if (value != null) {
+                          !value
+                              ? context.read<ListFilterPrayerTimeCubit>().onAddHiddenPray(e)
+                              : context.read<ListFilterPrayerTimeCubit>().onRemoveHiddenPray(e);
+                        }
+                      },
+                      value: !state.contains(e),
+                      fillColor: MaterialStatePropertyAll(colorScheme.secondary),
+                      checkColor: colorScheme.primary,
+                    ),
+                  )
+                  .toList(),
             ),
-            content: SingleChildScrollView(
-              child: SizedBox(
-                width: double.infinity,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: shalats
-                      .map(
-                        (e) => CheckboxListTile(
-                          title: Text(e, style: smallText),
-                          onChanged: (value) {
-                            if (value != null) {
-                              !value
-                                  ? context
-                                      .read<ListFilterPrayerTimeCubit>()
-                                      .onAddFilters(e)
-                                  : context
-                                      .read<ListFilterPrayerTimeCubit>()
-                                      .onRemoveFilters(e);
-                            }
-                          },
-                          value: !state.contains(e),
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
+          ),
+        ),
+        actions: <Widget>[
+          OutlinedButton(
+            child: Text(
+              l10n.close,
+              style: context.bodySmall?.copyWith(color: colorScheme.secondary),
             ),
-            actions: <Widget>[
-              OutlinedButton(
-                child: Text(
-                  l10n.close,
-                  style: smallText,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(backgroundColor),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  final dateCubit = context.read<DatepickerCubit>();
-                  context.read<PrayertimeCubit>().getTimings(
-                        dateCubit.state.month.toString(),
-                        dateCubit.state.year.toString(),
-                      );
-                },
-                child: Text(
-                  l10n.apply,
-                  style: smallText.copyWith(color: backgroundColor2),
-                ),
-              ),
-            ],
-          );
-        },
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(colorScheme.secondary),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              l10n.apply,
+              style: context.bodySmall?.copyWith(color: colorScheme.primary),
+            ),
+          ),
+        ],
       );
     },
   );

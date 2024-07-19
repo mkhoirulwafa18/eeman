@@ -162,7 +162,7 @@ class RPSCustomPainter extends CustomPainter {
     path_1.close();
 
     final paint1Fill = Paint()..style = PaintingStyle.fill;
-    paint1Fill.color = Theme.of(context).colorScheme.background.withOpacity(1);
+    paint1Fill.color = Theme.of(context).colorScheme.surface.withOpacity(1);
     canvas.drawPath(path_1, paint1Fill);
 
     final path_2 = Path();

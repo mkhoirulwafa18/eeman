@@ -22,13 +22,13 @@ class SurahListView extends StatelessWidget {
     return MaterialBanner(
       content: Text(
         context.l10n.lastReadError,
-        style: context.bodySmall,
+        style: context.bodySmall?.copyWith(color: colorScheme.secondary),
       ),
       backgroundColor: colorScheme.primary,
       actions: [
         OutlinedButton(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(colorScheme.secondary),
+            backgroundColor: WidgetStateProperty.all<Color>(colorScheme.secondary),
           ),
           onPressed: () {
             ScaffoldMessenger.of(context).removeCurrentMaterialBanner();
@@ -106,12 +106,12 @@ class SurahListView extends StatelessWidget {
               ),
             ),
             floatingActionButton: FloatingActionButton.extended(
-              backgroundColor: colorScheme.onBackground,
+              backgroundColor: colorScheme.onSurface,
               onPressed: () => state is SurahListLoaded ? navigateToLastRead(context, state.surahList) : null,
               icon: Assets.icons.lastRead.svg(width: 30),
               label: Text(
                 l10n.lastRead,
-                style: context.bodySmall?.copyWith(color: colorScheme.background),
+                style: context.bodySmall?.copyWith(color: colorScheme.surface),
               ),
             ),
             child: Column(

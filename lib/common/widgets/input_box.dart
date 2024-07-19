@@ -27,13 +27,13 @@ class InputBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-        border: Border.all(color: Theme.of(context).colorScheme.secondary, width: 4),
+        color: Theme.of(context).colorScheme.surface,
+        border: Border.all(color: Theme.of(context).colorScheme.onSurface, width: 4),
         borderRadius: BorderRadius.circular(50),
       ),
       child: TextFormField(
         enabled: enabled,
-        cursorColor: Theme.of(context).colorScheme.secondary,
+        cursorColor: Theme.of(context).colorScheme.onSurface,
         controller: controller,
         onChanged: onChanged,
         style: context.bodyMedium,
@@ -44,9 +44,9 @@ class InputBox extends StatelessWidget {
         decoration: InputDecoration(
           isDense: true,
           labelText: labelText,
-          labelStyle: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.secondary.withOpacity(0.7)),
+          labelStyle: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
           floatingLabelStyle:
-              context.bodySmall?.copyWith(height: 1, color: Theme.of(context).colorScheme.secondary.withOpacity(0.7)),
+              context.bodySmall?.copyWith(height: 1, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           border: InputBorder.none,
           counterText: '',

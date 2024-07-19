@@ -31,8 +31,7 @@ class AppInfoAction extends StatelessWidget {
             ],
           ),
           action: ElevatedButton(
-            style:
-                ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Theme.of(context).colorScheme.secondary)),
+            style: ButtonStyle(backgroundColor: WidgetStatePropertyAll<Color>(Theme.of(context).colorScheme.secondary)),
             child: Text(
               l10n.feedbackAndReport,
               style: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.primary),
@@ -58,7 +57,7 @@ class AppInfoAction extends StatelessWidget {
         padding: const EdgeInsets.only(right: EemanSizes.s24),
         child: Icon(
           Icons.info_outline_rounded,
-          color: Theme.of(context).colorScheme.onBackground,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
       ),
     );

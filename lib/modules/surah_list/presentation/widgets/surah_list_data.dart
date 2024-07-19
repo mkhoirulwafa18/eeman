@@ -26,7 +26,7 @@ class SurahListData extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               itemCount: surahs.length,
               separatorBuilder: (_, i) => Divider(
-                color: colorScheme.onBackground,
+                color: colorScheme.onSurface,
               ),
               itemBuilder: (BuildContext context, int index) {
                 return SurahListTile(
@@ -43,7 +43,7 @@ class SurahListData extends StatelessWidget {
                   l10n.errorNoSurahFound,
                   style: TextStyle(
                     fontFamily: FontFamily.poppins,
-                    color: colorScheme.onBackground,
+                    color: colorScheme.onSurface,
                   ),
                   textAlign: TextAlign.center,
                 ),

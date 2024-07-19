@@ -66,7 +66,7 @@ class HomeView extends StatelessWidget {
                         Text(
                           l10n.shalatTime.replaceAll('\n', ' '),
                           style: context.bodySmall?.copyWith(
-                            color: Theme.of(context).colorScheme.onBackground,
+                            color: Theme.of(context).colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -90,7 +90,7 @@ class HomeView extends StatelessWidget {
                               Text(
                                 l10n.more,
                                 style: context.bodySmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.onBackground,
+                                  color: Theme.of(context).colorScheme.onSurface,
                                 ),
                               ),
                               const Icon(
@@ -119,7 +119,7 @@ class HomeView extends StatelessWidget {
                     child: Text(
                       l10n.explore,
                       style: context.bodySmall
-                          ?.copyWith(color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
+                          ?.copyWith(color: Theme.of(context).colorScheme.onSurface, fontWeight: FontWeight.bold),
                     ),
                   ),
                   MenuList(

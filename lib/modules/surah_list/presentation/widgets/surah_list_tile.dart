@@ -31,7 +31,7 @@ class SurahListTile extends StatelessWidget {
       title: Text(
         resultSurah[index].name?.transliteration?.id ?? '',
         style: context.bodyMedium?.copyWith(
-          color: colorScheme.onBackground,
+          color: colorScheme.onSurface,
         ),
       ),
       subtitle: Row(
@@ -44,7 +44,7 @@ class SurahListTile extends StatelessWidget {
                   TextSpan(
                     text: resultSurah[index].name?.translation!.id ?? '',
                     style: context.bodySmall?.copyWith(
-                      color: colorScheme.onBackground.withOpacity(0.7),
+                      color: colorScheme.onSurface.withOpacity(0.7),
                     ),
                   ),
                   const WidgetSpan(
@@ -56,14 +56,14 @@ class SurahListTile extends StatelessWidget {
                     WidgetSpan(
                       child: Assets.icons.mecca.svg(
                         width: 12,
-                        color: colorScheme.onBackground,
+                        color: colorScheme.onSurface,
                       ),
                     )
                   else
                     WidgetSpan(
                       child: Assets.icons.medina.svg(
                         width: 16,
-                        color: colorScheme.onBackground,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                 ],

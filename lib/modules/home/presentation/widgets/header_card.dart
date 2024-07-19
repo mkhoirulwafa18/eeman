@@ -58,7 +58,7 @@ class _HeaderCardState extends State<HeaderCard> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).colorScheme.onBackground.withOpacity(0.2),
+            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
             blurRadius: 4,
             spreadRadius: 2,
             offset: const Offset(0, 4),

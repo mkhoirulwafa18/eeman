@@ -24,7 +24,7 @@ void showAppBottomSheet(BuildContext context, List<DoaDaily> doaDaily) {
               builder: (_, controller) {
                 return DecoratedBox(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(25),
                       topRight: Radius.circular(25),
@@ -77,10 +77,10 @@ class BottomSheetDoaContent extends StatelessWidget {
                       doaDaily[index].title ?? '',
                       style: context.bodyMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onBackground,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
-                    iconColor: Theme.of(context).colorScheme.onBackground,
+                    iconColor: Theme.of(context).colorScheme.onSurface,
                     childrenPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     children: [
                       Text(
@@ -92,17 +92,17 @@ class BottomSheetDoaContent extends StatelessWidget {
                       Text(
                         doaDaily[index].latin ?? '',
                         style: context.bodySmall
-                            ?.copyWith(height: 1, color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7)),
+                            ?.copyWith(height: 1, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
                       ),
                       const EemanSpacing.vertical4(),
                       Divider(
-                        color: Theme.of(context).colorScheme.onBackground.withOpacity(.5),
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity(.5),
                       ),
                       const EemanSpacing.vertical4(),
                       Text(
                         doaDaily[index].translation ?? '',
                         style: context.bodySmall
-                            ?.copyWith(height: 1, color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7)),
+                            ?.copyWith(height: 1, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
                       ),
                     ],
                   ),

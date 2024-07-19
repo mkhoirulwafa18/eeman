@@ -12,9 +12,9 @@ class GridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background.withAlpha(180),
+        color: Theme.of(context).colorScheme.surface.withAlpha(180),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
-        border: Border.all(color: Theme.of(context).colorScheme.onBackground.withOpacity(.15)),
+        border: Border.all(color: Theme.of(context).colorScheme.onSurface.withOpacity(.15)),
       ),
       child: Center(
         child: ListTile(
@@ -32,7 +32,7 @@ class GridItem extends StatelessWidget {
             item.title,
             // textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
-            style: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onBackground),
+            style: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onSurface),
           ),
         ),
       ),

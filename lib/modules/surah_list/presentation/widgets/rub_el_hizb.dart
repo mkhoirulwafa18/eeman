@@ -1,8 +1,8 @@
 // ignore_for_file: deprecated_member_use_from_same_package
 
 import 'package:flutter/material.dart';
+import 'package:quran_app/common/extensions/text_theme_extension.dart';
 import 'package:quran_app/gen/assets.gen.dart';
-import 'package:quran_app/gen/fonts.gen.dart';
 
 class RubElHizb extends StatelessWidget {
   const RubElHizb({
@@ -21,7 +21,7 @@ class RubElHizb extends StatelessWidget {
       children: [
         Assets.icons.rubhizb.svg(
           width: 40,
-          color: color ?? colorScheme.onBackground,
+          color: color ?? colorScheme.onSurface,
         ),
         SizedBox(
           width: 40,
@@ -29,10 +29,7 @@ class RubElHizb extends StatelessWidget {
           child: Align(
             child: Text(
               number,
-              style: TextStyle(
-                color: color ?? colorScheme.onBackground,
-                fontFamily: FontFamily.isepMisbah,
-              ),
+              style: context.bodyMedium?.copyWith(color: color ?? colorScheme.onSurface, fontSize: 12),
               textAlign: TextAlign.center,
             ),
           ),

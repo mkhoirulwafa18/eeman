@@ -10,6 +10,7 @@ class BasePage extends StatelessWidget {
     this.accentBackground,
     this.floatingActionButton,
     required this.child,
+    this.plainBackground = false,
   }) : padding = const EdgeInsets.symmetric(horizontal: 16);
 
   const BasePage.noPadding({
@@ -17,11 +18,13 @@ class BasePage extends StatelessWidget {
     this.appBar,
     this.accentBackground,
     this.floatingActionButton,
+    this.plainBackground = false,
     required this.child,
   }) : padding = EdgeInsets.zero;
 
   final PreferredSizeWidget? appBar;
   final bool? accentBackground;
+  final bool plainBackground;
   final Widget child;
   final EdgeInsetsGeometry padding;
   final Widget? floatingActionButton;
@@ -36,20 +39,22 @@ class BasePage extends StatelessWidget {
         padding: padding,
         child: Stack(
           children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Assets.icons.bgPattern
-                  .svg(color: Theme.of(context).colorScheme.onBackground.withOpacity(.03), fit: BoxFit.fitHeight),
-            ),
+            if (!plainBackground) ...[
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: Assets.icons.bgPattern
+                    .svg(color: Theme.of(context).colorScheme.onSurface.withOpacity(.03), fit: BoxFit.fitHeight),
+              ),
+            ],
             if (accentBackground ?? true) ...[
               Positioned(
                 top: -MediaQuery.of(context).size.width / 4,
                 right: -MediaQuery.of(context).size.width / 4,
                 child: Assets.icons.pattern.svg(
-                  color: Theme.of(context).colorScheme.onBackground.withOpacity(.2),
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(.2),
                   width: MediaQuery.of(context).size.width / 1.3,
                 ),
               ),

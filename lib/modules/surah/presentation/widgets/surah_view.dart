@@ -58,6 +58,7 @@ class _SurahViewState extends State<SurahView> {
         } else if (state is SurahLoaded) {
           return BasePage.noPadding(
             accentBackground: false,
+            plainBackground: true,
             appBar: CustomAppBar(
               title: widget.selectedSurah.name?.transliteration?.id ?? '',
               actions: [
@@ -174,7 +175,7 @@ class _SurahViewState extends State<SurahView> {
           onLongPress: setLastRead,
           dense: true,
           contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-          tileColor: index.isEven ? colorScheme.background : colorScheme.background.withAlpha(200),
+          tileColor: index.isEven ? colorScheme.surface : colorScheme.onSurface.withOpacity(.018),
           title: RichText(
             textAlign: TextAlign.justify,
             textDirection: TextDirection.rtl,
@@ -183,7 +184,7 @@ class _SurahViewState extends State<SurahView> {
                 TextSpan(
                   text: surah.verses[index].ayahText,
                   style: AppTextStyles.arabicText
-                      .copyWith(fontSize: userPref?.arabicFontSize, color: colorScheme.onBackground),
+                      .copyWith(fontSize: userPref?.arabicFontSize, color: colorScheme.onSurface),
                 ),
                 WidgetSpan(
                   child: Padding(
@@ -213,11 +214,16 @@ class _SurahViewState extends State<SurahView> {
                     children: [
                       TextSpan(
                         text: surah.verses[index].readText,
-                        style: TextStyle(
-                          color: colorScheme.onBackground,
+                        style: context.bodyMedium?.copyWith(
                           fontSize: userPref?.latinFontSize,
-                          fontStyle: FontStyle.italic,
+                          fontFamily: '',
+                          color: colorScheme.primary,
                         ),
+                        // style: TextStyle(
+                        //   color: colorScheme.onSurface,
+                        //   fontSize: userPref?.latinFontSize,
+                        //   fontStyle: FontStyle.italic,
+                        // ),
                       ),
                     ],
                   ),
@@ -232,12 +238,12 @@ class _SurahViewState extends State<SurahView> {
                       TextSpan(
                         text: surah.verses[index].indoText,
                         style: context.bodySmall?.copyWith(
-                          color: colorScheme.onBackground,
+                          color: colorScheme.onSurface,
                           fontSize: userPref?.translationFontSize,
                         ),
                       ),
 
-                      /// Remove Tafsir for v2.0.0
+                      /// Remove Tafsir for v2.0.0, will be back on next version
                       // WidgetSpan(
                       //   child: GestureDetector(
                       //     // onTap: () => showTafsirBottomSheet(context, surah, index),
@@ -246,7 +252,7 @@ class _SurahViewState extends State<SurahView> {
                       //       child: Icon(
                       //         Icons.info,
                       //         size: 15,
-                      //         color: Theme.of(context).colorScheme.onBackground.withOpacity(.5),
+                      //         color: Theme.of(context).colorScheme.onSurface.withOpacity(.5),
                       //       ),
                       //     ),
                       //   ),
@@ -271,8 +277,8 @@ class _SurahViewState extends State<SurahView> {
               child: Icon(
                 isLastRead ? Icons.book_rounded : Icons.book_outlined,
                 color: isLastRead
-                    ? Theme.of(context).colorScheme.onBackground
-                    : Theme.of(context).colorScheme.onBackground.withOpacity(.3),
+                    ? Theme.of(context).colorScheme.onSurface
+                    : Theme.of(context).colorScheme.onSurface.withOpacity(.3),
               ),
             );
           },

@@ -44,14 +44,14 @@ class ActionButton extends StatelessWidget {
               },
               icon: Icon(
                 type == ButtonActionType.back ? Icons.arrow_back : Icons.arrow_forward,
-                color: Theme.of(context).colorScheme.background,
+                color: Theme.of(context).colorScheme.surface,
               ),
               label: Text(
                 type == ButtonActionType.back ? l10n.back : l10n.next,
-                style: TextStyle(fontFamily: FontFamily.poppins, color: Theme.of(context).colorScheme.background),
+                style: TextStyle(fontFamily: FontFamily.poppins, color: Theme.of(context).colorScheme.surface),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.onBackground,
+                backgroundColor: Theme.of(context).colorScheme.onSurface,
               ),
             ),
           );

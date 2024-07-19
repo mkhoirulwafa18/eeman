@@ -1,5 +1,4 @@
 // ignore_for_file: depend_on_referenced_packages, lines_longer_than_80_chars
-import 'dart:developer';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
@@ -22,7 +21,7 @@ class NotificationHelper {
 
     // Initialize Notification
     const initializationSettingsDarwin = DarwinInitializationSettings();
-    const initializationSettingsAndroid = AndroidInitializationSettings('ic_launcher');
+    const initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const initializationSettings = InitializationSettings(
       iOS: initializationSettingsDarwin,
@@ -63,7 +62,7 @@ class NotificationHelper {
           autoCancel: false,
           enableLights: true,
           visibility: NotificationVisibility.public,
-          actions: [AndroidNotificationAction(title, 'Stop')],
+          actions: [AndroidNotificationAction(title, 'Okay')],
         ),
         iOS: DarwinNotificationDetails(sound: '$sound.mp3'),
       );
@@ -98,7 +97,7 @@ class NotificationHelper {
       getDetails(sound, title),
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      matchDateTimeComponents: DateTimeComponents.time,
+      matchDateTimeComponents: DateTimeComponents.dateAndTime,
       payload: 'It could be anything you pass',
     );
   }

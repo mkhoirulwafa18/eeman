@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:intl/intl.dart';
 
 /// [TimeExtension] used for easy formatting [DateTime] into 'id' Locale .
@@ -17,7 +16,6 @@ import 'package:intl/intl.dart';
 
 extension TimeExtension on DateTime {
   String toLocalAndFormat(String format) {
-    log('ini lho mas wafaaa => ${Intl.defaultLocale}');
-    return Intl.withLocale(Intl.defaultLocale ?? 'id', () => DateFormat(format).format(this)).toString();
+    return Intl.withLocale('id', () => DateFormat(format).format(this)).toString();
   }
 }

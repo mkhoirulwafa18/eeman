@@ -8,7 +8,7 @@ class AppColors {
   static const Color error = Color(0xffFC698C);
 
   /// App black color
-  static const Color black = Color(0xff14171A);
+  static const Color black = Color(0xff161716);
 
   /// App white color
   static const Color white = Color.fromARGB(255, 250, 250, 250);

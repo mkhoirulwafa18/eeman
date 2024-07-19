@@ -57,7 +57,7 @@ class LocationService {
       context: rootNavigatorKey.currentContext!,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           title: Text(
             context.l10n.turnOnLocation,
             style: context.displayLarge,

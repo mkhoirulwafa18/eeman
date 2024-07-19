@@ -18,7 +18,7 @@ class CompassDivider extends StatelessWidget {
         duration: duration,
         tween: Tween(begin: 0, end: 1),
         curve: Curves.easeOut,
-        child: Divider(height: 1, thickness: .5, color: linesColor ?? Theme.of(context).colorScheme.background),
+        child: Divider(height: 1, thickness: .5, color: linesColor ?? Theme.of(context).colorScheme.surface),
         builder: (_, value, child) {
           return Transform.scale(
             scaleX: value,
@@ -45,7 +45,7 @@ class CompassDivider extends StatelessWidget {
             height: 32,
             width: 32,
             child: Assets.icons.compassFull.svg(
-              colorFilter: ColorFilter.mode(compassColor ?? Theme.of(context).colorScheme.background, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(compassColor ?? Theme.of(context).colorScheme.surface, BlendMode.srcIn),
             ),
           ),
         ),

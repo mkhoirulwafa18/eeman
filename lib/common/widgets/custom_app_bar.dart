@@ -25,6 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Stack(
       children: [
         AppBar(
+          // backgroundColor: Colors.transparent,
           systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.light,
             statusBarColor: Colors.transparent,
@@ -36,7 +37,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             title.replaceAll('\n', ' '),
             style: context.displayLarge?.copyWith(fontSize: 24, color: Theme.of(context).colorScheme.secondary),
           ),
-          backgroundColor: Theme.of(context).colorScheme.primary,
           leading: showBack
               ? GestureDetector(
                   onTap: onBackTapped ?? () => Navigator.pop(context),

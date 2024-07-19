@@ -32,20 +32,20 @@ class PrayerTimeErrorWidget extends StatelessWidget {
           Text(
             state.message == 'No Internet Connection' ? l10n.noInternetConnection : state.message,
             style: context.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Theme.of(context).colorScheme.onSurface,
               fontWeight: FontWeight.bold,
             ),
           ),
           const EemanSpacing.vertical8(),
           Text(
             state.message == 'No Internet Connection' ? l10n.featureNeedInternet : '',
-            style: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onBackground),
+            style: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onSurface),
             textAlign: TextAlign.center,
           ),
           const EemanSpacing.vertical8(),
           ElevatedButton(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.onBackground),
+              backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).colorScheme.onSurface),
             ),
             onPressed: () async {
               final updatedTimings = await context.read<PrayerTimeCubit>().getTiming(selectedDate, location);

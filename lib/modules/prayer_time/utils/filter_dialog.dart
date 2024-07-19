@@ -40,7 +40,7 @@ void showFilterPrayerTimeDialog(
                         }
                       },
                       value: !state.contains(e),
-                      fillColor: MaterialStatePropertyAll(colorScheme.secondary),
+                      fillColor: WidgetStatePropertyAll(colorScheme.secondary),
                       checkColor: colorScheme.primary,
                     ),
                   )
@@ -60,7 +60,7 @@ void showFilterPrayerTimeDialog(
           ),
           ElevatedButton(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(colorScheme.secondary),
+              backgroundColor: WidgetStateProperty.all(colorScheme.secondary),
             ),
             onPressed: () {
               Navigator.of(context).pop();

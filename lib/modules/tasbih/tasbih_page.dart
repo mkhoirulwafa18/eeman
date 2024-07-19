@@ -57,7 +57,7 @@ class TasbihPage extends StatelessWidget {
                                 style: context.displayLarge?.copyWith(
                                   fontFamily: FontFamily.dsDigital,
                                   fontSize: 50,
-                                  color: colorScheme.background.withOpacity(.1),
+                                  color: colorScheme.surface.withOpacity(.1),
                                 ),
                               ),
                               TextSpan(
@@ -85,12 +85,12 @@ class TasbihPage extends StatelessWidget {
                                 width: EemanSizes.s72,
                                 height: EemanSizes.s72,
                                 decoration: BoxDecoration(
-                                  color: colorScheme.onBackground.withOpacity(.5),
+                                  color: colorScheme.onSurface.withOpacity(.5),
                                   shape: BoxShape.circle,
                                 ),
                                 child: Icon(
                                   Icons.undo_rounded,
-                                  color: colorScheme.onBackground,
+                                  color: colorScheme.onSurface,
                                 ),
                               ),
                             ),
@@ -100,12 +100,12 @@ class TasbihPage extends StatelessWidget {
                                 width: EemanSizes.s72,
                                 height: EemanSizes.s72,
                                 decoration: BoxDecoration(
-                                  color: colorScheme.onBackground.withOpacity(.5),
+                                  color: colorScheme.onSurface.withOpacity(.5),
                                   shape: BoxShape.circle,
                                 ),
                                 child: Icon(
                                   Icons.replay_rounded,
-                                  color: colorScheme.onBackground,
+                                  color: colorScheme.onSurface,
                                 ),
                               ),
                             ),
@@ -123,7 +123,7 @@ class TasbihPage extends StatelessWidget {
                           width: 126,
                           height: 126,
                           decoration: BoxDecoration(
-                            color: colorScheme.onBackground,
+                            color: colorScheme.onSurface,
                             shape: BoxShape.circle,
                             boxShadow: [primaryShadow],
                           ),

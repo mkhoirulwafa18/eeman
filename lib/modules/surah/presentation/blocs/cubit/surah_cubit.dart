@@ -28,6 +28,7 @@ class SurahCubit extends Cubit<SurahState> {
           index: ayah.verseId,
           duration: const Duration(seconds: 1),
           curve: Curves.elasticIn,
+          alignment: .2,
         );
       }
     });

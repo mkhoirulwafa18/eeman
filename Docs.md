@@ -35,6 +35,30 @@ _\*Quran App works on iOS, Android, Web, and Windows._
 
 ---
 
+## Folder Structures
+
+├── lib/
+│ ├── app/
+│ ├── common/
+│ │ ├── extensions/
+│ │ ├── services/
+│ │ ├── themes/
+│ │ └── widgets/
+│ ├── modules/
+│ │ ├── home/
+│ │ ├── settings/
+│ │ ├── surah/
+│ │ └── qibla/
+│ ├── l10n/
+│ └── main.dart
+├── assets/
+├── ios/
+├── android/
+├── web/
+├── windows/
+├── pubspec.yaml
+└── README.md
+
 ## Running Tests 🧪
 
 To run all unit and widget tests use the following command:

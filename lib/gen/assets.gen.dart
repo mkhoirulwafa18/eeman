@@ -46,9 +46,6 @@ class $AssetsIconsGen {
   /// File path: assets/icons/basmalah.svg
   SvgGenImage get basmalah => const SvgGenImage('assets/icons/basmalah.svg');
 
-  /// File path: assets/icons/bg-pattern.svg
-  SvgGenImage get bgPattern => const SvgGenImage('assets/icons/bg-pattern.svg');
-
   /// File path: assets/icons/compass-full.svg
   SvgGenImage get compassFull => const SvgGenImage('assets/icons/compass-full.svg');
 
@@ -79,9 +76,6 @@ class $AssetsIconsGen {
   /// File path: assets/icons/needle.svg
   SvgGenImage get needle => const SvgGenImage('assets/icons/needle.svg');
 
-  /// File path: assets/icons/pattern.svg
-  SvgGenImage get pattern => const SvgGenImage('assets/icons/pattern.svg');
-
   /// File path: assets/icons/praying-hands.svg
   SvgGenImage get prayingHands => const SvgGenImage('assets/icons/praying-hands.svg');
 
@@ -105,7 +99,6 @@ class $AssetsIconsGen {
         alQuran,
         ashar,
         basmalah,
-        bgPattern,
         compassFull,
         compass,
         dzuhur,
@@ -116,7 +109,6 @@ class $AssetsIconsGen {
         mecca,
         medina,
         needle,
-        pattern,
         prayingHands,
         rubhizb,
         shalat,

@@ -37,7 +37,7 @@ class MenuList extends StatelessWidget {
             ),
             item: MenuItem(
               title: l10n.qiblaDirection,
-              icon: Assets.icons.compassPng.image(width: 50, height: 50),
+              icon: Assets.images.compass.image(width: 50, height: 50),
             ),
           ),
           GridItem(
@@ -59,7 +59,7 @@ class MenuList extends StatelessWidget {
             ),
             item: MenuItem(
               title: l10n.shalatTime,
-              icon: Assets.icons.shalatPng.image(width: 50, height: 50),
+              icon: Assets.images.shalat.image(width: 50, height: 50),
             ),
           ),
           GridItem(
@@ -80,7 +80,7 @@ class MenuList extends StatelessWidget {
             onTap: () => Navigator.pushNamed(context, '/settings'),
             item: MenuItem(
               title: l10n.settings,
-              icon: Assets.icons.setting.image(width: 50, height: 50),
+              icon: Assets.images.setting.image(width: 50, height: 50),
             ),
           ),
         ],

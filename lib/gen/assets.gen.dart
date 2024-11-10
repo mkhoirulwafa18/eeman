@@ -7,9 +7,10 @@
 // ignore_for_file: type=lint
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart' as _svg;
+import 'package:vector_graphics/vector_graphics.dart' as _vg;
 
 class $AssetsFontsGen {
   const $AssetsFontsGen();
@@ -51,17 +52,17 @@ class $AssetsIconsGen {
   /// File path: assets/icons/compass-full.svg
   SvgGenImage get compassFull => const SvgGenImage('assets/icons/compass-full.svg');
 
-  /// File path: assets/icons/compass.png
-  AssetGenImage get compassPng => const AssetGenImage('assets/icons/compass.png');
-
   /// File path: assets/icons/compass.svg
-  SvgGenImage get compassSvg => const SvgGenImage('assets/icons/compass.svg');
+  SvgGenImage get compass => const SvgGenImage('assets/icons/compass.svg');
 
   /// File path: assets/icons/dzuhur.svg
   SvgGenImage get dzuhur => const SvgGenImage('assets/icons/dzuhur.svg');
 
   /// File path: assets/icons/isya.svg
   SvgGenImage get isya => const SvgGenImage('assets/icons/isya.svg');
+
+  /// File path: assets/icons/lastThird.svg
+  SvgGenImage get lastThird => const SvgGenImage('assets/icons/lastThird.svg');
 
   /// File path: assets/icons/last_read.svg
   SvgGenImage get lastRead => const SvgGenImage('assets/icons/last_read.svg');
@@ -75,9 +76,6 @@ class $AssetsIconsGen {
   /// File path: assets/icons/medina.svg
   SvgGenImage get medina => const SvgGenImage('assets/icons/medina.svg');
 
-  /// File path: assets/icons/mosque.jpg
-  AssetGenImage get mosque => const AssetGenImage('assets/icons/mosque.jpg');
-
   /// File path: assets/icons/needle.svg
   SvgGenImage get needle => const SvgGenImage('assets/icons/needle.svg');
 
@@ -90,14 +88,8 @@ class $AssetsIconsGen {
   /// File path: assets/icons/rubhizb.svg
   SvgGenImage get rubhizb => const SvgGenImage('assets/icons/rubhizb.svg');
 
-  /// File path: assets/icons/setting.png
-  AssetGenImage get setting => const AssetGenImage('assets/icons/setting.png');
-
-  /// File path: assets/icons/shalat.png
-  AssetGenImage get shalatPng => const AssetGenImage('assets/icons/shalat.png');
-
   /// File path: assets/icons/shalat.svg
-  SvgGenImage get shalatSvg => const SvgGenImage('assets/icons/shalat.svg');
+  SvgGenImage get shalat => const SvgGenImage('assets/icons/shalat.svg');
 
   /// File path: assets/icons/subuh.svg
   SvgGenImage get subuh => const SvgGenImage('assets/icons/subuh.svg');
@@ -109,42 +101,61 @@ class $AssetsIconsGen {
   SvgGenImage get tasbih => const SvgGenImage('assets/icons/tasbih.svg');
 
   /// List of all assets
-  List<dynamic> get values => [
+  List<SvgGenImage> get values => [
         alQuran,
         ashar,
         basmalah,
         bgPattern,
         compassFull,
-        compassPng,
-        compassSvg,
+        compass,
         dzuhur,
         isya,
+        lastThird,
         lastRead,
         maghrib,
         mecca,
         medina,
-        mosque,
         needle,
         pattern,
         prayingHands,
         rubhizb,
-        setting,
-        shalatPng,
-        shalatSvg,
+        shalat,
         subuh,
         sunrise,
         tasbih
       ];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/bg-pattern.png
+  AssetGenImage get bgPattern => const AssetGenImage('assets/images/bg-pattern.png');
+
+  /// File path: assets/images/compass.png
+  AssetGenImage get compass => const AssetGenImage('assets/images/compass.png');
+
+  /// File path: assets/images/mosque.jpg
+  AssetGenImage get mosque => const AssetGenImage('assets/images/mosque.jpg');
+
+  /// File path: assets/images/pattern.png
+  AssetGenImage get pattern => const AssetGenImage('assets/images/pattern.png');
+
+  /// File path: assets/images/setting.png
+  AssetGenImage get setting => const AssetGenImage('assets/images/setting.png');
+
+  /// File path: assets/images/shalat.png
+  AssetGenImage get shalat => const AssetGenImage('assets/images/shalat.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [bgPattern, compass, mosque, pattern, setting, shalat];
+}
+
 class $AssetsSourcesGen {
   const $AssetsSourcesGen();
 
   /// File path: assets/sources/al-quran-indopak.db
-  String get alQuranIndopakDb => 'assets/sources/al-quran-indopak.db';
-
-  /// File path: assets/sources/al-quran-indopak.sqbpro
-  String get alQuranIndopakSqbpro => 'assets/sources/al-quran-indopak.sqbpro';
+  String get alQuranIndopak => 'assets/sources/al-quran-indopak.db';
 
   /// File path: assets/sources/doa.json
   String get doa => 'assets/sources/doa.json';
@@ -153,7 +164,7 @@ class $AssetsSourcesGen {
   String get surah => 'assets/sources/surah.json';
 
   /// List of all assets
-  List<String> get values => [alQuranIndopakDb, alQuranIndopakSqbpro, doa, surah];
+  List<String> get values => [alQuranIndopak, doa, surah];
 }
 
 class Assets {
@@ -161,13 +172,21 @@ class Assets {
 
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsSourcesGen sources = $AssetsSourcesGen();
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName);
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
 
   final String _assetName;
+
+  final Size? size;
+  final Set<String> flavors;
 
   Image image({
     Key? key,
@@ -187,7 +206,7 @@ class AssetGenImage {
     ImageRepeat repeat = ImageRepeat.noRepeat,
     Rect? centerSlice,
     bool matchTextDirection = false,
-    bool gaplessPlayback = false,
+    bool gaplessPlayback = true,
     bool isAntiAlias = false,
     String? package,
     FilterQuality filterQuality = FilterQuality.low,
@@ -239,11 +258,24 @@ class AssetGenImage {
 }
 
 class SvgGenImage {
-  const SvgGenImage(this._assetName);
+  const SvgGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  }) : _isVecFormat = false;
+
+  const SvgGenImage.vec(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  }) : _isVecFormat = true;
 
   final String _assetName;
+  final Size? size;
+  final Set<String> flavors;
+  final bool _isVecFormat;
 
-  SvgPicture svg({
+  _svg.SvgPicture svg({
     Key? key,
     bool matchTextDirection = false,
     AssetBundle? bundle,
@@ -256,19 +288,32 @@ class SvgGenImage {
     WidgetBuilder? placeholderBuilder,
     String? semanticsLabel,
     bool excludeFromSemantics = false,
-    SvgTheme theme = const SvgTheme(),
+    _svg.SvgTheme? theme,
     ColorFilter? colorFilter,
     Clip clipBehavior = Clip.hardEdge,
     @deprecated Color? color,
     @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
     @deprecated bool cacheColorFilter = false,
   }) {
-    return SvgPicture.asset(
-      _assetName,
+    final _svg.BytesLoader loader;
+    if (_isVecFormat) {
+      loader = _vg.AssetBytesLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+      );
+    } else {
+      loader = _svg.SvgAssetLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+        theme: theme,
+      );
+    }
+    return _svg.SvgPicture(
+      loader,
       key: key,
       matchTextDirection: matchTextDirection,
-      bundle: bundle,
-      package: package,
       width: width,
       height: height,
       fit: fit,
@@ -277,10 +322,7 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      theme: theme,
-      colorFilter: colorFilter,
-      color: color,
-      colorBlendMode: colorBlendMode,
+      colorFilter: colorFilter ?? (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );

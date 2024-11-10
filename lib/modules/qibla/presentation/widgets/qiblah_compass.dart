@@ -83,7 +83,7 @@ class QiblahCompassWidget extends StatelessWidget {
             children: <Widget>[
               Transform.rotate(
                 angle: qiblahDirection.direction * (pi / 180) * -1,
-                child: Assets.icons.compassSvg.svg(),
+                child: Assets.icons.compass.svg(),
               ),
               Transform.rotate(
                 angle: qiblahDirection.qiblah * (pi / 180) * -1,

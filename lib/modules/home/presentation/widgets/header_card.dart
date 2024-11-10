@@ -54,7 +54,7 @@ class _HeaderCardState extends State<HeaderCard> {
     return Container(
       width: MediaQuery.of(context).size.width / 1.15,
       decoration: BoxDecoration(
-        image: DecorationImage(image: Assets.icons.mosque.provider(), fit: BoxFit.cover),
+        image: DecorationImage(image: Assets.images.mosque.provider(), fit: BoxFit.cover),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(

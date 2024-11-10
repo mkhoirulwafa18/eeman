@@ -43,7 +43,7 @@ void showPreferencesDialog(
                       value: context.watch<AppThemeCubit>().state == ThemeMode.dark,
                       activeTrackColor: colorScheme.secondary,
                       activeColor: colorScheme.primary,
-                      activeThumbImage: Assets.icons.mosque.provider(),
+                      activeThumbImage: Assets.images.mosque.provider(),
                       onChanged: (value) {
                         context.read<AppThemeCubit>().toggleTheme();
                       },

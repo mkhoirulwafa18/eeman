@@ -40,6 +40,7 @@ class AppView extends StatelessWidget {
         builder: (context, themeMode) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
+            // showPerformanceOverlay: true,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: themeMode,

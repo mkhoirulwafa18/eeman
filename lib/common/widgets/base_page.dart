@@ -45,15 +45,15 @@ class BasePage extends StatelessWidget {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                child: Assets.icons.bgPattern
-                    .svg(color: Theme.of(context).colorScheme.onSurface.withOpacity(.03), fit: BoxFit.fitHeight),
+                child: Assets.images.bgPattern
+                    .image(color: Theme.of(context).colorScheme.onSurface.withOpacity(.03), fit: BoxFit.fitHeight),
               ),
             ],
             if (accentBackground ?? true) ...[
               Positioned(
                 top: -MediaQuery.of(context).size.width / 4,
                 right: -MediaQuery.of(context).size.width / 4,
-                child: Assets.icons.pattern.svg(
+                child: Assets.images.pattern.image(
                   color: Theme.of(context).colorScheme.onSurface.withOpacity(.2),
                   width: MediaQuery.of(context).size.width / 1.3,
                 ),

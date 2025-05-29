@@ -24,7 +24,7 @@ class MurattalPaused extends MurattalState {}
 class MurattalLoaded extends MurattalInitial {
   const MurattalLoaded(super.data, this.player, this.playlist);
   final AudioPlayer player;
-  final ConcatenatingAudioSource playlist;
+  final List<AudioSource> playlist;
 }
 
 class MurattalError extends MurattalInitial {

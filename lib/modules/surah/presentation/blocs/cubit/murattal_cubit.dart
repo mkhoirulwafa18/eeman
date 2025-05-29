@@ -14,7 +14,7 @@ class MurattalCubit extends Cubit<MurattalState> {
   MurattalCubit() : super(const MurattalInitial([]));
 
   AudioPlayer player = AudioPlayer();
-  late ConcatenatingAudioSource playlist;
+  late List<AudioSource> audioSources;
   bool errorAlreadyShowed = false;
 
   void init(BuildContext context, Surah surah) {
@@ -33,17 +33,14 @@ class MurattalCubit extends Cubit<MurattalState> {
       audioFileName.insert(0, AudioSource.uri(Uri.parse('$baseAudioUrl/001001.mp3')));
     }
 
-    playlist = ConcatenatingAudioSource(
-      shuffleOrder: DefaultShuffleOrder(),
-      children: audioFileName,
-    );
-    emit(MurattalLoaded(audioFileName, player, playlist));
+    audioSources = audioFileName;
+    emit(MurattalLoaded(audioFileName, player, audioSources));
 
     // Catching errors during playback (e.g. lost network connection)
     player.playbackEventStream.listen(
       (event) {
         if (event.processingState == ProcessingState.completed) {
-          emit(MurattalLoaded(audioFileName, player, playlist));
+          emit(MurattalLoaded(audioFileName, player, audioSources));
         }
       },
       onError: (Object e) {
@@ -78,13 +75,13 @@ class MurattalCubit extends Cubit<MurattalState> {
     try {
       final internet = await checkInternetConnection();
       if (internet && !player.playing) {
-        await player.setAudioSource(
-          playlist,
+        await player.setAudioSources(
+          audioSources,
           initialIndex: 0,
           initialPosition: Duration.zero,
         );
       } else {
-        if (!internet) throw PlayerException(0, 'Source error');
+        if (!internet) throw PlayerException(0, 'Source error',0);
       }
 
       emit(MurattalPlaying());
@@ -109,7 +106,7 @@ class MurattalCubit extends Cubit<MurattalState> {
         emit(MurattalPaused());
         await player.pause();
       } else {
-        throw PlayerException(0, 'Source error');
+        throw PlayerException(0, 'Source error',0);
       }
     } on PlayerException catch (e) {
       if (e.message.toString() == 'Source error') {

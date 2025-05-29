@@ -97,7 +97,6 @@ class NotificationHelper {
       getDetails(sound, title),
       // androidAllowWhileIdle: true,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.dateAndTime,
       payload: 'It could be anything you pass',
     );

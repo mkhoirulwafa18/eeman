@@ -46,7 +46,7 @@ class BasePage extends StatelessWidget {
                 right: 0,
                 bottom: 0,
                 child: Assets.images.bgPattern
-                    .image(color: Theme.of(context).colorScheme.onSurface.withOpacity(.03), fit: BoxFit.fitHeight),
+                    .image(color: Theme.of(context).colorScheme.onSurface.withValues(alpha:.03), fit: BoxFit.fitHeight),
               ),
             ],
             if (accentBackground ?? true) ...[
@@ -54,7 +54,7 @@ class BasePage extends StatelessWidget {
                 top: -MediaQuery.of(context).size.width / 4,
                 right: -MediaQuery.of(context).size.width / 4,
                 child: Assets.images.pattern.image(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(.2),
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha:.2),
                   width: MediaQuery.of(context).size.width / 1.3,
                 ),
               ),

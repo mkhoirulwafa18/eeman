@@ -175,7 +175,7 @@ class _SurahViewState extends State<SurahView> {
           onLongPress: setLastRead,
           dense: true,
           contentPadding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-          tileColor: index.isEven ? colorScheme.surface : colorScheme.onSurface.withOpacity(.018),
+          tileColor: index.isEven ? colorScheme.surface : colorScheme.onSurface.withValues(alpha:.018),
           title: RichText(
             textAlign: TextAlign.justify,
             textDirection: TextDirection.rtl,
@@ -252,7 +252,7 @@ class _SurahViewState extends State<SurahView> {
                       //       child: Icon(
                       //         Icons.info,
                       //         size: 15,
-                      //         color: Theme.of(context).colorScheme.onSurface.withOpacity(.5),
+                      //         color: Theme.of(context).colorScheme.onSurface.withValues(alpha:.5),
                       //       ),
                       //     ),
                       //   ),
@@ -278,7 +278,7 @@ class _SurahViewState extends State<SurahView> {
                 isLastRead ? Icons.book_rounded : Icons.book_outlined,
                 color: isLastRead
                     ? Theme.of(context).colorScheme.onSurface
-                    : Theme.of(context).colorScheme.onSurface.withOpacity(.3),
+                    : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
               ),
             );
           },

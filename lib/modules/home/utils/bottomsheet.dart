@@ -92,17 +92,17 @@ class BottomSheetDoaContent extends StatelessWidget {
                       Text(
                         doaDaily[index].latin ?? '',
                         style: context.bodySmall
-                            ?.copyWith(height: 1, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
+                            ?.copyWith(height: 1, color: Theme.of(context).colorScheme.onSurface.withValues(alpha:0.7)),
                       ),
                       const EemanSpacing.vertical4(),
                       Divider(
-                        color: Theme.of(context).colorScheme.onSurface.withOpacity(.5),
+                        color: Theme.of(context).colorScheme.onSurface.withValues(alpha:.5),
                       ),
                       const EemanSpacing.vertical4(),
                       Text(
                         doaDaily[index].translation ?? '',
                         style: context.bodySmall
-                            ?.copyWith(height: 1, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
+                            ?.copyWith(height: 1, color: Theme.of(context).colorScheme.onSurface.withValues(alpha:0.7)),
                       ),
                     ],
                   ),

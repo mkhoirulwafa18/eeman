@@ -44,7 +44,7 @@ class SurahListTile extends StatelessWidget {
                   TextSpan(
                     text: resultSurah[index].name?.translation!.id ?? '',
                     style: context.bodySmall?.copyWith(
-                      color: colorScheme.onSurface.withOpacity(0.7),
+                      color: colorScheme.onSurface.withValues(alpha:0.7),
                     ),
                   ),
                   const WidgetSpan(

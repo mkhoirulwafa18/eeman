@@ -83,7 +83,7 @@ class RPSCustomPainter extends CustomPainter {
     path_0.close();
 
     final paint0Fill = Paint()..style = PaintingStyle.fill;
-    paint0Fill.color = const Color(0xff000000).withOpacity(1);
+    paint0Fill.color = const Color(0xff000000).withValues(alpha:1);
     canvas.drawPath(path_0, paint0Fill);
 
     final path_1 = Path();
@@ -162,7 +162,7 @@ class RPSCustomPainter extends CustomPainter {
     path_1.close();
 
     final paint1Fill = Paint()..style = PaintingStyle.fill;
-    paint1Fill.color = Theme.of(context).colorScheme.surface.withOpacity(1);
+    paint1Fill.color = Theme.of(context).colorScheme.surface.withValues(alpha:1);
     canvas.drawPath(path_1, paint1Fill);
 
     final path_2 = Path();
@@ -394,7 +394,7 @@ class RPSCustomPainter extends CustomPainter {
     path_2.close();
 
     final paint2Fill = Paint()..style = PaintingStyle.fill;
-    paint2Fill.color = const Color(0xff234D60).withOpacity(1);
+    paint2Fill.color = const Color(0xff234D60).withValues(alpha:1);
     canvas.drawPath(path_2, paint2Fill);
   }
 

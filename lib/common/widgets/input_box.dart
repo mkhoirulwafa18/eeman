@@ -44,9 +44,9 @@ class InputBox extends StatelessWidget {
         decoration: InputDecoration(
           isDense: true,
           labelText: labelText,
-          labelStyle: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
+          labelStyle: context.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onSurface.withValues(alpha:0.7)),
           floatingLabelStyle:
-              context.bodySmall?.copyWith(height: 1, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
+              context.bodySmall?.copyWith(height: 1, color: Theme.of(context).colorScheme.onSurface.withValues(alpha:0.7)),
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           border: InputBorder.none,
           counterText: '',

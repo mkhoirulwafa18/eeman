@@ -14,7 +14,7 @@ class GridItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface.withAlpha(180),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
-        border: Border.all(color: Theme.of(context).colorScheme.onSurface.withOpacity(.15)),
+        border: Border.all(color: Theme.of(context).colorScheme.onSurface.withValues(alpha:.15)),
       ),
       child: Center(
         child: ListTile(

@@ -51,11 +51,11 @@ class _PrayerTimeHeaderContentState extends State<PrayerTimeHeaderContent> {
             selectedTextColor: colorScheme.secondary,
             locale: 'id',
             dateTextStyle: context.displayLarge!.copyWith(
-              color: colorScheme.primary.withOpacity(0.5),
+              color: colorScheme.primary.withValues(alpha:0.5),
               fontWeight: FontWeight.w600,
             ),
-            monthTextStyle: context.bodySmall!.copyWith(color: colorScheme.primary.withOpacity(0.5)),
-            dayTextStyle: context.bodySmall!.copyWith(color: colorScheme.primary.withOpacity(0.5)),
+            monthTextStyle: context.bodySmall!.copyWith(color: colorScheme.primary.withValues(alpha:0.5)),
+            dayTextStyle: context.bodySmall!.copyWith(color: colorScheme.primary.withValues(alpha:0.5)),
             onDateChange: (date) async {
               controller.animateToDate(date);
               final updatedTimings = await context.read<PrayerTimeCubit>().getTiming(date, widget.location);

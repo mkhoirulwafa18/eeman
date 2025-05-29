@@ -45,7 +45,7 @@ class TasbihPage extends StatelessWidget {
                         padding: const EdgeInsets.all(16),
                         margin: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                         decoration: BoxDecoration(
-                          color: colorScheme.primary.withOpacity(.7),
+                          color: colorScheme.primary.withValues(alpha:.7),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: RichText(
@@ -57,7 +57,7 @@ class TasbihPage extends StatelessWidget {
                                 style: context.displayLarge?.copyWith(
                                   fontFamily: FontFamily.dsDigital,
                                   fontSize: 50,
-                                  color: colorScheme.surface.withOpacity(.1),
+                                  color: colorScheme.surface.withValues(alpha:.1),
                                 ),
                               ),
                               TextSpan(
@@ -85,7 +85,7 @@ class TasbihPage extends StatelessWidget {
                                 width: EemanSizes.s72,
                                 height: EemanSizes.s72,
                                 decoration: BoxDecoration(
-                                  color: colorScheme.onSurface.withOpacity(.5),
+                                  color: colorScheme.onSurface.withValues(alpha:.5),
                                   shape: BoxShape.circle,
                                 ),
                                 child: Icon(
@@ -100,7 +100,7 @@ class TasbihPage extends StatelessWidget {
                                 width: EemanSizes.s72,
                                 height: EemanSizes.s72,
                                 decoration: BoxDecoration(
-                                  color: colorScheme.onSurface.withOpacity(.5),
+                                  color: colorScheme.onSurface.withValues(alpha:.5),
                                   shape: BoxShape.circle,
                                 ),
                                 child: Icon(

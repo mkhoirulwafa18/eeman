@@ -45,7 +45,7 @@ class CardItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     color: isPassed
                         ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                        : Theme.of(context).colorScheme.primary.withValues(alpha:0.7),
                     boxShadow: isPassed ? [primaryShadow] : [],
                     border: isPassed && active ? Border.all(color: Colors.red, width: 2) : null,
                   ),
@@ -65,7 +65,7 @@ class CardItem extends StatelessWidget {
                                     fontSize: 50,
                                     color: isPassed
                                         ? Theme.of(context).colorScheme.secondary
-                                        : Theme.of(context).colorScheme.secondary.withOpacity(0.7),
+                                        : Theme.of(context).colorScheme.secondary.withValues(alpha:0.7),
                                   ),
                                 ),
                                 Text(
@@ -73,7 +73,7 @@ class CardItem extends StatelessWidget {
                                   style: context.bodyMedium?.copyWith(
                                     color: isPassed
                                         ? Theme.of(context).colorScheme.secondary
-                                        : Theme.of(context).colorScheme.secondary.withOpacity(0.7),
+                                        : Theme.of(context).colorScheme.secondary.withValues(alpha:0.7),
                                   ),
                                 ),
                               ],

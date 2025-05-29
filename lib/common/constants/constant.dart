@@ -148,7 +148,7 @@ double setHeight(double height) => ScreenUtil().setHeight(height);
 /// -----------------------------------
 
 // TextStyle inputLabel = TextStyle(
-//   color: backgroundColor.withOpacity(0.7),
+//   color: backgroundColor.withValues(alpha:0.7),
 //   fontFamily: 'Poppins',
 //   fontSize: 14,
 // );
@@ -189,7 +189,7 @@ double setHeight(double height) => ScreenUtil().setHeight(height);
 /// -----------------------------------
 
 BoxShadow primaryShadow = BoxShadow(
-  color: Colors.black.withOpacity(0.5),
+  color: Colors.black.withValues(alpha: 0.5),
   blurRadius: 4,
   offset: const Offset(0, 4),
 );

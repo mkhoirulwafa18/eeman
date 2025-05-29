@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:notification_permissions/notification_permissions.dart';
 import 'package:quran_app/common/local_data/alarm_list_local_data.dart';
+import 'package:quran_app/common/services/notification_permission_service.dart';
 import 'package:quran_app/common/services/services.dart';
 
 /// Cubit to manage the list of alarms
@@ -70,10 +70,11 @@ class AlarmListCubit extends Cubit<List<DateTime>> {
     required DateTime selectedDate,
     required String title,
   }) async {
-    final permissionStatus = await NotificationPermissions.getNotificationPermissionStatus();
+    final permissionService = NotificationPermissionService();
+    final isPermissionGranted = await permissionService.isNotificationPermissionGranted();
 
-    if (permissionStatus == PermissionStatus.unknown || permissionStatus == PermissionStatus.denied) {
-      await NotificationPermissions.requestNotificationPermissions();
+    if (!isPermissionGranted) {
+      await permissionService.requestNotificationPermission();
     }
 
     if (isPassed) {

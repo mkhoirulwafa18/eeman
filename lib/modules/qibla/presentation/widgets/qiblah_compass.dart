@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show SystemNavigator;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:geolocator/geolocator.dart';
@@ -33,8 +34,11 @@ class QiblahCompass extends StatelessWidget {
           case LocationPermission.always:
           case LocationPermission.whileInUse:
             return PopScope(
-              onPopInvoked: (didPop) {
+              canPop: false,
+              onPopInvokedWithResult: (didPop, result) {
+                if (didPop) return;
                 context.read<QiblahCubit>().dispose();
+                SystemNavigator.pop();
               },
               child: const QiblahCompassWidget(),
             );

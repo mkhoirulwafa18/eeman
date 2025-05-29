@@ -1,6 +1,6 @@
 name: quran_app
 description: Quran app
-version: 2.1.0
+version: 2.2.0
 publish_to: none
 
 environment:

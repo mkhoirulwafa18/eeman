@@ -68,6 +68,7 @@ unlinked_spec.ds
 **/android/.idea/
 *.jks
 *.jks.old
+**/.cxx/
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
@@ -126,3 +127,5 @@ app.*.map.json
 !.idea/codeStyles/
 !.idea/dictionaries/
 !.idea/runConfigurations/
+
+deploy_*/

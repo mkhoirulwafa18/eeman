@@ -8,7 +8,7 @@ An open source, Quran & Prayer Times, built with Flutter<br />
 
 ---
 
-![Eeman Mobile](assets/screenshots/showcase.png)
+![Eeman Mobile](https://res.cloudinary.com/dum82w4aj/image/upload/v1751907695/showcase_ygrfb4.jpg)
 
 </div>
 
@@ -16,14 +16,15 @@ An open source, Quran & Prayer Times, built with Flutter<br />
 
 <div align="center">
 <div>
-<img src="assets\screenshots\home.png" width="25%" />
-<img src="assets\screenshots\dailydoa.png" width="25%" />
-<img src="assets\screenshots\surahlist.png" width="25%" />
-<img src="assets\screenshots\quran.png" width="25%" />
-<img src="assets\screenshots\searchayat.png" width="25%" />
-<img src="assets\screenshots\prayertime.png" width="25%" />
-<img src="assets\screenshots\tasbih.png" width="25%" />
-<img src="assets\screenshots\feedback.png" width="25%" />
+<img src="https://res.cloudinary.com/dum82w4aj/image/upload/v1751907525/1_ufz4bc.png" width="25%" />
+<img src="https://res.cloudinary.com/dum82w4aj/image/upload/v1751907519/7_xs90hd.png" width="25%" />
+<img src="https://res.cloudinary.com/dum82w4aj/image/upload/v1751907522/3_cvjhue.png" width="25%" />
+<img src="https://res.cloudinary.com/dum82w4aj/image/upload/v1751907517/6_umqfd3.png" width="25%" />
+<img src="https://res.cloudinary.com/dum82w4aj/image/upload/v1751907526/9_zwpijr.png" width="25%" />
+<img src="https://res.cloudinary.com/dum82w4aj/image/upload/v1751907518/5_u6pebl.png" width="25%" />
+<img src="https://res.cloudinary.com/dum82w4aj/image/upload/v1751907517/4_sixcg6.png" width="25%" />
+<img src="https://res.cloudinary.com/dum82w4aj/image/upload/v1751907521/2_x05w4m.png" width="25%" />
+<img src="https://res.cloudinary.com/dum82w4aj/image/upload/v1751907525/8_l5tbna.png" width="25%" />
 </div>
 </div>
 
